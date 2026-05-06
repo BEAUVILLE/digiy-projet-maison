@@ -4,14 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DIGIY Projet Maison — Transforme une idée en cahier clair</title>
-  <meta name="description" content="Assistant maison de cadrage projet pour transformer une idée en cahier clair, prompt IA, SQL conseillé et plan de production." />
+  <meta name="description" content="Assistant maison de cadrage projet : cahier des charges, prompt IA, SQL conseillé et plan de production." />
   <style>
-    :root{
-      --bg:#061512;--panel:#102b24;--panel2:#15362e;--line:rgba(255,255,255,.12);
-      --text:#f7fff9;--muted:#bdd3ca;--soft:#8fb2a5;--gold:#f5c76b;--gold2:#ffe7a8;--green:#19c889;
-      --shadow:0 24px 70px rgba(0,0,0,.35);--radius:24px;--max:1180px;
-      --font:Outfit,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    }
+    :root{--bg:#061512;--card:#102b24;--line:rgba(255,255,255,.12);--text:#f7fff9;--muted:#bdd3ca;--soft:#8fb2a5;--gold:#f5c76b;--gold2:#ffe7a8;--green:#19c889;--shadow:0 24px 70px rgba(0,0,0,.35);--radius:24px;--max:1180px;--font:Outfit,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font);color:var(--text);background:radial-gradient(circle at 10% 5%,rgba(245,199,107,.18),transparent 30%),radial-gradient(circle at 88% 6%,rgba(25,200,137,.16),transparent 27%),linear-gradient(135deg,var(--bg),#04100d 65%,#071a15);min-height:100vh}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:var(--max);margin:0 auto;padding:20px}
     header{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(6,21,18,.82);border-bottom:1px solid var(--line)}.topbar{max-width:var(--max);margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center}.brand{display:flex;align-items:center;gap:12px;min-width:0}.mark{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;font-weight:950;flex:0 0 auto}.brand strong{display:block;font-size:15px}.brand span{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58vw}.top-actions{display:flex;gap:10px}.pill{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);padding:10px 13px;border-radius:999px;font-weight:850;font-size:13px}.pill.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;border-color:transparent}
     .hero{padding:42px 0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:24px}.card,.panel,.result{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.card{padding:32px}.kicker{display:inline-flex;border:1px solid rgba(245,199,107,.32);background:rgba(245,199,107,.09);padding:9px 12px;border-radius:999px;color:var(--gold2);font-weight:950;font-size:13px;margin-bottom:18px}h1{font-size:clamp(34px,5vw,64px);line-height:.95;margin:0 0 18px;letter-spacing:-2px}h1 span{color:var(--gold2)}.lead{font-size:18px;line-height:1.55;color:var(--muted);margin:0 0 20px}.quote{border-left:4px solid var(--gold);padding:12px 0 12px 16px;background:rgba(255,255,255,.035);border-radius:0 16px 16px 0;color:#eafff6;line-height:1.55}.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.mini{padding:18px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.num{width:34px;height:34px;border-radius:13px;display:grid;place-items:center;background:rgba(245,199,107,.14);color:var(--gold2);font-weight:950;margin-bottom:12px}.mini b{display:block;font-size:18px;margin-bottom:8px}.mini p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
@@ -26,440 +21,46 @@
     <div class="tabs"><a class="tab active" href="#atelier">Cadrage</a><a class="tab" href="#sortie">Sortie</a><button class="tab" type="button" onclick="resetForm()">Nouveau projet</button></div>
     <section id="atelier" class="grid"><form class="panel" onsubmit="event.preventDefault();generateAll();"><h2>1. Informations du projet</h2><p class="hint">On commence simple. Le but n’est pas de parler ingénieur. Le but est de faire sortir une route claire.</p><div class="form-grid"><div class="field"><label for="projectName">Nom du projet</label><input id="projectName" placeholder="Ex : Restaurant Teranga" /></div><div class="field"><label for="projectType">Type de projet</label><select id="projectType" onchange="applyTypeDefaults()"><option value="vitrine">Site vitrine</option><option value="ecommerce">E-commerce</option><option value="restaurant">Restaurant</option><option value="reservation">Réservation</option><option value="taxi">Taxi / chauffeur</option><option value="immobilier">Agence immobilière</option><option value="location">Location / hébergement</option><option value="beaute">Beauté / coiffure</option><option value="btp">BTP / artisans</option><option value="annuaire">Annuaire</option><option value="voyage">Voyage / tourisme</option><option value="carte">Carte digitale</option><option value="personnalise">Projet personnalisé</option></select></div></div><div class="form-grid"><div class="field"><label for="activity">Activité / métier</label><input id="activity" placeholder="Ex : restaurant à Saly" /></div><div class="field"><label for="location">Ville / pays</label><input id="location" placeholder="Ex : Saly, Sénégal" /></div></div><div class="field"><label for="goal">Objectif principal</label><textarea id="goal" placeholder="Ex : présenter le restaurant, afficher le menu et prendre des réservations."></textarea></div><div class="field"><label for="audience">Public visé</label><input id="audience" placeholder="Ex : clients locaux, diaspora, touristes" /></div><h2 style="margin-top:22px">2. Besoins à activer</h2><p class="hint">Coche ce qui compte. L’outil va préparer les blocs utiles sans surcharger.</p><div class="checks"><label class="check"><input type="checkbox" id="needPublic" checked /> Partie publique visible</label><label class="check"><input type="checkbox" id="needAdmin" checked /> Espace de gestion</label><label class="check"><input type="checkbox" id="needDb" checked /> Base de données</label><label class="check"><input type="checkbox" id="needPayments" /> Paiements / acomptes</label><label class="check"><input type="checkbox" id="needBooking" /> Réservations / planning</label><label class="check"><input type="checkbox" id="needUsers" checked /> Utilisateurs / rôles</label><label class="check"><input type="checkbox" id="needTrace" checked /> Historique des actions</label><label class="check"><input type="checkbox" id="needAi" /> Assistant / aide maison</label><label class="check"><input type="checkbox" id="needSupa" /> Connexion Supa Apps</label><label class="check"><input type="checkbox" id="needAudio" /> Explication audio</label></div><div class="field"><label for="customPages">Pages souhaitées en plus</label><textarea id="customPages" placeholder="Ex : témoignages, galerie, tarifs, FAQ"></textarea></div><div class="field"><label for="customFeatures">Fonctionnalités particulières</label><textarea id="customFeatures" placeholder="Ex : QR client, validation manuelle, galerie, réservation rapide"></textarea></div><div class="field"><label for="styleWanted">Style souhaité</label><input id="styleWanted" placeholder="Ex : premium, mobile, clair, rassurant" /></div><h2 style="margin-top:22px">3. Template HTML existant</h2><p class="hint">Optionnel. Tu peux ajouter des fichiers HTML pour que l’outil lise les titres, menus, formulaires, images et boutons.</p><div class="drop"><p><strong>Lecture locale seulement.</strong> Rien n’est envoyé à un serveur. Les fichiers sont analysés dans ton navigateur.</p><div class="file-row"><input id="htmlFiles" type="file" accept=".html,.htm,text/html" multiple onchange="readTemplateFiles(event)" /><button class="btn secondary" type="button" onclick="clearFiles()">Vider</button></div><div id="fileList" class="file-list">Aucun fichier ajouté pour le moment.</div></div><div class="actions"><button class="btn green" type="submit">Préparer le projet</button><button class="btn secondary" type="button" onclick="copyCurrent()">Copier la sortie</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button></div><div id="status" class="status"></div></form>
       <aside id="sortie" class="result"><h2>4. Dossier généré</h2><div class="output-tabs"><button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Cahier</button><button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button><button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL conseillé</button><button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button></div><div id="emptyState" class="empty"><div><b>Le dossier va sortir ici.</b>Remplis le projet puis clique sur “Préparer le projet”.</div></div><pre id="output" hidden></pre><div class="actions"><button class="btn" type="button" onclick="copyCurrent()">Copier</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger .md</button></div><p class="small">Version maison autonome. Aucun code externe de l’ancien outil n’est utilisé.</p></aside></section><footer class="footer">DIGIY Projet Maison · Atelier de cadrage pour la Supa Apps · BY DIGIYLYFE</footer></main><div id="toast" class="toast">Copié</div>
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(circle at 14% 8%, rgba(245,199,107,.19), transparent 30%),
-        radial-gradient(circle at 92% 10%, rgba(19,183,122,.18), transparent 26%),
-        linear-gradient(135deg,var(--bg),#04100d 62%,#071a15);
-      min-height:100vh;
-    }
-
-    a{color:inherit;text-decoration:none}
-    button,input,select,textarea{font:inherit}
-    button{cursor:pointer}
-
-    .wrap{max-width:var(--max);margin:0 auto;padding:20px}
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      backdrop-filter:blur(18px);
-      background:rgba(6,21,18,.78);
-      border-bottom:1px solid var(--line);
-    }
-
-    .topbar{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:14px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}
-    .mark{
-      width:44px;height:44px;border-radius:16px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--gold2),var(--gold));
-      color:#163326;
-      font-weight:950;
-      box-shadow:0 12px 34px rgba(245,199,107,.18);
-      flex:0 0 auto;
-    }
-    .brand strong{display:block;letter-spacing:.3px;font-size:15px;line-height:1.1}
-    .brand span{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58vw}
-
-    .top-actions{display:flex;gap:10px;align-items:center}
-    .pill{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      padding:10px 13px;
-      border-radius:999px;
-      font-weight:800;
-      font-size:13px;
-    }
-    .pill.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#183327;border-color:transparent}
-
-    .hero{padding:42px 0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch}
-    .hero-card,.panel,.result-card{
-      background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .hero-card{padding:32px;position:relative;overflow:hidden}
-    .hero-card:after{
-      content:"";position:absolute;right:-90px;bottom:-100px;width:260px;height:260px;border-radius:50%;
-      background:rgba(245,199,107,.11);
-      pointer-events:none;
-    }
-    .kicker{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(245,199,107,.32);background:rgba(245,199,107,.09);padding:9px 12px;border-radius:999px;color:var(--gold2);font-weight:900;font-size:13px;margin-bottom:18px}
-    h1{font-size:clamp(34px,5vw,64px);line-height:.95;margin:0 0 18px;letter-spacing:-2px}
-    h1 span{color:var(--gold2)}
-    .lead{font-size:18px;line-height:1.55;color:var(--muted);max-width:720px;margin:0 0 20px}
-    .quote{
-      border-left:4px solid var(--gold);
-      padding:12px 0 12px 16px;
-      color:#e9fff6;
-      background:rgba(255,255,255,.035);
-      border-radius:0 16px 16px 0;
-      margin-top:20px;
-      line-height:1.55;
-    }
-
-    .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;height:100%}
-    .mini{
-      padding:18px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--line);min-height:136px;
-    }
-    .mini b{display:block;font-size:18px;margin-bottom:8px;color:#fff}
-    .mini p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
-    .num{width:34px;height:34px;border-radius:13px;display:grid;place-items:center;background:rgba(245,199,107,.14);color:var(--gold2);font-weight:950;margin-bottom:12px}
-
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 18px}
-    .tab{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
-      padding:11px 14px;border-radius:999px;font-weight:900;
-    }
-    .tab.active{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;border-color:transparent}
-
-    .grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:22px;align-items:start}
-    .panel{padding:20px}
-    .panel h2,.result-card h2{margin:0 0 14px;font-size:22px;letter-spacing:-.4px}
-    .panel .hint{color:var(--muted);line-height:1.45;margin:0 0 18px}
-
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
-    label{font-size:13px;color:#dff5ed;font-weight:900}
-    input,select,textarea{
-      width:100%;border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--text);border-radius:16px;padding:13px 14px;outline:none;
-    }
-    select option{background:#102b24;color:#fff}
-    textarea{min-height:112px;resize:vertical;line-height:1.45}
-    input:focus,select:focus,textarea:focus{border-color:rgba(245,199,107,.72);box-shadow:0 0 0 4px rgba(245,199,107,.08)}
-
-    .checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 14px}
-    .check{
-      display:flex;gap:9px;align-items:flex-start;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:15px;padding:10px;color:var(--muted);font-size:13px;
-    }
-    .check input{width:auto;margin-top:2px;accent-color:var(--gold)}
-
-    .drop{
-      border:1px dashed rgba(245,199,107,.45);
-      background:rgba(245,199,107,.055);
-      border-radius:20px;
-      padding:16px;
-      margin-top:10px;
-    }
-    .drop p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
-    .file-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap}
-    .file-list{font-size:13px;color:var(--soft);margin-top:10px;line-height:1.5;max-height:120px;overflow:auto}
-
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .btn{
-      border:0;border-radius:16px;padding:13px 15px;font-weight:950;color:#143226;background:linear-gradient(135deg,var(--gold2),var(--gold));
-      box-shadow:0 12px 28px rgba(245,199,107,.16);
-    }
-    .btn.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line);box-shadow:none}
-    .btn.green{background:linear-gradient(135deg,#2ff0a6,var(--green));color:#06231a}
-    .btn.danger{background:rgba(255,123,123,.12);color:#ffd2d2;border:1px solid rgba(255,123,123,.25);box-shadow:none}
-    .btn:disabled{opacity:.45;cursor:not-allowed}
-
-    .result-card{padding:20px;min-height:680px;position:sticky;top:86px}
-    .output-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-    .output-tabs button{border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--muted);border-radius:999px;padding:9px 12px;font-weight:900;font-size:13px}
-    .output-tabs button.active{background:rgba(245,199,107,.16);color:var(--gold2);border-color:rgba(245,199,107,.35)}
-    pre{
-      white-space:pre-wrap;word-break:break-word;margin:0;background:rgba(0,0,0,.27);border:1px solid var(--line);border-radius:20px;padding:18px;color:#f6fff9;line-height:1.55;font-size:14px;min-height:520px;max-height:66vh;overflow:auto;
-    }
-    .empty{
-      display:grid;place-items:center;min-height:520px;text-align:center;color:var(--muted);background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:20px;padding:20px;line-height:1.55;
-    }
-    [hidden]{display:none!important;}
-    .empty b{display:block;color:var(--text);font-size:20px;margin-bottom:8px}
-
-    .status{margin-top:10px;color:var(--gold2);font-weight:900;font-size:13px;min-height:18px}
-    .small{font-size:12px;color:var(--soft);line-height:1.45}
-
-    .footer{padding:26px 0 40px;color:var(--soft);text-align:center;font-size:13px}
-
-    .toast{
-      position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(20px);
-      background:#112c25;border:1px solid rgba(245,199,107,.35);color:#fff;border-radius:999px;padding:12px 16px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:80;font-weight:900;
-    }
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-    @media (max-width:900px){
-      .hero,.grid{grid-template-columns:1fr}
-      .mini-grid{grid-template-columns:1fr 1fr}
-      .result-card{position:relative;top:auto;min-height:auto}
-      pre,.empty{min-height:360px;max-height:none}
-      .top-actions .pill:not(.gold){display:none}
-    }
-
-    @media (max-width:620px){
-      .wrap{padding:14px}
-      .topbar{padding:12px 14px}
-      .brand span{max-width:48vw}
-      .hero{padding-top:24px}
-      .hero-card,.panel,.result-card{padding:16px;border-radius:22px}
-      .mini-grid,.form-grid,.checks{grid-template-columns:1fr}
-      .mini{min-height:auto}
-      .actions .btn{width:100%}
-      h1{letter-spacing:-1.3px}
-      .lead{font-size:16px}
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="topbar">
-      <a class="brand" href="#top" aria-label="Retour en haut">
-        <div class="mark">D∞</div>
-        <div>
-          <strong>DIGIY Projet Maison</strong>
-          <span>Transforme une idée en cahier clair</span>
-        </div>
-      </a>
-      <div class="top-actions">
-        <a class="pill" href="#atelier">Atelier</a>
-        <button class="pill gold" type="button" onclick="generateAll()">Préparer</button>
-      </div>
-    </div>
-  </header>
-
-  <main id="top" class="wrap">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-card">
-        <div class="kicker">Assistant maison · Supa Apps · Terrain</div>
-        <h1 id="hero-title">Transforme une idée en <span>cahier clair</span>.</h1>
-        <p class="lead">Un outil maison pour aider les novices du web à expliquer leur projet. Tu choisis le métier, tu ajoutes les besoins, tu peux importer un template HTML, et DIGIY prépare une feuille de route propre.</p>
-        <div class="quote">On ne copie pas l’ancien outil. On construit notre assistant de cadrage projet maison, inspiré du besoin terrain.</div>
-        <div class="actions">
-          <a class="btn" href="#atelier">Commencer le cadrage</a>
-          <button class="btn secondary" type="button" onclick="fillDemo()">Exemple agence immobilière</button>
-        </div>
-      </div>
-      <div class="mini-grid" aria-label="Étapes de l’outil">
-        <div class="mini"><div class="num">1</div><b>Dire le métier</b><p>Commerce, restaurant, immobilier, taxi, beauté, BTP, réservation ou projet libre.</p></div>
-        <div class="mini"><div class="num">2</div><b>Ranger l’idée</b><p>L’outil clarifie les pages, les actions, les données et les priorités.</p></div>
-        <div class="mini"><div class="num">3</div><b>Lire le template</b><p>Ajoute des fichiers HTML pour repérer menus, formulaires, titres et images.</p></div>
-        <div class="mini"><div class="num">4</div><b>Sortir le dossier</b><p>Cahier des charges, prompt IA, SQL conseillé, plan de production.</p></div>
-      </div>
-    </section>
-
-    <div class="tabs" role="navigation" aria-label="Accès rapide">
-      <a class="tab active" href="#atelier">Cadrage</a>
-      <a class="tab" href="#sortie">Sortie</a>
-      <button class="tab" type="button" onclick="resetForm()">Nouveau projet</button>
-    </div>
-
-    <section id="atelier" class="grid">
-      <form class="panel" onsubmit="event.preventDefault(); generateAll();" aria-label="Formulaire de cadrage projet">
-        <h2>1. Informations du projet</h2>
-        <p class="hint">On commence simple. Le but n’est pas de parler ingénieur. Le but est de faire sortir une route claire.</p>
-
-        <div class="form-grid">
-          <div class="field">
-            <label for="projectName">Nom du projet</label>
-            <input id="projectName" placeholder="Ex : Agence Soleil Immo" />
-          </div>
-          <div class="field">
-            <label for="projectType">Type de projet</label>
-            <select id="projectType" onchange="applyTypeDefaults()">
-              <option value="vitrine">Site vitrine</option>
-              <option value="ecommerce">E-commerce</option>
-              <option value="restaurant">Restaurant</option>
-              <option value="reservation">Réservation</option>
-              <option value="taxi">Taxi / chauffeur</option>
-              <option value="immobilier">Agence immobilière</option>
-              <option value="location">Location / hébergement</option>
-              <option value="beaute">Beauté / coiffure</option>
-              <option value="btp">BTP / artisans</option>
-              <option value="annuaire">Annuaire</option>
-              <option value="voyage">Voyage / tourisme</option>
-              <option value="carte">Carte digitale</option>
-              <option value="personnalise">Projet personnalisé</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="field">
-            <label for="activity">Activité / métier</label>
-            <input id="activity" placeholder="Ex : agence immobilière à Saly" />
-          </div>
-          <div class="field">
-            <label for="location">Ville / pays</label>
-            <input id="location" placeholder="Ex : Saly, Sénégal" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="goal">Objectif principal</label>
-          <textarea id="goal" placeholder="Ex : présenter les biens, recevoir des demandes, gérer les visites et les réservations à la nuitée."></textarea>
-        </div>
-
-        <div class="field">
-          <label for="audience">Public visé</label>
-          <input id="audience" placeholder="Ex : clients locaux, diaspora, touristes, entreprises" />
-        </div>
-
-        <h2 style="margin-top:22px">2. Besoins à activer</h2>
-        <p class="hint">Coche ce qui compte. L’outil va préparer les blocs utiles sans surcharger.</p>
-        <div class="checks">
-          <label class="check"><input type="checkbox" id="needPublic" checked /> Partie publique visible</label>
-          <label class="check"><input type="checkbox" id="needAdmin" checked /> Espace de gestion</label>
-          <label class="check"><input type="checkbox" id="needDb" checked /> Base de données</label>
-          <label class="check"><input type="checkbox" id="needPayments" /> Paiements / acomptes</label>
-          <label class="check"><input type="checkbox" id="needBooking" /> Réservations / planning</label>
-          <label class="check"><input type="checkbox" id="needUsers" checked /> Utilisateurs / rôles</label>
-          <label class="check"><input type="checkbox" id="needTrace" checked /> Historique des actions</label>
-          <label class="check"><input type="checkbox" id="needAi" /> Assistant / aide maison</label>
-          <label class="check"><input type="checkbox" id="needSupa" /> Connexion Supa Apps</label>
-          <label class="check"><input type="checkbox" id="needAudio" /> Explication audio</label>
-        </div>
-
-        <div class="field">
-          <label for="customPages">Pages souhaitées en plus</label>
-          <textarea id="customPages" placeholder="Ex : À propos, témoignages, galerie, tarifs, FAQ"></textarea>
-        </div>
-
-        <div class="field">
-          <label for="customFeatures">Fonctionnalités particulières</label>
-          <textarea id="customFeatures" placeholder="Ex : contrat PDF, upload images, recherche par quartier, validation manuelle, QR client"></textarea>
-        </div>
-
-        <div class="field">
-          <label for="styleWanted">Style souhaité</label>
-          <input id="styleWanted" placeholder="Ex : sobre, premium, mobile, africain, clair, rassurant" />
-        </div>
-
-        <h2 style="margin-top:22px">3. Template HTML existant</h2>
-        <p class="hint">Optionnel. Tu peux ajouter des fichiers HTML pour que l’outil lise les titres, menus, formulaires, images et boutons.</p>
-        <div class="drop">
-          <p><strong>Lecture locale seulement.</strong> Rien n’est envoyé à un serveur. Les fichiers sont analysés dans ton navigateur.</p>
-          <div class="file-row">
-            <input id="htmlFiles" type="file" accept=".html,.htm,text/html" multiple onchange="readTemplateFiles(event)" />
-            <button class="btn secondary" type="button" onclick="clearFiles()">Vider</button>
-          </div>
-          <div id="fileList" class="file-list">Aucun fichier ajouté pour le moment.</div>
-        </div>
-
-        <div class="actions">
-          <button class="btn green" type="submit">Préparer le projet</button>
-          <button class="btn secondary" type="button" onclick="copyCurrent()">Copier la sortie</button>
-          <button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button>
-        </div>
-        <div id="status" class="status" aria-live="polite"></div>
-      </form>
-
-      <aside id="sortie" class="result-card" aria-label="Sortie générée">
-        <h2>4. Dossier généré</h2>
-        <div class="output-tabs" role="tablist" aria-label="Types de sortie">
-          <button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Cahier</button>
-          <button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button>
-          <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL conseillé</button>
-          <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
-        </div>
-        <div id="emptyState" class="empty"><div><b>Le dossier va sortir ici.</b>Remplis le projet puis clique sur “Préparer le projet”. L’outil te donnera un cahier clair, un prompt IA, une base SQL conseillée et une synthèse exploitable.</div></div>
-        <pre id="output" hidden></pre>
-        <div class="actions">
-          <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
-          <button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger .md</button>
-        </div>
-        <p class="small">Version maison autonome. Aucun code externe de l’ancien outil n’est utilisé.</p>
-      </aside>
-    </section>
-
-    <footer class="footer">
-      DIGIY Projet Maison · Atelier de cadrage pour la Supa Apps · BY DIGIYLYFE
-    </footer>
-  </main>
-
-  <div id="toast" class="toast" role="status" aria-live="polite">Copié</div>
-
   <script>
-    const templates = {
-      vitrine: {
-        label: "Site vitrine",
-        pages: ["Accueil", "Services", "À propos", "Réalisations", "Contact"],
-        publicFeatures: ["Présentation de l’activité", "Boutons WhatsApp / appel", "Galerie images", "Formulaire de contact", "Avis ou témoignages"],
-        adminFeatures: ["Modifier les textes", "Modifier les images", "Gérer les messages reçus", "Publier ou masquer des sections"],
-        tables: ["users", "site_settings", "pages", "messages", "media"],
-        rules: ["Les coordonnées publiques doivent être contrôlées.", "Les messages clients doivent rester privés."]
-      },
-      ecommerce: {
-        label: "E-commerce",
-        pages: ["Accueil", "Catalogue", "Détail produit", "Panier", "Commande", "Contact"],
-        publicFeatures: ["Catalogue produits", "Recherche et filtres", "Fiche produit", "Ajout au panier", "Commande WhatsApp ou formulaire", "Suivi simple"],
-        adminFeatures: ["Gestion produits", "Gestion catégories", "Gestion commandes", "Gestion clients", "Stock", "Prix et promotions"],
-        tables: ["users", "products", "categories", "customers", "orders", "order_items", "payments", "stock_movements"],
-        rules: ["Un produit peut avoir plusieurs images.", "Une commande contient une ou plusieurs lignes.", "Le stock doit être mis à jour après validation."]
-      },
-      restaurant: {
-        label: "Restaurant",
-        pages: ["Accueil", "Menu", "Plat détail", "Commande", "Réservation", "Contact"],
-        publicFeatures: ["Menu par catégories", "Photos des plats", "Commande directe", "Réservation de table", "Bouton WhatsApp", "Horaires"],
-        adminFeatures: ["Gestion plats", "Gestion menus", "Gestion commandes", "Gestion réservations", "Horaires", "Messages clients"],
-        tables: ["users", "restaurant_settings", "menu_categories", "dishes", "orders", "order_items", "reservations", "payments"],
-        rules: ["Les plats masqués ne s’affichent pas au public.", "Une réservation doit avoir un statut clair."]
-      },
-      reservation: {
-        label: "Réservation",
-        pages: ["Accueil", "Services", "Calendrier", "Réserver", "Confirmation", "Contact"],
-        publicFeatures: ["Liste des services", "Créneaux disponibles", "Demande de réservation", "Confirmation", "Contact direct"],
-        adminFeatures: ["Gestion services", "Gestion créneaux", "Gestion réservations", "Annulations", "Suivi client"],
-        tables: ["users", "services", "availability", "bookings", "customers", "payments", "notifications"],
-        rules: ["Un créneau confirmé ne doit plus être disponible.", "Le client doit recevoir une information claire après demande."]
-      },
-      taxi: {
-        label: "Taxi / chauffeur",
-        pages: ["Accueil", "Chauffeurs", "Détail chauffeur", "Demande de trajet", "Contact"],
-        publicFeatures: ["Présentation chauffeur", "Zone de service", "Demande de trajet", "Bouton appel / WhatsApp", "Tarifs indicatifs"],
-        adminFeatures: ["Profil chauffeur", "Tarifs", "Demandes de trajet", "Historique courses", "Disponibilité"],
-        tables: ["users", "drivers", "vehicles", "ride_requests", "trips", "payments", "reviews"],
-        rules: ["Les données privées du chauffeur ne doivent pas sortir côté public.", "Une course doit avoir un statut."]
-      },
-      immobilier: {
-        label: "Agence immobilière",
-        pages: ["Accueil", "Biens", "Détail bien", "Recherche", "Demande de visite", "Réservation", "Contact"],
-        publicFeatures: ["Liste des biens", "Recherche par ville/quartier/type/prix", "Fiche bien", "Galerie images", "Demande de visite", "Demande de réservation à la nuitée", "Contact agence"],
-        adminFeatures: ["Gestion des biens", "Gestion des images", "Gestion des équipements", "Gestion des agents", "Gestion des clients", "Gestion des visites", "Gestion des réservations", "Planning des disponibilités", "Contrats", "Paiements et acomptes"],
-        tables: ["users", "real_estate_properties", "property_equipment", "property_images", "agents", "customers", "visits", "reservations", "planning", "payments", "contracts", "user_actions"],
-        rules: ["Un bien peut avoir plusieurs images.", "Un bien masqué ne doit pas apparaître côté public.", "Une réservation confirmée bloque les dates dans le planning.", "Les index eau et électricité doivent être suivis à l’entrée et à la sortie."]
-      },
-      location: {
-        label: "Location / hébergement",
-        pages: ["Accueil", "Logements", "Fiche logement", "Calendrier", "Réserver", "Contact"],
-        publicFeatures: ["Galerie logements", "Fiche logement", "Prix nuit/semaine/mois", "Calendrier des disponibilités", "Demande de réservation", "Contact direct"],
-        adminFeatures: ["Gestion logements", "Photos", "Tarifs", "Planning", "Arrivées/départs", "Paiements", "Notes rapides"],
-        tables: ["users", "rooms", "room_images", "availability", "reservations", "customers", "payments", "expenses", "user_actions"],
-        rules: ["Le planning est le cœur du module.", "Les dates occupées doivent être protégées.", "Le propriétaire garde le paiement direct."]
-      },
-      beaute: {
-        label: "Beauté / coiffure",
-        pages: ["Accueil", "Services", "Tarifs", "Réserver", "Galerie", "Contact"],
-        publicFeatures: ["Liste des services", "Prix", "Photos avant/après", "Réservation", "Contact WhatsApp"],
-        adminFeatures: ["Gestion services", "Planning", "Clients", "Réservations", "Paiements", "Photos"],
-        tables: ["users", "services", "appointments", "customers", "payments", "gallery", "user_actions"],
-        rules: ["Un service doit avoir une durée et un prix.", "Un créneau réservé ne doit pas être proposé deux fois."]
-      },
-      btp: {
-        label: "BTP / artisans",
-        pages: ["Accueil", "Services", "Réalisations", "Demande de devis", "Contact"],
-        publicFeatures: ["Présentation métier", "Services proposés", "Galerie réalisations", "Demande de devis", "Contact direct"],
-        adminFeatures: ["Gestion services", "Demandes de devis", "Clients", "Chantiers", "Photos", "Paiements"],
-        tables: ["users", "services", "customers", "quote_requests", "projects", "project_images", "payments", "expenses"],
-        rules: ["Chaque demande doit être suivie avec un statut.", "Les photos chantier peuvent servir de preuve d’avancement."]
-      },
-      annu
+    const templates={
+      vitrine:{label:"Site vitrine",pages:["Accueil","Services","À propos","Réalisations","Contact"],pub:["Présentation de l’activité","Bouton WhatsApp / appel","Galerie images","Formulaire de contact","Avis ou témoignages"],admin:["Modifier les textes","Modifier les images","Gérer les messages reçus","Publier ou masquer des sections"],tables:["users","site_settings","pages","messages","media"],rules:["Les coordonnées publiques doivent être contrôlées.","Les messages clients doivent rester privés."]},
+      ecommerce:{label:"E-commerce",pages:["Accueil","Catalogue","Détail produit","Panier","Commande","Contact"],pub:["Catalogue produits","Recherche et filtres","Fiche produit","Ajout au panier","Commande WhatsApp ou formulaire"],admin:["Gestion produits","Gestion catégories","Gestion commandes","Gestion clients","Stock"],tables:["users","products","categories","customers","orders","order_items","payments"],rules:["Un produit peut avoir plusieurs images.","Une commande contient une ou plusieurs lignes.","Le stock doit être mis à jour après validation."]},
+      restaurant:{label:"Restaurant",pages:["Accueil","Menu","Plat détail","Commande","Réservation","Contact"],pub:["Menu par catégories","Photos des plats","Commande directe","Réservation de table","Bouton WhatsApp","Horaires"],admin:["Gestion plats","Gestion menus","Gestion commandes","Gestion réservations","Horaires","Messages clients"],tables:["users","restaurant_settings","menu_categories","dishes","orders","order_items","reservations","payments"],rules:["Les plats masqués ne s’affichent pas au public.","Une réservation doit avoir un statut clair."]},
+      reservation:{label:"Réservation",pages:["Accueil","Services","Calendrier","Réserver","Confirmation","Contact"],pub:["Liste des services","Créneaux disponibles","Demande de réservation","Confirmation","Contact direct"],admin:["Gestion services","Gestion créneaux","Gestion réservations","Annulations","Suivi client"],tables:["users","services","availability","bookings","customers","payments"],rules:["Un créneau confirmé ne doit plus être disponible.","Le client doit recevoir une information claire après demande."]},
+      taxi:{label:"Taxi / chauffeur",pages:["Accueil","Chauffeurs","Détail chauffeur","Demande de trajet","Contact"],pub:["Présentation chauffeur","Zone de service","Demande de trajet","Bouton appel / WhatsApp","Tarifs indicatifs"],admin:["Profil chauffeur","Tarifs","Demandes de trajet","Historique courses","Disponibilité"],tables:["users","drivers","vehicles","ride_requests","trips","payments"],rules:["Les données privées du chauffeur ne doivent pas sortir côté public.","Une course doit avoir un statut."]},
+      immobilier:{label:"Agence immobilière",pages:["Accueil","Biens","Détail bien","Recherche","Demande de visite","Réservation","Contact"],pub:["Liste des biens","Recherche par ville/quartier/type/prix","Fiche bien","Galerie images","Demande de visite","Demande de réservation à la nuitée"],admin:["Gestion des biens","Gestion des images","Gestion des équipements","Gestion des agents","Gestion des clients","Gestion des visites","Gestion des réservations","Planning","Contrats","Paiements et acomptes"],tables:["users","properties","property_equipment","property_images","agents","customers","visits","reservations","planning","payments","contracts","user_actions"],rules:["Un bien peut avoir plusieurs images.","Un bien masqué ne doit pas apparaître côté public.","Une réservation confirmée bloque les dates dans le planning."]},
+      location:{label:"Location / hébergement",pages:["Accueil","Logements","Fiche logement","Calendrier","Réserver","Contact"],pub:["Galerie logements","Fiche logement","Prix nuit/semaine/mois","Calendrier des disponibilités","Demande de réservation"],admin:["Gestion logements","Photos","Tarifs","Planning","Arrivées/départs","Paiements","Notes rapides"],tables:["users","rooms","room_images","availability","reservations","customers","payments","expenses"],rules:["Le planning est le cœur du module.","Les dates occupées doivent être protégées."]},
+      beaute:{label:"Beauté / coiffure",pages:["Accueil","Services","Tarifs","Réserver","Galerie","Contact"],pub:["Liste des services","Prix","Photos avant/après","Réservation","Contact WhatsApp"],admin:["Gestion services","Planning","Clients","Réservations","Paiements","Photos"],tables:["users","services","appointments","customers","payments","gallery"],rules:["Un service doit avoir une durée et un prix.","Un créneau réservé ne doit pas être proposé deux fois."]},
+      btp:{label:"BTP / artisans",pages:["Accueil","Services","Réalisations","Demande de devis","Contact"],pub:["Présentation métier","Services proposés","Galerie réalisations","Demande de devis","Contact direct"],admin:["Gestion services","Demandes de devis","Clients","Chantiers","Photos","Paiements"],tables:["users","services","customers","quote_requests","projects","project_images","payments"],rules:["Chaque demande doit être suivie avec un statut.","Les photos chantier peuvent servir de preuve d’avancement."]},
+      annuaire:{label:"Annuaire",pages:["Accueil","Catégories","Liste des pros","Fiche pro","Ajouter une fiche","Contact"],pub:["Recherche","Catégories","Fiches professionnelles","Contact direct"],admin:["Validation des fiches","Gestion catégories","Gestion pros","Signalements"],tables:["users","categories","professionals","reviews","reports"],rules:["Une fiche doit pouvoir être validée avant publication."]},
+      voyage:{label:"Voyage / tourisme",pages:["Accueil","Destinations","Offres","Détail offre","Réserver","Contact"],pub:["Destinations","Offres de voyage","Galerie","Demande de réservation"],admin:["Gestion offres","Gestion destinations","Demandes clients","Réservations","Paiements"],tables:["users","destinations","offers","customers","bookings","payments"],rules:["Une offre doit préciser durée, prix, conditions et disponibilité."]},
+      carte:{label:"Carte digitale",pages:["Carte publique","Contact","Liens","Galerie","QR"],pub:["Présentation rapide","Liens sociaux","Boutons contact","QR","Galerie"],admin:["Modifier profil","Modifier liens","Modifier couleurs","Statut visible ou caché"],tables:["users","digital_cards","card_links","card_media"],rules:["La carte doit être rapide à ouvrir sur téléphone."]},
+      personnalise:{label:"Projet personnalisé",pages:["Accueil","Présentation","Fonction principale","Contact"],pub:["Présentation claire","Action principale","Contact direct"],admin:["Gestion du contenu","Gestion des demandes","Historique","Paramètres"],tables:["users","settings","items","requests","messages"],rules:["Le projet doit rester compréhensible pour un novice."]}
+    };
+    let templateAnalysis=[],outputs={brief:"",prompt:"",sql:"",json:""},currentTab="brief";
+    const $=id=>document.getElementById(id);const val=id=>($(id)?.value||"").trim();const checked=id=>!!$(id)?.checked;const list=a=>[...new Set((a||[]).map(x=>String(x).trim()).filter(Boolean))];
+    function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
+    function setStatus(t){$("status").textContent=t||""}function tpl(){return templates[$("projectType").value]||templates.personnalise}function lines(id){return val(id).split(/[\n,]+/).map(x=>x.trim()).filter(Boolean)}
+    function applyTypeDefaults(){const k=$("projectType").value,t=tpl();if(!val("activity"))$("activity").value=t.label;if(["restaurant","reservation","immobilier","location","beaute","voyage"].includes(k))$("needBooking").checked=true;if(["ecommerce","restaurant","immobilier","location","taxi","btp","voyage"].includes(k))$("needPayments").checked=true;setStatus("Modèle métier chargé : "+t.label)}
+    function fillDemo(){Object.assign($("projectName"),{value:"Agence Soleil Immo"});$("projectType").value="immobilier";$("activity").value="Agence immobilière avec vente, location et réservations à la nuitée";$("location").value="Saly, Sénégal";$("goal").value="Présenter les biens, recevoir des demandes, organiser les visites, gérer les réservations à la nuitée, suivre les contrats, les acomptes et le planning.";$("audience").value="Clients locaux, diaspora, touristes, investisseurs et entreprises";$("customPages").value="À propos\nTémoignages\nTarifs\nFAQ";$("customFeatures").value="Contrat de location\nUpload images\nRecherche par quartier\nBlocage automatique des dates";$("styleWanted").value="sobre, premium, mobile, rassurant";["needPublic","needAdmin","needDb","needPayments","needBooking","needUsers","needTrace","needAi","needSupa","needAudio"].forEach(id=>$(id).checked=true);generateAll();location.hash="sortie"}
+    function resetForm(){document.querySelector("form").reset();$("projectType").value="vitrine";templateAnalysis=[];outputs={brief:"",prompt:"",sql:"",json:""};$("htmlFiles").value="";$("fileList").textContent="Aucun fichier ajouté pour le moment.";renderOutput();setStatus("Nouveau projet prêt.")}
+    async function readTemplateFiles(e){const files=[...(e.target.files||[])];templateAnalysis=[];for(const f of files){try{templateAnalysis.push(analyzeHtml(f.name,await f.text()))}catch{templateAnalysis.push({name:f.name,error:"Lecture impossible"})}}renderFileList();setStatus(files.length+" fichier(s) HTML analysé(s).")}
+    function analyzeHtml(name,text){const d=new DOMParser().parseFromString(text,"text/html");return{name,title:(d.querySelector("title")?.textContent||"").trim(),headings:[...d.querySelectorAll("h1,h2,h3")].map(x=>x.textContent.trim()).filter(Boolean).slice(0,16),forms:d.querySelectorAll("form").length,inputs:d.querySelectorAll("input,select,textarea").length,buttons:[...d.querySelectorAll("button,a")].map(x=>x.textContent.trim()).filter(Boolean).slice(0,16),images:d.querySelectorAll("img").length}}
+    function renderFileList(){if(!templateAnalysis.length){$("fileList").textContent="Aucun fichier ajouté pour le moment.";return}$("fileList").innerHTML=templateAnalysis.map(f=>`<div>• <strong>${esc(f.name)}</strong> · ${f.forms||0} formulaire(s) · ${f.images||0} image(s)</div>`).join("")}
+    function clearFiles(){$("htmlFiles").value="";templateAnalysis=[];renderFileList();setStatus("Fichiers retirés.")}function esc(s){return String(s||"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[c]))}
+    function guessName(){const a=val("activity")||tpl().label,c=(val("location").split(",")[0]||"").trim();return c?a+" — "+c:a}
+    function data(){const t=tpl(),pages=list([...(checked("needPublic")?t.pages:[]),...lines("customPages")]),pub=checked("needPublic")?[...t.pub]:[],admin=checked("needAdmin")?[...t.admin]:[],tables=checked("needDb")?[...t.tables]:[],rules=[...t.rules];if(checked("needPayments")){admin.push("Suivi des paiements","Acomptes","Restes à payer","Références de paiement");tables.push("payments");rules.push("Les paiements doivent avoir un statut clair : en attente, validé, annulé.")}if(checked("needBooking")){pub.push("Demande de réservation","Disponibilités ou planning");admin.push("Planning","Confirmation ou annulation des réservations");tables.push("bookings","availability");rules.push("Une réservation confirmée doit bloquer la disponibilité correspondante.")}if(checked("needUsers")){admin.push("Gestion des utilisateurs","Gestion des rôles");tables.push("users")}if(checked("needTrace")){admin.push("Historique des actions importantes");tables.push("user_actions");rules.push("Les actions sensibles doivent être enregistrées dans un historique.")}if(checked("needAi")){pub.push("Aide maison pour comprendre le service");admin.push("Assistant d’aide pour guider les gestes de gestion")}if(checked("needSupa"))rules.push("Prévoir une future connexion à la Supa Apps sans rendre le projet dépendant dès le départ.");if(checked("needAudio")){pub.push("Bouton d’explication audio simple");rules.push("L’audio doit expliquer le service avec des mots humains.")}lines("customFeatures").forEach(x=>admin.push(x));return{projectName:val("projectName")||guessName(),typeKey:$("projectType").value,typeLabel:t.label,activity:val("activity")||t.label,location:val("location")||"Non précisé",goal:val("goal")||"Clarifier le besoin et produire une première version exploitable.",audience:val("audience")||"Clients, visiteurs et administrateurs du projet",styleWanted:val("styleWanted")||"simple, clair, mobile, rassurant",pages:list(pages),publicFeatures:list(pub),adminFeatures:list(admin),tables:list(tables),rules:list(rules),templateAnalysis}}
+    const bullet=a=>(a||[]).map(x=>"- "+x).join("\n");function report(files){return(!files||!files.length)?"Aucun template HTML importé.":files.map(f=>`### ${f.name}\n- Titre : ${f.title||"Non détecté"}\n- Formulaires : ${f.forms||0}\n- Champs : ${f.inputs||0}\n- Images : ${f.images||0}\n- Titres : ${(f.headings||[]).slice(0,6).join(" | ")||"Non détectés"}`).join("\n\n")}
+    function brief(d){return`# CAHIER DES CHARGES — ${d.projectName.toUpperCase()}\n\n## Positionnement\n\n**Type :** ${d.typeLabel}\n**Activité :** ${d.activity}\n**Zone :** ${d.location}\n**Public visé :** ${d.audience}\n**Style :** ${d.styleWanted}\n\n## Objectif\n\n${d.goal}\n\n## Pages nécessaires\n\n${bullet(d.pages)}\n\n## Fonctionnalités publiques\n\n${bullet(d.publicFeatures)}\n\n## Fonctionnalités de gestion\n\n${bullet(d.adminFeatures)}\n\n## Base de données proposée\n\n${bullet(d.tables)}\n\n## Règles métier\n\n${bullet(d.rules)}\n\n## Sécurité et clarté\n\n- Séparer ce qui est public de ce qui appartient à la gestion interne.\n- Ne pas exposer les données sensibles côté public.\n- Protéger les accès de gestion.\n- Garder des mots simples et humains.\n- Prévoir une interface mobile claire.\n\n## Analyse du template\n\n${report(d.templateAnalysis)}\n\n## Sortie attendue\n\n- Structure de pages claire.\n- Interface publique simple.\n- Interface de gestion légère.\n- Schéma SQL cohérent.\n- Plan de production fichier par fichier.\n`}
+    function promptIA(d){return`Tu es un assistant de production web. Aide-moi à créer ce projet sans jargon.\n\nNom : ${d.projectName}\nType : ${d.typeLabel}\nActivité : ${d.activity}\nZone : ${d.location}\nPublic : ${d.audience}\nStyle : ${d.styleWanted}\n\nObjectif :\n${d.goal}\n\nPages :\n${bullet(d.pages)}\n\nFonctionnalités publiques :\n${bullet(d.publicFeatures)}\n\nFonctionnalités de gestion :\n${bullet(d.adminFeatures)}\n\nTables à prévoir :\n${bullet(d.tables)}\n\nRègles métier :\n${bullet(d.rules)}\n\nTravail attendu :\n1. Résumer la logique du projet.\n2. Proposer l’arborescence des fichiers.\n3. Proposer les pages prioritaires.\n4. Proposer le SQL initial.\n5. Proposer une première page HTML complète.\n`}
+    function slug(s){return String(s||"projet").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,34)||"projet"}
+    function sql(d){const p=slug(d.projectName);return`-- SQL CONSEILLÉ — ${d.projectName}\n\ncreate table if not exists ${p}_users (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text,\n  email text,\n  password_hash text,\n  role text default 'admin',\n  status text default 'active',\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_settings (\n  id uuid primary key default gen_random_uuid(),\n  public_name text,\n  activity text,\n  city text,\n  whatsapp text,\n  description text,\n  is_public boolean default false,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_items (\n  id uuid primary key default gen_random_uuid(),\n  title text not null,\n  description text,\n  price numeric default 0,\n  image_url text,\n  status text default 'draft',\n  is_public boolean default false,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_requests (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text,\n  customer_phone text,\n  customer_email text,\n  message text,\n  status text default 'new',\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_payments (\n  id uuid primary key default gen_random_uuid(),\n  source_type text,\n  source_id uuid,\n  amount numeric default 0,\n  channel text,\n  reference text,\n  status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_user_actions (\n  id uuid primary key default gen_random_uuid(),\n  user_id uuid references ${p}_users(id) on delete set null,\n  action_label text not null,\n  action_type text,\n  created_at timestamptz default now()\n);`}
+    function generateAll(){const d=data();outputs.brief=brief(d);outputs.prompt=promptIA(d);outputs.sql=sql(d);outputs.json=JSON.stringify(d,null,2);renderOutput();setStatus("Dossier préparé pour : "+d.projectName);toast("Projet préparé")}
+    function setOutputTab(t){currentTab=t;document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));renderOutput()}
+    function renderOutput(){const text=outputs[currentTab]||"",out=$("output"),empty=$("emptyState");if(!text){out.hidden=true;out.style.display="none";empty.hidden=false;empty.style.display="grid";return}empty.hidden=true;empty.style.display="none";out.hidden=false;out.style.display="block";out.textContent=text}
+    async function copyCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à copier");return}try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}toast("Sortie copiée")}
+    function downloadCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à télécharger");return}const d=data(),ext=currentTab==="json"?"json":currentTab==="sql"?"sql":"md",blob=new Blob([text],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=slug(d.projectName)+"_"+currentTab+"."+ext;document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();toast("Téléchargement lancé")}
+    applyTypeDefaults();
+  </script>
+</body>
+</html>
