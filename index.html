@@ -667,6 +667,79 @@ FAQ</textarea>
       ].join(String.fromCharCode(10));
     }
 
+
+    function extraSectionHtml(d, sectionName){
+      const id = slug(sectionName);
+      const title = esc(sectionName);
+      const key = slug(sectionName);
+
+      let content = "";
+
+      if(d.typeKey === "restaurant"){
+        const restaurantBlocks = {
+          "plat-detail": `<div class="grid">
+        <div class="box"><h3>Plat signature</h3><p>Présente le plat phare : origine, goût, ingrédients principaux et ce qui le rend mémorable.</p></div>
+        <div class="box"><h3>Pour qui ?</h3><p>Familles, touristes, habitués du quartier ou clients qui veulent découvrir une vraie table locale.</p></div>
+        <div class="box"><h3>Conseil maison</h3><p>Ajoute une boisson, un accompagnement ou une suggestion du chef pour guider le client.</p></div>
+      </div>`,
+          "commande": `<div class="box">
+        <h3>Commander simplement</h3>
+        <p>Le client choisit son plat, indique l’heure souhaitée, puis contacte le restaurant par WhatsApp ou téléphone.</p>
+        <ol class="steps">
+          <li>Choisir le plat ou demander le plat du jour.</li>
+          <li>Indiquer le nombre de personnes ou de portions.</li>
+          <li>Confirmer l’heure, le lieu et le mode de retrait ou livraison.</li>
+        </ol>
+      </div>`,
+          "temoignages": `<div class="grid">
+        <div class="box"><h3>Accueil chaleureux</h3><p>“On se sent bien reçu, comme à la maison.”</p></div>
+        <div class="box"><h3>Cuisine généreuse</h3><p>“Les plats sont simples, bons et bien servis.”</p></div>
+        <div class="box"><h3>Bon repère à Saly</h3><p>“Facile à contacter, pratique pour réserver avant d’arriver.”</p></div>
+      </div>`,
+          "galerie": `<div class="gallery-grid">
+        <div class="photo-card">Photo du restaurant</div>
+        <div class="photo-card">Plat du jour</div>
+        <div class="photo-card">Poisson grillé</div>
+        <div class="photo-card">Salle ou terrasse</div>
+      </div>`,
+          "tarifs": `<div class="grid">
+        <div class="box price"><span>Plat du jour</span><strong>À partir de 2 500 FCFA</strong><p>À adapter selon le vrai menu.</p></div>
+        <div class="box price"><span>Poisson / grillade</span><strong>Prix selon arrivage</strong><p>Clair, honnête, sans surprise.</p></div>
+        <div class="box price"><span>Groupe</span><strong>Sur demande</strong><p>Pour familles, anniversaires et événements privés.</p></div>
+      </div>`,
+          "a-propos": `<div class="box">
+        <h3>Une table locale, simple et accueillante</h3>
+        <p>${esc(d.projectName)} présente une cuisine sénégalaise familiale, avec un accueil direct, une réservation simple et une présence claire pour les clients locaux comme pour les visiteurs.</p>
+      </div>`,
+          "evenements-prives": `<div class="grid">
+        <div class="box"><h3>Repas de groupe</h3><p>Prévoir les tables, le nombre de personnes et l’heure d’arrivée.</p></div>
+        <div class="box"><h3>Anniversaire</h3><p>Ajouter une demande spéciale : gâteau, décoration, musique ou menu adapté.</p></div>
+        <div class="box"><h3>Sortie d’entreprise</h3><p>Organiser un repas simple, clair et confirmé à l’avance.</p></div>
+      </div>`,
+          "faq": `<div class="box faq-list">
+        <details open><summary>Faut-il réserver ?</summary><p>Pour les groupes et les heures chargées, oui, c’est préférable.</p></details>
+        <details><summary>Peut-on commander à emporter ?</summary><p>Oui, indique le plat, l’heure souhaitée et ton contact WhatsApp.</p></details>
+        <details><summary>Acceptez-vous les groupes ?</summary><p>Oui, il faut préciser le nombre de personnes et l’heure prévue.</p></details>
+      </div>`
+        };
+
+        content = restaurantBlocks[key] || `<div class="box">
+        <h3>${title}</h3>
+        <p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p>
+      </div>`;
+      }else{
+        content = `<div class="box">
+        <h3>${title}</h3>
+        <p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p>
+      </div>`;
+      }
+
+      return `<section id="${esc(id)}" class="section">
+      <h2>${title}</h2>
+      ${content}
+    </section>`;
+    }
+
     function firstPage(d){
       const name = esc(d.projectName);
       const city = esc(d.city);
@@ -694,16 +767,9 @@ FAQ</textarea>
           <div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div>
         </div>`;
 
-      const extraSections = d.extraSections.slice(0,10).map(sectionName => {
-        const id = slug(sectionName);
-        const title = esc(sectionName);
-        return `<section id="${esc(id)}" class="section">
-      <h2>${title}</h2>
-      <div class="box">
-        <p>Ajoute ici le contenu de la section <strong>${title}</strong> : informations utiles, photos, détails, preuves de confiance et appel à l’action.</p>
-      </div>
-    </section>`;
-      }).join(String.fromCharCode(10));
+      const extraSections = d.extraSections.slice(0,10)
+        .map(sectionName => extraSectionHtml(d, sectionName))
+        .join(String.fromCharCode(10));
 
       return `<!doctype html>
 <html lang="fr">
@@ -735,8 +801,16 @@ FAQ</textarea>
     .form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}
     .form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}
     .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}
+    .steps{margin:12px 0 0;padding-left:20px;color:var(--muted);line-height:1.7}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+    .photo-card{min-height:150px;border:1px dashed rgba(245,199,107,.45);border-radius:22px;display:grid;place-items:center;text-align:center;color:#ffe7a8;background:rgba(245,199,107,.08);font-weight:900;padding:14px}
+    .price span{display:block;color:#ffe7a8;font-weight:900;margin-bottom:8px}
+    .price strong{display:block;font-size:22px;margin-bottom:8px}
+    .faq-list details{border-top:1px solid var(--line);padding:14px 0}
+    .faq-list details:first-child{border-top:0}
+    .faq-list summary{cursor:pointer;font-weight:950;color:#ffe7a8}
     footer{padding:30px 0;color:var(--muted);font-size:13px}
-    @media(max-width:760px){.grid,.info{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}}
+    @media(max-width:760px){.grid,.info,.gallery-grid{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}}
   </style>
 </head>
 <body>
@@ -936,4 +1010,5 @@ FAQ</textarea>
   </script>
 </body>
 </html>
+
 
