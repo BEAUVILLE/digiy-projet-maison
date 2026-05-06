@@ -54,7 +54,186 @@
     function brief(d){return`# CAHIER DES CHARGES — ${d.projectName.toUpperCase()}\n\n## Positionnement\n\n**Type :** ${d.typeLabel}\n**Activité :** ${d.activity}\n**Zone :** ${d.location}\n**Public visé :** ${d.audience}\n**Style :** ${d.styleWanted}\n\n## Objectif\n\n${d.goal}\n\n## Pages nécessaires\n\n${bullet(d.pages)}\n\n## Fonctionnalités publiques\n\n${bullet(d.publicFeatures)}\n\n## Fonctionnalités de gestion\n\n${bullet(d.adminFeatures)}\n\n## Base de données proposée\n\n${bullet(d.tables)}\n\n## Règles métier\n\n${bullet(d.rules)}\n\n## Sécurité et clarté\n\n- Séparer ce qui est public de ce qui appartient à la gestion interne.\n- Ne pas exposer les données sensibles côté public.\n- Protéger les accès de gestion.\n- Garder des mots simples et humains.\n- Prévoir une interface mobile claire.\n\n## Analyse du template\n\n${report(d.templateAnalysis)}\n\n## Sortie attendue\n\n- Structure de pages claire.\n- Interface publique simple.\n- Interface de gestion légère.\n- Schéma SQL cohérent.\n- Plan de production fichier par fichier.\n`}
     function promptIA(d){return`Tu es un assistant de production web. Aide-moi à créer ce projet sans jargon.\n\nNom : ${d.projectName}\nType : ${d.typeLabel}\nActivité : ${d.activity}\nZone : ${d.location}\nPublic : ${d.audience}\nStyle : ${d.styleWanted}\n\nObjectif :\n${d.goal}\n\nPages :\n${bullet(d.pages)}\n\nFonctionnalités publiques :\n${bullet(d.publicFeatures)}\n\nFonctionnalités de gestion :\n${bullet(d.adminFeatures)}\n\nTables à prévoir :\n${bullet(d.tables)}\n\nRègles métier :\n${bullet(d.rules)}\n\nTravail attendu :\n1. Résumer la logique du projet.\n2. Proposer l’arborescence des fichiers.\n3. Proposer les pages prioritaires.\n4. Proposer le SQL initial.\n5. Proposer une première page HTML complète.\n`}
     function slug(s){return String(s||"projet").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,34)||"projet"}
-    function sql(d){const p=slug(d.projectName);return`-- SQL CONSEILLÉ — ${d.projectName}\n\ncreate table if not exists ${p}_users (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text,\n  email text,\n  password_hash text,\n  role text default 'admin',\n  status text default 'active',\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_settings (\n  id uuid primary key default gen_random_uuid(),\n  public_name text,\n  activity text,\n  city text,\n  whatsapp text,\n  description text,\n  is_public boolean default false,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_items (\n  id uuid primary key default gen_random_uuid(),\n  title text not null,\n  description text,\n  price numeric default 0,\n  image_url text,\n  status text default 'draft',\n  is_public boolean default false,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_requests (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text,\n  customer_phone text,\n  customer_email text,\n  message text,\n  status text default 'new',\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_payments (\n  id uuid primary key default gen_random_uuid(),\n  source_type text,\n  source_id uuid,\n  amount numeric default 0,\n  channel text,\n  reference text,\n  status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_user_actions (\n  id uuid primary key default gen_random_uuid(),\n  user_id uuid references ${p}_users(id) on delete set null,\n  action_label text not null,\n  action_type text,\n  created_at timestamptz default now()\n);`}
+    function sql(d){
+      const p=slug(d.projectName);
+      if(d.typeKey==="restaurant"){
+        return `-- SQL CONSEILLÉ — ${d.projectName}
+-- Version métier restaurant : menu, plats, commandes, réservations, paiements.
+
+create table if not exists ${p}_users (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  phone text,
+  email text,
+  password_hash text,
+  role text default 'admin',
+  status text default 'active',
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_restaurant_settings (
+  id uuid primary key default gen_random_uuid(),
+  public_name text not null,
+  activity text,
+  city text,
+  country text default 'Sénégal',
+  whatsapp text,
+  address text,
+  opening_hours text,
+  description text,
+  cover_image_url text,
+  logo_url text,
+  is_public boolean default false,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists ${p}_menu_categories (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  description text,
+  sort_order int default 0,
+  is_active boolean default true,
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_dishes (
+  id uuid primary key default gen_random_uuid(),
+  category_id uuid references ${p}_menu_categories(id) on delete set null,
+  name text not null,
+  description text,
+  price_xof numeric default 0,
+  image_url text,
+  is_available boolean default true,
+  is_public boolean default true,
+  sort_order int default 0,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+create table if not exists ${p}_reservations (
+  id uuid primary key default gen_random_uuid(),
+  customer_name text not null,
+  customer_phone text,
+  customer_email text,
+  reservation_date date not null,
+  reservation_time time,
+  guests_count int default 1,
+  note text,
+  status text default 'pending',
+  deposit_amount_xof numeric default 0,
+  remaining_amount_xof numeric default 0,
+  payment_reference text,
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_orders (
+  id uuid primary key default gen_random_uuid(),
+  customer_name text,
+  customer_phone text,
+  order_type text default 'sur_place',
+  total_amount_xof numeric default 0,
+  status text default 'pending',
+  payment_status text default 'pending',
+  note text,
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_order_items (
+  id uuid primary key default gen_random_uuid(),
+  order_id uuid references ${p}_orders(id) on delete cascade,
+  dish_id uuid references ${p}_dishes(id) on delete set null,
+  dish_name text,
+  quantity numeric default 1,
+  unit_price_xof numeric default 0,
+  line_total_xof numeric default 0
+);
+
+create table if not exists ${p}_payments (
+  id uuid primary key default gen_random_uuid(),
+  source_type text,
+  source_id uuid,
+  amount_xof numeric default 0,
+  channel text,
+  reference text,
+  status text default 'pending',
+  note text,
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_user_actions (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references ${p}_users(id) on delete set null,
+  action_label text not null,
+  action_type text,
+  created_at timestamptz default now()
+);`;
+      }
+      return `-- SQL CONSEILLÉ — ${d.projectName}
+
+create table if not exists ${p}_users (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  phone text,
+  email text,
+  password_hash text,
+  role text default 'admin',
+  status text default 'active',
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_settings (
+  id uuid primary key default gen_random_uuid(),
+  public_name text,
+  activity text,
+  city text,
+  whatsapp text,
+  description text,
+  is_public boolean default false,
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_items (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text,
+  price numeric default 0,
+  image_url text,
+  status text default 'draft',
+  is_public boolean default false,
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_requests (
+  id uuid primary key default gen_random_uuid(),
+  customer_name text,
+  customer_phone text,
+  customer_email text,
+  message text,
+  status text default 'new',
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_payments (
+  id uuid primary key default gen_random_uuid(),
+  source_type text,
+  source_id uuid,
+  amount numeric default 0,
+  channel text,
+  reference text,
+  status text default 'pending',
+  note text,
+  created_at timestamptz default now()
+);
+
+create table if not exists ${p}_user_actions (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references ${p}_users(id) on delete set null,
+  action_label text not null,
+  action_type text,
+  created_at timestamptz default now()
+);`;
+    }
     function generateAll(){const d=data();outputs.brief=brief(d);outputs.prompt=promptIA(d);outputs.sql=sql(d);outputs.json=JSON.stringify(d,null,2);renderOutput();setStatus("Dossier préparé pour : "+d.projectName);toast("Projet préparé")}
     function setOutputTab(t){currentTab=t;document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));renderOutput()}
     function renderOutput(){const text=outputs[currentTab]||"",out=$("output"),empty=$("emptyState");if(!text){out.hidden=true;out.style.display="none";empty.hidden=false;empty.style.display="grid";return}empty.hidden=true;empty.style.display="none";out.hidden=false;out.style.display="block";out.textContent=text}
@@ -64,3 +243,4 @@
   </script>
 </body>
 </html>
+
