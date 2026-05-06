@@ -72,8 +72,7 @@
         else if(id.includes("faq")) body="Réponds aux questions simples : horaires, réservation, paiement, accès, groupes et contact.";
         else body="Complète cette section avec les informations utiles pour le client.";
         return `<section id="${id}" class="section"><h2>${title}</h2><div class="box"><p>${body}</p></div></section>`;
-      }).join("
-");
+      }).join("\\n");
       const specials=(d.specialFeatures.length?d.specialFeatures:["Réservation directe","Contact WhatsApp","Photos et avis","Horaires clairs"]).slice(0,8).map(x=>`<li>${esc(x)}</li>`).join("");
       const restaurantMenu=d.typeKey==="restaurant"?`<div class="grid menu-grid"><div class="box dish"><span>Plat local</span><h3>Thiéboudienne maison</h3><p>Un plat signature pour montrer la cuisine sénégalaise et rassurer le client.</p></div><div class="box dish"><span>Grillade</span><h3>Poisson grillé</h3><p>Idéal pour les touristes, familles et clients qui veulent manger frais à Saly.</p></div><div class="box dish"><span>Réservation</span><h3>Table de groupe</h3><p>Prévoir une demande simple avec nombre de personnes, date et heure souhaitée.</p></div></div>`:`<div class="grid"><div class="box"><h3>Offre principale</h3><p>Présente ici le service ou produit le plus important.</p></div><div class="box"><h3>Contact direct</h3><p>Ajoute WhatsApp, téléphone ou formulaire client.</p></div><div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div></div>`;
       return `<!doctype html>
