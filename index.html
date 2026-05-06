@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DIGIY Projet Maison — Transforme une idée en cahier clair</title>
-  <meta name="description" content="Assistant maison de cadrage projet : cahier des charges, prompt IA, SQL conseillé et plan de production." />
+  <meta name="description" content="Assistant maison de cadrage projet : cahier des charges, prompt IA, SQL conseillé, plan de production et première page HTML." />
   <style>
     :root{--bg:#061512;--card:#102b24;--line:rgba(255,255,255,.12);--text:#f7fff9;--muted:#bdd3ca;--soft:#8fb2a5;--gold:#f5c76b;--gold2:#ffe7a8;--green:#19c889;--shadow:0 24px 70px rgba(0,0,0,.35);--radius:24px;--max:1180px;--font:Outfit,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font);color:var(--text);background:radial-gradient(circle at 10% 5%,rgba(245,199,107,.18),transparent 30%),radial-gradient(circle at 88% 6%,rgba(25,200,137,.16),transparent 27%),linear-gradient(135deg,var(--bg),#04100d 65%,#071a15);min-height:100vh}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:var(--max);margin:0 auto;padding:20px}
@@ -17,15 +17,15 @@
 <body>
   <header><div class="topbar"><a class="brand" href="#top"><div class="mark">D∞</div><div><strong>DIGIY Projet Maison</strong><span>Transforme une idée en cahier clair</span></div></a><div class="top-actions"><a class="pill" href="#atelier">Atelier</a><button class="pill gold" type="button" onclick="generateAll()">Préparer</button></div></div></header>
   <main id="top" class="wrap">
-    <section class="hero"><div class="card"><div class="kicker">Assistant maison · Supa Apps · Terrain</div><h1>Transforme une idée en <span>cahier clair</span>.</h1><p class="lead">Un outil maison pour aider les novices du web à expliquer leur projet. Tu choisis le métier, tu ajoutes les besoins, tu peux importer un template HTML, et DIGIY prépare une feuille de route propre.</p><div class="quote">On ne copie pas l’ancien outil. On construit notre assistant de cadrage projet maison, inspiré du besoin terrain.</div><div class="actions"><a class="btn" href="#atelier">Commencer le cadrage</a><button class="btn secondary" type="button" onclick="fillDemo()">Exemple agence immobilière</button></div></div><div class="mini-grid"><div class="mini"><div class="num">1</div><b>Dire le métier</b><p>Commerce, restaurant, immobilier, taxi, beauté, BTP, réservation ou projet libre.</p></div><div class="mini"><div class="num">2</div><b>Ranger l’idée</b><p>L’outil clarifie les pages, les actions, les données et les priorités.</p></div><div class="mini"><div class="num">3</div><b>Lire le template</b><p>Ajoute des fichiers HTML pour repérer menus, formulaires, titres et images.</p></div><div class="mini"><div class="num">4</div><b>Sortir le dossier</b><p>Cahier des charges, prompt IA, SQL conseillé, plan de production.</p></div></div></section>
+    <section class="hero"><div class="card"><div class="kicker">Assistant maison · Supa Apps · Terrain</div><h1>Transforme une idée en <span>cahier clair</span>.</h1><p class="lead">Un outil maison pour aider les novices du web à expliquer leur projet. Tu choisis le métier, tu ajoutes les besoins, tu peux importer un template HTML, et DIGIY prépare une feuille de route propre.</p><div class="quote">Projet Maison prépare. Réalisation construit. Supa Apps relie.</div><div class="actions"><a class="btn" href="#atelier">Commencer le cadrage</a><button class="btn secondary" type="button" onclick="fillDemo()">Exemple agence immobilière</button></div></div><div class="mini-grid"><div class="mini"><div class="num">1</div><b>Dire le métier</b><p>Commerce, restaurant, immobilier, taxi, beauté, BTP, réservation ou projet libre.</p></div><div class="mini"><div class="num">2</div><b>Ranger l’idée</b><p>L’outil clarifie les pages, les actions, les données et les priorités.</p></div><div class="mini"><div class="num">3</div><b>Préparer la réalisation</b><p>Structure des fichiers, plan de production et première page HTML.</p></div><div class="mini"><div class="num">4</div><b>Sortir le dossier</b><p>Cahier des charges, prompt IA, SQL conseillé, JSON et page de départ.</p></div></div></section>
     <div class="tabs"><a class="tab active" href="#atelier">Cadrage</a><a class="tab" href="#sortie">Sortie</a><button class="tab" type="button" onclick="resetForm()">Nouveau projet</button></div>
-    <section id="atelier" class="grid"><form class="panel" onsubmit="event.preventDefault();generateAll();"><h2>Étape 1 — Informations du projet</h2><p class="hint">On commence simple. Le but n’est pas de parler ingénieur. Le but est de faire sortir une route claire.</p><div class="form-grid"><div class="field"><label for="projectName">1. Nom du projet</label><input id="projectName" placeholder="1 — Ex : Restaurant Teranga" /></div><div class="field"><label for="projectType">2. Type de projet</label><select id="projectType" onchange="applyTypeDefaults()"><option value="vitrine">Site vitrine</option><option value="ecommerce">E-commerce</option><option value="restaurant">Restaurant</option><option value="reservation">Réservation</option><option value="taxi">Taxi / chauffeur</option><option value="immobilier">Agence immobilière</option><option value="location">Location / hébergement</option><option value="beaute">Beauté / coiffure</option><option value="btp">BTP / artisans</option><option value="annuaire">Annuaire</option><option value="voyage">Voyage / tourisme</option><option value="carte">Carte digitale</option><option value="personnalise">Projet personnalisé</option></select></div></div><div class="form-grid"><div class="field"><label for="activity">3. Activité / métier</label><input id="activity" placeholder="3 — Ex : restaurant familial à Saly" /></div><div class="field"><label for="location">4. Ville / pays</label><input id="location" placeholder="4 — Ex : Saly, Sénégal" /></div></div><div class="field"><label for="goal">5. Objectif principal</label><textarea id="goal" placeholder="5 — Ex : présenter le restaurant, afficher le menu et prendre des réservations."></textarea></div><div class="field"><label for="audience">6. Public visé</label><input id="audience" placeholder="6 — Ex : clients locaux, familles, touristes, diaspora"},{ /></div><h2 style="margin-top:22px">Étape 2 — Besoins à activer</h2><p class="hint">Coche ce qui compte. L’outil va préparer les blocs utiles sans surcharger.</p><div class="checks"><label class="check"><input type="checkbox" id="needPublic" checked /> Partie publique visible</label><label class="check"><input type="checkbox" id="needAdmin" checked /> Espace de gestion</label><label class="check"><input type="checkbox" id="needDb" checked /> Base de données</label><label class="check"><input type="checkbox" id="needPayments" /> Paiements / acomptes</label><label class="check"><input type="checkbox" id="needBooking" /> Réservations / planning</label><label class="check"><input type="checkbox" id="needUsers" checked /> Utilisateurs / rôles</label><label class="check"><input type="checkbox" id="needTrace" checked /> Historique des actions</label><label class="check"><input type="checkbox" id="needAi" /> Assistant / aide maison</label><label class="check"><input type="checkbox" id="needSupa" /> Connexion Supa Apps</label><label class="check"><input type="checkbox" id="needAudio" /> Explication audio</label></div><div class="field"><label for="customPages">7. Pages souhaitées en plus</label><textarea id="customPages" placeholder="Ex : témoignages, galerie, tarifs, FAQ"></textarea></div><div class="field"><label for="customFeatures">8. Fonctionnalités particulières</label><textarea id="customFeatures" placeholder="Ex : QR client, validation manuelle, galerie, réservation rapide"></textarea></div><div class="field"><label for="styleWanted">9. Style souhaité</label><input id="styleWanted" placeholder="Ex : premium, mobile, clair, rassurant" /></div><h2 style="margin-top:22px">10. Template HTML existant</h2><p class="hint">Optionnel. Tu peux ajouter des fichiers HTML pour que l’outil lise les titres, menus, formulaires, images et boutons.</p><div class="drop"><p><strong>Lecture locale seulement.</strong> Rien n’est envoyé à un serveur. Les fichiers sont analysés dans ton navigateur.</p><div class="file-row"><input id="htmlFiles" type="file" accept=".html,.htm,text/html" multiple onchange="readTemplateFiles(event)" /><button class="btn secondary" type="button" onclick="clearFiles()">Vider</button></div><div id="fileList" class="file-list">Aucun fichier ajouté pour le moment.</div></div><div class="actions"><button class="btn green" type="submit">Préparer le projet</button><button class="btn secondary" type="button" onclick="copyCurrent()">Copier la sortie</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button></div><div id="status" class="status"></div></form>
-      <aside id="sortie" class="result"><h2>4. Dossier généré</h2><div class="output-tabs"><button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Cahier</button><button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button><button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL conseillé</button><button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button></div><div id="emptyState" class="empty"><div><b>Le dossier va sortir ici.</b>Remplis le projet puis clique sur “Préparer le projet”.</div></div><pre id="output" hidden></pre><div class="actions"><button class="btn" type="button" onclick="copyCurrent()">Copier</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger .md</button></div><p class="small">Version maison autonome. Aucun code externe de l’ancien outil n’est utilisé.</p></aside></section><footer class="footer">DIGIY Projet Maison · Atelier de cadrage pour la Supa Apps · BY DIGIYLYFE</footer></main><div id="toast" class="toast">Copié</div>
+    <section id="atelier" class="grid"><form class="panel" onsubmit="event.preventDefault();generateAll();"><h2>1. Informations du projet</h2><p class="hint">On commence simple. Les numéros guident le remplissage : chaque idée dans la bonne case.</p><div class="form-grid"><div class="field"><label for="projectName">1. Nom du projet</label><input id="projectName" placeholder="Ex : Restaurant Teranga Saly" /></div><div class="field"><label for="projectType">2. Type de projet</label><select id="projectType" onchange="applyTypeDefaults()"><option value="vitrine">Site vitrine</option><option value="ecommerce">E-commerce</option><option value="restaurant">Restaurant</option><option value="reservation">Réservation</option><option value="taxi">Taxi / chauffeur</option><option value="immobilier">Agence immobilière</option><option value="location">Location / hébergement</option><option value="beaute">Beauté / coiffure</option><option value="btp">BTP / artisans</option><option value="annuaire">Annuaire</option><option value="voyage">Voyage / tourisme</option><option value="carte">Carte digitale</option><option value="personnalise">Projet personnalisé</option></select></div></div><div class="form-grid"><div class="field"><label for="activity">3. Activité / métier</label><input id="activity" placeholder="Ex : restaurant familial sénégalais avec spécialités locales" /></div><div class="field"><label for="location">4. Ville / pays</label><input id="location" placeholder="Ex : Saly, Sénégal" /></div></div><div class="field"><label for="goal">5. Objectif principal</label><textarea id="goal" placeholder="Ex : présenter le restaurant, afficher le menu et prendre des réservations."></textarea></div><div class="field"><label for="audience">6. Public visé</label><input id="audience" placeholder="Ex : clients locaux, diaspora, touristes" /></div><h2 style="margin-top:22px">2. Besoins à activer</h2><p class="hint">Coche ce qui compte. L’outil prépare les blocs utiles sans surcharger.</p><div class="checks"><label class="check"><input type="checkbox" id="needPublic" checked /> Partie publique visible</label><label class="check"><input type="checkbox" id="needAdmin" checked /> Espace de gestion</label><label class="check"><input type="checkbox" id="needDb" checked /> Base de données</label><label class="check"><input type="checkbox" id="needPayments" /> Paiements / acomptes</label><label class="check"><input type="checkbox" id="needBooking" /> Réservations / planning</label><label class="check"><input type="checkbox" id="needUsers" checked /> Utilisateurs / rôles</label><label class="check"><input type="checkbox" id="needTrace" checked /> Historique des actions</label><label class="check"><input type="checkbox" id="needAi" /> Assistant / aide maison</label><label class="check"><input type="checkbox" id="needSupa" /> Connexion Supa Apps</label><label class="check"><input type="checkbox" id="needAudio" /> Explication audio</label></div><div class="field"><label for="customPages">7. Pages souhaitées en plus</label><textarea id="customPages" placeholder="Ex : témoignages, galerie, tarifs, FAQ"></textarea></div><div class="field"><label for="customFeatures">8. Besoins particuliers</label><textarea id="customFeatures" placeholder="Ex : QR client, acompte groupe, audio de présentation, galerie restaurant"></textarea></div><div class="field"><label for="styleWanted">9. Style souhaité</label><input id="styleWanted" placeholder="Ex : premium, mobile, clair, rassurant" /></div><h2 style="margin-top:22px">3. Template HTML existant</h2><p class="hint">10. Optionnel. Tu peux ajouter des fichiers HTML pour repérer titres, menus, formulaires, images et boutons.</p><div class="drop"><p><strong>Lecture locale seulement.</strong> Rien n’est envoyé à un serveur. Les fichiers sont analysés dans ton navigateur.</p><div class="file-row"><input id="htmlFiles" type="file" accept=".html,.htm,text/html" multiple onchange="readTemplateFiles(event)" /><button class="btn secondary" type="button" onclick="clearFiles()">Vider</button></div><div id="fileList" class="file-list">Aucun fichier ajouté pour le moment.</div></div><div class="actions"><button class="btn green" type="submit">Préparer le projet</button><button class="btn secondary" type="button" onclick="copyCurrent()">Copier la sortie</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button></div><div id="status" class="status"></div></form>
+      <aside id="sortie" class="result"><h2>4. Dossier généré</h2><div class="output-tabs"><button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Cahier</button><button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button><button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL conseillé</button><button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button><button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button><button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button></div><div id="emptyState" class="empty"><div><b>Le dossier va sortir ici.</b>Remplis le projet puis clique sur “Préparer le projet”.</div></div><pre id="output" hidden></pre><div class="actions"><button class="btn" type="button" onclick="copyCurrent()">Copier</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button></div><p class="small">Version maison autonome. Aucun code externe de l’ancien outil n’est utilisé.</p></aside></section><footer class="footer">DIGIY Projet Maison · Atelier de cadrage pour la Supa Apps · BY DIGIYLYFE</footer></main><div id="toast" class="toast">Copié</div>
   <script>
     const templates={
       vitrine:{label:"Site vitrine",pages:["Accueil","Services","À propos","Réalisations","Contact"],pub:["Présentation de l’activité","Bouton WhatsApp / appel","Galerie images","Formulaire de contact","Avis ou témoignages"],admin:["Modifier les textes","Modifier les images","Gérer les messages reçus","Publier ou masquer des sections"],tables:["users","site_settings","pages","messages","media"],rules:["Les coordonnées publiques doivent être contrôlées.","Les messages clients doivent rester privés."]},
       ecommerce:{label:"E-commerce",pages:["Accueil","Catalogue","Détail produit","Panier","Commande","Contact"],pub:["Catalogue produits","Recherche et filtres","Fiche produit","Ajout au panier","Commande WhatsApp ou formulaire"],admin:["Gestion produits","Gestion catégories","Gestion commandes","Gestion clients","Stock"],tables:["users","products","categories","customers","orders","order_items","payments"],rules:["Un produit peut avoir plusieurs images.","Une commande contient une ou plusieurs lignes.","Le stock doit être mis à jour après validation."]},
-      restaurant:{label:"Restaurant",pages:["Accueil","Menu","Plat détail","Commande","Réservation","Contact"],pub:["Menu par catégories","Photos des plats","Commande directe","Réservation de table","Bouton WhatsApp","Horaires"],admin:["Gestion plats","Gestion menus","Gestion commandes","Gestion réservations","Horaires","Messages clients"],tables:["users","restaurant_settings","menu_categories","dishes","orders","order_items","reservations","payments"],rules:["Les plats masqués ne s’affichent pas au public.","Une réservation doit avoir un statut clair."]},
+      restaurant:{label:"Restaurant",pages:["Accueil","Menu","Plat détail","Commande","Réservation","Contact"],pub:["Menu par catégories","Photos des plats","Commande directe","Réservation de table","Bouton WhatsApp","Horaires"],admin:["Gestion plats","Gestion menus","Gestion commandes","Gestion réservations","Horaires","Messages clients"],tables:["users","restaurant_settings","menu_categories","dishes","orders","order_items","reservations","payments","user_actions"],rules:["Les plats masqués ne s’affichent pas au public.","Une réservation doit avoir un statut clair."]},
       reservation:{label:"Réservation",pages:["Accueil","Services","Calendrier","Réserver","Confirmation","Contact"],pub:["Liste des services","Créneaux disponibles","Demande de réservation","Confirmation","Contact direct"],admin:["Gestion services","Gestion créneaux","Gestion réservations","Annulations","Suivi client"],tables:["users","services","availability","bookings","customers","payments"],rules:["Un créneau confirmé ne doit plus être disponible.","Le client doit recevoir une information claire après demande."]},
       taxi:{label:"Taxi / chauffeur",pages:["Accueil","Chauffeurs","Détail chauffeur","Demande de trajet","Contact"],pub:["Présentation chauffeur","Zone de service","Demande de trajet","Bouton appel / WhatsApp","Tarifs indicatifs"],admin:["Profil chauffeur","Tarifs","Demandes de trajet","Historique courses","Disponibilité"],tables:["users","drivers","vehicles","ride_requests","trips","payments"],rules:["Les données privées du chauffeur ne doivent pas sortir côté public.","Une course doit avoir un statut."]},
       immobilier:{label:"Agence immobilière",pages:["Accueil","Biens","Détail bien","Recherche","Demande de visite","Réservation","Contact"],pub:["Liste des biens","Recherche par ville/quartier/type/prix","Fiche bien","Galerie images","Demande de visite","Demande de réservation à la nuitée"],admin:["Gestion des biens","Gestion des images","Gestion des équipements","Gestion des agents","Gestion des clients","Gestion des visites","Gestion des réservations","Planning","Contrats","Paiements et acomptes"],tables:["users","properties","property_equipment","property_images","agents","customers","visits","reservations","planning","payments","contracts","user_actions"],rules:["Un bien peut avoir plusieurs images.","Un bien masqué ne doit pas apparaître côté public.","Une réservation confirmée bloque les dates dans le planning."]},
@@ -37,208 +37,58 @@
       carte:{label:"Carte digitale",pages:["Carte publique","Contact","Liens","Galerie","QR"],pub:["Présentation rapide","Liens sociaux","Boutons contact","QR","Galerie"],admin:["Modifier profil","Modifier liens","Modifier couleurs","Statut visible ou caché"],tables:["users","digital_cards","card_links","card_media"],rules:["La carte doit être rapide à ouvrir sur téléphone."]},
       personnalise:{label:"Projet personnalisé",pages:["Accueil","Présentation","Fonction principale","Contact"],pub:["Présentation claire","Action principale","Contact direct"],admin:["Gestion du contenu","Gestion des demandes","Historique","Paramètres"],tables:["users","settings","items","requests","messages"],rules:["Le projet doit rester compréhensible pour un novice."]}
     };
-    let templateAnalysis=[],outputs={brief:"",prompt:"",sql:"",json:""},currentTab="brief";
+    let templateAnalysis=[],outputs={brief:"",prompt:"",sql:"",realisation:"",page:"",json:""},currentTab="brief";
     const $=id=>document.getElementById(id);const val=id=>($(id)?.value||"").trim();const checked=id=>!!$(id)?.checked;const list=a=>[...new Set((a||[]).map(x=>String(x).trim()).filter(Boolean))];
     function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
     function setStatus(t){$("status").textContent=t||""}function tpl(){return templates[$("projectType").value]||templates.personnalise}function lines(id){return val(id).split(/[\n,]+/).map(x=>x.trim()).filter(Boolean)}
     function applyTypeDefaults(){const k=$("projectType").value,t=tpl();if(!val("activity"))$("activity").value=t.label;if(["restaurant","reservation","immobilier","location","beaute","voyage"].includes(k))$("needBooking").checked=true;if(["ecommerce","restaurant","immobilier","location","taxi","btp","voyage"].includes(k))$("needPayments").checked=true;setStatus("Modèle métier chargé : "+t.label)}
-    function fillDemo(){Object.assign($("projectName"),{value:"Agence Soleil Immo"});$("projectType").value="immobilier";$("activity").value="Agence immobilière avec vente, location et réservations à la nuitée";$("location").value="Saly, Sénégal";$("goal").value="Présenter les biens, recevoir des demandes, organiser les visites, gérer les réservations à la nuitée, suivre les contrats, les acomptes et le planning.";$("audience").value="Clients locaux, diaspora, touristes, investisseurs et entreprises";$("customPages").value="À propos\nTémoignages\nTarifs\nFAQ";$("customFeatures").value="Contrat de location\nUpload images\nRecherche par quartier\nBlocage automatique des dates";$("styleWanted").value="sobre, premium, mobile, rassurant";["needPublic","needAdmin","needDb","needPayments","needBooking","needUsers","needTrace","needAi","needSupa","needAudio"].forEach(id=>$(id).checked=true);generateAll();location.hash="sortie"}
-    function resetForm(){document.querySelector("form").reset();$("projectType").value="vitrine";templateAnalysis=[];outputs={brief:"",prompt:"",sql:"",json:""};$("htmlFiles").value="";$("fileList").textContent="Aucun fichier ajouté pour le moment.";renderOutput();setStatus("Nouveau projet prêt.")}
+    function fillDemo(){$("projectName").value="Agence Soleil Immo";$("projectType").value="immobilier";$("activity").value="Agence immobilière avec vente, location et réservations à la nuitée";$("location").value="Saly, Sénégal";$("goal").value="Présenter les biens, recevoir des demandes, organiser les visites, gérer les réservations à la nuitée, suivre les contrats, les acomptes et le planning.";$("audience").value="Clients locaux, diaspora, touristes, investisseurs et entreprises";$("customPages").value="À propos\nTémoignages\nTarifs\nFAQ";$("customFeatures").value="Contrat de location\nUpload images\nRecherche par quartier\nBlocage automatique des dates";$("styleWanted").value="sobre, premium, mobile, rassurant";["needPublic","needAdmin","needDb","needPayments","needBooking","needUsers","needTrace","needAi","needSupa","needAudio"].forEach(id=>$(id).checked=true);generateAll();location.hash="sortie"}
+    function resetForm(){document.querySelector("form").reset();$("projectType").value="vitrine";templateAnalysis=[];outputs={brief:"",prompt:"",sql:"",realisation:"",page:"",json:""};$("htmlFiles").value="";$("fileList").textContent="Aucun fichier ajouté pour le moment.";renderOutput();setStatus("Nouveau projet prêt.")}
     async function readTemplateFiles(e){const files=[...(e.target.files||[])];templateAnalysis=[];for(const f of files){try{templateAnalysis.push(analyzeHtml(f.name,await f.text()))}catch{templateAnalysis.push({name:f.name,error:"Lecture impossible"})}}renderFileList();setStatus(files.length+" fichier(s) HTML analysé(s).")}
     function analyzeHtml(name,text){const d=new DOMParser().parseFromString(text,"text/html");return{name,title:(d.querySelector("title")?.textContent||"").trim(),headings:[...d.querySelectorAll("h1,h2,h3")].map(x=>x.textContent.trim()).filter(Boolean).slice(0,16),forms:d.querySelectorAll("form").length,inputs:d.querySelectorAll("input,select,textarea").length,buttons:[...d.querySelectorAll("button,a")].map(x=>x.textContent.trim()).filter(Boolean).slice(0,16),images:d.querySelectorAll("img").length}}
     function renderFileList(){if(!templateAnalysis.length){$("fileList").textContent="Aucun fichier ajouté pour le moment.";return}$("fileList").innerHTML=templateAnalysis.map(f=>`<div>• <strong>${esc(f.name)}</strong> · ${f.forms||0} formulaire(s) · ${f.images||0} image(s)</div>`).join("")}
     function clearFiles(){$("htmlFiles").value="";templateAnalysis=[];renderFileList();setStatus("Fichiers retirés.")}function esc(s){return String(s||"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[c]))}
     function guessName(){const a=val("activity")||tpl().label,c=(val("location").split(",")[0]||"").trim();return c?a+" — "+c:a}
-    function data(){const t=tpl(),pages=list([...(checked("needPublic")?t.pages:[]),...lines("customPages")]),pub=checked("needPublic")?[...t.pub]:[],admin=checked("needAdmin")?[...t.admin]:[],tables=checked("needDb")?[...t.tables]:[],rules=[...t.rules];if(checked("needPayments")){admin.push("Suivi des paiements","Acomptes","Restes à payer","Références de paiement");tables.push("payments");rules.push("Les paiements doivent avoir un statut clair : en attente, validé, annulé.")}if(checked("needBooking")){pub.push("Demande de réservation","Disponibilités ou planning");admin.push("Planning","Confirmation ou annulation des réservations");tables.push("bookings","availability");rules.push("Une réservation confirmée doit bloquer la disponibilité correspondante.")}if(checked("needUsers")){admin.push("Gestion des utilisateurs","Gestion des rôles");tables.push("users")}if(checked("needTrace")){admin.push("Historique des actions importantes");tables.push("user_actions");rules.push("Les actions sensibles doivent être enregistrées dans un historique.")}if(checked("needAi")){pub.push("Aide maison pour comprendre le service");admin.push("Assistant d’aide pour guider les gestes de gestion")}if(checked("needSupa"))rules.push("Prévoir une future connexion à la Supa Apps sans rendre le projet dépendant dès le départ.");if(checked("needAudio")){pub.push("Bouton d’explication audio simple");rules.push("L’audio doit expliquer le service avec des mots humains.")}lines("customFeatures").forEach(x=>admin.push(x));return{projectName:val("projectName")||guessName(),typeKey:$("projectType").value,typeLabel:t.label,activity:val("activity")||t.label,location:val("location")||"Non précisé",goal:val("goal")||"Clarifier le besoin et produire une première version exploitable.",audience:val("audience")||"Clients, visiteurs et administrateurs du projet",styleWanted:val("styleWanted")||"simple, clair, mobile, rassurant",pages:list(pages),publicFeatures:list(pub),adminFeatures:list(admin),tables:list(tables),rules:list(rules),templateAnalysis}}
+    function data(){const t=tpl(),special=lines("customFeatures"),pages=list([...(checked("needPublic")?t.pages:[]),...lines("customPages")]),pub=checked("needPublic")?[...t.pub]:[],admin=checked("needAdmin")?[...t.admin]:[],tables=checked("needDb")?[...t.tables]:[],rules=[...t.rules];if(checked("needPayments")){admin.push("Suivi des paiements","Acomptes","Restes à payer","Références de paiement");if(!tables.includes("payments"))tables.push("payments");rules.push("Les paiements doivent avoir un statut clair : en attente, validé, annulé.")}if(checked("needBooking")){pub.push("Demande de réservation","Disponibilités ou planning");admin.push("Planning","Confirmation ou annulation des réservations");if($("projectType").value!=="restaurant"){tables.push("bookings","availability")}rules.push("Une réservation confirmée doit bloquer la disponibilité correspondante.")}if(checked("needUsers")){admin.push("Gestion des utilisateurs","Gestion des rôles");tables.push("users")}if(checked("needTrace")){admin.push("Historique des actions importantes");tables.push("user_actions");rules.push("Les actions sensibles doivent être enregistrées dans un historique.")}if(checked("needAi")){pub.push("Aide maison pour comprendre le service");admin.push("Assistant d’aide pour guider les gestes de gestion")}if(checked("needSupa"))rules.push("Prévoir une future connexion à la Supa Apps sans rendre le projet dépendant dès le départ.");if(checked("needAudio")){pub.push("Bouton d’explication audio simple");rules.push("L’audio doit expliquer le service avec des mots humains.")}return{projectName:val("projectName")||guessName(),typeKey:$("projectType").value,typeLabel:t.label,activity:val("activity")||t.label,location:val("location")||"Non précisé",goal:val("goal")||"Clarifier le besoin et produire une première version exploitable.",audience:val("audience")||"Clients, visiteurs et administrateurs du projet",styleWanted:val("styleWanted")||"simple, clair, mobile, rassurant",pages:list(pages),publicFeatures:list(pub),adminFeatures:list(admin),specialFeatures:list(special),tables:list(tables),rules:list(rules),templateAnalysis}}
     const bullet=a=>(a||[]).map(x=>"- "+x).join("\n");function report(files){return(!files||!files.length)?"Aucun template HTML importé.":files.map(f=>`### ${f.name}\n- Titre : ${f.title||"Non détecté"}\n- Formulaires : ${f.forms||0}\n- Champs : ${f.inputs||0}\n- Images : ${f.images||0}\n- Titres : ${(f.headings||[]).slice(0,6).join(" | ")||"Non détectés"}`).join("\n\n")}
-    function brief(d){return`# CAHIER DES CHARGES — ${d.projectName.toUpperCase()}\n\n## Positionnement\n\n**Type :** ${d.typeLabel}\n**Activité :** ${d.activity}\n**Zone :** ${d.location}\n**Public visé :** ${d.audience}\n**Style :** ${d.styleWanted}\n\n## Objectif\n\n${d.goal}\n\n## Pages nécessaires\n\n${bullet(d.pages)}\n\n## Fonctionnalités publiques\n\n${bullet(d.publicFeatures)}\n\n## Fonctionnalités de gestion\n\n${bullet(d.adminFeatures)}\n\n## Base de données proposée\n\n${bullet(d.tables)}\n\n## Règles métier\n\n${bullet(d.rules)}\n\n## Sécurité et clarté\n\n- Séparer ce qui est public de ce qui appartient à la gestion interne.\n- Ne pas exposer les données sensibles côté public.\n- Protéger les accès de gestion.\n- Garder des mots simples et humains.\n- Prévoir une interface mobile claire.\n\n## Analyse du template\n\n${report(d.templateAnalysis)}\n\n## Sortie attendue\n\n- Structure de pages claire.\n- Interface publique simple.\n- Interface de gestion légère.\n- Schéma SQL cohérent.\n- Plan de production fichier par fichier.\n`}
-    function promptIA(d){return`Tu es un assistant de production web. Aide-moi à créer ce projet sans jargon.\n\nNom : ${d.projectName}\nType : ${d.typeLabel}\nActivité : ${d.activity}\nZone : ${d.location}\nPublic : ${d.audience}\nStyle : ${d.styleWanted}\n\nObjectif :\n${d.goal}\n\nPages :\n${bullet(d.pages)}\n\nFonctionnalités publiques :\n${bullet(d.publicFeatures)}\n\nFonctionnalités de gestion :\n${bullet(d.adminFeatures)}\n\nTables à prévoir :\n${bullet(d.tables)}\n\nRègles métier :\n${bullet(d.rules)}\n\nTravail attendu :\n1. Résumer la logique du projet.\n2. Proposer l’arborescence des fichiers.\n3. Proposer les pages prioritaires.\n4. Proposer le SQL initial.\n5. Proposer une première page HTML complète.\n`}
+    function brief(d){return`# CAHIER DES CHARGES — ${d.projectName.toUpperCase()}\n\n## Positionnement\n\n**Type :** ${d.typeLabel}\n**Activité :** ${d.activity}\n**Zone :** ${d.location}\n**Public visé :** ${d.audience}\n**Style :** ${d.styleWanted}\n\n## Objectif\n\n${d.goal}\n\n## Pages nécessaires\n\n${bullet(d.pages)}\n\n## Fonctionnalités publiques\n\n${bullet(d.publicFeatures)}\n\n## Fonctionnalités de gestion\n\n${bullet(d.adminFeatures)}\n\n## Besoins particuliers\n\n${d.specialFeatures.length?bullet(d.specialFeatures):"- Aucun besoin particulier ajouté pour le moment."}\n\n## Base de données proposée\n\n${bullet(d.tables)}\n\n## Règles métier\n\n${bullet(d.rules)}\n\n## Sécurité et clarté\n\n- Séparer ce qui est public de ce qui appartient à la gestion interne.\n- Ne pas exposer les données sensibles côté public.\n- Protéger les accès de gestion.\n- Garder des mots simples et humains.\n- Prévoir une interface mobile claire.\n\n## Analyse du template\n\n${report(d.templateAnalysis)}\n\n## Sortie attendue\n\n- Structure de pages claire.\n- Interface publique simple.\n- Interface de gestion légère.\n- Schéma SQL cohérent.\n- Plan de production fichier par fichier.\n`}
+    function promptIA(d){return`Tu es un assistant de production web. Aide-moi à créer ce projet sans jargon.\n\nNom : ${d.projectName}\nType : ${d.typeLabel}\nActivité : ${d.activity}\nZone : ${d.location}\nPublic : ${d.audience}\nStyle : ${d.styleWanted}\n\nObjectif :\n${d.goal}\n\nPages :\n${bullet(d.pages)}\n\nFonctionnalités publiques :\n${bullet(d.publicFeatures)}\n\nFonctionnalités de gestion :\n${bullet(d.adminFeatures)}\n\nBesoins particuliers :\n${d.specialFeatures.length?bullet(d.specialFeatures):"- Aucun besoin particulier ajouté."}\n\nTables à prévoir :\n${bullet(d.tables)}\n\nRègles métier :\n${bullet(d.rules)}\n\nTravail attendu :\n1. Résumer la logique du projet.\n2. Proposer l’arborescence des fichiers.\n3. Proposer les pages prioritaires.\n4. Proposer le SQL initial.\n5. Proposer une première page HTML complète.\n`}
     function slug(s){return String(s||"projet").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,34)||"projet"}
-    function sql(d){
-      const p=slug(d.projectName);
-      if(d.typeKey==="restaurant"){
-        return `-- SQL CONSEILLÉ — ${d.projectName}
--- Version métier restaurant : menu, plats, commandes, réservations, paiements.
-
-create table if not exists ${p}_users (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  phone text,
-  email text,
-  password_hash text,
-  role text default 'admin',
-  status text default 'active',
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_restaurant_settings (
-  id uuid primary key default gen_random_uuid(),
-  public_name text not null,
-  activity text,
-  city text,
-  country text default 'Sénégal',
-  whatsapp text,
-  address text,
-  opening_hours text,
-  description text,
-  cover_image_url text,
-  logo_url text,
-  is_public boolean default false,
-  created_at timestamptz default now(),
-  updated_at timestamptz default now()
-);
-
-create table if not exists ${p}_menu_categories (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  description text,
-  sort_order int default 0,
-  is_active boolean default true,
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_dishes (
-  id uuid primary key default gen_random_uuid(),
-  category_id uuid references ${p}_menu_categories(id) on delete set null,
-  name text not null,
-  description text,
-  price_xof numeric default 0,
-  image_url text,
-  is_available boolean default true,
-  is_public boolean default true,
-  sort_order int default 0,
-  created_at timestamptz default now(),
-  updated_at timestamptz default now()
-);
-
-create table if not exists ${p}_reservations (
-  id uuid primary key default gen_random_uuid(),
-  customer_name text not null,
-  customer_phone text,
-  customer_email text,
-  reservation_date date not null,
-  reservation_time time,
-  guests_count int default 1,
-  note text,
-  status text default 'pending',
-  deposit_amount_xof numeric default 0,
-  remaining_amount_xof numeric default 0,
-  payment_reference text,
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_orders (
-  id uuid primary key default gen_random_uuid(),
-  customer_name text,
-  customer_phone text,
-  order_type text default 'sur_place',
-  total_amount_xof numeric default 0,
-  status text default 'pending',
-  payment_status text default 'pending',
-  note text,
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_order_items (
-  id uuid primary key default gen_random_uuid(),
-  order_id uuid references ${p}_orders(id) on delete cascade,
-  dish_id uuid references ${p}_dishes(id) on delete set null,
-  dish_name text,
-  quantity numeric default 1,
-  unit_price_xof numeric default 0,
-  line_total_xof numeric default 0
-);
-
-create table if not exists ${p}_payments (
-  id uuid primary key default gen_random_uuid(),
-  source_type text,
-  source_id uuid,
-  amount_xof numeric default 0,
-  channel text,
-  reference text,
-  status text default 'pending',
-  note text,
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_user_actions (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid references ${p}_users(id) on delete set null,
-  action_label text not null,
-  action_type text,
-  created_at timestamptz default now()
-);`;
-      }
-      return `-- SQL CONSEILLÉ — ${d.projectName}
-
-create table if not exists ${p}_users (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  phone text,
-  email text,
-  password_hash text,
-  role text default 'admin',
-  status text default 'active',
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_settings (
-  id uuid primary key default gen_random_uuid(),
-  public_name text,
-  activity text,
-  city text,
-  whatsapp text,
-  description text,
-  is_public boolean default false,
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_items (
-  id uuid primary key default gen_random_uuid(),
-  title text not null,
-  description text,
-  price numeric default 0,
-  image_url text,
-  status text default 'draft',
-  is_public boolean default false,
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_requests (
-  id uuid primary key default gen_random_uuid(),
-  customer_name text,
-  customer_phone text,
-  customer_email text,
-  message text,
-  status text default 'new',
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_payments (
-  id uuid primary key default gen_random_uuid(),
-  source_type text,
-  source_id uuid,
-  amount numeric default 0,
-  channel text,
-  reference text,
-  status text default 'pending',
-  note text,
-  created_at timestamptz default now()
-);
-
-create table if not exists ${p}_user_actions (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid references ${p}_users(id) on delete set null,
-  action_label text not null,
-  action_type text,
-  created_at timestamptz default now()
-);`;
-    }
-    function generateAll(){const d=data();outputs.brief=brief(d);outputs.prompt=promptIA(d);outputs.sql=sql(d);outputs.json=JSON.stringify(d,null,2);renderOutput();setStatus("Dossier préparé pour : "+d.projectName);toast("Projet préparé")}
+    function sql(d){const p=slug(d.projectName);if(d.typeKey==="restaurant"){return`-- SQL CONSEILLÉ — ${d.projectName}\n-- Version métier restaurant : menu, plats, commandes, réservations, paiements.\n\ncreate table if not exists ${p}_users (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text,\n  email text,\n  password_hash text,\n  role text default 'admin',\n  status text default 'active',\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_restaurant_settings (\n  id uuid primary key default gen_random_uuid(),\n  public_name text not null,\n  activity text,\n  city text,\n  country text default 'Sénégal',\n  whatsapp text,\n  address text,\n  opening_hours text,\n  description text,\n  cover_image_url text,\n  logo_url text,\n  is_public boolean default false,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_menu_categories (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  description text,\n  sort_order int default 0,\n  is_active boolean default true,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_dishes (\n  id uuid primary key default gen_random_uuid(),\n  category_id uuid references ${p}_menu_categories(id) on delete set null,\n  name text not null,\n  description text,\n  price_xof numeric default 0,\n  image_url text,\n  is_available boolean default true,\n  is_public boolean default true,\n  sort_order int default 0,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_reservations (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text not null,\n  customer_phone text,\n  customer_email text,\n  reservation_date date not null,\n  reservation_time time,\n  guests_count int default 1,\n  note text,\n  status text default 'pending',\n  deposit_amount_xof numeric default 0,\n  remaining_amount_xof numeric default 0,\n  payment_reference text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_orders (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text,\n  customer_phone text,\n  order_type text default 'sur_place',\n  total_amount_xof numeric default 0,\n  status text default 'pending',\n  payment_status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_order_items (\n  id uuid primary key default gen_random_uuid(),\n  order_id uuid references ${p}_orders(id) on delete cascade,\n  dish_id uuid references ${p}_dishes(id) on delete set null,\n  dish_name text,\n  quantity numeric default 1,\n  unit_price_xof numeric default 0,\n  line_total_xof numeric default 0\n);\n\ncreate table if not exists ${p}_payments (\n  id uuid primary key default gen_random_uuid(),\n  source_type text,\n  source_id uuid,\n  amount_xof numeric default 0,\n  channel text,\n  reference text,\n  status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_user_actions (\n  id uuid primary key default gen_random_uuid(),\n  user_id uuid references ${p}_users(id) on delete set null,\n  action_label text not null,\n  action_type text,\n  created_at timestamptz default now()\n);`}return`-- SQL CONSEILLÉ — ${d.projectName}\n\ncreate table if not exists ${p}_users (id uuid primary key default gen_random_uuid(), name text not null, phone text, email text, password_hash text, role text default 'admin', status text default 'active', created_at timestamptz default now());\ncreate table if not exists ${p}_settings (id uuid primary key default gen_random_uuid(), public_name text, activity text, city text, whatsapp text, description text, is_public boolean default false, created_at timestamptz default now());\ncreate table if not exists ${p}_items (id uuid primary key default gen_random_uuid(), title text not null, description text, price numeric default 0, image_url text, status text default 'draft', is_public boolean default false, created_at timestamptz default now());\ncreate table if not exists ${p}_requests (id uuid primary key default gen_random_uuid(), customer_name text, customer_phone text, customer_email text, message text, status text default 'new', created_at timestamptz default now());\ncreate table if not exists ${p}_payments (id uuid primary key default gen_random_uuid(), source_type text, source_id uuid, amount numeric default 0, channel text, reference text, status text default 'pending', note text, created_at timestamptz default now());\ncreate table if not exists ${p}_user_actions (id uuid primary key default gen_random_uuid(), user_id uuid references ${p}_users(id) on delete set null, action_label text not null, action_type text, created_at timestamptz default now());`}
+    function realisation(d){return`# RÉALISATION — ${d.projectName}\n\n## Structure de fichiers proposée\n\n- index.html : première page publique\n- admin.html : gestion légère\n- style.css : styles si le projet est séparé en fichiers\n- app.js : logique navigateur\n- schema.sql : base de données conseillée\n- README.md : note de pose et d’usage\n\n## Pages prioritaires à produire\n\n${bullet(d.pages.slice(0,6))}\n\n## Plan de production\n\n1. Produire index.html avec présentation, action principale, contact et sections utiles.\n2. Ajouter la page de gestion légère pour modifier les contenus essentiels.\n3. Poser le schéma SQL conseillé dans un fichier séparé.\n4. Tester sur téléphone avant toute amélioration lourde.\n5. Relier plus tard à la Supa Apps si le projet est validé.\n\n## Instructions de pose\n\n- Créer un nouveau dossier ou dépôt GitHub.\n- Coller la sortie “Page HTML” dans index.html.\n- Coller la sortie “SQL conseillé” dans schema.sql.\n- Tester localement, puis publier.\n\n## Principe\n\nProjet Maison prépare. Réalisation construit. Supa Apps relie.`}
+    function firstPage(d){const name=esc(d.projectName),activity=esc(d.activity),goal=esc(d.goal),city=esc(d.location),style=esc(d.styleWanted);const pages=d.pages.slice(0,6).map(x=>`<a href="#${slug(x)}">${esc(x)}</a>`).join("");const specials=(d.specialFeatures.length?d.specialFeatures:["Contact WhatsApp","Présentation claire","Action directe"]).slice(0,6).map(x=>`<li>${esc(x)}</li>`).join("");return`<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${name}</title>
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#071512;color:#f7fff9}a{color:inherit}.wrap{max-width:1040px;margin:auto;padding:22px}.hero{min-height:82vh;display:grid;align-items:center}.card{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12);border-radius:28px;padding:32px;box-shadow:0 24px 70px rgba(0,0,0,.35)}.kicker{color:#ffe7a8;font-weight:800}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:#c7ddd3;font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:#f5c76b;color:#143226;font-weight:900;margin-top:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:18px}.box p,.box li{color:#c7ddd3;line-height:1.5}.section{padding:24px 0}input,textarea{width:100%;padding:13px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}button{padding:13px 16px;border:0;border-radius:16px;background:#f5c76b;color:#143226;font-weight:900}@media(max-width:760px){.grid{grid-template-columns:1fr}.card{padding:22px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="card">
+        <div class="kicker">${city} · ${style}</div>
+        <h1 class="title">${name}</h1>
+        <p class="lead">${activity}</p>
+        <p class="lead">${goal}</p>
+        <div class="nav">${pages}</div>
+        <a class="btn" href="#reservation">Réserver / contacter</a>
+      </div>
+    </section>
+    <section id="menu" class="section"><h2>Ce que nous proposons</h2><div class="grid"><div class="box"><h3>Spécialités</h3><p>Présente ici les plats, produits ou services principaux.</p></div><div class="box"><h3>Contact direct</h3><p>Ajoute le WhatsApp, le téléphone ou le formulaire client.</p></div><div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div></div></section>
+    <section id="reservation" class="section"><h2>Demande client</h2><div class="box"><label>Nom</label><input placeholder="Votre nom"><label>Téléphone</label><input placeholder="Votre WhatsApp"><label>Message</label><textarea placeholder="Votre demande"></textarea><button>Envoyer la demande</button></div></section>
+    <section class="section"><h2>Besoins particuliers</h2><div class="box"><ul>${specials}</ul></div></section>
+  </main>
+</body>
+</html>`}
+    function generateAll(){const d=data();outputs.brief=brief(d);outputs.prompt=promptIA(d);outputs.sql=sql(d);outputs.realisation=realisation(d);outputs.page=firstPage(d);outputs.json=JSON.stringify(d,null,2);renderOutput();setStatus("Dossier préparé pour : "+d.projectName);toast("Projet préparé")}
     function setOutputTab(t){currentTab=t;document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));renderOutput()}
     function renderOutput(){const text=outputs[currentTab]||"",out=$("output"),empty=$("emptyState");if(!text){out.hidden=true;out.style.display="none";empty.hidden=false;empty.style.display="grid";return}empty.hidden=true;empty.style.display="none";out.hidden=false;out.style.display="block";out.textContent=text}
     async function copyCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à copier");return}try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}toast("Sortie copiée")}
-    function downloadCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à télécharger");return}const d=data(),ext=currentTab==="json"?"json":currentTab==="sql"?"sql":"md",blob=new Blob([text],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=slug(d.projectName)+"_"+currentTab+"."+ext;document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();toast("Téléchargement lancé")}
+    function downloadCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à télécharger");return}const d=data(),ext=currentTab==="json"?"json":currentTab==="sql"?"sql":"html"===currentTab?"html":"md",blob=new Blob([text],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=slug(d.projectName)+"_"+currentTab+(currentTab==="page"?".html":"."+ext);document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();toast("Téléchargement lancé")}
     applyTypeDefaults();
   </script>
 </body>
