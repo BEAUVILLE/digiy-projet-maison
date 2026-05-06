@@ -4,28 +4,28 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DIGIY Projet Maison — Transforme une idée en cahier clair</title>
-  <meta name="description" content="Assistant maison de cadrage projet : transforme une idée en cahier des charges clair, prompt IA, pages, fonctionnalités et base de données proposée." />
+  <meta name="description" content="Assistant maison de cadrage projet pour transformer une idée en cahier clair, prompt IA, SQL conseillé et plan de production." />
   <style>
     :root{
-      --bg:#061512;
-      --bg2:#0c211c;
-      --card:#102b24;
-      --card2:#15362e;
-      --line:rgba(255,255,255,.11);
-      --text:#f5fff9;
-      --muted:#bdd3ca;
-      --soft:#8fb2a5;
-      --gold:#f5c76b;
-      --gold2:#ffe5a3;
-      --green:#13b77a;
-      --danger:#ff7b7b;
-      --shadow:0 24px 70px rgba(0,0,0,.35);
-      --radius:24px;
-      --max:1180px;
-      --font: Outfit, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg:#061512;--panel:#102b24;--panel2:#15362e;--line:rgba(255,255,255,.12);
+      --text:#f7fff9;--muted:#bdd3ca;--soft:#8fb2a5;--gold:#f5c76b;--gold2:#ffe7a8;--green:#19c889;
+      --shadow:0 24px 70px rgba(0,0,0,.35);--radius:24px;--max:1180px;
+      --font:Outfit,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     }
-
-    *{box-sizing:border-box}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font);color:var(--text);background:radial-gradient(circle at 10% 5%,rgba(245,199,107,.18),transparent 30%),radial-gradient(circle at 88% 6%,rgba(25,200,137,.16),transparent 27%),linear-gradient(135deg,var(--bg),#04100d 65%,#071a15);min-height:100vh}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:var(--max);margin:0 auto;padding:20px}
+    header{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(6,21,18,.82);border-bottom:1px solid var(--line)}.topbar{max-width:var(--max);margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center}.brand{display:flex;align-items:center;gap:12px;min-width:0}.mark{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;font-weight:950;flex:0 0 auto}.brand strong{display:block;font-size:15px}.brand span{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58vw}.top-actions{display:flex;gap:10px}.pill{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);padding:10px 13px;border-radius:999px;font-weight:850;font-size:13px}.pill.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;border-color:transparent}
+    .hero{padding:42px 0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:24px}.card,.panel,.result{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.card{padding:32px}.kicker{display:inline-flex;border:1px solid rgba(245,199,107,.32);background:rgba(245,199,107,.09);padding:9px 12px;border-radius:999px;color:var(--gold2);font-weight:950;font-size:13px;margin-bottom:18px}h1{font-size:clamp(34px,5vw,64px);line-height:.95;margin:0 0 18px;letter-spacing:-2px}h1 span{color:var(--gold2)}.lead{font-size:18px;line-height:1.55;color:var(--muted);margin:0 0 20px}.quote{border-left:4px solid var(--gold);padding:12px 0 12px 16px;background:rgba(255,255,255,.035);border-radius:0 16px 16px 0;color:#eafff6;line-height:1.55}.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.mini{padding:18px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.num{width:34px;height:34px;border-radius:13px;display:grid;place-items:center;background:rgba(245,199,107,.14);color:var(--gold2);font-weight:950;margin-bottom:12px}.mini b{display:block;font-size:18px;margin-bottom:8px}.mini p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted);padding:11px 14px;border-radius:999px;font-weight:900}.tab.active{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;border-color:transparent}.grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:22px;align-items:start}.panel,.result{padding:20px}.panel h2,.result h2{margin:0 0 14px;font-size:22px}.hint{color:var(--muted);line-height:1.45;margin:0 0 18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}label{font-size:13px;color:#dff5ed;font-weight:900}input,select,textarea{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--text);border-radius:16px;padding:13px 14px;outline:none}select option{background:#102b24;color:#fff}textarea{min-height:112px;resize:vertical;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:rgba(245,199,107,.72);box-shadow:0 0 0 4px rgba(245,199,107,.08)}.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 14px}.check{display:flex;gap:9px;align-items:flex-start;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:15px;padding:10px;color:var(--muted);font-size:13px}.check input{width:auto;margin-top:2px;accent-color:var(--gold)}.drop{border:1px dashed rgba(245,199,107,.45);background:rgba(245,199,107,.055);border-radius:20px;padding:16px;margin-top:10px}.drop p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}.file-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap}.file-list{font-size:13px;color:var(--soft);margin-top:10px;line-height:1.5;max-height:120px;overflow:auto}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:16px;padding:13px 15px;font-weight:950;color:#143226;background:linear-gradient(135deg,var(--gold2),var(--gold));box-shadow:0 12px 28px rgba(245,199,107,.16)}.btn.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line);box-shadow:none}.btn.green{background:linear-gradient(135deg,#2ff0a6,var(--green));color:#06231a}.result{min-height:680px;position:sticky;top:86px}.output-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.output-tabs button{border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--muted);border-radius:999px;padding:9px 12px;font-weight:900;font-size:13px}.output-tabs button.active{background:rgba(245,199,107,.16);color:var(--gold2);border-color:rgba(245,199,107,.35)}pre{white-space:pre-wrap;word-break:break-word;margin:0;background:rgba(0,0,0,.27);border:1px solid var(--line);border-radius:20px;padding:18px;color:#f6fff9;line-height:1.55;font-size:14px;min-height:520px;max-height:66vh;overflow:auto}.empty{display:grid;place-items:center;min-height:520px;text-align:center;color:var(--muted);background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:20px;padding:20px;line-height:1.55}.empty b{display:block;color:var(--text);font-size:20px;margin-bottom:8px}[hidden]{display:none!important}.status{margin-top:10px;color:var(--gold2);font-weight:900;font-size:13px;min-height:18px}.small{font-size:12px;color:var(--soft);line-height:1.45}.footer{padding:26px 0 40px;color:var(--soft);text-align:center;font-size:13px}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(20px);background:#112c25;border:1px solid rgba(245,199,107,.35);color:#fff;border-radius:999px;padding:12px 16px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:80;font-weight:900}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    @media(max-width:900px){.hero,.grid{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr 1fr}.result{position:relative;top:auto;min-height:auto}pre,.empty{min-height:360px;max-height:none}.top-actions .pill:not(.gold){display:none}}@media(max-width:620px){.wrap{padding:14px}.topbar{padding:12px 14px}.card,.panel,.result{padding:16px;border-radius:22px}.mini-grid,.form-grid,.checks{grid-template-columns:1fr}.actions .btn{width:100%}.lead{font-size:16px}h1{letter-spacing:-1.3px}}
+  </style>
+</head>
+<body>
+  <header><div class="topbar"><a class="brand" href="#top"><div class="mark">D∞</div><div><strong>DIGIY Projet Maison</strong><span>Transforme une idée en cahier clair</span></div></a><div class="top-actions"><a class="pill" href="#atelier">Atelier</a><button class="pill gold" type="button" onclick="generateAll()">Préparer</button></div></div></header>
+  <main id="top" class="wrap">
+    <section class="hero"><div class="card"><div class="kicker">Assistant maison · Supa Apps · Terrain</div><h1>Transforme une idée en <span>cahier clair</span>.</h1><p class="lead">Un outil maison pour aider les novices du web à expliquer leur projet. Tu choisis le métier, tu ajoutes les besoins, tu peux importer un template HTML, et DIGIY prépare une feuille de route propre.</p><div class="quote">On ne copie pas l’ancien outil. On construit notre assistant de cadrage projet maison, inspiré du besoin terrain.</div><div class="actions"><a class="btn" href="#atelier">Commencer le cadrage</a><button class="btn secondary" type="button" onclick="fillDemo()">Exemple agence immobilière</button></div></div><div class="mini-grid"><div class="mini"><div class="num">1</div><b>Dire le métier</b><p>Commerce, restaurant, immobilier, taxi, beauté, BTP, réservation ou projet libre.</p></div><div class="mini"><div class="num">2</div><b>Ranger l’idée</b><p>L’outil clarifie les pages, les actions, les données et les priorités.</p></div><div class="mini"><div class="num">3</div><b>Lire le template</b><p>Ajoute des fichiers HTML pour repérer menus, formulaires, titres et images.</p></div><div class="mini"><div class="num">4</div><b>Sortir le dossier</b><p>Cahier des charges, prompt IA, SQL conseillé, plan de production.</p></div></div></section>
+    <div class="tabs"><a class="tab active" href="#atelier">Cadrage</a><a class="tab" href="#sortie">Sortie</a><button class="tab" type="button" onclick="resetForm()">Nouveau projet</button></div>
+    <section id="atelier" class="grid"><form class="panel" onsubmit="event.preventDefault();generateAll();"><h2>1. Informations du projet</h2><p class="hint">On commence simple. Le but n’est pas de parler ingénieur. Le but est de faire sortir une route claire.</p><div class="form-grid"><div class="field"><label for="projectName">Nom du projet</label><input id="projectName" placeholder="Ex : Restaurant Teranga" /></div><div class="field"><label for="projectType">Type de projet</label><select id="projectType" onchange="applyTypeDefaults()"><option value="vitrine">Site vitrine</option><option value="ecommerce">E-commerce</option><option value="restaurant">Restaurant</option><option value="reservation">Réservation</option><option value="taxi">Taxi / chauffeur</option><option value="immobilier">Agence immobilière</option><option value="location">Location / hébergement</option><option value="beaute">Beauté / coiffure</option><option value="btp">BTP / artisans</option><option value="annuaire">Annuaire</option><option value="voyage">Voyage / tourisme</option><option value="carte">Carte digitale</option><option value="personnalise">Projet personnalisé</option></select></div></div><div class="form-grid"><div class="field"><label for="activity">Activité / métier</label><input id="activity" placeholder="Ex : restaurant à Saly" /></div><div class="field"><label for="location">Ville / pays</label><input id="location" placeholder="Ex : Saly, Sénégal" /></div></div><div class="field"><label for="goal">Objectif principal</label><textarea id="goal" placeholder="Ex : présenter le restaurant, afficher le menu et prendre des réservations."></textarea></div><div class="field"><label for="audience">Public visé</label><input id="audience" placeholder="Ex : clients locaux, diaspora, touristes" /></div><h2 style="margin-top:22px">2. Besoins à activer</h2><p class="hint">Coche ce qui compte. L’outil va préparer les blocs utiles sans surcharger.</p><div class="checks"><label class="check"><input type="checkbox" id="needPublic" checked /> Partie publique visible</label><label class="check"><input type="checkbox" id="needAdmin" checked /> Espace de gestion</label><label class="check"><input type="checkbox" id="needDb" checked /> Base de données</label><label class="check"><input type="checkbox" id="needPayments" /> Paiements / acomptes</label><label class="check"><input type="checkbox" id="needBooking" /> Réservations / planning</label><label class="check"><input type="checkbox" id="needUsers" checked /> Utilisateurs / rôles</label><label class="check"><input type="checkbox" id="needTrace" checked /> Historique des actions</label><label class="check"><input type="checkbox" id="needAi" /> Assistant / aide maison</label><label class="check"><input type="checkbox" id="needSupa" /> Connexion Supa Apps</label><label class="check"><input type="checkbox" id="needAudio" /> Explication audio</label></div><div class="field"><label for="customPages">Pages souhaitées en plus</label><textarea id="customPages" placeholder="Ex : témoignages, galerie, tarifs, FAQ"></textarea></div><div class="field"><label for="customFeatures">Fonctionnalités particulières</label><textarea id="customFeatures" placeholder="Ex : QR client, validation manuelle, galerie, réservation rapide"></textarea></div><div class="field"><label for="styleWanted">Style souhaité</label><input id="styleWanted" placeholder="Ex : premium, mobile, clair, rassurant" /></div><h2 style="margin-top:22px">3. Template HTML existant</h2><p class="hint">Optionnel. Tu peux ajouter des fichiers HTML pour que l’outil lise les titres, menus, formulaires, images et boutons.</p><div class="drop"><p><strong>Lecture locale seulement.</strong> Rien n’est envoyé à un serveur. Les fichiers sont analysés dans ton navigateur.</p><div class="file-row"><input id="htmlFiles" type="file" accept=".html,.htm,text/html" multiple onchange="readTemplateFiles(event)" /><button class="btn secondary" type="button" onclick="clearFiles()">Vider</button></div><div id="fileList" class="file-list">Aucun fichier ajouté pour le moment.</div></div><div class="actions"><button class="btn green" type="submit">Préparer le projet</button><button class="btn secondary" type="button" onclick="copyCurrent()">Copier la sortie</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button></div><div id="status" class="status"></div></form>
+      <aside id="sortie" class="result"><h2>4. Dossier généré</h2><div class="output-tabs"><button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Cahier</button><button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button><button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL conseillé</button><button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button></div><div id="emptyState" class="empty"><div><b>Le dossier va sortir ici.</b>Remplis le projet puis clique sur “Préparer le projet”.</div></div><pre id="output" hidden></pre><div class="actions"><button class="btn" type="button" onclick="copyCurrent()">Copier</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger .md</button></div><p class="small">Version maison autonome. Aucun code externe de l’ancien outil n’est utilisé.</p></aside></section><footer class="footer">DIGIY Projet Maison · Atelier de cadrage pour la Supa Apps · BY DIGIYLYFE</footer></main><div id="toast" class="toast">Copié</div>
     html{scroll-behavior:smooth}
     body{
       margin:0;
@@ -184,6 +184,7 @@
     .empty{
       display:grid;place-items:center;min-height:520px;text-align:center;color:var(--muted);background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:20px;padding:20px;line-height:1.55;
     }
+    [hidden]{display:none!important;}
     .empty b{display:block;color:var(--text);font-size:20px;margin-bottom:8px}
 
     .status{margin-top:10px;color:var(--gold2);font-weight:900;font-size:13px;min-height:18px}
@@ -461,358 +462,4 @@
         tables: ["users", "services", "customers", "quote_requests", "projects", "project_images", "payments", "expenses"],
         rules: ["Chaque demande doit être suivie avec un statut.", "Les photos chantier peuvent servir de preuve d’avancement."]
       },
-      annuaire: {
-        label: "Annuaire",
-        pages: ["Accueil", "Catégories", "Liste des pros", "Fiche pro", "Ajouter une fiche", "Contact"],
-        publicFeatures: ["Recherche", "Catégories", "Fiches professionnelles", "Contact direct", "Carte ou zone"],
-        adminFeatures: ["Validation des fiches", "Gestion catégories", "Gestion pros", "Signalements", "Mise en avant"],
-        tables: ["users", "directory_categories", "professionals", "professional_images", "reviews", "reports"],
-        rules: ["Une fiche doit pouvoir être validée avant publication.", "Les contacts visibles doivent être choisis par le professionnel."]
-      },
-      voyage: {
-        label: "Voyage / tourisme",
-        pages: ["Accueil", "Destinations", "Offres", "Détail offre", "Réserver", "Contact"],
-        publicFeatures: ["Destinations", "Offres de voyage", "Galerie", "Demande de réservation", "Contact conseiller"],
-        adminFeatures: ["Gestion offres", "Gestion destinations", "Demandes clients", "Réservations", "Paiements", "Documents"],
-        tables: ["users", "destinations", "offers", "offer_images", "customers", "bookings", "payments", "documents"],
-        rules: ["Une offre doit préciser durée, prix, conditions et disponibilité.", "Les demandes doivent être suivies." ]
-      },
-      carte: {
-        label: "Carte digitale",
-        pages: ["Carte publique", "Contact", "Liens", "Galerie", "QR"],
-        publicFeatures: ["Présentation rapide", "Liens sociaux", "Boutons contact", "QR", "Galerie"],
-        adminFeatures: ["Modifier profil", "Modifier liens", "Modifier couleurs", "Statut visible ou caché"],
-        tables: ["users", "digital_cards", "card_links", "card_media", "user_actions"],
-        rules: ["La carte doit être rapide à ouvrir sur téléphone.", "Les liens doivent être contrôlés." ]
-      },
-      personnalise: {
-        label: "Projet personnalisé",
-        pages: ["Accueil", "Présentation", "Fonction principale", "Contact"],
-        publicFeatures: ["Présentation claire", "Action principale", "Contact direct", "Explication simple"],
-        adminFeatures: ["Gestion du contenu", "Gestion des demandes", "Historique", "Paramètres"],
-        tables: ["users", "settings", "items", "requests", "messages", "user_actions"],
-        rules: ["Le projet doit rester compréhensible pour un novice.", "La partie publique doit éviter les mots techniques." ]
-      }
-    };
-
-    let templateAnalysis = [];
-    let outputs = { brief: "", prompt: "", sql: "", json: "" };
-    let currentTab = "brief";
-
-    function $(id){ return document.getElementById(id); }
-
-    function getValue(id){ return ($(id)?.value || "").trim(); }
-    function isChecked(id){ return !!$(id)?.checked; }
-
-    function toast(msg){
-      const el = $("toast");
-      el.textContent = msg;
-      el.classList.add("show");
-      setTimeout(()=>el.classList.remove("show"), 1800);
-    }
-
-    function setStatus(msg){ $("status").textContent = msg || ""; }
-
-    function uniqueList(arr){
-      return [...new Set((arr || []).map(x => String(x || "").trim()).filter(Boolean))];
-    }
-
-    function linesFromTextarea(id){
-      return getValue(id).split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);
-    }
-
-    function getTemplate(){
-      return templates[$("projectType").value] || templates.personnalise;
-    }
-
-    function applyTypeDefaults(){
-      const key = $("projectType").value;
-      const tpl = getTemplate();
-      if(!getValue("activity")) $("activity").value = tpl.label;
-      if(key === "immobilier"){
-        $("needBooking").checked = true;
-        $("needPayments").checked = true;
-      }
-      if(["reservation","restaurant","location","beaute"].includes(key)) $("needBooking").checked = true;
-      if(["ecommerce","restaurant","immobilier","location","taxi","btp"].includes(key)) $("needPayments").checked = true;
-      setStatus("Modèle métier chargé : " + tpl.label);
-    }
-
-    function fillDemo(){
-      $("projectName").value = "Agence Soleil Immo";
-      $("projectType").value = "immobilier";
-      $("activity").value = "Agence immobilière avec vente, location et réservations à la nuitée";
-      $("location").value = "Saly, Sénégal";
-      $("goal").value = "Présenter les biens, recevoir des demandes, organiser les visites, gérer les réservations à la nuitée, suivre les contrats, les acomptes, les cautions et le planning.";
-      $("audience").value = "Clients locaux, diaspora, touristes, investisseurs et entreprises";
-      $("customPages").value = "À propos de l’agence\nTémoignages\nTarifs / conditions\nFAQ";
-      $("customFeatures").value = "Contrat de location\nUpload images des biens\nRecherche par ville, quartier, prix et type\nSuivi eau et électricité\nBlocage automatique des dates";
-      $("styleWanted").value = "sobre, premium, mobile, rassurant, facile à comprendre";
-      $("needPublic").checked = true;
-      $("needAdmin").checked = true;
-      $("needDb").checked = true;
-      $("needPayments").checked = true;
-      $("needBooking").checked = true;
-      $("needUsers").checked = true;
-      $("needTrace").checked = true;
-      $("needAi").checked = true;
-      $("needSupa").checked = true;
-      $("needAudio").checked = true;
-      generateAll();
-      location.hash = "sortie";
-    }
-
-    function resetForm(){
-      document.querySelector("form").reset();
-      $("projectType").value = "vitrine";
-      templateAnalysis = [];
-      outputs = { brief: "", prompt: "", sql: "", json: "" };
-      $("htmlFiles").value = "";
-      $("fileList").textContent = "Aucun fichier ajouté pour le moment.";
-      $("output").hidden = true;
-      $("emptyState").hidden = false;
-      setStatus("Nouveau projet prêt.");
-    }
-
-    async function readTemplateFiles(event){
-      const files = [...(event.target.files || [])];
-      templateAnalysis = [];
-      if(!files.length){
-        $("fileList").textContent = "Aucun fichier ajouté pour le moment.";
-        return;
-      }
-      setStatus("Lecture des fichiers HTML...");
-      for(const file of files){
-        try{
-          const text = await file.text();
-          templateAnalysis.push(analyzeHtml(file.name, text));
-        }catch(err){
-          templateAnalysis.push({ name:file.name, error:"Lecture impossible", titles:[], forms:0, buttons:[], links:[], images:0, sections:[] });
-        }
-      }
-      renderFileList();
-      setStatus(files.length + " fichier(s) HTML analysé(s).");
-    }
-
-    function analyzeHtml(name, text){
-      const doc = new DOMParser().parseFromString(text, "text/html");
-      const title = (doc.querySelector("title")?.textContent || "").trim();
-      const headings = [...doc.querySelectorAll("h1,h2,h3")].map(h=>h.textContent.trim()).filter(Boolean).slice(0,24);
-      const forms = doc.querySelectorAll("form").length;
-      const inputs = doc.querySelectorAll("input,select,textarea").length;
-      const buttons = [...doc.querySelectorAll("button,a")].map(b=>b.textContent.trim()).filter(Boolean).slice(0,24);
-      const links = [...doc.querySelectorAll("a[href]")].map(a=>a.getAttribute("href")).filter(Boolean).slice(0,30);
-      const images = doc.querySelectorAll("img").length;
-      const sections = [...doc.querySelectorAll("section,main,header,footer,nav")].map(s=>s.tagName.toLowerCase() + (s.id ? "#" + s.id : "")).slice(0,20);
-      return { name, title, headings, forms, inputs, buttons, links, images, sections };
-    }
-
-    function renderFileList(){
-      if(!templateAnalysis.length){
-        $("fileList").textContent = "Aucun fichier ajouté pour le moment.";
-        return;
-      }
-      $("fileList").innerHTML = templateAnalysis.map(f => {
-        const bits = [];
-        bits.push("<strong>" + escapeHtml(f.name) + "</strong>");
-        if(f.title) bits.push("titre : " + escapeHtml(f.title));
-        bits.push((f.forms || 0) + " formulaire(s)");
-        bits.push((f.images || 0) + " image(s)");
-        return "<div>• " + bits.join(" · ") + "</div>";
-      }).join("");
-    }
-
-    function clearFiles(){
-      $("htmlFiles").value = "";
-      templateAnalysis = [];
-      renderFileList();
-      setStatus("Fichiers retirés.");
-    }
-
-    function escapeHtml(str){
-      return String(str || "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;","\"":"&quot;"}[c]));
-    }
-
-    function getProjectData(){
-      const tpl = getTemplate();
-      const customPages = linesFromTextarea("customPages");
-      const customFeatures = linesFromTextarea("customFeatures");
-      const pages = uniqueList([...(isChecked("needPublic") ? tpl.pages : []), ...customPages]);
-      const publicFeatures = isChecked("needPublic") ? [...tpl.publicFeatures] : [];
-      const adminFeatures = isChecked("needAdmin") ? [...tpl.adminFeatures] : [];
-      const rules = [...tpl.rules];
-      const tables = isChecked("needDb") ? [...tpl.tables] : [];
-
-      if(isChecked("needPayments")){
-        adminFeatures.push("Suivi des paiements", "Acomptes", "Restes à payer", "Références de paiement");
-        tables.push("payments");
-        rules.push("Les paiements doivent avoir un statut clair : en attente, validé, annulé.");
-      }
-      if(isChecked("needBooking")){
-        publicFeatures.push("Demande de réservation", "Disponibilités ou planning");
-        adminFeatures.push("Planning", "Confirmation ou annulation des réservations");
-        tables.push("bookings", "availability");
-        rules.push("Une réservation confirmée doit bloquer la disponibilité correspondante.");
-      }
-      if(isChecked("needUsers")){
-        adminFeatures.push("Gestion des utilisateurs", "Gestion des rôles");
-        tables.push("users");
-      }
-      if(isChecked("needTrace")){
-        adminFeatures.push("Historique des actions importantes");
-        tables.push("user_actions");
-        rules.push("Les actions sensibles doivent être enregistrées dans un historique.");
-      }
-      if(isChecked("needAi")){
-        publicFeatures.push("Aide maison pour comprendre le service");
-        adminFeatures.push("Assistant d’aide pour guider les gestes de gestion");
-      }
-      if(isChecked("needSupa")){
-        rules.push("Prévoir une future connexion à la Supa Apps sans rendre le projet dépendant dès le départ.");
-      }
-      if(isChecked("needAudio")){
-        publicFeatures.push("Bouton d’explication audio simple");
-        rules.push("L’audio doit expliquer le service avec des mots humains, sans jargon technique.");
-      }
-
-      customFeatures.forEach(f => adminFeatures.push(f));
-
-      return {
-        projectName: getValue("projectName") || "Projet sans nom",
-        typeKey: $("projectType").value,
-        typeLabel: tpl.label,
-        activity: getValue("activity") || tpl.label,
-        location: getValue("location") || "Non précisé",
-        goal: getValue("goal") || "Clarifier le besoin et produire une première version exploitable.",
-        audience: getValue("audience") || "Clients, visiteurs et administrateurs du projet",
-        styleWanted: getValue("styleWanted") || "simple, clair, mobile, rassurant",
-        pages: uniqueList(pages),
-        publicFeatures: uniqueList(publicFeatures),
-        adminFeatures: uniqueList(adminFeatures),
-        tables: uniqueList(tables),
-        rules: uniqueList(rules),
-        templateAnalysis
-      };
-    }
-
-    function bullet(list){ return (list || []).map(x => "- " + x).join("\n"); }
-
-    function templateReport(files){
-      if(!files || !files.length) return "Aucun template HTML importé.";
-      return files.map(f => {
-        return `### ${f.name}\n- Titre détecté : ${f.title || "Non détecté"}\n- Formulaires : ${f.forms || 0}\n- Champs : ${f.inputs || 0}\n- Images : ${f.images || 0}\n- Titres principaux : ${(f.headings || []).slice(0,8).join(" | ") || "Non détectés"}\n- Boutons / liens visibles : ${(f.buttons || []).slice(0,8).join(" | ") || "Non détectés"}`;
-      }).join("\n\n");
-    }
-
-    function generateBrief(data){
-      return `# CAHIER DES CHARGES — ${data.projectName.toUpperCase()}\n\n## Positionnement\n\n**Type de projet :** ${data.typeLabel}\n\n**Activité :** ${data.activity}\n\n**Zone :** ${data.location}\n\n**Public visé :** ${data.audience}\n\n**Style souhaité :** ${data.styleWanted}\n\n## Objectif du projet\n\n${data.goal}\n\n## Pages nécessaires\n\n${bullet(data.pages)}\n\n## Fonctionnalités publiques\n\n${bullet(data.publicFeatures)}\n\n## Fonctionnalités de gestion\n\n${bullet(data.adminFeatures)}\n\n## Base de données proposée\n\n${bullet(data.tables)}\n\n## Règles métier importantes\n\n${bullet(data.rules)}\n\n## Sécurité et clarté\n\n- Séparer ce qui est public de ce qui appartient à la gestion interne.\n- Ne pas exposer les données sensibles côté public.\n- Protéger les accès de gestion par une authentification.\n- Garder des mots simples dans l’interface visible.\n- Prévoir une interface mobile claire, avec les actions importantes visibles rapidement.\n\n## Analyse du template importé\n\n${templateReport(data.templateAnalysis)}\n\n## Sortie attendue\n\n- Une première structure de pages claire.\n- Une interface publique compréhensible par un novice.\n- Une interface de gestion simple.\n- Un schéma de base de données cohérent.\n- Un plan de production fichier par fichier.\n- Un prompt IA prêt à être utilisé pour produire la suite.\n`;
-    }
-
-    function generatePrompt(data){
-      return `Tu es un assistant de production web. Aide-moi à créer un projet propre à partir du cahier ci-dessous.\n\nNom du projet : ${data.projectName}\nType : ${data.typeLabel}\nActivité : ${data.activity}\nZone : ${data.location}\nPublic visé : ${data.audience}\nStyle souhaité : ${data.styleWanted}\n\nObjectif :\n${data.goal}\n\nPages à prévoir :\n${bullet(data.pages)}\n\nFonctionnalités publiques :\n${bullet(data.publicFeatures)}\n\nFonctionnalités de gestion :\n${bullet(data.adminFeatures)}\n\nTables ou données à prévoir :\n${bullet(data.tables)}\n\nRègles métier :\n${bullet(data.rules)}\n\nContraintes de production :\n- Produire une interface mobile-first.\n- Utiliser des mots simples, humains, orientés action.\n- Éviter le jargon visible côté public.\n- Séparer partie publique et partie gestion.\n- Protéger les données sensibles.\n- Ne pas inventer de fonctionnalités inutiles.\n- Donner une structure de fichiers claire.\n- Commencer par une version légère mais propre.\n\nTemplate HTML importé :\n${templateReport(data.templateAnalysis)}\n\nTravail attendu :\n1. Résumer la logique du projet.\n2. Proposer l’arborescence des fichiers.\n3. Proposer les pages prioritaires.\n4. Proposer le schéma SQL initial.\n5. Proposer la première page HTML complète.\n6. Expliquer les prochaines étapes sans jargon.\n`;
-    }
-
-    function sqlName(name){
-      return String(name || "item").toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,38) || "item";
-    }
-
-    function generateSql(data){
-      const prefix = sqlName(data.projectName);
-      const base = `-- SQL CONSEILLÉ — ${data.projectName}\n-- Première base simple à adapter avant production.\n\ncreate table if not exists ${prefix}_users (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text,\n  email text,\n  password_hash text,\n  role text default 'admin',\n  status text default 'active',\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_settings (\n  id uuid primary key default gen_random_uuid(),\n  public_name text,\n  activity text,\n  city text,\n  country text,\n  whatsapp text,\n  description text,\n  is_public boolean default false,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n`;
-
-      const type = data.typeKey;
-      let specific = "";
-
-      if(type === "immobilier"){
-        specific = `\ncreate table if not exists ${prefix}_properties (\n  id uuid primary key default gen_random_uuid(),\n  title text not null,\n  property_type text,\n  transaction_type text,\n  price numeric default 0,\n  price_night numeric default 0,\n  price_week numeric default 0,\n  price_month numeric default 0,\n  surface numeric,\n  bedrooms int default 0,\n  bathrooms int default 0,\n  description text,\n  status text default 'draft',\n  city text,\n  district text,\n  address text,\n  is_public boolean default false,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_property_images (\n  id uuid primary key default gen_random_uuid(),\n  property_id uuid references ${prefix}_properties(id) on delete cascade,\n  image_url text not null,\n  image_order int default 0,\n  is_cover boolean default false,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_customers (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text,\n  email text,\n  identity_type text,\n  identity_number text,\n  identity_expiration date,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_visits (\n  id uuid primary key default gen_random_uuid(),\n  property_id uuid references ${prefix}_properties(id) on delete cascade,\n  customer_id uuid references ${prefix}_customers(id) on delete set null,\n  visit_date date,\n  visit_time time,\n  status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_reservations (\n  id uuid primary key default gen_random_uuid(),\n  property_id uuid references ${prefix}_properties(id) on delete cascade,\n  customer_id uuid references ${prefix}_customers(id) on delete set null,\n  checkin date not null,\n  checkout date not null,\n  nights int default 1,\n  total_amount numeric default 0,\n  deposit_amount numeric default 0,\n  remaining_amount numeric default 0,\n  caution_amount numeric default 0,\n  cleaning_fee numeric default 0,\n  status text default 'pending',\n  payment_channel text,\n  payment_reference text,\n  contract_url text,\n  water_index_in numeric,\n  water_index_out numeric,\n  electricity_index_in numeric,\n  electricity_index_out numeric,\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_planning (\n  id uuid primary key default gen_random_uuid(),\n  property_id uuid references ${prefix}_properties(id) on delete cascade,\n  reservation_id uuid references ${prefix}_reservations(id) on delete set null,\n  day date not null,\n  status text default 'open',\n  day_price numeric default 0,\n  note text,\n  unique(property_id, day)\n);\n`;
-      } else if(["ecommerce","restaurant"].includes(type)){
-        specific = `\ncreate table if not exists ${prefix}_categories (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  sort_order int default 0,\n  is_active boolean default true\n);\n\ncreate table if not exists ${prefix}_products (\n  id uuid primary key default gen_random_uuid(),\n  category_id uuid references ${prefix}_categories(id) on delete set null,\n  name text not null,\n  description text,\n  price numeric default 0,\n  stock numeric default 0,\n  image_url text,\n  is_public boolean default false,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_orders (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text,\n  customer_phone text,\n  total_amount numeric default 0,\n  status text default 'pending',\n  payment_status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_order_items (\n  id uuid primary key default gen_random_uuid(),\n  order_id uuid references ${prefix}_orders(id) on delete cascade,\n  product_id uuid references ${prefix}_products(id) on delete set null,\n  quantity numeric default 1,\n  unit_price numeric default 0,\n  line_total numeric default 0\n);\n`;
-      } else if(["reservation","location","beaute","taxi"].includes(type)){
-        specific = `\ncreate table if not exists ${prefix}_services (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  description text,\n  price numeric default 0,\n  duration_minutes int default 60,\n  is_public boolean default true,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_customers (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text,\n  email text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_bookings (\n  id uuid primary key default gen_random_uuid(),\n  service_id uuid references ${prefix}_services(id) on delete set null,\n  customer_id uuid references ${prefix}_customers(id) on delete set null,\n  start_at timestamptz,\n  end_at timestamptz,\n  amount numeric default 0,\n  deposit_amount numeric default 0,\n  status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_availability (\n  id uuid primary key default gen_random_uuid(),\n  day date not null,\n  status text default 'open',\n  note text,\n  unique(day)\n);\n`;
-      } else {
-        specific = `\ncreate table if not exists ${prefix}_items (\n  id uuid primary key default gen_random_uuid(),\n  title text not null,\n  description text,\n  status text default 'draft',\n  image_url text,\n  is_public boolean default false,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_requests (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text,\n  customer_phone text,\n  customer_email text,\n  message text,\n  status text default 'new',\n  created_at timestamptz default now()\n);\n`;
-      }
-
-      const common = `\ncreate table if not exists ${prefix}_payments (\n  id uuid primary key default gen_random_uuid(),\n  source_type text,\n  source_id uuid,\n  amount numeric default 0,\n  channel text,\n  reference text,\n  status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${prefix}_user_actions (\n  id uuid primary key default gen_random_uuid(),\n  user_id uuid references ${prefix}_users(id) on delete set null,\n  action_label text not null,\n  action_type text,\n  created_at timestamptz default now()\n);\n`;
-
-      return base + specific + common;
-    }
-
-    function generateJson(data){
-      return JSON.stringify(data, null, 2);
-    }
-
-    function generateAll(){
-      const data = getProjectData();
-      outputs.brief = generateBrief(data);
-      outputs.prompt = generatePrompt(data);
-      outputs.sql = generateSql(data);
-      outputs.json = generateJson(data);
-      renderOutput();
-      setStatus("Dossier préparé pour : " + data.projectName);
-      toast("Projet préparé");
-    }
-
-    function setOutputTab(tab){
-      currentTab = tab;
-      document.querySelectorAll(".output-tabs button").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tab));
-      renderOutput();
-    }
-
-    function renderOutput(){
-      const text = outputs[currentTab] || "";
-      const out = $("output");
-      if(!text){
-        out.hidden = true;
-        $("emptyState").hidden = false;
-        return;
-      }
-      $("emptyState").hidden = true;
-      out.hidden = false;
-      out.textContent = text;
-    }
-
-    async function copyCurrent(){
-      const text = outputs[currentTab] || $("output").textContent || "";
-      if(!text.trim()){
-        toast("Rien à copier");
-        return;
-      }
-      try{
-        await navigator.clipboard.writeText(text);
-        toast("Sortie copiée");
-      }catch(err){
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        ta.remove();
-        toast("Sortie copiée");
-      }
-    }
-
-    function downloadCurrent(){
-      const text = outputs[currentTab] || "";
-      if(!text.trim()){
-        toast("Rien à télécharger");
-        return;
-      }
-      const data = getProjectData();
-      const ext = currentTab === "json" ? "json" : currentTab === "sql" ? "sql" : "md";
-      const mime = currentTab === "json" ? "application/json" : "text/plain";
-      const blob = new Blob([text], { type:mime + ";charset=utf-8" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = sqlName(data.projectName) + "_" + currentTab + "." + ext;
-      document.body.appendChild(a);
-      a.click();
-      URL.revokeObjectURL(a.href);
-      a.remove();
-      toast("Téléchargement lancé");
-    }
-
-    applyTypeDefaults();
-  </script>
-</body>
-</html>
+      annu
