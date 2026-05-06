@@ -2,79 +2,709 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>DIGIY Projet Maison — Transforme une idée en cahier clair</title>
-  <meta name="description" content="Assistant maison de cadrage projet : cahier des charges, prompt IA, SQL conseillé, plan de production et première page HTML." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DIGIY Projet Maison Builder</title>
   <style>
-    :root{--bg:#061512;--card:#102b24;--line:rgba(255,255,255,.12);--text:#f7fff9;--muted:#bdd3ca;--soft:#8fb2a5;--gold:#f5c76b;--gold2:#ffe7a8;--green:#19c889;--shadow:0 24px 70px rgba(0,0,0,.35);--radius:24px;--max:1180px;--font:Outfit,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font);color:var(--text);background:radial-gradient(circle at 10% 5%,rgba(245,199,107,.18),transparent 30%),radial-gradient(circle at 88% 6%,rgba(25,200,137,.16),transparent 27%),linear-gradient(135deg,var(--bg),#04100d 65%,#071a15);min-height:100vh}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:var(--max);margin:0 auto;padding:20px}
-    header{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(6,21,18,.82);border-bottom:1px solid var(--line)}.topbar{max-width:var(--max);margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center}.brand{display:flex;align-items:center;gap:12px;min-width:0}.mark{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;font-weight:950;flex:0 0 auto}.brand strong{display:block;font-size:15px}.brand span{display:block;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58vw}.top-actions{display:flex;gap:10px}.pill{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);padding:10px 13px;border-radius:999px;font-weight:850;font-size:13px}.pill.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;border-color:transparent}
-    .hero{padding:42px 0 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:24px}.card,.panel,.result{background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.card{padding:32px}.kicker{display:inline-flex;border:1px solid rgba(245,199,107,.32);background:rgba(245,199,107,.09);padding:9px 12px;border-radius:999px;color:var(--gold2);font-weight:950;font-size:13px;margin-bottom:18px}h1{font-size:clamp(34px,5vw,64px);line-height:.95;margin:0 0 18px;letter-spacing:-2px}h1 span{color:var(--gold2)}.lead{font-size:18px;line-height:1.55;color:var(--muted);margin:0 0 20px}.quote{border-left:4px solid var(--gold);padding:12px 0 12px 16px;background:rgba(255,255,255,.035);border-radius:0 16px 16px 0;color:#eafff6;line-height:1.55}.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.mini{padding:18px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--line)}.num{width:34px;height:34px;border-radius:13px;display:grid;place-items:center;background:rgba(245,199,107,.14);color:var(--gold2);font-weight:950;margin-bottom:12px}.mini b{display:block;font-size:18px;margin-bottom:8px}.mini p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted);padding:11px 14px;border-radius:999px;font-weight:900}.tab.active{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#143226;border-color:transparent}.grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:22px;align-items:start}.panel,.result{padding:20px}.panel h2,.result h2{margin:0 0 14px;font-size:22px}.hint{color:var(--muted);line-height:1.45;margin:0 0 18px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}label{font-size:13px;color:#dff5ed;font-weight:900}input,select,textarea{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.22);color:var(--text);border-radius:16px;padding:13px 14px;outline:none}select option{background:#102b24;color:#fff}textarea{min-height:112px;resize:vertical;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:rgba(245,199,107,.72);box-shadow:0 0 0 4px rgba(245,199,107,.08)}.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 14px}.check{display:flex;gap:9px;align-items:flex-start;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:15px;padding:10px;color:var(--muted);font-size:13px}.check input{width:auto;margin-top:2px;accent-color:var(--gold)}.drop{border:1px dashed rgba(245,199,107,.45);background:rgba(245,199,107,.055);border-radius:20px;padding:16px;margin-top:10px}.drop p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}.file-row{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap}.file-list{font-size:13px;color:var(--soft);margin-top:10px;line-height:1.5;max-height:120px;overflow:auto}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:16px;padding:13px 15px;font-weight:950;color:#143226;background:linear-gradient(135deg,var(--gold2),var(--gold));box-shadow:0 12px 28px rgba(245,199,107,.16)}.btn.secondary{background:rgba(255,255,255,.08);color:var(--text);border:1px solid var(--line);box-shadow:none}.btn.green{background:linear-gradient(135deg,#2ff0a6,var(--green));color:#06231a}.result{min-height:680px;position:sticky;top:86px}.output-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.output-tabs button{border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--muted);border-radius:999px;padding:9px 12px;font-weight:900;font-size:13px}.output-tabs button.active{background:rgba(245,199,107,.16);color:var(--gold2);border-color:rgba(245,199,107,.35)}pre{white-space:pre-wrap;word-break:break-word;margin:0;background:rgba(0,0,0,.27);border:1px solid var(--line);border-radius:20px;padding:18px;color:#f6fff9;line-height:1.55;font-size:14px;min-height:520px;max-height:66vh;overflow:auto}.empty{display:grid;place-items:center;min-height:520px;text-align:center;color:var(--muted);background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:20px;padding:20px;line-height:1.55}.empty b{display:block;color:var(--text);font-size:20px;margin-bottom:8px}[hidden]{display:none!important}.status{margin-top:10px;color:var(--gold2);font-weight:900;font-size:13px;min-height:18px}.small{font-size:12px;color:var(--soft);line-height:1.45}.footer{padding:26px 0 40px;color:var(--soft);text-align:center;font-size:13px}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(20px);background:#112c25;border:1px solid rgba(245,199,107,.35);color:#fff;border-radius:999px;padding:12px 16px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:80;font-weight:900}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    @media(max-width:900px){.hero,.grid{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr 1fr}.result{position:relative;top:auto;min-height:auto}pre,.empty{min-height:360px;max-height:none}.top-actions .pill:not(.gold){display:none}}@media(max-width:620px){.wrap{padding:14px}.topbar{padding:12px 14px}.card,.panel,.result{padding:16px;border-radius:22px}.mini-grid,.form-grid,.checks{grid-template-columns:1fr}.actions .btn{width:100%}.lead{font-size:16px}h1{letter-spacing:-1.3px}}
+    :root{
+      --bg:#061512;
+      --bg2:#0d2a22;
+      --card:rgba(255,255,255,.075);
+      --card2:rgba(255,255,255,.045);
+      --line:rgba(255,255,255,.14);
+      --text:#f7fff9;
+      --muted:#c7ddd3;
+      --soft:#92b7a8;
+      --gold:#f5c76b;
+      --green:#19c98a;
+      --danger:#ff927a;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 12% 0,rgba(245,199,107,.18),transparent 32%),
+        radial-gradient(circle at 90% 10%,rgba(25,201,138,.12),transparent 30%),
+        linear-gradient(135deg,var(--bg),#020b09 72%);
+      color:var(--text);
+    }
+
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+
+    .wrap{width:min(1180px,100%);margin:0 auto;padding:22px}
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0 22px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:.02em}
+    .mark{
+      width:42px;height:42px;border-radius:16px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--gold),#fff1ba);
+      color:#123226;
+      box-shadow:0 12px 30px rgba(245,199,107,.18);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 12px;
+      background:rgba(255,255,255,.055);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      align-items:stretch;
+      margin-bottom:18px;
+    }
+    .card,.panel{
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .card{padding:28px}
+    .panel{overflow:hidden}
+
+    .kicker{color:#ffe7a8;font-weight:950;text-transform:uppercase;font-size:13px;letter-spacing:.08em}
+    h1{font-size:clamp(34px,6vw,68px);line-height:.95;margin:12px 0 14px;letter-spacing:-.055em}
+    h2{margin:0 0 14px;font-size:clamp(24px,4vw,38px);letter-spacing:-.035em}
+    h3{margin:0 0 10px;font-size:19px}
+    p{line-height:1.6}
+    .lead{color:var(--muted);font-size:17px;margin:0 0 14px}
+    .small{font-size:13px;color:var(--soft);line-height:1.5}
+
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:12px 15px;
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:850;
+      text-decoration:none;
+    }
+    .btn.primary{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.65)}
+    .btn.green{background:var(--green);color:#06231a;border-color:rgba(25,201,138,.55)}
+    .btn.danger{background:rgba(255,146,122,.12);color:#ffd4cb;border-color:rgba(255,146,122,.28)}
+
+    .form{padding:20px;display:grid;gap:13px}
+    .field{display:grid;gap:7px}
+    .field label{font-size:13px;font-weight:900;color:#ffe7a8}
+    .field input,.field textarea,.field select{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      border-radius:16px;
+      padding:13px 14px;
+      outline:none;
+    }
+    .field textarea{min-height:96px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+    .output-wrap{margin-top:18px}
+    .output-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+    }
+    .output-tabs{display:flex;gap:8px;flex-wrap:wrap}
+    .output-tabs button{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 11px;
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-weight:850;
+      font-size:13px;
+    }
+    .output-tabs button.active{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.7)}
+    .output-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+    #output{
+      display:none;
+      margin:0;
+      min-height:360px;
+      max-height:70vh;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+      padding:18px;
+      color:#eefdf6;
+      background:rgba(0,0,0,.22);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+      font-size:13px;
+      line-height:1.55;
+    }
+    .empty{
+      min-height:340px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:25px;
+      color:var(--muted);
+      background:rgba(0,0,0,.18);
+    }
+
+    .statusbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      color:var(--soft);
+      font-size:13px;
+    }
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%) translateY(20px);
+      opacity:0;
+      pointer-events:none;
+      background:#fff7df;
+      color:#173228;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:950;
+      box-shadow:0 18px 40px rgba(0,0,0,.28);
+      transition:.25s ease;
+      z-index:20;
+      max-width:calc(100% - 28px);
+      text-align:center;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    .hint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .hint{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:14px;
+      background:rgba(255,255,255,.045);
+    }
+    .hint strong{display:block;color:#ffe7a8;margin-bottom:6px}
+    .hint span{display:block;color:var(--muted);font-size:13px;line-height:1.45}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+      .hint-grid{grid-template-columns:1fr}
+      .topbar{align-items:flex-start;flex-direction:column}
+      .output-head{align-items:flex-start;flex-direction:column}
+    }
   </style>
 </head>
 <body>
-  <header><div class="topbar"><a class="brand" href="#top"><div class="mark">D∞</div><div><strong>DIGIY Projet Maison</strong><span>Transforme une idée en cahier clair</span></div></a><div class="top-actions"><a class="pill" href="#atelier">Atelier</a><button class="pill gold" type="button" onclick="generateAll()">Préparer</button></div></div></header>
-  <main id="top" class="wrap">
-    <section class="hero"><div class="card"><div class="kicker">Assistant maison · Supa Apps · Terrain</div><h1>Transforme une idée en <span>cahier clair</span>.</h1><p class="lead">Un outil maison pour aider les novices du web à expliquer leur projet. Tu choisis le métier, tu ajoutes les besoins, tu peux importer un template HTML, et DIGIY prépare une feuille de route propre.</p><div class="quote">Projet Maison prépare. Réalisation construit. Supa Apps relie.</div><div class="actions"><a class="btn" href="#atelier">Commencer le cadrage</a><button class="btn secondary" type="button" onclick="fillDemo()">Exemple agence immobilière</button></div></div><div class="mini-grid"><div class="mini"><div class="num">1</div><b>Dire le métier</b><p>Commerce, restaurant, immobilier, taxi, beauté, BTP, réservation ou projet libre.</p></div><div class="mini"><div class="num">2</div><b>Ranger l’idée</b><p>L’outil clarifie les pages, les actions, les données et les priorités.</p></div><div class="mini"><div class="num">3</div><b>Préparer la réalisation</b><p>Structure des fichiers, plan de production et première page HTML.</p></div><div class="mini"><div class="num">4</div><b>Sortir le dossier</b><p>Cahier des charges, prompt IA, SQL conseillé, JSON et page de départ.</p></div></div></section>
-    <div class="tabs"><a class="tab active" href="#atelier">Cadrage</a><a class="tab" href="#sortie">Sortie</a><button class="tab" type="button" onclick="resetForm()">Nouveau projet</button></div>
-    <section id="atelier" class="grid"><form class="panel" onsubmit="event.preventDefault();generateAll();"><h2>1. Informations du projet</h2><p class="hint">On commence simple. Les numéros guident le remplissage : chaque idée dans la bonne case.</p><div class="form-grid"><div class="field"><label for="projectName">1. Nom du projet</label><input id="projectName" placeholder="Ex : Restaurant Teranga Saly" /></div><div class="field"><label for="projectType">2. Type de projet</label><select id="projectType" onchange="applyTypeDefaults()"><option value="vitrine">Site vitrine</option><option value="ecommerce">E-commerce</option><option value="restaurant">Restaurant</option><option value="reservation">Réservation</option><option value="taxi">Taxi / chauffeur</option><option value="immobilier">Agence immobilière</option><option value="location">Location / hébergement</option><option value="beaute">Beauté / coiffure</option><option value="btp">BTP / artisans</option><option value="annuaire">Annuaire</option><option value="voyage">Voyage / tourisme</option><option value="carte">Carte digitale</option><option value="personnalise">Projet personnalisé</option></select></div></div><div class="form-grid"><div class="field"><label for="activity">3. Activité / métier</label><input id="activity" placeholder="Ex : restaurant familial sénégalais avec spécialités locales" /></div><div class="field"><label for="location">4. Ville / pays</label><input id="location" placeholder="Ex : Saly, Sénégal" /></div></div><div class="field"><label for="goal">5. Objectif principal</label><textarea id="goal" placeholder="Ex : présenter le restaurant, afficher le menu et prendre des réservations."></textarea></div><div class="field"><label for="audience">6. Public visé</label><input id="audience" placeholder="Ex : clients locaux, diaspora, touristes" /></div><h2 style="margin-top:22px">2. Besoins à activer</h2><p class="hint">Coche ce qui compte. L’outil prépare les blocs utiles sans surcharger.</p><div class="checks"><label class="check"><input type="checkbox" id="needPublic" checked /> Partie publique visible</label><label class="check"><input type="checkbox" id="needAdmin" checked /> Espace de gestion</label><label class="check"><input type="checkbox" id="needDb" checked /> Base de données</label><label class="check"><input type="checkbox" id="needPayments" /> Paiements / acomptes</label><label class="check"><input type="checkbox" id="needBooking" /> Réservations / planning</label><label class="check"><input type="checkbox" id="needUsers" checked /> Utilisateurs / rôles</label><label class="check"><input type="checkbox" id="needTrace" checked /> Historique des actions</label><label class="check"><input type="checkbox" id="needAi" /> Assistant / aide maison</label><label class="check"><input type="checkbox" id="needSupa" /> Connexion Supa Apps</label><label class="check"><input type="checkbox" id="needAudio" /> Explication audio</label></div><div class="field"><label for="customPages">7. Pages souhaitées en plus</label><textarea id="customPages" placeholder="Ex : témoignages, galerie, tarifs, FAQ"></textarea></div><div class="field"><label for="customFeatures">8. Besoins particuliers</label><textarea id="customFeatures" placeholder="Ex : QR client, acompte groupe, audio de présentation, galerie restaurant"></textarea></div><div class="field"><label for="styleWanted">9. Style souhaité</label><input id="styleWanted" placeholder="Ex : premium, mobile, clair, rassurant" /></div><h2 style="margin-top:22px">3. Template HTML existant</h2><p class="hint">10. Optionnel. Tu peux ajouter des fichiers HTML pour repérer titres, menus, formulaires, images et boutons.</p><div class="drop"><p><strong>Lecture locale seulement.</strong> Rien n’est envoyé à un serveur. Les fichiers sont analysés dans ton navigateur.</p><div class="file-row"><input id="htmlFiles" type="file" accept=".html,.htm,text/html" multiple onchange="readTemplateFiles(event)" /><button class="btn secondary" type="button" onclick="clearFiles()">Vider</button></div><div id="fileList" class="file-list">Aucun fichier ajouté pour le moment.</div></div><div class="actions"><button class="btn green" type="submit">Préparer le projet</button><button class="btn secondary" type="button" onclick="copyCurrent()">Copier la sortie</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button></div><div id="status" class="status"></div></form>
-      <aside id="sortie" class="result"><h2>4. Dossier généré</h2><div class="output-tabs"><button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Cahier</button><button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button><button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL conseillé</button><button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button><button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button><button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button></div><div id="emptyState" class="empty"><div><b>Le dossier va sortir ici.</b>Remplis le projet puis clique sur “Préparer le projet”.</div></div><pre id="output" hidden></pre><div class="actions"><button class="btn" type="button" onclick="copyCurrent()">Copier</button><button class="btn secondary" type="button" onclick="downloadCurrent()">Télécharger</button></div><p class="small">Version maison autonome. Aucun code externe de l’ancien outil n’est utilisé.</p></aside></section><footer class="footer">DIGIY Projet Maison · Atelier de cadrage pour la Supa Apps · BY DIGIYLYFE</footer></main><div id="toast" class="toast">Copié</div>
+  <main class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">∞</div>
+        <div>
+          <div>DIGIY Projet Maison Builder</div>
+          <div class="small">Préparer une page, un brief, un prompt et une base de réalisation.</div>
+        </div>
+      </div>
+      <a class="pill" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour DIGIYLYFE</a>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <div class="kicker">Outil maison · BY DIGIYLYFE</div>
+        <h1>Préparer un projet sans se perdre.</h1>
+        <p class="lead">Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier : brief, prompt IA, SQL léger, plan de réalisation, page HTML et JSON.</p>
+        <p class="lead">Correction posée : la page générée ne doit plus afficher <strong>\n&lt;section</strong>. Les sections s’enchaînent proprement.</p>
+        <div class="actions">
+          <button class="btn primary" type="button" onclick="generateAll()">Préparer le projet</button>
+          <button class="btn" type="button" onclick="applyTypeDefaults(true)">Remplir exemple</button>
+          <button class="btn danger" type="button" onclick="clearForm()">Nettoyer</button>
+        </div>
+        <div class="hint-grid">
+          <div class="hint"><strong>1. Projet</strong><span>Nom, ville, type et public visé.</span></div>
+          <div class="hint"><strong>2. Sorties</strong><span>Brief, prompt, SQL, réalisation et page prête à copier.</span></div>
+          <div class="hint"><strong>3. Terrain</strong><span>Simple, mobile, humain, action directe.</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <form class="form" onsubmit="event.preventDefault();generateAll();">
+          <div class="row">
+            <div class="field">
+              <label for="projectName">Nom du projet</label>
+              <input id="projectName" value="Restaurant Teranga Saly" placeholder="Ex : Restaurant Teranga Saly" />
+            </div>
+            <div class="field">
+              <label for="typeKey">Type</label>
+              <select id="typeKey" onchange="applyTypeDefaults(false)">
+                <option value="restaurant" selected>Restaurant</option>
+                <option value="hotel">Logement / hôtel</option>
+                <option value="boutique">Boutique</option>
+                <option value="service">Service / artisan</option>
+                <option value="event">Événement</option>
+                <option value="generic">Projet simple</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="city">Ville / zone</label>
+              <input id="city" value="Saly, Sénégal" placeholder="Ex : Saly, Sénégal" />
+            </div>
+            <div class="field">
+              <label for="style">Style souhaité</label>
+              <input id="style" value="Premium, mobile, chaleureux, africain, clair, rassurant" placeholder="Ex : sobre, moderne, local" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="activity">Activité</label>
+            <textarea id="activity" placeholder="Décris l’activité">Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="goal">Objectif de la page</label>
+            <textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="audience">Public visé</label>
+            <input id="audience" value="Clients locaux, familles, touristes, groupes, visiteurs de Saly" placeholder="Ex : clients locaux, touristes, familles" />
+          </div>
+
+          <div class="field">
+            <label for="specialFeatures">Points importants</label>
+            <textarea id="specialFeatures" placeholder="Un point par ligne">Spécialités sénégalaises
+Réservation directe
+Contact WhatsApp
+Plats du jour
+Groupes et événements privés
+Photos et avis
+Horaires clairs</textarea>
+          </div>
+
+          <div class="field">
+            <label for="extraSections">Sections à ajouter</label>
+            <textarea id="extraSections" placeholder="Un nom de section par ligne">Plat détail
+Commande
+Témoignages
+Galerie
+Tarifs
+À propos
+Événements privés
+FAQ</textarea>
+          </div>
+
+          <button class="btn green" type="submit">Préparer le projet</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="panel output-wrap">
+      <div class="output-head">
+        <div class="output-tabs" aria-label="Onglets de sortie">
+          <button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Brief</button>
+          <button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button>
+          <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button>
+          <button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button>
+          <button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button>
+          <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
+        </div>
+        <div class="output-actions">
+          <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
+          <button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button>
+          <button class="btn" type="button" onclick="previewPage()">Voir la page</button>
+        </div>
+      </div>
+      <pre id="output" hidden></pre>
+      <div id="emptyState" class="empty">
+        <div>
+          <h2>Rien préparé pour l’instant</h2>
+          <p>Clique sur <strong>Préparer le projet</strong>. La sortie apparaîtra ici.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="statusbar">
+      <span id="status">Prêt.</span>
+      <span>BY DIGIYLYFE · terrain d’abord</span>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <script>
-    const templates={
-      vitrine:{label:"Site vitrine",pages:["Accueil","Services","À propos","Réalisations","Contact"],pub:["Présentation de l’activité","Bouton WhatsApp / appel","Galerie images","Formulaire de contact","Avis ou témoignages"],admin:["Modifier les textes","Modifier les images","Gérer les messages reçus","Publier ou masquer des sections"],tables:["users","site_settings","pages","messages","media"],rules:["Les coordonnées publiques doivent être contrôlées.","Les messages clients doivent rester privés."]},
-      ecommerce:{label:"E-commerce",pages:["Accueil","Catalogue","Détail produit","Panier","Commande","Contact"],pub:["Catalogue produits","Recherche et filtres","Fiche produit","Ajout au panier","Commande WhatsApp ou formulaire"],admin:["Gestion produits","Gestion catégories","Gestion commandes","Gestion clients","Stock"],tables:["users","products","categories","customers","orders","order_items","payments"],rules:["Un produit peut avoir plusieurs images.","Une commande contient une ou plusieurs lignes.","Le stock doit être mis à jour après validation."]},
-      restaurant:{label:"Restaurant",pages:["Accueil","Menu","Plat détail","Commande","Réservation","Contact"],pub:["Menu par catégories","Photos des plats","Commande directe","Réservation de table","Bouton WhatsApp","Horaires"],admin:["Gestion plats","Gestion menus","Gestion commandes","Gestion réservations","Horaires","Messages clients"],tables:["users","restaurant_settings","menu_categories","dishes","orders","order_items","reservations","payments","user_actions"],rules:["Les plats masqués ne s’affichent pas au public.","Une réservation doit avoir un statut clair."]},
-      reservation:{label:"Réservation",pages:["Accueil","Services","Calendrier","Réserver","Confirmation","Contact"],pub:["Liste des services","Créneaux disponibles","Demande de réservation","Confirmation","Contact direct"],admin:["Gestion services","Gestion créneaux","Gestion réservations","Annulations","Suivi client"],tables:["users","services","availability","bookings","customers","payments"],rules:["Un créneau confirmé ne doit plus être disponible.","Le client doit recevoir une information claire après demande."]},
-      taxi:{label:"Taxi / chauffeur",pages:["Accueil","Chauffeurs","Détail chauffeur","Demande de trajet","Contact"],pub:["Présentation chauffeur","Zone de service","Demande de trajet","Bouton appel / WhatsApp","Tarifs indicatifs"],admin:["Profil chauffeur","Tarifs","Demandes de trajet","Historique courses","Disponibilité"],tables:["users","drivers","vehicles","ride_requests","trips","payments"],rules:["Les données privées du chauffeur ne doivent pas sortir côté public.","Une course doit avoir un statut."]},
-      immobilier:{label:"Agence immobilière",pages:["Accueil","Biens","Détail bien","Recherche","Demande de visite","Réservation","Contact"],pub:["Liste des biens","Recherche par ville/quartier/type/prix","Fiche bien","Galerie images","Demande de visite","Demande de réservation à la nuitée"],admin:["Gestion des biens","Gestion des images","Gestion des équipements","Gestion des agents","Gestion des clients","Gestion des visites","Gestion des réservations","Planning","Contrats","Paiements et acomptes"],tables:["users","properties","property_equipment","property_images","agents","customers","visits","reservations","planning","payments","contracts","user_actions"],rules:["Un bien peut avoir plusieurs images.","Un bien masqué ne doit pas apparaître côté public.","Une réservation confirmée bloque les dates dans le planning."]},
-      location:{label:"Location / hébergement",pages:["Accueil","Logements","Fiche logement","Calendrier","Réserver","Contact"],pub:["Galerie logements","Fiche logement","Prix nuit/semaine/mois","Calendrier des disponibilités","Demande de réservation"],admin:["Gestion logements","Photos","Tarifs","Planning","Arrivées/départs","Paiements","Notes rapides"],tables:["users","rooms","room_images","availability","reservations","customers","payments","expenses"],rules:["Le planning est le cœur du module.","Les dates occupées doivent être protégées."]},
-      beaute:{label:"Beauté / coiffure",pages:["Accueil","Services","Tarifs","Réserver","Galerie","Contact"],pub:["Liste des services","Prix","Photos avant/après","Réservation","Contact WhatsApp"],admin:["Gestion services","Planning","Clients","Réservations","Paiements","Photos"],tables:["users","services","appointments","customers","payments","gallery"],rules:["Un service doit avoir une durée et un prix.","Un créneau réservé ne doit pas être proposé deux fois."]},
-      btp:{label:"BTP / artisans",pages:["Accueil","Services","Réalisations","Demande de devis","Contact"],pub:["Présentation métier","Services proposés","Galerie réalisations","Demande de devis","Contact direct"],admin:["Gestion services","Demandes de devis","Clients","Chantiers","Photos","Paiements"],tables:["users","services","customers","quote_requests","projects","project_images","payments"],rules:["Chaque demande doit être suivie avec un statut.","Les photos chantier peuvent servir de preuve d’avancement."]},
-      annuaire:{label:"Annuaire",pages:["Accueil","Catégories","Liste des pros","Fiche pro","Ajouter une fiche","Contact"],pub:["Recherche","Catégories","Fiches professionnelles","Contact direct"],admin:["Validation des fiches","Gestion catégories","Gestion pros","Signalements"],tables:["users","categories","professionals","reviews","reports"],rules:["Une fiche doit pouvoir être validée avant publication."]},
-      voyage:{label:"Voyage / tourisme",pages:["Accueil","Destinations","Offres","Détail offre","Réserver","Contact"],pub:["Destinations","Offres de voyage","Galerie","Demande de réservation"],admin:["Gestion offres","Gestion destinations","Demandes clients","Réservations","Paiements"],tables:["users","destinations","offers","customers","bookings","payments"],rules:["Une offre doit préciser durée, prix, conditions et disponibilité."]},
-      carte:{label:"Carte digitale",pages:["Carte publique","Contact","Liens","Galerie","QR"],pub:["Présentation rapide","Liens sociaux","Boutons contact","QR","Galerie"],admin:["Modifier profil","Modifier liens","Modifier couleurs","Statut visible ou caché"],tables:["users","digital_cards","card_links","card_media"],rules:["La carte doit être rapide à ouvrir sur téléphone."]},
-      personnalise:{label:"Projet personnalisé",pages:["Accueil","Présentation","Fonction principale","Contact"],pub:["Présentation claire","Action principale","Contact direct"],admin:["Gestion du contenu","Gestion des demandes","Historique","Paramètres"],tables:["users","settings","items","requests","messages"],rules:["Le projet doit rester compréhensible pour un novice."]}
+    "use strict";
+
+    const outputs = {
+      brief: "",
+      prompt: "",
+      sql: "",
+      realisation: "",
+      page: "",
+      json: ""
     };
-    let templateAnalysis=[],outputs={brief:"",prompt:"",sql:"",realisation:"",page:"",json:""},currentTab="brief";
-    const $=id=>document.getElementById(id);const val=id=>($(id)?.value||"").trim();const checked=id=>!!$(id)?.checked;const list=a=>[...new Set((a||[]).map(x=>String(x).trim()).filter(Boolean))];
-    function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
-    function setStatus(t){$("status").textContent=t||""}function tpl(){return templates[$("projectType").value]||templates.personnalise}function lines(id){return val(id).split(/[\n,]+/).map(x=>x.trim()).filter(Boolean)}
-    function applyTypeDefaults(){const k=$("projectType").value,t=tpl();if(!val("activity"))$("activity").value=t.label;if(["restaurant","reservation","immobilier","location","beaute","voyage"].includes(k))$("needBooking").checked=true;if(["ecommerce","restaurant","immobilier","location","taxi","btp","voyage"].includes(k))$("needPayments").checked=true;setStatus("Modèle métier chargé : "+t.label)}
-    function fillDemo(){$("projectName").value="Agence Soleil Immo";$("projectType").value="immobilier";$("activity").value="Agence immobilière avec vente, location et réservations à la nuitée";$("location").value="Saly, Sénégal";$("goal").value="Présenter les biens, recevoir des demandes, organiser les visites, gérer les réservations à la nuitée, suivre les contrats, les acomptes et le planning.";$("audience").value="Clients locaux, diaspora, touristes, investisseurs et entreprises";$("customPages").value="À propos\nTémoignages\nTarifs\nFAQ";$("customFeatures").value="Contrat de location\nUpload images\nRecherche par quartier\nBlocage automatique des dates";$("styleWanted").value="sobre, premium, mobile, rassurant";["needPublic","needAdmin","needDb","needPayments","needBooking","needUsers","needTrace","needAi","needSupa","needAudio"].forEach(id=>$(id).checked=true);generateAll();location.hash="sortie"}
-    function resetForm(){document.querySelector("form").reset();$("projectType").value="vitrine";templateAnalysis=[];outputs={brief:"",prompt:"",sql:"",realisation:"",page:"",json:""};$("htmlFiles").value="";$("fileList").textContent="Aucun fichier ajouté pour le moment.";renderOutput();setStatus("Nouveau projet prêt.")}
-    async function readTemplateFiles(e){const files=[...(e.target.files||[])];templateAnalysis=[];for(const f of files){try{templateAnalysis.push(analyzeHtml(f.name,await f.text()))}catch{templateAnalysis.push({name:f.name,error:"Lecture impossible"})}}renderFileList();setStatus(files.length+" fichier(s) HTML analysé(s).")}
-    function analyzeHtml(name,text){const d=new DOMParser().parseFromString(text,"text/html");return{name,title:(d.querySelector("title")?.textContent||"").trim(),headings:[...d.querySelectorAll("h1,h2,h3")].map(x=>x.textContent.trim()).filter(Boolean).slice(0,16),forms:d.querySelectorAll("form").length,inputs:d.querySelectorAll("input,select,textarea").length,buttons:[...d.querySelectorAll("button,a")].map(x=>x.textContent.trim()).filter(Boolean).slice(0,16),images:d.querySelectorAll("img").length}}
-    function renderFileList(){if(!templateAnalysis.length){$("fileList").textContent="Aucun fichier ajouté pour le moment.";return}$("fileList").innerHTML=templateAnalysis.map(f=>`<div>• <strong>${esc(f.name)}</strong> · ${f.forms||0} formulaire(s) · ${f.images||0} image(s)</div>`).join("")}
-    function clearFiles(){$("htmlFiles").value="";templateAnalysis=[];renderFileList();setStatus("Fichiers retirés.")}function esc(s){return String(s||"").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"}[c]))}
-    function guessName(){const a=val("activity")||tpl().label,c=(val("location").split(",")[0]||"").trim();return c?a+" — "+c:a}
-    function data(){const t=tpl(),special=lines("customFeatures"),pages=list([...(checked("needPublic")?t.pages:[]),...lines("customPages")]),pub=checked("needPublic")?[...t.pub]:[],admin=checked("needAdmin")?[...t.admin]:[],tables=checked("needDb")?[...t.tables]:[],rules=[...t.rules];if(checked("needPayments")){admin.push("Suivi des paiements","Acomptes","Restes à payer","Références de paiement");if(!tables.includes("payments"))tables.push("payments");rules.push("Les paiements doivent avoir un statut clair : en attente, validé, annulé.")}if(checked("needBooking")){pub.push("Demande de réservation","Disponibilités ou planning");admin.push("Planning","Confirmation ou annulation des réservations");if($("projectType").value!=="restaurant"){tables.push("bookings","availability")}rules.push("Une réservation confirmée doit bloquer la disponibilité correspondante.")}if(checked("needUsers")){admin.push("Gestion des utilisateurs","Gestion des rôles");tables.push("users")}if(checked("needTrace")){admin.push("Historique des actions importantes");tables.push("user_actions");rules.push("Les actions sensibles doivent être enregistrées dans un historique.")}if(checked("needAi")){pub.push("Aide maison pour comprendre le service");admin.push("Assistant d’aide pour guider les gestes de gestion")}if(checked("needSupa"))rules.push("Prévoir une future connexion à la Supa Apps sans rendre le projet dépendant dès le départ.");if(checked("needAudio")){pub.push("Bouton d’explication audio simple");rules.push("L’audio doit expliquer le service avec des mots humains.")}return{projectName:val("projectName")||guessName(),typeKey:$("projectType").value,typeLabel:t.label,activity:val("activity")||t.label,location:val("location")||"Non précisé",goal:val("goal")||"Clarifier le besoin et produire une première version exploitable.",audience:val("audience")||"Clients, visiteurs et administrateurs du projet",styleWanted:val("styleWanted")||"simple, clair, mobile, rassurant",pages:list(pages),publicFeatures:list(pub),adminFeatures:list(admin),specialFeatures:list(special),tables:list(tables),rules:list(rules),templateAnalysis}}
-    const bullet=a=>(a||[]).map(x=>"- "+x).join("\n");function report(files){return(!files||!files.length)?"Aucun template HTML importé.":files.map(f=>`### ${f.name}\n- Titre : ${f.title||"Non détecté"}\n- Formulaires : ${f.forms||0}\n- Champs : ${f.inputs||0}\n- Images : ${f.images||0}\n- Titres : ${(f.headings||[]).slice(0,6).join(" | ")||"Non détectés"}`).join("\n\n")}
-    function brief(d){return`# CAHIER DES CHARGES — ${d.projectName.toUpperCase()}\n\n## Positionnement\n\n**Type :** ${d.typeLabel}\n**Activité :** ${d.activity}\n**Zone :** ${d.location}\n**Public visé :** ${d.audience}\n**Style :** ${d.styleWanted}\n\n## Objectif\n\n${d.goal}\n\n## Pages nécessaires\n\n${bullet(d.pages)}\n\n## Fonctionnalités publiques\n\n${bullet(d.publicFeatures)}\n\n## Fonctionnalités de gestion\n\n${bullet(d.adminFeatures)}\n\n## Besoins particuliers\n\n${d.specialFeatures.length?bullet(d.specialFeatures):"- Aucun besoin particulier ajouté pour le moment."}\n\n## Base de données proposée\n\n${bullet(d.tables)}\n\n## Règles métier\n\n${bullet(d.rules)}\n\n## Sécurité et clarté\n\n- Séparer ce qui est public de ce qui appartient à la gestion interne.\n- Ne pas exposer les données sensibles côté public.\n- Protéger les accès de gestion.\n- Garder des mots simples et humains.\n- Prévoir une interface mobile claire.\n\n## Analyse du template\n\n${report(d.templateAnalysis)}\n\n## Sortie attendue\n\n- Structure de pages claire.\n- Interface publique simple.\n- Interface de gestion légère.\n- Schéma SQL cohérent.\n- Plan de production fichier par fichier.\n`}
-    function promptIA(d){return`Tu es un assistant de production web. Aide-moi à créer ce projet sans jargon.\n\nNom : ${d.projectName}\nType : ${d.typeLabel}\nActivité : ${d.activity}\nZone : ${d.location}\nPublic : ${d.audience}\nStyle : ${d.styleWanted}\n\nObjectif :\n${d.goal}\n\nPages :\n${bullet(d.pages)}\n\nFonctionnalités publiques :\n${bullet(d.publicFeatures)}\n\nFonctionnalités de gestion :\n${bullet(d.adminFeatures)}\n\nBesoins particuliers :\n${d.specialFeatures.length?bullet(d.specialFeatures):"- Aucun besoin particulier ajouté."}\n\nTables à prévoir :\n${bullet(d.tables)}\n\nRègles métier :\n${bullet(d.rules)}\n\nTravail attendu :\n1. Résumer la logique du projet.\n2. Proposer l’arborescence des fichiers.\n3. Proposer les pages prioritaires.\n4. Proposer le SQL initial.\n5. Proposer une première page HTML complète.\n`}
-    function slug(s){return String(s||"projet").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"_").replace(/^_+|_+$/g,"").slice(0,34)||"projet"}
-    function sql(d){const p=slug(d.projectName);if(d.typeKey==="restaurant"){return`-- SQL CONSEILLÉ — ${d.projectName}\n-- Version métier restaurant : menu, plats, commandes, réservations, paiements.\n\ncreate table if not exists ${p}_users (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  phone text,\n  email text,\n  password_hash text,\n  role text default 'admin',\n  status text default 'active',\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_restaurant_settings (\n  id uuid primary key default gen_random_uuid(),\n  public_name text not null,\n  activity text,\n  city text,\n  country text default 'Sénégal',\n  whatsapp text,\n  address text,\n  opening_hours text,\n  description text,\n  cover_image_url text,\n  logo_url text,\n  is_public boolean default false,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_menu_categories (\n  id uuid primary key default gen_random_uuid(),\n  name text not null,\n  description text,\n  sort_order int default 0,\n  is_active boolean default true,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_dishes (\n  id uuid primary key default gen_random_uuid(),\n  category_id uuid references ${p}_menu_categories(id) on delete set null,\n  name text not null,\n  description text,\n  price_xof numeric default 0,\n  image_url text,\n  is_available boolean default true,\n  is_public boolean default true,\n  sort_order int default 0,\n  created_at timestamptz default now(),\n  updated_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_reservations (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text not null,\n  customer_phone text,\n  customer_email text,\n  reservation_date date not null,\n  reservation_time time,\n  guests_count int default 1,\n  note text,\n  status text default 'pending',\n  deposit_amount_xof numeric default 0,\n  remaining_amount_xof numeric default 0,\n  payment_reference text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_orders (\n  id uuid primary key default gen_random_uuid(),\n  customer_name text,\n  customer_phone text,\n  order_type text default 'sur_place',\n  total_amount_xof numeric default 0,\n  status text default 'pending',\n  payment_status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_order_items (\n  id uuid primary key default gen_random_uuid(),\n  order_id uuid references ${p}_orders(id) on delete cascade,\n  dish_id uuid references ${p}_dishes(id) on delete set null,\n  dish_name text,\n  quantity numeric default 1,\n  unit_price_xof numeric default 0,\n  line_total_xof numeric default 0\n);\n\ncreate table if not exists ${p}_payments (\n  id uuid primary key default gen_random_uuid(),\n  source_type text,\n  source_id uuid,\n  amount_xof numeric default 0,\n  channel text,\n  reference text,\n  status text default 'pending',\n  note text,\n  created_at timestamptz default now()\n);\n\ncreate table if not exists ${p}_user_actions (\n  id uuid primary key default gen_random_uuid(),\n  user_id uuid references ${p}_users(id) on delete set null,\n  action_label text not null,\n  action_type text,\n  created_at timestamptz default now()\n);`}return`-- SQL CONSEILLÉ — ${d.projectName}\n\ncreate table if not exists ${p}_users (id uuid primary key default gen_random_uuid(), name text not null, phone text, email text, password_hash text, role text default 'admin', status text default 'active', created_at timestamptz default now());\ncreate table if not exists ${p}_settings (id uuid primary key default gen_random_uuid(), public_name text, activity text, city text, whatsapp text, description text, is_public boolean default false, created_at timestamptz default now());\ncreate table if not exists ${p}_items (id uuid primary key default gen_random_uuid(), title text not null, description text, price numeric default 0, image_url text, status text default 'draft', is_public boolean default false, created_at timestamptz default now());\ncreate table if not exists ${p}_requests (id uuid primary key default gen_random_uuid(), customer_name text, customer_phone text, customer_email text, message text, status text default 'new', created_at timestamptz default now());\ncreate table if not exists ${p}_payments (id uuid primary key default gen_random_uuid(), source_type text, source_id uuid, amount numeric default 0, channel text, reference text, status text default 'pending', note text, created_at timestamptz default now());\ncreate table if not exists ${p}_user_actions (id uuid primary key default gen_random_uuid(), user_id uuid references ${p}_users(id) on delete set null, action_label text not null, action_type text, created_at timestamptz default now());`}
-    function realisation(d){return`# RÉALISATION — ${d.projectName}\n\n## Structure de fichiers proposée\n\n- index.html : première page publique\n- admin.html : gestion légère\n- style.css : styles si le projet est séparé en fichiers\n- app.js : logique navigateur\n- schema.sql : base de données conseillée\n- README.md : note de pose et d’usage\n\n## Pages prioritaires à produire\n\n${bullet(d.pages.slice(0,6))}\n\n## Plan de production\n\n1. Produire index.html avec présentation, action principale, contact et sections utiles.\n2. Ajouter la page de gestion légère pour modifier les contenus essentiels.\n3. Poser le schéma SQL conseillé dans un fichier séparé.\n4. Tester sur téléphone avant toute amélioration lourde.\n5. Relier plus tard à la Supa Apps si le projet est validé.\n\n## Instructions de pose\n\n- Créer un nouveau dossier ou dépôt GitHub.\n- Coller la sortie “Page HTML” dans index.html.\n- Coller la sortie “SQL conseillé” dans schema.sql.\n- Tester localement, puis publier.\n\n## Principe\n\nProjet Maison prépare. Réalisation construit. Supa Apps relie.`}
+
+    let currentTab = "brief";
+    let toastTimer = null;
+
+    function $(id){
+      return document.getElementById(id);
+    }
+
+    function esc(value){
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+    }
+
+    function sqlEsc(value){
+      return String(value ?? "").replace(/'/g,"''");
+    }
+
+    function slug(value){
+      return String(value || "projet")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"")
+        .slice(0,70) || "projet";
+    }
+
+    function lines(value){
+      const raw = String(value || "")
+        .split(/\n|,|;/g)
+        .map(x => x.trim())
+        .filter(Boolean);
+      return [...new Set(raw)];
+    }
+
+    function data(){
+      return {
+        projectName: $("projectName").value.trim() || "Projet DIGIY",
+        typeKey: $("typeKey").value || "generic",
+        city: $("city").value.trim() || "Saly, Sénégal",
+        style: $("style").value.trim() || "Mobile, clair, chaleureux, rassurant",
+        activity: $("activity").value.trim() || "Activité locale à présenter simplement.",
+        goal: $("goal").value.trim() || "Présenter l’activité, rassurer le client et faciliter le contact.",
+        audience: $("audience").value.trim() || "Clients locaux et visiteurs",
+        specialFeatures: lines($("specialFeatures").value),
+        extraSections: lines($("extraSections").value)
+      };
+    }
+
+    const defaultsByType = {
+      restaurant: {
+        projectName:"Restaurant Teranga Saly",
+        city:"Saly, Sénégal",
+        style:"Premium, mobile, chaleureux, africain, clair, rassurant",
+        activity:"Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.",
+        goal:"Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.",
+        audience:"Clients locaux, familles, touristes, groupes, visiteurs de Saly",
+        specialFeatures:"Spécialités sénégalaises\nRéservation directe\nContact WhatsApp\nPlats du jour\nGroupes et événements privés\nPhotos et avis\nHoraires clairs",
+        extraSections:"Plat détail\nCommande\nTémoignages\nGalerie\nTarifs\nÀ propos\nÉvénements privés\nFAQ"
+      },
+      hotel: {
+        projectName:"Maison d’hôtes Saly",
+        city:"Saly, Sénégal",
+        style:"Calme, premium, solaire, hospitalité locale, mobile",
+        activity:"Logement ou maison d’hôtes avec chambres, disponibilité, repères du quartier et contact direct.",
+        goal:"Présenter le lieu, rassurer le voyageur, montrer les tarifs et faciliter une demande de réservation directe.",
+        audience:"Voyageurs, familles, couples, clients de passage, diaspora",
+        specialFeatures:"Chambres disponibles\nContact direct\nPhotos du lieu\nTarifs nuit semaine mois\nQuartier et repères\nDisponibilités\nConseils locaux",
+        extraSections:"Chambres\nDisponibilités\nGalerie\nTarifs\nQuartier\nRèglement\nFAQ"
+      },
+      boutique: {
+        projectName:"Astou Market",
+        city:"Saly, Sénégal",
+        style:"Boutique claire, visuelle, directe, confiance, mobile",
+        activity:"Boutique locale avec produits, photos, prix indicatifs et contact WhatsApp direct.",
+        goal:"Présenter la boutique, mettre en avant les produits, faciliter la demande client et préparer la vente directe.",
+        audience:"Clients du quartier, visiteurs, habitués, acheteurs WhatsApp",
+        specialFeatures:"Produits visibles\nPrix clairs\nCommande WhatsApp\nPhotos produits\nConseil direct\nRetrait ou livraison",
+        extraSections:"Produits\nCommande\nGalerie\nTarifs\nAvis clients\nLivraison\nFAQ"
+      },
+      service: {
+        projectName:"Mes services à Saly",
+        city:"Saly, Sénégal",
+        style:"Simple, sérieux, humain, local, mobile",
+        activity:"Service terrain local : artisan, réparateur, aide maison, nettoyage, travaux ou prestation directe.",
+        goal:"Présenter le savoir-faire, inspirer confiance, recevoir une demande claire et faciliter le contact direct.",
+        audience:"Habitants, propriétaires, commerces, familles, professionnels locaux",
+        specialFeatures:"Demande rapide\nContact WhatsApp\nPhotos avant après\nZone d’intervention\nTarifs indicatifs\nUrgence possible",
+        extraSections:"Services\nDemande\nRéalisations\nTarifs\nAvis\nZone couverte\nFAQ"
+      },
+      event: {
+        projectName:"Événement à Saly",
+        city:"Saly, Sénégal",
+        style:"Festif, clair, chaleureux, mobile, rassurant",
+        activity:"Page de présentation pour un événement, une soirée, une rencontre, un atelier ou une activité locale.",
+        goal:"Présenter le programme, donner les informations pratiques et faciliter l’inscription ou le contact.",
+        audience:"Participants, familles, visiteurs, communauté locale",
+        specialFeatures:"Programme\nInscription directe\nLieu et horaires\nContact WhatsApp\nPhotos\nInformations pratiques",
+        extraSections:"Programme\nInscription\nGalerie\nTarifs\nLieu\nOrganisateur\nFAQ"
+      },
+      generic: {
+        projectName:"Projet DIGIY",
+        city:"Saly, Sénégal",
+        style:"Simple, clair, mobile, humain, rassurant",
+        activity:"Projet local à présenter avec une page claire et directe.",
+        goal:"Expliquer le projet, rassurer, montrer les informations utiles et guider vers l’action.",
+        audience:"Public local, clients, partenaires, visiteurs",
+        specialFeatures:"Présentation claire\nContact direct\nInformations pratiques\nConfiance\nAction simple",
+        extraSections:"Présentation\nOffres\nContact\nGalerie\nTarifs\nFAQ"
+      }
+    };
+
+    function applyTypeDefaults(force){
+      const type = $("typeKey").value || "generic";
+      const d = defaultsByType[type] || defaultsByType.generic;
+      const ids = ["projectName","city","style","activity","goal","audience","specialFeatures","extraSections"];
+
+      ids.forEach(id => {
+        const el = $(id);
+        if(force || !el.value.trim()){
+          el.value = d[id] || "";
+        }
+      });
+
+      if(force){
+        setStatus("Exemple chargé pour : " + type);
+        toast("Exemple chargé");
+      }
+    }
+
+    function sectionTitleByType(d){
+      if(d.typeKey === "restaurant") return "Menu et spécialités";
+      if(d.typeKey === "hotel") return "Lieu et hospitalité";
+      if(d.typeKey === "boutique") return "Produits et boutique";
+      if(d.typeKey === "service") return "Services proposés";
+      if(d.typeKey === "event") return "Programme et informations";
+      return "Ce que nous proposons";
+    }
+
+    function actionLabelByType(d){
+      if(d.typeKey === "restaurant") return "Réserver / contacter";
+      if(d.typeKey === "hotel") return "Demander une réservation";
+      if(d.typeKey === "boutique") return "Commander / contacter";
+      if(d.typeKey === "service") return "Demander le service";
+      if(d.typeKey === "event") return "S’inscrire / contacter";
+      return "Contacter";
+    }
+
+    function buildNav(d){
+      const base = [
+        {id:"accueil", label:"Accueil"},
+        {id:"menu", label:d.typeKey === "restaurant" ? "Menu" : "Offres"}
+      ];
+
+      const extras = d.extraSections.slice(0,10).map(label => ({
+        id: slug(label),
+        label
+      }));
+
+      const tail = [
+        {id:"reservation", label:d.typeKey === "boutique" ? "Commande" : "Réservation"},
+        {id:"contact", label:"Contact"}
+      ];
+
+      return base.concat(extras, tail);
+    }
+
+    function brief(d){
+      return [
+        "# Brief projet — " + d.projectName,
+        "",
+        "## Contexte",
+        "- Nom : " + d.projectName,
+        "- Type : " + d.typeKey,
+        "- Zone : " + d.city,
+        "- Style : " + d.style,
+        "- Public : " + d.audience,
+        "",
+        "## Activité",
+        d.activity,
+        "",
+        "## Objectif",
+        d.goal,
+        "",
+        "## Points importants",
+        ...(d.specialFeatures.length ? d.specialFeatures.map(x => "- " + x) : ["- Contact direct", "- Présentation claire", "- Action simple"]),
+        "",
+        "## Sections prévues",
+        ...(buildNav(d).map(x => "- " + x.label + " (#" + x.id + ")")),
+        "",
+        "## Doctrine DIGIY",
+        "Mobile d’abord. Texte simple. Action visible. Contact direct. Le client doit comprendre en quelques secondes."
+      ].join(String.fromCharCode(10));
+    }
+
+    function promptIA(d){
+      return [
+        "Crée une page web HTML/CSS/JS complète pour le projet suivant :",
+        "",
+        "Nom : " + d.projectName,
+        "Type : " + d.typeKey,
+        "Ville / zone : " + d.city,
+        "Style : " + d.style,
+        "Public visé : " + d.audience,
+        "Activité : " + d.activity,
+        "Objectif : " + d.goal,
+        "",
+        "Contraintes :",
+        "- Page mobile d’abord.",
+        "- Ton humain, clair, rassurant, terrain.",
+        "- Navigation simple avec ancres.",
+        "- Gros bouton d’action visible.",
+        "- Section contact ou réservation simple.",
+        "- Pas de jargon technique visible.",
+        "- Style premium africain, sobre, chaleureux.",
+        "",
+        "Sections à prévoir :",
+        ...buildNav(d).map(x => "- " + x.label),
+        "",
+        "Points à mettre en avant :",
+        ...(d.specialFeatures.length ? d.specialFeatures.map(x => "- " + x) : ["- Contact direct", "- Confiance", "- Informations pratiques"])
+      ].join(String.fromCharCode(10));
+    }
+
+    function sql(d){
+      const id = slug(d.projectName);
+      const features = JSON.stringify(d.specialFeatures);
+      const sections = JSON.stringify(buildNav(d).map(x => x.label));
+      return [
+        "-- SQL léger de référence pour " + d.projectName,
+        "-- À adapter à ta vraie table si besoin.",
+        "",
+        "create table if not exists public.digiy_project_maison (",
+        "  id text primary key,",
+        "  project_name text not null,",
+        "  type_key text not null,",
+        "  city text,",
+        "  style text,",
+        "  activity text,",
+        "  goal text,",
+        "  audience text,",
+        "  special_features jsonb default '[]'::jsonb,",
+        "  sections jsonb default '[]'::jsonb,",
+        "  created_at timestamptz default now()",
+        ");",
+        "",
+        "insert into public.digiy_project_maison (",
+        "  id, project_name, type_key, city, style, activity, goal, audience, special_features, sections",
+        ") values (",
+        "  '" + sqlEsc(id) + "',",
+        "  '" + sqlEsc(d.projectName) + "',",
+        "  '" + sqlEsc(d.typeKey) + "',",
+        "  '" + sqlEsc(d.city) + "',",
+        "  '" + sqlEsc(d.style) + "',",
+        "  '" + sqlEsc(d.activity) + "',",
+        "  '" + sqlEsc(d.goal) + "',",
+        "  '" + sqlEsc(d.audience) + "',",
+        "  '" + sqlEsc(features) + "'::jsonb,",
+        "  '" + sqlEsc(sections) + "'::jsonb",
+        ")",
+        "on conflict (id) do update set",
+        "  project_name = excluded.project_name,",
+        "  type_key = excluded.type_key,",
+        "  city = excluded.city,",
+        "  style = excluded.style,",
+        "  activity = excluded.activity,",
+        "  goal = excluded.goal,",
+        "  audience = excluded.audience,",
+        "  special_features = excluded.special_features,",
+        "  sections = excluded.sections;"
+      ].join(String.fromCharCode(10));
+    }
+
+    function realisation(d){
+      return [
+        "# Plan de réalisation — " + d.projectName,
+        "",
+        "## 1. Page publique",
+        "- Poser une page HTML simple.",
+        "- Mettre le nom, la zone, l’activité et l’objectif dès le haut.",
+        "- Ajouter un bouton direct : " + actionLabelByType(d) + ".",
+        "",
+        "## 2. Sections",
+        ...buildNav(d).map((x,i) => (i + 1) + ". " + x.label + " — ancre #" + x.id),
+        "",
+        "## 3. Contenu terrain",
+        "- Ajouter 3 à 6 photos réelles dès que possible.",
+        "- Ajouter horaires, repère local et WhatsApp officiel.",
+        "- Garder les phrases courtes sur téléphone.",
+        "",
+        "## 4. Vérification",
+        "- Tester sur téléphone.",
+        "- Cliquer chaque bouton du menu.",
+        "- Vérifier que le formulaire guide le client vers une demande claire.",
+        "- Vérifier que le texte \\n<section n’apparaît pas dans la page générée."
+      ].join(String.fromCharCode(10));
+    }
+
     function firstPage(d){
-      const name=esc(d.projectName),activity=esc(d.activity),goal=esc(d.goal),city=esc(d.location),style=esc(d.styleWanted),audience=esc(d.audience);
-      const nav=d.pages.slice(0,8).map(x=>`<a href="#${slug(x)}">${esc(x)}</a>`).join("");
-      const extraPages=d.pages.filter(x=>!["Accueil","Menu","Réservation","Contact"].includes(x));
-      const extraSections=extraPages.map(page=>{
-        const id=slug(page), title=esc(page);
-        let body="";
-        if(id.includes("plat")) body="Présente ici une fiche claire : photo du plat, description courte, prix, disponibilité et bouton pour commander ou réserver.";
-        else if(id.includes("commande")) body="Permets au client de choisir un plat, laisser son nom, son WhatsApp et envoyer une demande simple.";
-        else if(id.includes("galerie")) body="Ajoute quelques photos fortes : salle, terrasse, plats, équipe et ambiance du lieu.";
-        else if(id.includes("tarif")) body="Affiche les prix importants, les formules groupe, les menus du jour et les conditions d’acompte.";
-        else if(id.includes("temoign")) body="Affiche les retours clients pour rassurer les nouveaux visiteurs.";
-        else if(id.includes("evenement")) body="Explique les repas de groupe, anniversaires, repas d’entreprise ou événements privés.";
-        else if(id.includes("faq")) body="Réponds aux questions simples : horaires, réservation, paiement, accès, groupes et contact.";
-        else body="Complète cette section avec les informations utiles pour le client.";
-        return `<section id="${id}" class="section"><h2>${title}</h2><div class="box"><p>${body}</p></div></section>`;
-      }).join("\\n");
-      const specials=(d.specialFeatures.length?d.specialFeatures:["Réservation directe","Contact WhatsApp","Photos et avis","Horaires clairs"]).slice(0,8).map(x=>`<li>${esc(x)}</li>`).join("");
-      const restaurantMenu=d.typeKey==="restaurant"?`<div class="grid menu-grid"><div class="box dish"><span>Plat local</span><h3>Thiéboudienne maison</h3><p>Un plat signature pour montrer la cuisine sénégalaise et rassurer le client.</p></div><div class="box dish"><span>Grillade</span><h3>Poisson grillé</h3><p>Idéal pour les touristes, familles et clients qui veulent manger frais à Saly.</p></div><div class="box dish"><span>Réservation</span><h3>Table de groupe</h3><p>Prévoir une demande simple avec nombre de personnes, date et heure souhaitée.</p></div></div>`:`<div class="grid"><div class="box"><h3>Offre principale</h3><p>Présente ici le service ou produit le plus important.</p></div><div class="box"><h3>Contact direct</h3><p>Ajoute WhatsApp, téléphone ou formulaire client.</p></div><div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div></div>`;
+      const name = esc(d.projectName);
+      const city = esc(d.city);
+      const style = esc(d.style);
+      const activity = esc(d.activity);
+      const goal = esc(d.goal);
+      const audience = esc(d.audience);
+      const action = esc(actionLabelByType(d));
+      const navItems = buildNav(d);
+      const nav = navItems.map(x => `<a href="#${esc(x.id)}">${esc(x.label)}</a>`).join("");
+      const specials = (d.specialFeatures.length ? d.specialFeatures : ["Réservation directe","Contact WhatsApp","Photos et avis","Horaires clairs"])
+        .slice(0,8)
+        .map(x => `<li>${esc(x)}</li>`)
+        .join("");
+
+      const restaurantMenu = d.typeKey === "restaurant"
+        ? `<div class="grid menu-grid">
+          <div class="box dish"><span>Plat local</span><h3>Thiéboudienne maison</h3><p>Un plat signature pour montrer la cuisine sénégalaise et rassurer le client.</p></div>
+          <div class="box dish"><span>Grillade</span><h3>Poisson grillé</h3><p>Idéal pour les touristes, familles et clients qui veulent manger frais à Saly.</p></div>
+          <div class="box dish"><span>Réservation</span><h3>Table de groupe</h3><p>Prévoir une demande simple avec nombre de personnes, date et heure souhaitée.</p></div>
+        </div>`
+        : `<div class="grid">
+          <div class="box"><h3>Offre principale</h3><p>Présente ici le service ou produit le plus important.</p></div>
+          <div class="box"><h3>Contact direct</h3><p>Ajoute WhatsApp, téléphone ou formulaire client.</p></div>
+          <div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div>
+        </div>`;
+
+      const extraSections = d.extraSections.slice(0,10).map(sectionName => {
+        const id = slug(sectionName);
+        const title = esc(sectionName);
+        return `<section id="${esc(id)}" class="section">
+      <h2>${title}</h2>
+      <div class="box">
+        <p>Ajoute ici le contenu de la section <strong>${title}</strong> : informations utiles, photos, détails, preuves de confiance et appel à l’action.</p>
+      </div>
+    </section>`;
+      }).join(String.fromCharCode(10));
+
       return `<!doctype html>
 <html lang="fr">
 <head>
@@ -82,7 +712,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>${name}</title>
   <style>
-    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{min-height:86vh;display:grid;align-items:center}.card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.kicker{color:#ffe7a8;font-weight:900}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:var(--muted);font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}.section{padding:28px 0}.section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.box p,.box li{color:var(--muted);line-height:1.55}.dish span{display:inline-block;color:#ffe7a8;font-weight:900;font-size:13px}.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}.form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}footer{padding:30px 0;color:var(--muted);font-size:13px}@media(max-width:760px){.grid,.info{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}}
+    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}
+    a{color:inherit}
+    .wrap{max-width:1080px;margin:auto;padding:22px}
+    .hero{min-height:86vh;display:grid;align-items:center}
+    .card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}
+    .kicker{color:#ffe7a8;font-weight:900}
+    .title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}
+    .lead{color:var(--muted);font-size:18px;line-height:1.6}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+    .nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}
+    .btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}
+    .section{padding:28px 0;scroll-margin-top:18px}
+    .section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+    .box p,.box li{color:var(--muted);line-height:1.55}
+    .dish span{display:inline-block;color:#ffe7a8;font-weight:900;font-size:13px}
+    .info{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}
+    .form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}
+    .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}
+    footer{padding:30px 0;color:var(--muted);font-size:13px}
+    @media(max-width:760px){.grid,.info{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}}
   </style>
 </head>
 <body>
@@ -95,12 +749,12 @@
         <p class="lead">${goal}</p>
         <p class="lead"><strong>Pour :</strong> ${audience}</p>
         <div class="nav">${nav}</div>
-        <a class="btn" href="#reservation">Réserver / contacter</a>
+        <a class="btn" href="#reservation">${action}</a>
       </div>
     </section>
 
     <section id="menu" class="section">
-      <h2>${d.typeKey==="restaurant"?"Menu et spécialités":"Ce que nous proposons"}</h2>
+      <h2>${esc(sectionTitleByType(d))}</h2>
       <p class="lead">Une première vitrine claire pour donner envie, rassurer et guider le client vers l’action.</p>
       ${restaurantMenu}
     </section>
@@ -108,29 +762,177 @@
     ${extraSections}
 
     <section id="reservation" class="section">
-      <h2>Réserver simplement</h2>
+      <h2>${action}</h2>
       <div class="info">
-        <div class="box form"><label>Nom</label><input placeholder="Votre nom"><label>Téléphone</label><input placeholder="Votre WhatsApp"><label>Message</label><textarea placeholder="Date, heure, nombre de personnes ou demande particulière"></textarea><button>Envoyer la demande</button></div>
-        <div class="box"><h3>Informations pratiques</h3><p>Ajoute ici les horaires, le quartier, le repère, le téléphone et le lien WhatsApp officiel.</p><p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p></div>
+        <div class="box form">
+          <label>Nom</label>
+          <input placeholder="Votre nom">
+          <label>Téléphone</label>
+          <input placeholder="Votre WhatsApp">
+          <label>Message</label>
+          <textarea placeholder="Date, heure, nombre de personnes ou demande particulière"></textarea>
+          <button>Envoyer la demande</button>
+        </div>
+        <div class="box">
+          <h3>Informations pratiques</h3>
+          <p>Ajoute ici les horaires, le quartier, le repère, le téléphone et le lien WhatsApp officiel.</p>
+          <p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p>
+        </div>
       </div>
     </section>
 
     <section id="contact" class="section">
       <h2>Contact et besoins particuliers</h2>
-      <div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div>
+      <div class="box">
+        <h3>Besoins particuliers</h3>
+        <ul>${specials}</ul>
+      </div>
     </section>
 
     <footer>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
 </body>
-</html>`
+</html>`;
     }
-    function generateAll(){const d=data();outputs.brief=brief(d);outputs.prompt=promptIA(d);outputs.sql=sql(d);outputs.realisation=realisation(d);outputs.page=firstPage(d);outputs.json=JSON.stringify(d,null,2);renderOutput();setStatus("Dossier préparé pour : "+d.projectName);toast("Projet préparé")}
-    function setOutputTab(t){currentTab=t;document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));renderOutput()}
-    function renderOutput(){const text=outputs[currentTab]||"",out=$("output"),empty=$("emptyState");if(!text){out.hidden=true;out.style.display="none";empty.hidden=false;empty.style.display="grid";return}empty.hidden=true;empty.style.display="none";out.hidden=false;out.style.display="block";out.textContent=text}
-    async function copyCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à copier");return}try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}toast("Sortie copiée")}
-    function downloadCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à télécharger");return}const d=data(),ext=currentTab==="json"?"json":currentTab==="sql"?"sql":"html"===currentTab?"html":"md",blob=new Blob([text],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=slug(d.projectName)+"_"+currentTab+(currentTab==="page"?".html":"."+ext);document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();toast("Téléchargement lancé")}
-    applyTypeDefaults();
+
+    function generateAll(){
+      const d = data();
+
+      outputs.brief = brief(d);
+      outputs.prompt = promptIA(d);
+      outputs.sql = sql(d);
+      outputs.realisation = realisation(d);
+      outputs.page = firstPage(d);
+      outputs.json = JSON.stringify(d,null,2);
+
+      currentTab = "page";
+      document.querySelectorAll(".output-tabs button").forEach(button => {
+        button.classList.toggle("active", button.dataset.tab === currentTab);
+      });
+
+      renderOutput();
+      setStatus("Dossier préparé pour : " + d.projectName);
+      toast("Projet préparé");
+    }
+
+    function setOutputTab(tab){
+      currentTab = tab;
+      document.querySelectorAll(".output-tabs button").forEach(button => {
+        button.classList.toggle("active", button.dataset.tab === tab);
+      });
+      renderOutput();
+    }
+
+    function renderOutput(){
+      const text = outputs[currentTab] || "";
+      const out = $("output");
+      const empty = $("emptyState");
+
+      if(!text.trim()){
+        out.hidden = true;
+        out.style.display = "none";
+        empty.hidden = false;
+        empty.style.display = "grid";
+        return;
+      }
+
+      empty.hidden = true;
+      empty.style.display = "none";
+      out.hidden = false;
+      out.style.display = "block";
+      out.textContent = text;
+    }
+
+    async function copyCurrent(){
+      const text = outputs[currentTab] || "";
+      if(!text.trim()){
+        toast("Rien à copier");
+        return;
+      }
+
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(error){
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly","");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        textarea.remove();
+      }
+
+      toast("Sortie copiée");
+    }
+
+    function downloadCurrent(){
+      const text = outputs[currentTab] || "";
+      if(!text.trim()){
+        toast("Rien à télécharger");
+        return;
+      }
+
+      const d = data();
+      const ext = currentTab === "json" ? "json" : currentTab === "sql" ? "sql" : currentTab === "page" ? "html" : "md";
+      const type = ext === "html" ? "text/html;charset=utf-8" : "text/plain;charset=utf-8";
+      const blob = new Blob([text],{type});
+      const a = document.createElement("a");
+
+      a.href = URL.createObjectURL(blob);
+      a.download = slug(d.projectName) + "_" + currentTab + "." + ext;
+      document.body.appendChild(a);
+      a.click();
+      URL.revokeObjectURL(a.href);
+      a.remove();
+
+      toast("Téléchargement lancé");
+    }
+
+    function previewPage(){
+      const html = outputs.page || "";
+      if(!html.trim()){
+        toast("Prépare d’abord le projet");
+        return;
+      }
+
+      const blob = new Blob([html],{type:"text/html;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      window.open(url,"_blank","noopener,noreferrer");
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      toast("Page ouverte");
+    }
+
+    function clearForm(){
+      ["projectName","city","style","activity","goal","audience","specialFeatures","extraSections"].forEach(id => {
+        $(id).value = "";
+      });
+      outputs.brief = "";
+      outputs.prompt = "";
+      outputs.sql = "";
+      outputs.realisation = "";
+      outputs.page = "";
+      outputs.json = "";
+      renderOutput();
+      setStatus("Formulaire nettoyé.");
+      toast("Nettoyé");
+    }
+
+    function setStatus(message){
+      $("status").textContent = message;
+    }
+
+    function toast(message){
+      const el = $("toast");
+      el.textContent = message;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove("show"), 1800);
+    }
+
+    applyTypeDefaults(false);
+    renderOutput();
   </script>
 </body>
 </html>
