@@ -33,6 +33,7 @@
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier : brief, prompt IA, mémo SQL léger, plan de réalisation, page HTML et JSON.</p>
         <p class="lead">Version V11 : diapo plus ouvert, image plus haute, mode photo/affiche, swipe tactile, Google Drive ou WordPress média, zéro stockage image Supabase, zéro SQL lourd.</p>
+        <p class="lead"><strong>Chaque partenaire est une facette. DIGIY lui donne la lumière.</strong></p>
         <div class="actions">
           <button class="btn primary" type="button" onclick="generateAll()">Préparer le projet</button>
           <button class="btn" type="button" onclick="applyTypeDefaults(true)">Remplir exemple</button>
@@ -199,7 +200,7 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
     function actionLabelByType(d){if(d.typeKey==="restaurant")return "Réserver / contacter";if(d.typeKey==="hotel")return "Demander une réservation";if(d.typeKey==="boutique")return "Commander / contacter";if(d.typeKey==="service")return "Demander le service";if(d.typeKey==="event")return "S’inscrire / contacter";return "Contacter";}
     function buildNav(d){const base=[{id:"accueil",label:"Accueil"},{id:"menu",label:d.typeKey==="restaurant"?"Menu":"Offre"}];const extra=d.extraSections.slice(0,10).map(s=>({id:slug(s),label:s}));return [...base,...extra,{id:"reservation",label:d.typeKey==="restaurant"?"Réservation":"Demande"},{id:"contact",label:"Contact"}];}
 
-    function brief(d){return ["# Brief — "+d.projectName,"","- Type : "+d.typeKey,"- Zone : "+d.city,"- Style : "+d.style,"- WhatsApp : "+(d.contactPhone||"à préciser"),"- Horaires : "+(d.hours||"à préciser"),"- Repère : "+(d.address||"à préciser"),"","## Activité",d.activity,"","## Objectif",d.goal,"","## Public",d.audience,"","## Points importants",...(d.specialFeatures.length?d.specialFeatures.map(x=>"- "+x):["- Contact direct","- Confiance","- Informations pratiques"]),"","## Galerie photos",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" — "+x.url:" — URL à ajouter")):["- URL photos à ajouter"]),"","## Sections",...buildNav(d).map(x=>"- "+x.label+" (#"+x.id+")")].join(String.fromCharCode(10));}
+    function brief(d){return ["# Brief — "+d.projectName,"","Chaque partenaire est une facette. DIGIY lui donne la lumière.","","- Type : "+d.typeKey,"- Zone : "+d.city,"- Style : "+d.style,"- WhatsApp : "+(d.contactPhone||"à préciser"),"- Horaires : "+(d.hours||"à préciser"),"- Repère : "+(d.address||"à préciser"),"","## Activité",d.activity,"","## Objectif",d.goal,"","## Public",d.audience,"","## Points importants",...(d.specialFeatures.length?d.specialFeatures.map(x=>"- "+x):["- Contact direct","- Confiance","- Informations pratiques"]),"","## Galerie photos",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" — "+x.url:" — URL à ajouter")):["- URL photos à ajouter"]),"","## Sections",...buildNav(d).map(x=>"- "+x.label+" (#"+x.id+")")].join(String.fromCharCode(10));}
     function promptIA(d){return ["Tu es un assistant de création de page web locale.","Crée une page HTML mobile, claire, chaleureuse et rassurante.","","Projet : "+d.projectName,"Type : "+d.typeKey,"Zone : "+d.city,"Style : "+d.style,"WhatsApp : "+(d.contactPhone||"à préciser"),"Horaires : "+(d.hours||"à préciser"),"Repère : "+(d.address||"à préciser"),"Activité : "+d.activity,"Objectif : "+d.goal,"Public : "+d.audience,"","Sections attendues :",...buildNav(d).map(x=>"- "+x.label),"","Photos de galerie :",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" : "+x.url:" : URL à ajouter")):["- À ajouter si disponible"]),"","Contraintes : phrases courtes, boutons visibles, contact direct, galerie diapo premium avec vraies images si les URLs sont fournies, pas de jargon technique, rendu agréable sur téléphone."].join(String.fromCharCode(10));}
     function sql(d){return [
       "-- DIGIY Projet Maison Builder — SQL léger",
@@ -301,7 +302,7 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
     ${extraSections}
     <section id="reservation" class="section"><h2>${action}</h2><div class="info"><div class="box form"><label>Nom</label><input id="clientName" placeholder="Votre nom"><label>Téléphone</label><input id="clientPhone" placeholder="Votre WhatsApp"><label>Message</label><textarea id="clientMessage" placeholder="Date, heure, nombre de personnes ou demande particulière"></textarea><button type="button" onclick="${buttonCode}">Envoyer la demande sur WhatsApp</button></div><div class="box"><h3>Informations pratiques</h3><p><strong>WhatsApp :</strong> ${phoneText}</p><p><strong>Horaires :</strong> ${hours}</p><p><strong>Repère :</strong> ${address}</p><p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p></div></div></section>
     <section id="contact" class="section"><h2>Contact et besoins particuliers</h2><div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div></section>
-    <footer>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
+    <footer>Chaque partenaire est une facette. DIGIY lui donne la lumière.<br>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
   ${'<scr'+'ipt>'}
     (function(){
@@ -369,7 +370,6 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
   </script>
 </body>
 </html>
-
 
 
 
