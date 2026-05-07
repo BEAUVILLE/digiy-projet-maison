@@ -6,226 +6,24 @@
   <title>DIGIY Projet Maison Builder</title>
   <style>
     :root{
-      --bg:#061512;
-      --bg2:#0d2a22;
-      --card:rgba(255,255,255,.075);
-      --card2:rgba(255,255,255,.045);
-      --line:rgba(255,255,255,.14);
-      --text:#f7fff9;
-      --muted:#c7ddd3;
-      --soft:#92b7a8;
-      --gold:#f5c76b;
-      --green:#19c98a;
-      --danger:#ff927a;
-      --shadow:0 24px 70px rgba(0,0,0,.34);
-      --radius:28px;
+      --bg:#061512;--bg2:#0d2a22;--card:rgba(255,255,255,.075);--card2:rgba(255,255,255,.045);
+      --line:rgba(255,255,255,.14);--text:#f7fff9;--muted:#c7ddd3;--soft:#92b7a8;
+      --gold:#f5c76b;--green:#19c98a;--danger:#ff927a;--shadow:0 24px 70px rgba(0,0,0,.34);--radius:28px;
     }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:
-        radial-gradient(circle at 12% 0,rgba(245,199,107,.18),transparent 32%),
-        radial-gradient(circle at 90% 10%,rgba(25,201,138,.12),transparent 30%),
-        linear-gradient(135deg,var(--bg),#020b09 72%);
-      color:var(--text);
-    }
-
-    a{color:inherit}
-    button,input,textarea,select{font:inherit}
-    button{cursor:pointer}
-
-    .wrap{width:min(1180px,100%);margin:0 auto;padding:22px}
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding:14px 0 22px;
-    }
-    .brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:.02em}
-    .mark{
-      width:42px;height:42px;border-radius:16px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--gold),#fff1ba);
-      color:#123226;
-      box-shadow:0 12px 30px rgba(245,199,107,.18);
-    }
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:9px 12px;
-      background:rgba(255,255,255,.055);
-      color:var(--muted);
-      font-size:13px;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-
-    .hero{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:18px;
-      align-items:stretch;
-      margin-bottom:18px;
-    }
-    .card,.panel{
-      background:linear-gradient(180deg,var(--card),var(--card2));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .card{padding:28px}
-    .panel{overflow:hidden}
-
-    .kicker{color:#ffe7a8;font-weight:950;text-transform:uppercase;font-size:13px;letter-spacing:.08em}
-    h1{font-size:clamp(34px,6vw,68px);line-height:.95;margin:12px 0 14px;letter-spacing:-.055em}
-    h2{margin:0 0 14px;font-size:clamp(24px,4vw,38px);letter-spacing:-.035em}
-    h3{margin:0 0 10px;font-size:19px}
-    p{line-height:1.6}
-    .lead{color:var(--muted);font-size:17px;margin:0 0 14px}
-    .small{font-size:13px;color:var(--soft);line-height:1.5}
-
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-    .btn{
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:12px 15px;
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      font-weight:850;
-      text-decoration:none;
-    }
-    .btn.primary{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.65)}
-    .btn.green{background:var(--green);color:#06231a;border-color:rgba(25,201,138,.55)}
-    .btn.danger{background:rgba(255,146,122,.12);color:#ffd4cb;border-color:rgba(255,146,122,.28)}
-
-    .form{padding:20px;display:grid;gap:13px}
-    .field{display:grid;gap:7px}
-    .field label{font-size:13px;font-weight:900;color:#ffe7a8}
-    .field input,.field textarea,.field select{
-      width:100%;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.25);
-      color:var(--text);
-      border-radius:16px;
-      padding:13px 14px;
-      outline:none;
-    }
-    .field textarea{min-height:96px;resize:vertical}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-    .output-wrap{margin-top:18px}
-    .output-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:16px;
-      border-bottom:1px solid var(--line);
-      background:rgba(255,255,255,.035);
-    }
-    .output-tabs{display:flex;gap:8px;flex-wrap:wrap}
-    .output-tabs button{
-      border:1px solid var(--line);
-      border-radius:999px;
-      padding:9px 11px;
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
-      font-weight:850;
-      font-size:13px;
-    }
-    .output-tabs button.active{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.7)}
-    .output-actions{display:flex;gap:8px;flex-wrap:wrap}
-
-    #output{
-      display:none;
-      margin:0;
-      min-height:360px;
-      max-height:70vh;
-      overflow:auto;
-      white-space:pre-wrap;
-      word-break:break-word;
-      padding:18px;
-      color:#eefdf6;
-      background:rgba(0,0,0,.22);
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
-      font-size:13px;
-      line-height:1.55;
-    }
-    .empty{
-      min-height:340px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:25px;
-      color:var(--muted);
-      background:rgba(0,0,0,.18);
-    }
-
-    .statusbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-top:14px;
-      color:var(--soft);
-      font-size:13px;
-    }
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%) translateY(20px);
-      opacity:0;
-      pointer-events:none;
-      background:#fff7df;
-      color:#173228;
-      border-radius:999px;
-      padding:12px 16px;
-      font-weight:950;
-      box-shadow:0 18px 40px rgba(0,0,0,.28);
-      transition:.25s ease;
-      z-index:20;
-      max-width:calc(100% - 28px);
-      text-align:center;
-    }
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-    .hint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
-    .hint{
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:14px;
-      background:rgba(255,255,255,.045);
-    }
-    .hint strong{display:block;color:#ffe7a8;margin-bottom:6px}
-    .hint span{display:block;color:var(--muted);font-size:13px;line-height:1.45}
-
-    @media(max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .row{grid-template-columns:1fr}
-      .hint-grid{grid-template-columns:1fr}
-      .topbar{align-items:flex-start;flex-direction:column}
-      .output-head{align-items:flex-start;flex-direction:column}
-    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 12% 0,rgba(245,199,107,.18),transparent 32%),radial-gradient(circle at 90% 10%,rgba(25,201,138,.12),transparent 30%),linear-gradient(135deg,var(--bg),#020b09 72%);color:var(--text)}
+    a{color:inherit}button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{width:min(1180px,100%);margin:0 auto;padding:22px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0 22px}.brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:.02em}.mark{width:42px;height:42px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#fff1ba);color:#123226;box-shadow:0 12px 30px rgba(245,199,107,.18)}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:9px 12px;background:rgba(255,255,255,.055);color:var(--muted);font-size:13px;text-decoration:none;white-space:nowrap}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch;margin-bottom:18px}.card,.panel{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.card{padding:28px}.panel{overflow:hidden}.kicker{color:#ffe7a8;font-weight:950;text-transform:uppercase;font-size:13px;letter-spacing:.08em}h1{font-size:clamp(34px,6vw,68px);line-height:.95;margin:12px 0 14px;letter-spacing:-.055em}h2{margin:0 0 14px;font-size:clamp(24px,4vw,38px);letter-spacing:-.035em}h3{margin:0 0 10px;font-size:19px}p{line-height:1.6}.lead{color:var(--muted);font-size:17px;margin:0 0 14px}.small{font-size:13px;color:var(--soft);line-height:1.5}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:1px solid var(--line);border-radius:999px;padding:12px 15px;background:rgba(255,255,255,.06);color:var(--text);font-weight:850;text-decoration:none}.btn.primary{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.65)}.btn.green{background:var(--green);color:#06231a;border-color:rgba(25,201,138,.55)}.btn.danger{background:rgba(255,146,122,.12);color:#ffd4cb;border-color:rgba(255,146,122,.28)}
+    .form{padding:20px;display:grid;gap:13px}.field{display:grid;gap:7px}.field label{font-size:13px;font-weight:900;color:#ffe7a8}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--text);border-radius:16px;padding:13px 14px;outline:none}.field textarea{min-height:96px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    .output-wrap{margin-top:18px}.output-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.035)}.output-tabs{display:flex;gap:8px;flex-wrap:wrap}.output-tabs button{border:1px solid var(--line);border-radius:999px;padding:9px 11px;background:rgba(255,255,255,.05);color:var(--muted);font-weight:850;font-size:13px}.output-tabs button.active{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.7)}.output-actions{display:flex;gap:8px;flex-wrap:wrap}#output{display:none;margin:0;min-height:360px;max-height:70vh;overflow:auto;white-space:pre-wrap;word-break:break-word;padding:18px;color:#eefdf6;background:rgba(0,0,0,.22);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:13px;line-height:1.55}.empty{min-height:340px;display:grid;place-items:center;text-align:center;padding:25px;color:var(--muted);background:rgba(0,0,0,.18)}
+    .statusbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;color:var(--soft);font-size:13px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#fff7df;color:#173228;border-radius:999px;padding:12px 16px;font-weight:950;box-shadow:0 18px 40px rgba(0,0,0,.28);transition:.25s ease;z-index:20;max-width:calc(100% - 28px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.hint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.hint{border:1px solid var(--line);border-radius:22px;padding:14px;background:rgba(255,255,255,.045)}.hint strong{display:block;color:#ffe7a8;margin-bottom:6px}.hint span{display:block;color:var(--muted);font-size:13px;line-height:1.45}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.row,.row3{grid-template-columns:1fr}.hint-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.output-head{align-items:flex-start;flex-direction:column}}
   </style>
 </head>
 <body>
   <main class="wrap">
     <header class="topbar">
-      <div class="brand">
-        <div class="mark">∞</div>
-        <div>
-          <div>DIGIY Projet Maison Builder</div>
-          <div class="small">Préparer une page, un brief, un prompt et une base de réalisation.</div>
-        </div>
-      </div>
+      <div class="brand"><div class="mark">∞</div><div><div>DIGIY Projet Maison Builder</div><div class="small">Préparer une page, un brief, un prompt et une base de réalisation.</div></div></div>
       <a class="pill" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour DIGIYLYFE</a>
     </header>
 
@@ -233,8 +31,8 @@
       <div class="card">
         <div class="kicker">Outil maison · BY DIGIYLYFE</div>
         <h1>Préparer un projet sans se perdre.</h1>
-        <p class="lead">Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier : brief, prompt IA, SQL léger, plan de réalisation, page HTML et JSON.</p>
-        <p class="lead">Correction posée : la page générée ne doit plus afficher <strong>\n&lt;section</strong>. Les sections s’enchaînent proprement.</p>
+        <p class="lead">Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier : brief, prompt IA, mémo SQL léger, plan de réalisation, page HTML et JSON.</p>
+        <p class="lead">Version V5 : sections restaurant, WhatsApp réel et galerie photo par URLs Google Drive — sans stockage image Supabase.</p>
         <div class="actions">
           <button class="btn primary" type="button" onclick="generateAll()">Préparer le projet</button>
           <button class="btn" type="button" onclick="applyTypeDefaults(true)">Remplir exemple</button>
@@ -242,80 +40,48 @@
         </div>
         <div class="hint-grid">
           <div class="hint"><strong>1. Projet</strong><span>Nom, ville, type et public visé.</span></div>
-          <div class="hint"><strong>2. Sorties</strong><span>Brief, prompt, SQL, réalisation et page prête à copier.</span></div>
-          <div class="hint"><strong>3. Terrain</strong><span>Simple, mobile, humain, action directe.</span></div>
+          <div class="hint"><strong>2. Contact</strong><span>WhatsApp, horaires et repère terrain.</span></div>
+          <div class="hint"><strong>3. Sortie</strong><span>Une page mobile claire prête à tester.</span></div>
         </div>
       </div>
 
       <div class="panel">
         <form class="form" onsubmit="event.preventDefault();generateAll();">
           <div class="row">
-            <div class="field">
-              <label for="projectName">Nom du projet</label>
-              <input id="projectName" value="Restaurant Teranga Saly" placeholder="Ex : Restaurant Teranga Saly" />
-            </div>
-            <div class="field">
-              <label for="typeKey">Type</label>
-              <select id="typeKey" onchange="applyTypeDefaults(false)">
-                <option value="restaurant" selected>Restaurant</option>
-                <option value="hotel">Logement / hôtel</option>
-                <option value="boutique">Boutique</option>
-                <option value="service">Service / artisan</option>
-                <option value="event">Événement</option>
-                <option value="generic">Projet simple</option>
-              </select>
-            </div>
+            <div class="field"><label for="projectName">Nom du projet</label><input id="projectName" value="Restaurant Teranga Saly" placeholder="Ex : Restaurant Teranga Saly" /></div>
+            <div class="field"><label for="typeKey">Type</label><select id="typeKey" onchange="applyTypeDefaults(false)"><option value="restaurant" selected>Restaurant</option><option value="hotel">Logement / hôtel</option><option value="boutique">Boutique</option><option value="service">Service / artisan</option><option value="event">Événement</option><option value="generic">Projet simple</option></select></div>
           </div>
-
           <div class="row">
-            <div class="field">
-              <label for="city">Ville / zone</label>
-              <input id="city" value="Saly, Sénégal" placeholder="Ex : Saly, Sénégal" />
-            </div>
-            <div class="field">
-              <label for="style">Style souhaité</label>
-              <input id="style" value="Premium, mobile, chaleureux, africain, clair, rassurant" placeholder="Ex : sobre, moderne, local" />
-            </div>
+            <div class="field"><label for="city">Ville / zone</label><input id="city" value="Saly, Sénégal" placeholder="Ex : Saly, Sénégal" /></div>
+            <div class="field"><label for="style">Style souhaité</label><input id="style" value="Premium, mobile, chaleureux, africain, clair, rassurant" placeholder="Ex : sobre, moderne, local" /></div>
           </div>
-
-          <div class="field">
-            <label for="activity">Activité</label>
-            <textarea id="activity" placeholder="Décris l’activité">Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.</textarea>
+          <div class="row3">
+            <div class="field"><label for="contactPhone">WhatsApp officiel</label><input id="contactPhone" value="+221 77 000 00 00" placeholder="Ex : +221 77 000 00 00" /></div>
+            <div class="field"><label for="hours">Horaires</label><input id="hours" value="Tous les jours · 11h30 — 23h00" placeholder="Ex : Tous les jours 11h — 23h" /></div>
+            <div class="field"><label for="address">Repère / adresse</label><input id="address" value="Saly centre · proche route principale" placeholder="Ex : Saly centre, près de..." /></div>
           </div>
-
-          <div class="field">
-            <label for="goal">Objectif de la page</label>
-            <textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea>
-          </div>
-
-          <div class="field">
-            <label for="audience">Public visé</label>
-            <input id="audience" value="Clients locaux, familles, touristes, groupes, visiteurs de Saly" placeholder="Ex : clients locaux, touristes, familles" />
-          </div>
-
-          <div class="field">
-            <label for="specialFeatures">Points importants</label>
-            <textarea id="specialFeatures" placeholder="Un point par ligne">Spécialités sénégalaises
+          <div class="field"><label for="activity">Activité</label><textarea id="activity" placeholder="Décris l’activité">Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.</textarea></div>
+          <div class="field"><label for="goal">Objectif de la page</label><textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea><div class="small">Photos gardées sur ton Google Drive : colle seulement les liens publics. Rien n’est envoyé dans Supabase Storage.</div></div>
+          <div class="field"><label for="audience">Public visé</label><input id="audience" value="Clients locaux, familles, touristes, groupes, visiteurs de Saly" placeholder="Ex : clients locaux, touristes, familles" /></div>
+          <div class="field"><label for="specialFeatures">Points importants</label><textarea id="specialFeatures" placeholder="Un point par ligne">Spécialités sénégalaises
 Réservation directe
 Contact WhatsApp
 Plats du jour
 Groupes et événements privés
 Photos et avis
-Horaires clairs</textarea>
-          </div>
-
-          <div class="field">
-            <label for="extraSections">Sections à ajouter</label>
-            <textarea id="extraSections" placeholder="Un nom de section par ligne">Plat détail
+Horaires clairs</textarea></div>
+          <div class="field"><label for="extraSections">Sections à ajouter</label><textarea id="extraSections" placeholder="Un nom de section par ligne">Plat détail
 Commande
 Témoignages
 Galerie
 Tarifs
 À propos
 Événements privés
-FAQ</textarea>
-          </div>
-
+FAQ</textarea></div>
+          <div class="field"><label for="galleryPhotos">Galerie photos Google Drive — titre | URL publique</label><textarea id="galleryPhotos" placeholder="Une photo par ligne. Exemple : Plat du jour | https://drive.google.com/file/d/ID_IMAGE/view?usp=sharing">Photo du restaurant |
+Plat du jour |
+Poisson grillé |
+Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google Drive. Les images restent chez toi : aucun upload, aucun stockage Supabase, aucun SQL lourd.</div></div>
           <button class="btn green" type="submit">Préparer le projet</button>
         </form>
       </div>
@@ -324,453 +90,145 @@ FAQ</textarea>
     <section class="panel output-wrap">
       <div class="output-head">
         <div class="output-tabs" aria-label="Onglets de sortie">
-          <button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Brief</button>
-          <button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button>
-          <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button>
-          <button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button>
-          <button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button>
-          <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
+          <button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Brief</button><button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button><button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button><button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button><button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button><button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
         </div>
-        <div class="output-actions">
-          <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
-          <button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button>
-          <button class="btn" type="button" onclick="previewPage()">Voir la page</button>
-        </div>
+        <div class="output-actions"><button class="btn" type="button" onclick="copyCurrent()">Copier</button><button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button><button class="btn" type="button" onclick="previewPage()">Voir la page</button></div>
       </div>
       <pre id="output" hidden></pre>
-      <div id="emptyState" class="empty">
-        <div>
-          <h2>Rien préparé pour l’instant</h2>
-          <p>Clique sur <strong>Préparer le projet</strong>. La sortie apparaîtra ici.</p>
-        </div>
-      </div>
+      <div id="emptyState" class="empty"><div><h2>Rien préparé pour l’instant</h2><p>Clique sur <strong>Préparer le projet</strong>. La sortie apparaîtra ici.</p></div></div>
     </section>
 
-    <div class="statusbar">
-      <span id="status">Prêt.</span>
-      <span>BY DIGIYLYFE · terrain d’abord</span>
-    </div>
+    <div class="statusbar"><span id="status">Prêt.</span><span>BY DIGIYLYFE · terrain d’abord</span></div>
   </main>
-
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
     "use strict";
-
-    const outputs = {
-      brief: "",
-      prompt: "",
-      sql: "",
-      realisation: "",
-      page: "",
-      json: ""
-    };
-
+    const outputs = { brief:"", prompt:"", sql:"", realisation:"", page:"", json:"" };
     let currentTab = "brief";
     let toastTimer = null;
+    const $ = id => document.getElementById(id);
 
-    function $(id){
-      return document.getElementById(id);
+    function esc(value){return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
+    function attr(value){return esc(value).replace(/`/g,"&#096;");}
+    function sqlEsc(value){return String(value ?? "").replace(/'/g,"''");}
+    function slug(value){return String(value || "projet").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70) || "projet";}
+    function lines(value){const raw=String(value||"").split(/\n|,|;/g).map(x=>x.trim()).filter(Boolean);return [...new Set(raw)];}
+    function galleryItems(value){
+      return String(value||"").split(/\n/g).map((line,index)=>{
+        const raw=line.trim();
+        if(!raw) return null;
+        const parts=raw.split("|");
+        const title=(parts[0]||"Photo "+(index+1)).trim();
+        const url=(parts.length>1?parts.slice(1).join("|"):raw.startsWith("http")?raw:"").trim();
+        return {title:title||"Photo "+(index+1),url};
+      }).filter(Boolean).slice(0,12);
+    }
+    function waDigits(value){return String(value||"").replace(/[^0-9]/g,"");}
+    function imageUrl(value){
+      const url=String(value||"").trim();
+      if(!url) return "";
+      const fileMatch=url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+      const idParam=url.match(/[?&]id=([^&]+)/);
+      const openMatch=url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+      const id=(fileMatch&&fileMatch[1])||(idParam&&idParam[1])||(openMatch&&openMatch[1])||"";
+      if(id) return "https://drive.google.com/thumbnail?id="+encodeURIComponent(id)+"&sz=w1200";
+      return url;
     }
 
-    function esc(value){
-      return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-    }
-
-    function sqlEsc(value){
-      return String(value ?? "").replace(/'/g,"''");
-    }
-
-    function slug(value){
-      return String(value || "projet")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"")
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g,"-")
-        .replace(/^-+|-+$/g,"")
-        .slice(0,70) || "projet";
-    }
-
-    function lines(value){
-      const raw = String(value || "")
-        .split(/\n|,|;/g)
-        .map(x => x.trim())
-        .filter(Boolean);
-      return [...new Set(raw)];
-    }
-
-    function data(){
-      return {
-        projectName: $("projectName").value.trim() || "Projet DIGIY",
-        typeKey: $("typeKey").value || "generic",
-        city: $("city").value.trim() || "Saly, Sénégal",
-        style: $("style").value.trim() || "Mobile, clair, chaleureux, rassurant",
-        activity: $("activity").value.trim() || "Activité locale à présenter simplement.",
-        goal: $("goal").value.trim() || "Présenter l’activité, rassurer le client et faciliter le contact.",
-        audience: $("audience").value.trim() || "Clients locaux et visiteurs",
-        specialFeatures: lines($("specialFeatures").value),
-        extraSections: lines($("extraSections").value)
-      };
-    }
+    function data(){return {
+      projectName:$("projectName").value.trim() || "Projet DIGIY",
+      typeKey:$("typeKey").value || "generic",
+      city:$("city").value.trim() || "Saly, Sénégal",
+      style:$("style").value.trim() || "Mobile, clair, chaleureux, rassurant",
+      contactPhone:$("contactPhone").value.trim(),
+      hours:$("hours").value.trim(),
+      address:$("address").value.trim(),
+      activity:$("activity").value.trim() || "Activité locale à présenter simplement.",
+      goal:$("goal").value.trim() || "Présenter l’activité, rassurer le client et faciliter le contact.",
+      audience:$("audience").value.trim() || "Clients locaux et visiteurs",
+      specialFeatures:lines($("specialFeatures").value),
+      extraSections:lines($("extraSections").value),
+      galleryPhotos:galleryItems($("galleryPhotos").value),
+      galleryRaw:$("galleryPhotos").value.trim()
+    };}
 
     const defaultsByType = {
-      restaurant: {
-        projectName:"Restaurant Teranga Saly",
-        city:"Saly, Sénégal",
-        style:"Premium, mobile, chaleureux, africain, clair, rassurant",
-        activity:"Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.",
-        goal:"Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.",
-        audience:"Clients locaux, familles, touristes, groupes, visiteurs de Saly",
-        specialFeatures:"Spécialités sénégalaises\nRéservation directe\nContact WhatsApp\nPlats du jour\nGroupes et événements privés\nPhotos et avis\nHoraires clairs",
-        extraSections:"Plat détail\nCommande\nTémoignages\nGalerie\nTarifs\nÀ propos\nÉvénements privés\nFAQ"
-      },
-      hotel: {
-        projectName:"Maison d’hôtes Saly",
-        city:"Saly, Sénégal",
-        style:"Calme, premium, solaire, hospitalité locale, mobile",
-        activity:"Logement ou maison d’hôtes avec chambres, disponibilité, repères du quartier et contact direct.",
-        goal:"Présenter le lieu, rassurer le voyageur, montrer les tarifs et faciliter une demande de réservation directe.",
-        audience:"Voyageurs, familles, couples, clients de passage, diaspora",
-        specialFeatures:"Chambres disponibles\nContact direct\nPhotos du lieu\nTarifs nuit semaine mois\nQuartier et repères\nDisponibilités\nConseils locaux",
-        extraSections:"Chambres\nDisponibilités\nGalerie\nTarifs\nQuartier\nRèglement\nFAQ"
-      },
-      boutique: {
-        projectName:"Astou Market",
-        city:"Saly, Sénégal",
-        style:"Boutique claire, visuelle, directe, confiance, mobile",
-        activity:"Boutique locale avec produits, photos, prix indicatifs et contact WhatsApp direct.",
-        goal:"Présenter la boutique, mettre en avant les produits, faciliter la demande client et préparer la vente directe.",
-        audience:"Clients du quartier, visiteurs, habitués, acheteurs WhatsApp",
-        specialFeatures:"Produits visibles\nPrix clairs\nCommande WhatsApp\nPhotos produits\nConseil direct\nRetrait ou livraison",
-        extraSections:"Produits\nCommande\nGalerie\nTarifs\nAvis clients\nLivraison\nFAQ"
-      },
-      service: {
-        projectName:"Mes services à Saly",
-        city:"Saly, Sénégal",
-        style:"Simple, sérieux, humain, local, mobile",
-        activity:"Service terrain local : artisan, réparateur, aide maison, nettoyage, travaux ou prestation directe.",
-        goal:"Présenter le savoir-faire, inspirer confiance, recevoir une demande claire et faciliter le contact direct.",
-        audience:"Habitants, propriétaires, commerces, familles, professionnels locaux",
-        specialFeatures:"Demande rapide\nContact WhatsApp\nPhotos avant après\nZone d’intervention\nTarifs indicatifs\nUrgence possible",
-        extraSections:"Services\nDemande\nRéalisations\nTarifs\nAvis\nZone couverte\nFAQ"
-      },
-      event: {
-        projectName:"Événement à Saly",
-        city:"Saly, Sénégal",
-        style:"Festif, clair, chaleureux, mobile, rassurant",
-        activity:"Page de présentation pour un événement, une soirée, une rencontre, un atelier ou une activité locale.",
-        goal:"Présenter le programme, donner les informations pratiques et faciliter l’inscription ou le contact.",
-        audience:"Participants, familles, visiteurs, communauté locale",
-        specialFeatures:"Programme\nInscription directe\nLieu et horaires\nContact WhatsApp\nPhotos\nInformations pratiques",
-        extraSections:"Programme\nInscription\nGalerie\nTarifs\nLieu\nOrganisateur\nFAQ"
-      },
-      generic: {
-        projectName:"Projet DIGIY",
-        city:"Saly, Sénégal",
-        style:"Simple, clair, mobile, humain, rassurant",
-        activity:"Projet local à présenter avec une page claire et directe.",
-        goal:"Expliquer le projet, rassurer, montrer les informations utiles et guider vers l’action.",
-        audience:"Public local, clients, partenaires, visiteurs",
-        specialFeatures:"Présentation claire\nContact direct\nInformations pratiques\nConfiance\nAction simple",
-        extraSections:"Présentation\nOffres\nContact\nGalerie\nTarifs\nFAQ"
-      }
+      restaurant:{projectName:"Restaurant Teranga Saly",city:"Saly, Sénégal",style:"Premium, mobile, chaleureux, africain, clair, rassurant",contactPhone:"+221 77 000 00 00",hours:"Tous les jours · 11h30 — 23h00",address:"Saly centre · proche route principale",activity:"Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.",goal:"Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.",audience:"Clients locaux, familles, touristes, groupes, visiteurs de Saly",specialFeatures:"Spécialités sénégalaises\nRéservation directe\nContact WhatsApp\nPlats du jour\nGroupes et événements privés\nPhotos et avis\nHoraires clairs",extraSections:"Plat détail\nCommande\nTémoignages\nGalerie\nTarifs\nÀ propos\nÉvénements privés\nFAQ",galleryPhotos:"Photo du restaurant |\nPlat du jour |\nPoisson grillé |\nSalle ou terrasse |"},
+      hotel:{projectName:"Maison d’hôtes Saly",city:"Saly, Sénégal",style:"Calme, premium, solaire, hospitalité locale, mobile",contactPhone:"+221 77 000 00 00",hours:"Arrivées sur rendez-vous",address:"Saly · repère à préciser",activity:"Logement ou maison d’hôtes avec chambres, disponibilité, repères du quartier et contact direct.",goal:"Présenter le lieu, rassurer le voyageur, montrer les tarifs et faciliter une demande de réservation directe.",audience:"Voyageurs, familles, couples, clients de passage, diaspora",specialFeatures:"Chambres disponibles\nContact direct\nPhotos du lieu\nTarifs nuit semaine mois\nQuartier et repères\nDisponibilités\nConseils locaux",extraSections:"Chambres\nDisponibilités\nGalerie\nTarifs\nQuartier\nRèglement\nFAQ",galleryPhotos:"Façade du lieu |\nChambre |\nTerrasse |\nQuartier |"},
+      boutique:{projectName:"Astou Market",city:"Saly, Sénégal",style:"Boutique claire, visuelle, directe, confiance, mobile",contactPhone:"+221 77 000 00 00",hours:"Lundi à samedi · 9h00 — 20h00",address:"Saly centre",activity:"Boutique locale avec produits, photos, prix indicatifs et contact WhatsApp direct.",goal:"Présenter la boutique, mettre en avant les produits, faciliter la demande client et préparer la vente directe.",audience:"Clients du quartier, visiteurs, habitués, acheteurs WhatsApp",specialFeatures:"Produits visibles\nPrix clairs\nCommande WhatsApp\nPhotos produits\nConseil direct\nRetrait ou livraison",extraSections:"Produits\nCommande\nGalerie\nTarifs\nAvis clients\nLivraison\nFAQ",galleryPhotos:"Produit phare |\nRayon boutique |\nNouveautés |\nCommande prête |"},
+      service:{projectName:"Mes services à Saly",city:"Saly, Sénégal",style:"Simple, sérieux, humain, local, mobile",contactPhone:"+221 77 000 00 00",hours:"Sur rendez-vous",address:"Saly et environs",activity:"Service terrain local : artisan, réparateur, aide maison, nettoyage, travaux ou prestation directe.",goal:"Présenter le savoir-faire, inspirer confiance, recevoir une demande claire et faciliter le contact direct.",audience:"Habitants, propriétaires, commerces, familles, professionnels locaux",specialFeatures:"Demande rapide\nContact WhatsApp\nPhotos avant après\nZone d’intervention\nTarifs indicatifs\nUrgence possible",extraSections:"Services\nDemande\nRéalisations\nTarifs\nAvis\nZone couverte\nFAQ",galleryPhotos:"Réalisation |\nAvant / après |\nÉquipe |\nMatériel |"},
+      event:{projectName:"Événement à Saly",city:"Saly, Sénégal",style:"Festif, clair, chaleureux, mobile, rassurant",contactPhone:"+221 77 000 00 00",hours:"Date et heure à préciser",address:"Lieu à préciser",activity:"Page de présentation pour un événement, une soirée, une rencontre, un atelier ou une activité locale.",goal:"Présenter le programme, donner les informations pratiques et faciliter l’inscription ou le contact.",audience:"Participants, familles, visiteurs, communauté locale",specialFeatures:"Programme\nInscription directe\nLieu et horaires\nContact WhatsApp\nPhotos\nInformations pratiques",extraSections:"Programme\nInscription\nGalerie\nTarifs\nLieu\nOrganisateur\nFAQ",galleryPhotos:"Affiche événement |\nLieu |\nAmbiance |\nOrganisateur |"},
+      generic:{projectName:"Projet DIGIY",city:"Saly, Sénégal",style:"Simple, clair, mobile, humain, rassurant",contactPhone:"+221 77 000 00 00",hours:"Horaires à préciser",address:"Repère à préciser",activity:"Projet local à présenter avec une page claire et directe.",goal:"Expliquer le projet, rassurer, montrer les informations utiles et guider vers l’action.",audience:"Public local, clients, partenaires, visiteurs",specialFeatures:"Présentation claire\nContact direct\nInformations pratiques\nConfiance\nAction simple",extraSections:"Présentation\nOffres\nContact\nGalerie\nTarifs\nFAQ",galleryPhotos:"Photo principale |\nPreuve terrain |\nOffre |\nContact |"}
     };
 
-    function applyTypeDefaults(force){
-      const type = $("typeKey").value || "generic";
-      const d = defaultsByType[type] || defaultsByType.generic;
-      const ids = ["projectName","city","style","activity","goal","audience","specialFeatures","extraSections"];
+    function applyTypeDefaults(force){const type=$("typeKey").value || "generic";const d=defaultsByType[type] || defaultsByType.generic;["projectName","city","style","contactPhone","hours","address","activity","goal","audience","specialFeatures","extraSections","galleryPhotos"].forEach(id=>{const el=$(id);if(force || !el.value.trim()) el.value=d[id]||"";});if(force){setStatus("Exemple chargé pour : "+type);toast("Exemple chargé");}}
+    function sectionTitleByType(d){if(d.typeKey==="restaurant")return "Menu et spécialités";if(d.typeKey==="hotel")return "Lieu et hospitalité";if(d.typeKey==="boutique")return "Produits et boutique";if(d.typeKey==="service")return "Services proposés";if(d.typeKey==="event")return "Programme et informations";return "Ce que nous proposons";}
+    function actionLabelByType(d){if(d.typeKey==="restaurant")return "Réserver / contacter";if(d.typeKey==="hotel")return "Demander une réservation";if(d.typeKey==="boutique")return "Commander / contacter";if(d.typeKey==="service")return "Demander le service";if(d.typeKey==="event")return "S’inscrire / contacter";return "Contacter";}
+    function buildNav(d){const base=[{id:"accueil",label:"Accueil"},{id:"menu",label:d.typeKey==="restaurant"?"Menu":"Offre"}];const extra=d.extraSections.slice(0,10).map(s=>({id:slug(s),label:s}));return [...base,...extra,{id:"reservation",label:d.typeKey==="restaurant"?"Réservation":"Demande"},{id:"contact",label:"Contact"}];}
 
-      ids.forEach(id => {
-        const el = $(id);
-        if(force || !el.value.trim()){
-          el.value = d[id] || "";
-        }
-      });
+    function brief(d){return ["# Brief — "+d.projectName,"","- Type : "+d.typeKey,"- Zone : "+d.city,"- Style : "+d.style,"- WhatsApp : "+(d.contactPhone||"à préciser"),"- Horaires : "+(d.hours||"à préciser"),"- Repère : "+(d.address||"à préciser"),"","## Activité",d.activity,"","## Objectif",d.goal,"","## Public",d.audience,"","## Points importants",...(d.specialFeatures.length?d.specialFeatures.map(x=>"- "+x):["- Contact direct","- Confiance","- Informations pratiques"]),"","## Galerie photos",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" — "+x.url:" — URL à ajouter")):["- URL photos à ajouter"]),"","## Sections",...buildNav(d).map(x=>"- "+x.label+" (#"+x.id+")")].join(String.fromCharCode(10));}
+    function promptIA(d){return ["Tu es un assistant de création de page web locale.","Crée une page HTML mobile, claire, chaleureuse et rassurante.","","Projet : "+d.projectName,"Type : "+d.typeKey,"Zone : "+d.city,"Style : "+d.style,"WhatsApp : "+(d.contactPhone||"à préciser"),"Horaires : "+(d.hours||"à préciser"),"Repère : "+(d.address||"à préciser"),"Activité : "+d.activity,"Objectif : "+d.goal,"Public : "+d.audience,"","Sections attendues :",...buildNav(d).map(x=>"- "+x.label),"","Photos de galerie :",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" : "+x.url:" : URL à ajouter")):["- À ajouter si disponible"]),"","Contraintes : phrases courtes, boutons visibles, contact direct, galerie avec vraies images si les URLs sont fournies, pas de jargon technique, rendu agréable sur téléphone."].join(String.fromCharCode(10));}
+    function sql(d){return [
+      "-- DIGIY Projet Maison Builder — SQL léger",
+      "-- Aucun stockage image Supabase.",
+      "-- Les photos restent sur ton Google Drive ou sur une URL publique.",
+      "-- Le générateur écrit les liens directement dans la page HTML produite.",
+      "-- Rien à créer en base pour la galerie.",
+      "",
+      "-- Option mémoire seulement, si un jour tu veux garder une trace texte :",
+      "-- project_id : "+sqlEsc(slug(d.projectName)),
+      "-- project_name : "+sqlEsc(d.projectName),
+      "-- city : "+sqlEsc(d.city),
+      "-- whatsapp : "+sqlEsc(d.contactPhone||"à préciser"),
+      "-- photos : liens externes uniquement, pas de fichier image en base"
+    ].join(String.fromCharCode(10));}
+    function realisation(d){return ["# Plan de réalisation — "+d.projectName,"","## 1. Page publique","- Poser une page HTML simple.","- Mettre le nom, la zone, l’activité et l’objectif dès le haut.","- Ajouter un bouton direct : "+actionLabelByType(d)+".","","## 2. Contact terrain","- Vérifier le WhatsApp : "+(d.contactPhone||"à préciser"),"- Vérifier les horaires : "+(d.hours||"à préciser"),"- Vérifier le repère : "+(d.address||"à préciser"),"","## 3. Sections",...buildNav(d).map((x,i)=>(i+1)+". "+x.label+" — ancre #"+x.id),"","## 4. Vérification","- Tester sur téléphone.","- Cliquer chaque bouton du menu.","- Cliquer Envoyer la demande et vérifier l’ouverture WhatsApp.","- Vérifier que le texte \\n<section n’apparaît pas dans la page générée."].join(String.fromCharCode(10));}
 
-      if(force){
-        setStatus("Exemple chargé pour : " + type);
-        toast("Exemple chargé");
-      }
+    function galleryHtml(d){
+      const items=(d.galleryPhotos&&d.galleryPhotos.length?d.galleryPhotos:[
+        {title:"Photo du restaurant",url:""},
+        {title:"Plat du jour",url:""},
+        {title:"Poisson grillé",url:""},
+        {title:"Salle ou terrasse",url:""}
+      ]).slice(0,8);
+      return `<div class="gallery-grid">${items.map(item=>{
+        const title=esc(item.title||"Photo");
+        const url=imageUrl(item.url);
+        if(url){return `<figure class="photo-card has-img"><img src="${attr(url)}" alt="${title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').classList.remove('has-img');this.remove();"><figcaption>${title}</figcaption></figure>`;}
+        return `<figure class="photo-card"><figcaption>${title}<small>URL photo à ajouter</small></figcaption></figure>`;
+      }).join("")}</div>`;
     }
-
-    function sectionTitleByType(d){
-      if(d.typeKey === "restaurant") return "Menu et spécialités";
-      if(d.typeKey === "hotel") return "Lieu et hospitalité";
-      if(d.typeKey === "boutique") return "Produits et boutique";
-      if(d.typeKey === "service") return "Services proposés";
-      if(d.typeKey === "event") return "Programme et informations";
-      return "Ce que nous proposons";
-    }
-
-    function actionLabelByType(d){
-      if(d.typeKey === "restaurant") return "Réserver / contacter";
-      if(d.typeKey === "hotel") return "Demander une réservation";
-      if(d.typeKey === "boutique") return "Commander / contacter";
-      if(d.typeKey === "service") return "Demander le service";
-      if(d.typeKey === "event") return "S’inscrire / contacter";
-      return "Contacter";
-    }
-
-    function buildNav(d){
-      const base = [
-        {id:"accueil", label:"Accueil"},
-        {id:"menu", label:d.typeKey === "restaurant" ? "Menu" : "Offres"}
-      ];
-
-      const extras = d.extraSections.slice(0,10).map(label => ({
-        id: slug(label),
-        label
-      }));
-
-      const tail = [
-        {id:"reservation", label:d.typeKey === "boutique" ? "Commande" : "Réservation"},
-        {id:"contact", label:"Contact"}
-      ];
-
-      return base.concat(extras, tail);
-    }
-
-    function brief(d){
-      return [
-        "# Brief projet — " + d.projectName,
-        "",
-        "## Contexte",
-        "- Nom : " + d.projectName,
-        "- Type : " + d.typeKey,
-        "- Zone : " + d.city,
-        "- Style : " + d.style,
-        "- Public : " + d.audience,
-        "",
-        "## Activité",
-        d.activity,
-        "",
-        "## Objectif",
-        d.goal,
-        "",
-        "## Points importants",
-        ...(d.specialFeatures.length ? d.specialFeatures.map(x => "- " + x) : ["- Contact direct", "- Présentation claire", "- Action simple"]),
-        "",
-        "## Sections prévues",
-        ...(buildNav(d).map(x => "- " + x.label + " (#" + x.id + ")")),
-        "",
-        "## Doctrine DIGIY",
-        "Mobile d’abord. Texte simple. Action visible. Contact direct. Le client doit comprendre en quelques secondes."
-      ].join(String.fromCharCode(10));
-    }
-
-    function promptIA(d){
-      return [
-        "Crée une page web HTML/CSS/JS complète pour le projet suivant :",
-        "",
-        "Nom : " + d.projectName,
-        "Type : " + d.typeKey,
-        "Ville / zone : " + d.city,
-        "Style : " + d.style,
-        "Public visé : " + d.audience,
-        "Activité : " + d.activity,
-        "Objectif : " + d.goal,
-        "",
-        "Contraintes :",
-        "- Page mobile d’abord.",
-        "- Ton humain, clair, rassurant, terrain.",
-        "- Navigation simple avec ancres.",
-        "- Gros bouton d’action visible.",
-        "- Section contact ou réservation simple.",
-        "- Pas de jargon technique visible.",
-        "- Style premium africain, sobre, chaleureux.",
-        "",
-        "Sections à prévoir :",
-        ...buildNav(d).map(x => "- " + x.label),
-        "",
-        "Points à mettre en avant :",
-        ...(d.specialFeatures.length ? d.specialFeatures.map(x => "- " + x) : ["- Contact direct", "- Confiance", "- Informations pratiques"])
-      ].join(String.fromCharCode(10));
-    }
-
-    function sql(d){
-      const id = slug(d.projectName);
-      const features = JSON.stringify(d.specialFeatures);
-      const sections = JSON.stringify(buildNav(d).map(x => x.label));
-      return [
-        "-- SQL léger de référence pour " + d.projectName,
-        "-- À adapter à ta vraie table si besoin.",
-        "",
-        "create table if not exists public.digiy_project_maison (",
-        "  id text primary key,",
-        "  project_name text not null,",
-        "  type_key text not null,",
-        "  city text,",
-        "  style text,",
-        "  activity text,",
-        "  goal text,",
-        "  audience text,",
-        "  special_features jsonb default '[]'::jsonb,",
-        "  sections jsonb default '[]'::jsonb,",
-        "  created_at timestamptz default now()",
-        ");",
-        "",
-        "insert into public.digiy_project_maison (",
-        "  id, project_name, type_key, city, style, activity, goal, audience, special_features, sections",
-        ") values (",
-        "  '" + sqlEsc(id) + "',",
-        "  '" + sqlEsc(d.projectName) + "',",
-        "  '" + sqlEsc(d.typeKey) + "',",
-        "  '" + sqlEsc(d.city) + "',",
-        "  '" + sqlEsc(d.style) + "',",
-        "  '" + sqlEsc(d.activity) + "',",
-        "  '" + sqlEsc(d.goal) + "',",
-        "  '" + sqlEsc(d.audience) + "',",
-        "  '" + sqlEsc(features) + "'::jsonb,",
-        "  '" + sqlEsc(sections) + "'::jsonb",
-        ")",
-        "on conflict (id) do update set",
-        "  project_name = excluded.project_name,",
-        "  type_key = excluded.type_key,",
-        "  city = excluded.city,",
-        "  style = excluded.style,",
-        "  activity = excluded.activity,",
-        "  goal = excluded.goal,",
-        "  audience = excluded.audience,",
-        "  special_features = excluded.special_features,",
-        "  sections = excluded.sections;"
-      ].join(String.fromCharCode(10));
-    }
-
-    function realisation(d){
-      return [
-        "# Plan de réalisation — " + d.projectName,
-        "",
-        "## 1. Page publique",
-        "- Poser une page HTML simple.",
-        "- Mettre le nom, la zone, l’activité et l’objectif dès le haut.",
-        "- Ajouter un bouton direct : " + actionLabelByType(d) + ".",
-        "",
-        "## 2. Sections",
-        ...buildNav(d).map((x,i) => (i + 1) + ". " + x.label + " — ancre #" + x.id),
-        "",
-        "## 3. Contenu terrain",
-        "- Ajouter 3 à 6 photos réelles dès que possible.",
-        "- Ajouter horaires, repère local et WhatsApp officiel.",
-        "- Garder les phrases courtes sur téléphone.",
-        "",
-        "## 4. Vérification",
-        "- Tester sur téléphone.",
-        "- Cliquer chaque bouton du menu.",
-        "- Vérifier que le formulaire guide le client vers une demande claire.",
-        "- Vérifier que le texte \\n<section n’apparaît pas dans la page générée."
-      ].join(String.fromCharCode(10));
-    }
-
 
     function extraSectionHtml(d, sectionName){
-      const id = slug(sectionName);
-      const title = esc(sectionName);
-      const key = slug(sectionName);
-
-      let content = "";
-
-      if(d.typeKey === "restaurant"){
-        const restaurantBlocks = {
-          "plat-detail": `<div class="grid">
-        <div class="box"><h3>Plat signature</h3><p>Présente le plat phare : origine, goût, ingrédients principaux et ce qui le rend mémorable.</p></div>
-        <div class="box"><h3>Pour qui ?</h3><p>Familles, touristes, habitués du quartier ou clients qui veulent découvrir une vraie table locale.</p></div>
-        <div class="box"><h3>Conseil maison</h3><p>Ajoute une boisson, un accompagnement ou une suggestion du chef pour guider le client.</p></div>
-      </div>`,
-          "commande": `<div class="box">
-        <h3>Commander simplement</h3>
-        <p>Le client choisit son plat, indique l’heure souhaitée, puis contacte le restaurant par WhatsApp ou téléphone.</p>
-        <ol class="steps">
-          <li>Choisir le plat ou demander le plat du jour.</li>
-          <li>Indiquer le nombre de personnes ou de portions.</li>
-          <li>Confirmer l’heure, le lieu et le mode de retrait ou livraison.</li>
-        </ol>
-      </div>`,
-          "temoignages": `<div class="grid">
-        <div class="box"><h3>Accueil chaleureux</h3><p>“On se sent bien reçu, comme à la maison.”</p></div>
-        <div class="box"><h3>Cuisine généreuse</h3><p>“Les plats sont simples, bons et bien servis.”</p></div>
-        <div class="box"><h3>Bon repère à Saly</h3><p>“Facile à contacter, pratique pour réserver avant d’arriver.”</p></div>
-      </div>`,
-          "galerie": `<div class="gallery-grid">
-        <div class="photo-card">Photo du restaurant</div>
-        <div class="photo-card">Plat du jour</div>
-        <div class="photo-card">Poisson grillé</div>
-        <div class="photo-card">Salle ou terrasse</div>
-      </div>`,
-          "tarifs": `<div class="grid">
-        <div class="box price"><span>Plat du jour</span><strong>À partir de 2 500 FCFA</strong><p>À adapter selon le vrai menu.</p></div>
-        <div class="box price"><span>Poisson / grillade</span><strong>Prix selon arrivage</strong><p>Clair, honnête, sans surprise.</p></div>
-        <div class="box price"><span>Groupe</span><strong>Sur demande</strong><p>Pour familles, anniversaires et événements privés.</p></div>
-      </div>`,
-          "a-propos": `<div class="box">
-        <h3>Une table locale, simple et accueillante</h3>
-        <p>${esc(d.projectName)} présente une cuisine sénégalaise familiale, avec un accueil direct, une réservation simple et une présence claire pour les clients locaux comme pour les visiteurs.</p>
-      </div>`,
-          "evenements-prives": `<div class="grid">
-        <div class="box"><h3>Repas de groupe</h3><p>Prévoir les tables, le nombre de personnes et l’heure d’arrivée.</p></div>
-        <div class="box"><h3>Anniversaire</h3><p>Ajouter une demande spéciale : gâteau, décoration, musique ou menu adapté.</p></div>
-        <div class="box"><h3>Sortie d’entreprise</h3><p>Organiser un repas simple, clair et confirmé à l’avance.</p></div>
-      </div>`,
-          "faq": `<div class="box faq-list">
-        <details open><summary>Faut-il réserver ?</summary><p>Pour les groupes et les heures chargées, oui, c’est préférable.</p></details>
-        <details><summary>Peut-on commander à emporter ?</summary><p>Oui, indique le plat, l’heure souhaitée et ton contact WhatsApp.</p></details>
-        <details><summary>Acceptez-vous les groupes ?</summary><p>Oui, il faut préciser le nombre de personnes et l’heure prévue.</p></details>
-      </div>`
+      const id=slug(sectionName), title=esc(sectionName), key=slug(sectionName);let content="";
+      if(d.typeKey==="restaurant"){
+        const blocks={
+          "plat-detail":`<div class="grid"><div class="box"><h3>Plat signature</h3><p>Présente le plat phare : origine, goût, ingrédients principaux, niveau d’épices et accompagnement conseillé.</p></div><div class="box"><h3>Pour qui ?</h3><p>Familles, touristes, habitués du quartier ou clients qui veulent découvrir une vraie table locale.</p></div><div class="box"><h3>Conseil maison</h3><p>Ajoute une boisson, un dessert ou une suggestion du chef pour guider le client sans le fatiguer.</p></div></div>`,
+          "commande":`<div class="box"><h3>Commander simplement</h3><p>Le client choisit son plat, indique l’heure souhaitée, puis contacte le restaurant par WhatsApp ou téléphone.</p><ol class="steps"><li>Choisir le plat ou demander le plat du jour.</li><li>Indiquer le nombre de personnes ou de portions.</li><li>Confirmer l’heure, le lieu et le mode de retrait ou livraison.</li></ol></div>`,
+          "temoignages":`<div class="grid"><div class="box"><h3>Accueil chaleureux</h3><p>“On se sent bien reçu, comme à la maison.”</p></div><div class="box"><h3>Cuisine généreuse</h3><p>“Les plats sont simples, bons et bien servis.”</p></div><div class="box"><h3>Bon repère à Saly</h3><p>“Facile à contacter, pratique pour réserver avant d’arriver.”</p></div></div>`,
+          "galerie":galleryHtml(d),
+          "tarifs":`<div class="grid"><div class="box price"><span>Plat du jour</span><strong>À partir de 2 500 FCFA</strong><p>À adapter selon le vrai menu.</p></div><div class="box price"><span>Poisson / grillade</span><strong>Prix selon arrivage</strong><p>Clair, honnête, sans surprise.</p></div><div class="box price"><span>Groupe</span><strong>Sur demande</strong><p>Pour familles, anniversaires et événements privés.</p></div></div>`,
+          "a-propos":`<div class="box"><h3>Une table locale, simple et accueillante</h3><p>${esc(d.projectName)} présente une cuisine sénégalaise familiale, avec un accueil direct, une réservation simple et une présence claire pour les clients locaux comme pour les visiteurs.</p></div>`,
+          "evenements-prives":`<div class="grid"><div class="box"><h3>Repas de groupe</h3><p>Prévoir les tables, le nombre de personnes et l’heure d’arrivée.</p></div><div class="box"><h3>Anniversaire</h3><p>Ajouter une demande spéciale : gâteau, décoration, musique ou menu adapté.</p></div><div class="box"><h3>Sortie d’entreprise</h3><p>Organiser un repas simple, clair et confirmé à l’avance.</p></div></div>`,
+          "faq":`<div class="box faq-list"><details open><summary>Faut-il réserver ?</summary><p>Pour les groupes et les heures chargées, oui, c’est préférable.</p></details><details open><summary>Peut-on commander à emporter ?</summary><p>Oui, indique le plat, l’heure souhaitée et ton contact WhatsApp.</p></details><details open><summary>Acceptez-vous les groupes ?</summary><p>Oui, il faut préciser le nombre de personnes et l’heure prévue pour préparer l’accueil.</p></details></div>`
         };
-
-        content = restaurantBlocks[key] || `<div class="box">
-        <h3>${title}</h3>
-        <p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p>
-      </div>`;
-      }else{
-        content = `<div class="box">
-        <h3>${title}</h3>
-        <p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p>
-      </div>`;
+        content=blocks[key] || `<div class="box"><h3>${title}</h3><p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p></div>`;
+      } else {
+        content=`<div class="box"><h3>${title}</h3><p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p></div>`;
       }
-
-      return `<section id="${esc(id)}" class="section">
-      <h2>${title}</h2>
-      ${content}
-    </section>`;
+      return `<section id="${esc(id)}" class="section"><h2>${title}</h2>${content}</section>`;
     }
 
     function firstPage(d){
-      const name = esc(d.projectName);
-      const city = esc(d.city);
-      const style = esc(d.style);
-      const activity = esc(d.activity);
-      const goal = esc(d.goal);
-      const audience = esc(d.audience);
-      const action = esc(actionLabelByType(d));
-      const navItems = buildNav(d);
-      const nav = navItems.map(x => `<a href="#${esc(x.id)}">${esc(x.label)}</a>`).join("");
-      const specials = (d.specialFeatures.length ? d.specialFeatures : ["Réservation directe","Contact WhatsApp","Photos et avis","Horaires clairs"])
-        .slice(0,8)
-        .map(x => `<li>${esc(x)}</li>`)
-        .join("");
-
-      const restaurantMenu = d.typeKey === "restaurant"
-        ? `<div class="grid menu-grid">
-          <div class="box dish"><span>Plat local</span><h3>Thiéboudienne maison</h3><p>Un plat signature pour montrer la cuisine sénégalaise et rassurer le client.</p></div>
-          <div class="box dish"><span>Grillade</span><h3>Poisson grillé</h3><p>Idéal pour les touristes, familles et clients qui veulent manger frais à Saly.</p></div>
-          <div class="box dish"><span>Réservation</span><h3>Table de groupe</h3><p>Prévoir une demande simple avec nombre de personnes, date et heure souhaitée.</p></div>
-        </div>`
-        : `<div class="grid">
-          <div class="box"><h3>Offre principale</h3><p>Présente ici le service ou produit le plus important.</p></div>
-          <div class="box"><h3>Contact direct</h3><p>Ajoute WhatsApp, téléphone ou formulaire client.</p></div>
-          <div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div>
-        </div>`;
-
-      const extraSections = d.extraSections.slice(0,10)
-        .map(sectionName => extraSectionHtml(d, sectionName))
-        .join(String.fromCharCode(10));
-
+      const name=esc(d.projectName), city=esc(d.city), style=esc(d.style), activity=esc(d.activity), goal=esc(d.goal), audience=esc(d.audience), action=esc(actionLabelByType(d));
+      const phoneText=esc(d.contactPhone || "WhatsApp à préciser"), phoneDigits=waDigits(d.contactPhone), hours=esc(d.hours || "Horaires à préciser"), address=esc(d.address || "Repère à préciser");
+      const nav=buildNav(d).map(x=>`<a href="#${esc(x.id)}">${esc(x.label)}</a>`).join("");
+      const specials=(d.specialFeatures.length?d.specialFeatures:["Réservation directe","Contact WhatsApp","Photos et avis","Horaires clairs"]).slice(0,8).map(x=>`<li>${esc(x)}</li>`).join("");
+      const extraSections=d.extraSections.slice(0,10).map(sectionName=>extraSectionHtml(d,sectionName)).join(String.fromCharCode(10));
+      const restaurantMenu=d.typeKey==="restaurant"?`<div class="grid menu-grid"><div class="box dish"><span>Plat local</span><h3>Thiéboudienne maison</h3><p>Un plat signature pour montrer la cuisine sénégalaise et rassurer le client.</p></div><div class="box dish"><span>Grillade</span><h3>Poisson grillé</h3><p>Idéal pour les touristes, familles et clients qui veulent manger frais à Saly.</p></div><div class="box dish"><span>Réservation</span><h3>Table de groupe</h3><p>Prévoir une demande simple avec nombre de personnes, date et heure souhaitée.</p></div></div>`:`<div class="grid"><div class="box"><h3>Offre principale</h3><p>Présente ici le service ou produit le plus important.</p></div><div class="box"><h3>Contact direct</h3><p>Ajoute WhatsApp, téléphone ou formulaire client.</p></div><div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div></div>`;
+      const whatsMessage=`Bonjour, je souhaite faire une demande. Nom : `;
+      const buttonCode=phoneDigits?`const nom=document.getElementById('clientName').value||'';const tel=document.getElementById('clientPhone').value||'';const msg=document.getElementById('clientMessage').value||'';const text='${attr(whatsMessage)}'+nom+' / Téléphone : '+tel+' / Message : '+msg;window.open('https://wa.me/${phoneDigits}?text='+encodeURIComponent(text),'_blank');`:`alert('Ajoutez le WhatsApp officiel dans le générateur avant de publier cette page.');`;
       return `<!doctype html>
 <html lang="fr">
 <head>
@@ -778,237 +236,35 @@ FAQ</textarea>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>${name}</title>
   <style>
-    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}
-    a{color:inherit}
-    .wrap{max-width:1080px;margin:auto;padding:22px}
-    .hero{min-height:86vh;display:grid;align-items:center}
-    .card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}
-    .kicker{color:#ffe7a8;font-weight:900}
-    .title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}
-    .lead{color:var(--muted);font-size:18px;line-height:1.6}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
-    .nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}
-    .btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}
-    .section{padding:28px 0;scroll-margin-top:18px}
-    .section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
-    .box p,.box li{color:var(--muted);line-height:1.55}
-    .dish span{display:inline-block;color:#ffe7a8;font-weight:900;font-size:13px}
-    .info{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}
-    .form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}
-    .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}
-    .steps{margin:12px 0 0;padding-left:20px;color:var(--muted);line-height:1.7}
-    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
-    .photo-card{min-height:150px;border:1px dashed rgba(245,199,107,.45);border-radius:22px;display:grid;place-items:center;text-align:center;color:#ffe7a8;background:rgba(245,199,107,.08);font-weight:900;padding:14px}
-    .price span{display:block;color:#ffe7a8;font-weight:900;margin-bottom:8px}
-    .price strong{display:block;font-size:22px;margin-bottom:8px}
-    .faq-list details{border-top:1px solid var(--line);padding:14px 0}
-    .faq-list details:first-child{border-top:0}
-    .faq-list summary{cursor:pointer;font-weight:950;color:#ffe7a8}
-    footer{padding:30px 0;color:var(--muted);font-size:13px}
-    @media(max-width:760px){.grid,.info,.gallery-grid{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}}
+    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{min-height:86vh;display:grid;align-items:center}.card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.kicker{color:#ffe7a8;font-weight:900}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:var(--muted);font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}.section{padding:28px 0;scroll-margin-top:18px}.section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.box p,.box li{color:var(--muted);line-height:1.55}.dish span{display:inline-block;color:#ffe7a8;font-weight:900;font-size:13px}.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}.form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}.steps{margin:12px 0 0;padding-left:20px;color:var(--muted);line-height:1.7}.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.photo-card{min-height:170px;border:1px dashed rgba(245,199,107,.45);border-radius:22px;display:grid;place-items:center;text-align:center;color:#ffe7a8;background:rgba(245,199,107,.08);font-weight:900;padding:14px;overflow:hidden;margin:0}.photo-card.has-img{display:block;padding:0;border-style:solid;background:rgba(255,255,255,.05)}.photo-card img{width:100%;height:160px;object-fit:cover;display:block}.photo-card figcaption{padding:12px}.photo-card small{display:block;color:var(--muted);font-size:12px;margin-top:5px;font-weight:700}.price span{display:block;color:#ffe7a8;font-weight:900;margin-bottom:8px}.price strong{display:block;font-size:22px;margin-bottom:8px}.faq-list details{border-top:1px solid var(--line);padding:14px 0}.faq-list details:first-child{border-top:0}.faq-list summary{cursor:pointer;font-weight:950;color:#ffe7a8}footer{padding:30px 0;color:var(--muted);font-size:13px}@media(max-width:760px){.grid,.info,.gallery-grid{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}}
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section id="accueil" class="hero">
-      <div class="card">
-        <div class="kicker">${city} · ${style}</div>
-        <h1 class="title">${name}</h1>
-        <p class="lead">${activity}</p>
-        <p class="lead">${goal}</p>
-        <p class="lead"><strong>Pour :</strong> ${audience}</p>
-        <div class="nav">${nav}</div>
-        <a class="btn" href="#reservation">${action}</a>
-      </div>
-    </section>
-
-    <section id="menu" class="section">
-      <h2>${esc(sectionTitleByType(d))}</h2>
-      <p class="lead">Une première vitrine claire pour donner envie, rassurer et guider le client vers l’action.</p>
-      ${restaurantMenu}
-    </section>
-
+    <section id="accueil" class="hero"><div class="card"><div class="kicker">${city} · ${style}</div><h1 class="title">${name}</h1><p class="lead">${activity}</p><p class="lead">${goal}</p><p class="lead"><strong>Pour :</strong> ${audience}</p><div class="nav">${nav}</div><a class="btn" href="#reservation">${action}</a></div></section>
+    <section id="menu" class="section"><h2>${esc(sectionTitleByType(d))}</h2><p class="lead">Une première vitrine claire pour donner envie, rassurer et guider le client vers l’action.</p>${restaurantMenu}</section>
     ${extraSections}
-
-    <section id="reservation" class="section">
-      <h2>${action}</h2>
-      <div class="info">
-        <div class="box form">
-          <label>Nom</label>
-          <input placeholder="Votre nom">
-          <label>Téléphone</label>
-          <input placeholder="Votre WhatsApp">
-          <label>Message</label>
-          <textarea placeholder="Date, heure, nombre de personnes ou demande particulière"></textarea>
-          <button>Envoyer la demande</button>
-        </div>
-        <div class="box">
-          <h3>Informations pratiques</h3>
-          <p>Ajoute ici les horaires, le quartier, le repère, le téléphone et le lien WhatsApp officiel.</p>
-          <p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section">
-      <h2>Contact et besoins particuliers</h2>
-      <div class="box">
-        <h3>Besoins particuliers</h3>
-        <ul>${specials}</ul>
-      </div>
-    </section>
-
+    <section id="reservation" class="section"><h2>${action}</h2><div class="info"><div class="box form"><label>Nom</label><input id="clientName" placeholder="Votre nom"><label>Téléphone</label><input id="clientPhone" placeholder="Votre WhatsApp"><label>Message</label><textarea id="clientMessage" placeholder="Date, heure, nombre de personnes ou demande particulière"></textarea><button type="button" onclick="${buttonCode}">Envoyer la demande sur WhatsApp</button></div><div class="box"><h3>Informations pratiques</h3><p><strong>WhatsApp :</strong> ${phoneText}</p><p><strong>Horaires :</strong> ${hours}</p><p><strong>Repère :</strong> ${address}</p><p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p></div></div></section>
+    <section id="contact" class="section"><h2>Contact et besoins particuliers</h2><div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div></section>
     <footer>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
 </body>
 </html>`;
     }
 
-    function generateAll(){
-      const d = data();
-
-      outputs.brief = brief(d);
-      outputs.prompt = promptIA(d);
-      outputs.sql = sql(d);
-      outputs.realisation = realisation(d);
-      outputs.page = firstPage(d);
-      outputs.json = JSON.stringify(d,null,2);
-
-      currentTab = "page";
-      document.querySelectorAll(".output-tabs button").forEach(button => {
-        button.classList.toggle("active", button.dataset.tab === currentTab);
-      });
-
-      renderOutput();
-      setStatus("Dossier préparé pour : " + d.projectName);
-      toast("Projet préparé");
-    }
-
-    function setOutputTab(tab){
-      currentTab = tab;
-      document.querySelectorAll(".output-tabs button").forEach(button => {
-        button.classList.toggle("active", button.dataset.tab === tab);
-      });
-      renderOutput();
-    }
-
-    function renderOutput(){
-      const text = outputs[currentTab] || "";
-      const out = $("output");
-      const empty = $("emptyState");
-
-      if(!text.trim()){
-        out.hidden = true;
-        out.style.display = "none";
-        empty.hidden = false;
-        empty.style.display = "grid";
-        return;
-      }
-
-      empty.hidden = true;
-      empty.style.display = "none";
-      out.hidden = false;
-      out.style.display = "block";
-      out.textContent = text;
-    }
-
-    async function copyCurrent(){
-      const text = outputs[currentTab] || "";
-      if(!text.trim()){
-        toast("Rien à copier");
-        return;
-      }
-
-      try{
-        await navigator.clipboard.writeText(text);
-      }catch(error){
-        const textarea = document.createElement("textarea");
-        textarea.value = text;
-        textarea.setAttribute("readonly","");
-        textarea.style.position = "fixed";
-        textarea.style.left = "-9999px";
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        textarea.remove();
-      }
-
-      toast("Sortie copiée");
-    }
-
-    function downloadCurrent(){
-      const text = outputs[currentTab] || "";
-      if(!text.trim()){
-        toast("Rien à télécharger");
-        return;
-      }
-
-      const d = data();
-      const ext = currentTab === "json" ? "json" : currentTab === "sql" ? "sql" : currentTab === "page" ? "html" : "md";
-      const type = ext === "html" ? "text/html;charset=utf-8" : "text/plain;charset=utf-8";
-      const blob = new Blob([text],{type});
-      const a = document.createElement("a");
-
-      a.href = URL.createObjectURL(blob);
-      a.download = slug(d.projectName) + "_" + currentTab + "." + ext;
-      document.body.appendChild(a);
-      a.click();
-      URL.revokeObjectURL(a.href);
-      a.remove();
-
-      toast("Téléchargement lancé");
-    }
-
-    function previewPage(){
-      const html = outputs.page || "";
-      if(!html.trim()){
-        toast("Prépare d’abord le projet");
-        return;
-      }
-
-      const blob = new Blob([html],{type:"text/html;charset=utf-8"});
-      const url = URL.createObjectURL(blob);
-      window.open(url,"_blank","noopener,noreferrer");
-      setTimeout(() => URL.revokeObjectURL(url), 60000);
-      toast("Page ouverte");
-    }
-
-    function clearForm(){
-      ["projectName","city","style","activity","goal","audience","specialFeatures","extraSections"].forEach(id => {
-        $(id).value = "";
-      });
-      outputs.brief = "";
-      outputs.prompt = "";
-      outputs.sql = "";
-      outputs.realisation = "";
-      outputs.page = "";
-      outputs.json = "";
-      renderOutput();
-      setStatus("Formulaire nettoyé.");
-      toast("Nettoyé");
-    }
-
-    function setStatus(message){
-      $("status").textContent = message;
-    }
-
-    function toast(message){
-      const el = $("toast");
-      el.textContent = message;
-      el.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => el.classList.remove("show"), 1800);
-    }
-
+    function generateAll(){const d=data();outputs.brief=brief(d);outputs.prompt=promptIA(d);outputs.sql=sql(d);outputs.realisation=realisation(d);outputs.page=firstPage(d);outputs.json=JSON.stringify(d,null,2);currentTab="page";document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===currentTab));renderOutput();setStatus("Dossier préparé pour : "+d.projectName);toast("Projet préparé");}
+    function setOutputTab(t){currentTab=t;document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));renderOutput();}
+    function renderOutput(){const text=outputs[currentTab]||"",out=$("output"),empty=$("emptyState");if(!text){out.hidden=true;out.style.display="none";empty.hidden=false;empty.style.display="grid";return}empty.hidden=true;empty.style.display="none";out.hidden=false;out.style.display="block";out.textContent=text;}
+    async function copyCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à copier");return}try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}toast("Sortie copiée");}
+    function downloadCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à télécharger");return}const d=data();const ext=currentTab==="json"?"json":currentTab==="sql"?"sql":currentTab==="page"?"html":"md";const blob=new Blob([text],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=slug(d.projectName)+"_"+currentTab+"."+ext;document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();toast("Téléchargement lancé");}
+    function previewPage(){if(!outputs.page.trim()){toast("Prépare d’abord la page");return}const blob=new Blob([outputs.page],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob);window.open(url,"_blank");setTimeout(()=>URL.revokeObjectURL(url),60000);}
+    function clearForm(){["projectName","city","style","contactPhone","hours","address","activity","goal","audience","specialFeatures","extraSections","galleryPhotos"].forEach(id=>$(id).value="");outputs.brief=outputs.prompt=outputs.sql=outputs.realisation=outputs.page=outputs.json="";renderOutput();setStatus("Formulaire nettoyé.");toast("Nettoyé");}
+    function setStatus(text){$("status").textContent=text;}
+    function toast(text){const el=$("toast");el.textContent=text;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),1800);}
     applyTypeDefaults(false);
-    renderOutput();
   </script>
 </body>
 </html>
+
 
 
