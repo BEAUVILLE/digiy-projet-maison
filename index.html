@@ -32,7 +32,7 @@
         <div class="kicker">Outil maison · BY DIGIYLYFE</div>
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier : brief, prompt IA, mémo SQL léger, plan de réalisation, page HTML et JSON.</p>
-        <p class="lead">Version V9 : galerie diapo premium corrigée, grande photo, swipe tactile, Google Drive ou WordPress média, zéro stockage image Supabase, zéro SQL lourd.</p>
+        <p class="lead">Version V10 : galerie diapo premium sécurisée, grande photo, swipe tactile, Google Drive ou WordPress média, zéro stockage image Supabase, zéro SQL lourd.</p>
         <div class="actions">
           <button class="btn primary" type="button" onclick="generateAll()">Préparer le projet</button>
           <button class="btn" type="button" onclick="applyTypeDefaults(true)">Remplir exemple</button>
@@ -293,7 +293,7 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
     <section id="contact" class="section"><h2>Contact et besoins particuliers</h2><div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div></section>
     <footer>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
-  <script>
+  ${'<scr'+'ipt>'}
     (function(){
       function initGallery(gallery){
         const slides=[...gallery.querySelectorAll('.gallery-slide')];
@@ -324,7 +324,7 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
       }
       document.querySelectorAll('[data-gallery]').forEach(initGallery);
     })();
-  <\/script>
+  ${'</scr'+'ipt>'}
 </body>
 </html>`;
     }
@@ -338,10 +338,21 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
     function clearForm(){["projectName","city","style","contactPhone","hours","address","activity","goal","audience","specialFeatures","extraSections","galleryPhotos"].forEach(id=>$(id).value="");outputs.brief=outputs.prompt=outputs.sql=outputs.realisation=outputs.page=outputs.json="";renderOutput();setStatus("Formulaire nettoyé.");toast("Nettoyé");}
     function setStatus(text){$("status").textContent=text;}
     function toast(text){const el=$("toast");el.textContent=text;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),1800);}
+
+    // Sécurité V10 : les boutons inline appellent explicitement window.*.
+    window.generateAll = generateAll;
+    window.setOutputTab = setOutputTab;
+    window.copyCurrent = copyCurrent;
+    window.downloadCurrent = downloadCurrent;
+    window.previewPage = previewPage;
+    window.clearForm = clearForm;
+    window.applyTypeDefaults = applyTypeDefaults;
+
     applyTypeDefaults(false);
   </script>
 </body>
 </html>
+
 
 
 
