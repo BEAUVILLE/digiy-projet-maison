@@ -32,7 +32,7 @@
         <div class="kicker">Outil maison · BY DIGIYLYFE</div>
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier : brief, prompt IA, mémo SQL léger, plan de réalisation, page HTML et JSON.</p>
-        <p class="lead">Version V5 : sections restaurant, WhatsApp réel et galerie photo par URLs Google Drive — sans stockage image Supabase.</p>
+        <p class="lead">Version V8 : galerie diapo premium, grande photo, swipe tactile, Google Drive ou WordPress média, zéro stockage image Supabase, zéro SQL lourd.</p>
         <div class="actions">
           <button class="btn primary" type="button" onclick="generateAll()">Préparer le projet</button>
           <button class="btn" type="button" onclick="applyTypeDefaults(true)">Remplir exemple</button>
@@ -61,7 +61,7 @@
             <div class="field"><label for="address">Repère / adresse</label><input id="address" value="Saly centre · proche route principale" placeholder="Ex : Saly centre, près de..." /></div>
           </div>
           <div class="field"><label for="activity">Activité</label><textarea id="activity" placeholder="Décris l’activité">Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.</textarea></div>
-          <div class="field"><label for="goal">Objectif de la page</label><textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea><div class="small">Photos gardées sur ton Google Drive : colle seulement les liens publics. Rien n’est envoyé dans Supabase Storage.</div></div>
+          <div class="field"><label for="goal">Objectif de la page</label><textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea><div class="small">Photos gardées sur ton Google Drive ou ton média WordPress : colle seulement les liens publics. Rien n’est envoyé dans Supabase Storage.</div></div>
           <div class="field"><label for="audience">Public visé</label><input id="audience" value="Clients locaux, familles, touristes, groupes, visiteurs de Saly" placeholder="Ex : clients locaux, touristes, familles" /></div>
           <div class="field"><label for="specialFeatures">Points importants</label><textarea id="specialFeatures" placeholder="Un point par ligne">Spécialités sénégalaises
 Réservation directe
@@ -78,10 +78,14 @@ Tarifs
 À propos
 Événements privés
 FAQ</textarea></div>
-          <div class="field"><label for="galleryPhotos">Galerie photos Google Drive — titre | URL publique</label><textarea id="galleryPhotos" placeholder="Une photo par ligne. Exemple : Plat du jour | https://drive.google.com/file/d/ID_IMAGE/view?usp=sharing">Photo du restaurant |
+          <div class="field"><label for="galleryPhotos">Galerie photos — titre | URL publique</label><textarea id="galleryPhotos" style="min-height:150px" placeholder="Une photo par ligne :
+Plat du jour | https://drive.google.com/file/d/ID_IMAGE/view?usp=sharing
+Salle | https://digiylyfe.net/wp-content/uploads/2026/04/photo.jpg
+
+Tu peux aussi coller des URLs seules : elles rempliront les cadres dans l’ordre.">Photo du restaurant |
 Plat du jour |
 Poisson grillé |
-Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google Drive. Les images restent chez toi : aucun upload, aucun stockage Supabase, aucun SQL lourd.</div></div>
+Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> colle ici tes liens publics Google Drive ou WordPress média. Tu peux écrire <em>Titre | URL</em> ou coller les URLs seules sous les titres. Les photos restent dehors : Supabase ne reçoit rien, le SQL reste léger.</div></div>
           <button class="btn green" type="submit">Préparer le projet</button>
         </form>
       </div>
@@ -114,15 +118,43 @@ Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google 
     function sqlEsc(value){return String(value ?? "").replace(/'/g,"''");}
     function slug(value){return String(value || "projet").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70) || "projet";}
     function lines(value){const raw=String(value||"").split(/\n|,|;/g).map(x=>x.trim()).filter(Boolean);return [...new Set(raw)];}
+    function looksLikeUrl(value){return /^https?:\/\//i.test(String(value||"").trim());}
     function galleryItems(value){
-      return String(value||"").split(/\n/g).map((line,index)=>{
+      const fallbackTitles=["Photo du restaurant","Plat du jour","Poisson grillé","Salle ou terrasse","Ambiance","Équipe","Détail","Client heureux","Carte / menu","Extérieur","Intérieur","Moment partagé"];
+      const items=[];
+      const looseUrls=[];
+
+      String(value||"").split(/\n/g).forEach((line)=>{
         const raw=line.trim();
-        if(!raw) return null;
-        const parts=raw.split("|");
-        const title=(parts[0]||"Photo "+(index+1)).trim();
-        const url=(parts.length>1?parts.slice(1).join("|"):raw.startsWith("http")?raw:"").trim();
-        return {title:title||"Photo "+(index+1),url};
-      }).filter(Boolean).slice(0,12);
+        if(!raw) return;
+
+        if(raw.includes("|")){
+          const parts=raw.split("|");
+          const title=(parts.shift()||"").trim();
+          const rest=parts.join("|").trim();
+          const url=looksLikeUrl(rest)?rest:"";
+          items.push({title:title||fallbackTitles[items.length]||("Photo "+(items.length+1)),url});
+          return;
+        }
+
+        if(looksLikeUrl(raw)){
+          looseUrls.push(raw);
+          return;
+        }
+
+        items.push({title:raw||fallbackTitles[items.length]||("Photo "+(items.length+1)),url:""});
+      });
+
+      looseUrls.forEach((url)=>{
+        const empty=items.find(item=>!item.url);
+        if(empty){
+          empty.url=url;
+        }else{
+          items.push({title:fallbackTitles[items.length]||("Photo "+(items.length+1)),url});
+        }
+      });
+
+      return items.slice(0,12);
     }
     function waDigits(value){return String(value||"").replace(/[^0-9]/g,"");}
     function imageUrl(value){
@@ -133,7 +165,7 @@ Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google 
       const openMatch=url.match(/drive\.google\.com\/open\?id=([^&]+)/);
       const id=(fileMatch&&fileMatch[1])||(idParam&&idParam[1])||(openMatch&&openMatch[1])||"";
       if(id) return "https://drive.google.com/thumbnail?id="+encodeURIComponent(id)+"&sz=w1200";
-      return url;
+      try{return encodeURI(url);}catch{return url;}
     }
 
     function data(){return {
@@ -168,11 +200,11 @@ Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google 
     function buildNav(d){const base=[{id:"accueil",label:"Accueil"},{id:"menu",label:d.typeKey==="restaurant"?"Menu":"Offre"}];const extra=d.extraSections.slice(0,10).map(s=>({id:slug(s),label:s}));return [...base,...extra,{id:"reservation",label:d.typeKey==="restaurant"?"Réservation":"Demande"},{id:"contact",label:"Contact"}];}
 
     function brief(d){return ["# Brief — "+d.projectName,"","- Type : "+d.typeKey,"- Zone : "+d.city,"- Style : "+d.style,"- WhatsApp : "+(d.contactPhone||"à préciser"),"- Horaires : "+(d.hours||"à préciser"),"- Repère : "+(d.address||"à préciser"),"","## Activité",d.activity,"","## Objectif",d.goal,"","## Public",d.audience,"","## Points importants",...(d.specialFeatures.length?d.specialFeatures.map(x=>"- "+x):["- Contact direct","- Confiance","- Informations pratiques"]),"","## Galerie photos",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" — "+x.url:" — URL à ajouter")):["- URL photos à ajouter"]),"","## Sections",...buildNav(d).map(x=>"- "+x.label+" (#"+x.id+")")].join(String.fromCharCode(10));}
-    function promptIA(d){return ["Tu es un assistant de création de page web locale.","Crée une page HTML mobile, claire, chaleureuse et rassurante.","","Projet : "+d.projectName,"Type : "+d.typeKey,"Zone : "+d.city,"Style : "+d.style,"WhatsApp : "+(d.contactPhone||"à préciser"),"Horaires : "+(d.hours||"à préciser"),"Repère : "+(d.address||"à préciser"),"Activité : "+d.activity,"Objectif : "+d.goal,"Public : "+d.audience,"","Sections attendues :",...buildNav(d).map(x=>"- "+x.label),"","Photos de galerie :",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" : "+x.url:" : URL à ajouter")):["- À ajouter si disponible"]),"","Contraintes : phrases courtes, boutons visibles, contact direct, galerie avec vraies images si les URLs sont fournies, pas de jargon technique, rendu agréable sur téléphone."].join(String.fromCharCode(10));}
+    function promptIA(d){return ["Tu es un assistant de création de page web locale.","Crée une page HTML mobile, claire, chaleureuse et rassurante.","","Projet : "+d.projectName,"Type : "+d.typeKey,"Zone : "+d.city,"Style : "+d.style,"WhatsApp : "+(d.contactPhone||"à préciser"),"Horaires : "+(d.hours||"à préciser"),"Repère : "+(d.address||"à préciser"),"Activité : "+d.activity,"Objectif : "+d.goal,"Public : "+d.audience,"","Sections attendues :",...buildNav(d).map(x=>"- "+x.label),"","Photos de galerie :",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" : "+x.url:" : URL à ajouter")):["- À ajouter si disponible"]),"","Contraintes : phrases courtes, boutons visibles, contact direct, galerie diapo premium avec vraies images si les URLs sont fournies, pas de jargon technique, rendu agréable sur téléphone."].join(String.fromCharCode(10));}
     function sql(d){return [
       "-- DIGIY Projet Maison Builder — SQL léger",
       "-- Aucun stockage image Supabase.",
-      "-- Les photos restent sur ton Google Drive ou sur une URL publique.",
+      "-- Les photos restent sur ton Google Drive, ton média WordPress ou toute URL publique directe.",
       "-- Le générateur écrit les liens directement dans la page HTML produite.",
       "-- Rien à créer en base pour la galerie.",
       "",
@@ -192,12 +224,25 @@ Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google 
         {title:"Poisson grillé",url:""},
         {title:"Salle ou terrasse",url:""}
       ]).slice(0,8);
-      return `<div class="gallery-grid">${items.map(item=>{
-        const title=esc(item.title||"Photo");
+      const hasAnyUrl=items.some(item=>String(item.url||"").trim());
+      const intro=hasAnyUrl?"":`<div class="box gallery-note"><h3>Galerie diapo premium prête à brancher</h3><p>Colle tes liens publics dans le générateur : titre | URL, ou colle seulement les URLs. Le diapo remplit les images dans l’ordre. Les photos restent sur Google Drive, WordPress média ou URL publique, sans Supabase Storage et sans SQL lourd.</p></div>`;
+      const slides=items.map((item,index)=>{
+        const title=esc(item.title||("Photo "+(index+1)));
         const url=imageUrl(item.url);
-        if(url){return `<figure class="photo-card has-img"><img src="${attr(url)}" alt="${title}" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').classList.remove('has-img');this.remove();"><figcaption>${title}</figcaption></figure>`;}
-        return `<figure class="photo-card"><figcaption>${title}<small>URL photo à ajouter</small></figcaption></figure>`;
-      }).join("")}</div>`;
+        if(url){
+          return `<figure class="gallery-slide${index===0?' active':''}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').classList.add('is-missing');this.remove();"><figcaption><strong>${title}</strong><small>Fais glisser ou utilise les flèches pour voir les autres photos.</small></figcaption></figure>`;
+        }
+        return `<figure class="gallery-slide placeholder${index===0?' active':''}"><div class="gallery-placeholder"><span>${title}</span><small>Colle une URL photo dans le générateur</small></div><figcaption><strong>${title}</strong><small>URL photo à ajouter.</small></figcaption></figure>`;
+      }).join("");
+      const thumbs=items.map((item,index)=>{
+        const title=esc(item.title||("Photo "+(index+1)));
+        const url=imageUrl(item.url);
+        if(url){
+          return `<button class="gallery-thumb${index===0?' active':''}" type="button" data-index="${index}" aria-label="Voir ${title}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer"></button>`;
+        }
+        return `<button class="gallery-thumb text-thumb${index===0?' active':''}" type="button" data-index="${index}" aria-label="Voir ${title}"><span>${title}</span></button>`;
+      }).join("");
+      return `${intro}<div class="gallery-premium" data-gallery><div class="gallery-stage"><div class="gallery-slides">${slides}</div><button class="gallery-arrow prev" type="button" data-prev aria-label="Photo précédente">‹</button><button class="gallery-arrow next" type="button" data-next aria-label="Photo suivante">›</button><div class="gallery-counter" data-counter>1 / ${items.length}</div></div><div class="gallery-thumbs">${thumbs}</div></div>`;
     }
 
     function extraSectionHtml(d, sectionName){
@@ -236,7 +281,7 @@ Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>${name}</title>
   <style>
-    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{min-height:86vh;display:grid;align-items:center}.card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.kicker{color:#ffe7a8;font-weight:900}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:var(--muted);font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}.section{padding:28px 0;scroll-margin-top:18px}.section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.box p,.box li{color:var(--muted);line-height:1.55}.dish span{display:inline-block;color:#ffe7a8;font-weight:900;font-size:13px}.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}.form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}.steps{margin:12px 0 0;padding-left:20px;color:var(--muted);line-height:1.7}.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.photo-card{min-height:170px;border:1px dashed rgba(245,199,107,.45);border-radius:22px;display:grid;place-items:center;text-align:center;color:#ffe7a8;background:rgba(245,199,107,.08);font-weight:900;padding:14px;overflow:hidden;margin:0}.photo-card.has-img{display:block;padding:0;border-style:solid;background:rgba(255,255,255,.05)}.photo-card img{width:100%;height:160px;object-fit:cover;display:block}.photo-card figcaption{padding:12px}.photo-card small{display:block;color:var(--muted);font-size:12px;margin-top:5px;font-weight:700}.price span{display:block;color:#ffe7a8;font-weight:900;margin-bottom:8px}.price strong{display:block;font-size:22px;margin-bottom:8px}.faq-list details{border-top:1px solid var(--line);padding:14px 0}.faq-list details:first-child{border-top:0}.faq-list summary{cursor:pointer;font-weight:950;color:#ffe7a8}footer{padding:30px 0;color:var(--muted);font-size:13px}@media(max-width:760px){.grid,.info,.gallery-grid{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}}
+    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{min-height:86vh;display:grid;align-items:center}.card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.kicker{color:#ffe7a8;font-weight:900}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:var(--muted);font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}.section{padding:28px 0;scroll-margin-top:18px}.section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.box p,.box li{color:var(--muted);line-height:1.55}.dish span{display:inline-block;color:#ffe7a8;font-weight:900;font-size:13px}.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}.form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}.steps{margin:12px 0 0;padding-left:20px;color:var(--muted);line-height:1.7}.gallery-premium{display:grid;gap:14px;margin:18px 0}.gallery-stage{position:relative;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:rgba(255,255,255,.05);box-shadow:0 24px 70px rgba(0,0,0,.24)}.gallery-slides{position:relative;min-height:280px;touch-action:pan-y}.gallery-slide{display:none;position:relative;margin:0;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}.gallery-slide.active{display:block}.gallery-slide img{width:100%;height:min(62vw,520px);min-height:260px;object-fit:cover;display:block;background:#0a1512}.gallery-slide figcaption{position:absolute;left:16px;right:16px;bottom:16px;padding:14px 16px;border-radius:20px;background:linear-gradient(180deg,rgba(5,17,14,.2),rgba(5,17,14,.82));backdrop-filter:blur(5px)}.gallery-slide figcaption strong{display:block;color:#fff4c8;font-size:clamp(18px,2.5vw,24px)}.gallery-slide figcaption small{display:block;color:#dcecdf;font-size:13px;margin-top:4px}.gallery-placeholder{display:grid;place-items:center;text-align:center;min-height:340px;padding:26px;color:#ffe7a8;background:radial-gradient(circle at 50% 50%,rgba(245,199,107,.18),transparent 45%),rgba(245,199,107,.08)}.gallery-placeholder span{font-size:clamp(20px,4vw,30px);font-weight:900}.gallery-placeholder small{display:block;color:var(--muted);margin-top:8px;font-size:13px}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(4,18,14,.56);color:#fff4c8;font-size:28px;line-height:1;display:grid;place-items:center;z-index:2}.gallery-arrow.prev{left:14px}.gallery-arrow.next{right:14px}.gallery-counter{position:absolute;top:14px;right:14px;padding:8px 12px;border-radius:999px;background:rgba(4,18,14,.58);border:1px solid rgba(255,255,255,.16);color:#fff4c8;font-weight:900;font-size:12px;z-index:2}.gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gallery-thumb{appearance:none;border:1px solid var(--line);padding:0;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.04);min-height:74px}.gallery-thumb img{width:100%;height:82px;object-fit:cover;display:block}.gallery-thumb.text-thumb{padding:12px;color:#ffe7a8;font-weight:900}.gallery-thumb.text-thumb span{display:block;font-size:13px;line-height:1.35}.gallery-thumb.active{outline:2px solid rgba(245,199,107,.7);outline-offset:2px}.price span{display:block;color:#ffe7a8;font-weight:900;margin-bottom:8px}.price strong{display:block;font-size:22px;margin-bottom:8px}.gallery-note{margin-bottom:14px}.faq-list details{border-top:1px solid var(--line);padding:14px 0}.faq-list details:first-child{border-top:0}.faq-list summary{cursor:pointer;font-weight:950;color:#ffe7a8}footer{padding:30px 0;color:var(--muted);font-size:13px}@media(max-width:760px){.grid,.info,.gallery-thumbs{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}.gallery-slide img{height:58vw;min-height:240px}.gallery-arrow{width:42px;height:42px}.gallery-thumbs{display:flex;overflow:auto;padding-bottom:4px;scroll-snap-type:x proximity}.gallery-thumb{min-width:88px;scroll-snap-align:start}.gallery-thumb img{height:70px}}
   </style>
 </head>
 <body>
@@ -248,6 +293,38 @@ Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google 
     <section id="contact" class="section"><h2>Contact et besoins particuliers</h2><div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div></section>
     <footer>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
+  <script>
+    (function(){
+      function initGallery(gallery){
+        const slides=[...gallery.querySelectorAll('.gallery-slide')];
+        const thumbs=[...gallery.querySelectorAll('.gallery-thumb')];
+        const prev=gallery.querySelector('[data-prev]');
+        const next=gallery.querySelector('[data-next]');
+        const counter=gallery.querySelector('[data-counter]');
+        if(!slides.length) return;
+        let index=slides.findIndex(s=>s.classList.contains('active'));
+        if(index<0) index=0;
+        function show(i){
+          index=(i+slides.length)%slides.length;
+          slides.forEach((slide,idx)=>slide.classList.toggle('active',idx===index));
+          thumbs.forEach((thumb,idx)=>thumb.classList.toggle('active',idx===index));
+          if(counter) counter.textContent=(index+1)+' / '+slides.length;
+        }
+        prev && prev.addEventListener('click',()=>show(index-1));
+        next && next.addEventListener('click',()=>show(index+1));
+        thumbs.forEach((thumb,idx)=>thumb.addEventListener('click',()=>show(idx)));
+        let startX=0,deltaX=0;
+        const zone=gallery.querySelector('.gallery-slides');
+        if(zone){
+          zone.addEventListener('touchstart',(e)=>{startX=e.changedTouches[0].clientX;deltaX=0;},{passive:true});
+          zone.addEventListener('touchmove',(e)=>{deltaX=e.changedTouches[0].clientX-startX;},{passive:true});
+          zone.addEventListener('touchend',()=>{if(Math.abs(deltaX)>45){show(index+(deltaX<0?1:-1));}});
+        }
+        show(index);
+      }
+      document.querySelectorAll('[data-gallery]').forEach(initGallery);
+    })();
+  </script>
 </body>
 </html>`;
     }
@@ -265,6 +342,7 @@ Salle ou terrasse |</textarea><div class="small">Colle les liens publics Google 
   </script>
 </body>
 </html>
+
 
 
 
