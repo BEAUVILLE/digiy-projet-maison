@@ -3,90 +3,624 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIGIY Projet Maison Builder</title>
+  <title>DIGIY Projet Maison Builder — V12 Pré-devis artisan</title>
+
   <style>
     :root{
-      --bg:#061512;--bg2:#0d2a22;--card:rgba(255,255,255,.075);--card2:rgba(255,255,255,.045);
-      --line:rgba(255,255,255,.14);--text:#f7fff9;--muted:#c7ddd3;--soft:#92b7a8;
-      --gold:#f5c76b;--green:#19c98a;--danger:#ff927a;--shadow:0 24px 70px rgba(0,0,0,.34);--radius:28px;
+      --bg:#061512;
+      --bg2:#0d2a22;
+      --card:rgba(255,255,255,.075);
+      --card2:rgba(255,255,255,.045);
+      --line:rgba(255,255,255,.14);
+      --text:#f7fff9;
+      --muted:#c7ddd3;
+      --soft:#92b7a8;
+      --gold:#f5c76b;
+      --green:#19c98a;
+      --danger:#ff927a;
+      --blue:#5fd4ff;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --radius:28px;
     }
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 12% 0,rgba(245,199,107,.18),transparent 32%),radial-gradient(circle at 90% 10%,rgba(25,201,138,.12),transparent 30%),linear-gradient(135deg,var(--bg),#020b09 72%);color:var(--text)}
-    a{color:inherit}button,input,textarea,select{font:inherit}button{cursor:pointer}.wrap{width:min(1180px,100%);margin:0 auto;padding:22px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0 22px}.brand{display:flex;align-items:center;gap:12px;font-weight:950;letter-spacing:.02em}.mark{width:42px;height:42px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#fff1ba);color:#123226;box-shadow:0 12px 30px rgba(245,199,107,.18)}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:9px 12px;background:rgba(255,255,255,.055);color:var(--muted);font-size:13px;text-decoration:none;white-space:nowrap}
-    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:stretch;margin-bottom:18px}.card,.panel{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.card{padding:28px}.panel{overflow:hidden}.kicker{color:#ffe7a8;font-weight:950;text-transform:uppercase;font-size:13px;letter-spacing:.08em}h1{font-size:clamp(34px,6vw,68px);line-height:.95;margin:12px 0 14px;letter-spacing:-.055em}h2{margin:0 0 14px;font-size:clamp(24px,4vw,38px);letter-spacing:-.035em}h3{margin:0 0 10px;font-size:19px}p{line-height:1.6}.lead{color:var(--muted);font-size:17px;margin:0 0 14px}.small{font-size:13px;color:var(--soft);line-height:1.5}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:1px solid var(--line);border-radius:999px;padding:12px 15px;background:rgba(255,255,255,.06);color:var(--text);font-weight:850;text-decoration:none}.btn.primary{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.65)}.btn.green{background:var(--green);color:#06231a;border-color:rgba(25,201,138,.55)}.btn.danger{background:rgba(255,146,122,.12);color:#ffd4cb;border-color:rgba(255,146,122,.28)}
-    .form{padding:20px;display:grid;gap:13px}.field{display:grid;gap:7px}.field label{font-size:13px;font-weight:900;color:#ffe7a8}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--text);border-radius:16px;padding:13px 14px;outline:none}.field textarea{min-height:96px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-    .output-wrap{margin-top:18px}.output-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.035)}.output-tabs{display:flex;gap:8px;flex-wrap:wrap}.output-tabs button{border:1px solid var(--line);border-radius:999px;padding:9px 11px;background:rgba(255,255,255,.05);color:var(--muted);font-weight:850;font-size:13px}.output-tabs button.active{background:var(--gold);color:#123226;border-color:rgba(245,199,107,.7)}.output-actions{display:flex;gap:8px;flex-wrap:wrap}#output{display:none;margin:0;min-height:360px;max-height:70vh;overflow:auto;white-space:pre-wrap;word-break:break-word;padding:18px;color:#eefdf6;background:rgba(0,0,0,.22);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;font-size:13px;line-height:1.55}.empty{min-height:340px;display:grid;place-items:center;text-align:center;padding:25px;color:var(--muted);background:rgba(0,0,0,.18)}
-    .statusbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;color:var(--soft);font-size:13px}.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:#fff7df;color:#173228;border-radius:999px;padding:12px 16px;font-weight:950;box-shadow:0 18px 40px rgba(0,0,0,.28);transition:.25s ease;z-index:20;max-width:calc(100% - 28px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.hint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.hint{border:1px solid var(--line);border-radius:22px;padding:14px;background:rgba(255,255,255,.045)}.hint strong{display:block;color:#ffe7a8;margin-bottom:6px}.hint span{display:block;color:var(--muted);font-size:13px;line-height:1.45}
-    @media(max-width:900px){.hero{grid-template-columns:1fr}.row,.row3{grid-template-columns:1fr}.hint-grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.output-head{align-items:flex-start;flex-direction:column}}
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 12% 0,rgba(245,199,107,.18),transparent 32%),
+        radial-gradient(circle at 90% 10%,rgba(25,201,138,.12),transparent 30%),
+        linear-gradient(135deg,var(--bg),#020b09 72%);
+      color:var(--text);
+    }
+
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+
+    .wrap{
+      width:min(1180px,100%);
+      margin:0 auto;
+      padding:22px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0 22px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:950;
+      letter-spacing:.02em;
+    }
+
+    .mark{
+      width:42px;
+      height:42px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--gold),#fff1ba);
+      color:#123226;
+      box-shadow:0 12px 30px rgba(245,199,107,.18);
+      flex:0 0 auto;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 12px;
+      background:rgba(255,255,255,.055);
+      color:var(--muted);
+      font-size:13px;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:18px;
+      align-items:stretch;
+      margin-bottom:18px;
+    }
+
+    .card,.panel{
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .card{padding:28px}
+    .panel{overflow:hidden}
+
+    .kicker{
+      color:#ffe7a8;
+      font-weight:950;
+      text-transform:uppercase;
+      font-size:13px;
+      letter-spacing:.08em;
+    }
+
+    h1{
+      font-size:clamp(34px,6vw,68px);
+      line-height:.95;
+      margin:12px 0 14px;
+      letter-spacing:-.055em;
+    }
+
+    h2{
+      margin:0 0 14px;
+      font-size:clamp(24px,4vw,38px);
+      letter-spacing:-.035em;
+    }
+
+    h3{
+      margin:0 0 10px;
+      font-size:19px;
+    }
+
+    p{line-height:1.6}
+
+    .lead{
+      color:var(--muted);
+      font-size:17px;
+      margin:0 0 14px;
+    }
+
+    .small{
+      font-size:13px;
+      color:var(--soft);
+      line-height:1.5;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:12px 15px;
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      font-weight:850;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .btn.primary{
+      background:var(--gold);
+      color:#123226;
+      border-color:rgba(245,199,107,.65);
+    }
+
+    .btn.green{
+      background:var(--green);
+      color:#06231a;
+      border-color:rgba(25,201,138,.55);
+    }
+
+    .btn.blue{
+      background:rgba(95,212,255,.16);
+      color:#dff6ff;
+      border-color:rgba(95,212,255,.35);
+    }
+
+    .btn.danger{
+      background:rgba(255,146,122,.12);
+      color:#ffd4cb;
+      border-color:rgba(255,146,122,.28);
+    }
+
+    .form{
+      padding:20px;
+      display:grid;
+      gap:13px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+    }
+
+    .field label{
+      font-size:13px;
+      font-weight:900;
+      color:#ffe7a8;
+    }
+
+    .field input,
+    .field textarea,
+    .field select{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      border-radius:16px;
+      padding:13px 14px;
+      outline:none;
+    }
+
+    .field textarea{
+      min-height:96px;
+      resize:vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus{
+      border-color:rgba(245,199,107,.50);
+      box-shadow:0 0 0 3px rgba(245,199,107,.10);
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .row3{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+    }
+
+    .quote-zone{
+      border:1px solid rgba(95,212,255,.22);
+      border-radius:24px;
+      padding:16px;
+      background:
+        radial-gradient(circle at top right,rgba(95,212,255,.10),transparent 34%),
+        rgba(255,255,255,.035);
+    }
+
+    .quote-zone .quote-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .quote-zone .quote-title strong{
+      color:#dff6ff;
+      font-weight:950;
+    }
+
+    .quote-zone .quote-title span{
+      color:var(--soft);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .output-wrap{margin-top:18px}
+
+    .output-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:16px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+    }
+
+    .output-tabs{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .output-tabs button{
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:9px 11px;
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+      font-weight:850;
+      font-size:13px;
+    }
+
+    .output-tabs button.active{
+      background:var(--gold);
+      color:#123226;
+      border-color:rgba(245,199,107,.7);
+    }
+
+    .output-tabs button.devis-tab.active{
+      background:var(--blue);
+      color:#062031;
+      border-color:rgba(95,212,255,.7);
+    }
+
+    .output-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    #output{
+      display:none;
+      margin:0;
+      min-height:360px;
+      max-height:70vh;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+      padding:18px;
+      color:#eefdf6;
+      background:rgba(0,0,0,.22);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .empty{
+      min-height:340px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:25px;
+      color:var(--muted);
+      background:rgba(0,0,0,.18);
+    }
+
+    .statusbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:14px;
+      color:var(--soft);
+      font-size:13px;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%) translateY(20px);
+      opacity:0;
+      pointer-events:none;
+      background:#fff7df;
+      color:#173228;
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:950;
+      box-shadow:0 18px 40px rgba(0,0,0,.28);
+      transition:.25s ease;
+      z-index:20;
+      max-width:calc(100% - 28px);
+      text-align:center;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    .hint-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .hint{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:14px;
+      background:rgba(255,255,255,.045);
+    }
+
+    .hint strong{
+      display:block;
+      color:#ffe7a8;
+      margin-bottom:6px;
+    }
+
+    .hint span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .row,.row3{grid-template-columns:1fr}
+      .hint-grid{grid-template-columns:1fr}
+      .topbar{align-items:flex-start;flex-direction:column}
+      .output-head{align-items:flex-start;flex-direction:column}
+    }
   </style>
 </head>
+
 <body>
   <main class="wrap">
     <header class="topbar">
-      <div class="brand"><div class="mark">∞</div><div><div>DIGIY Projet Maison Builder</div><div class="small">Préparer une page, un brief, un prompt et une base de réalisation.</div></div></div>
+      <div class="brand">
+        <div class="mark">∞</div>
+        <div>
+          <div>DIGIY Projet Maison Builder</div>
+          <div class="small">Préparer une page, un brief, un prompt, une base de réalisation et un pré-devis artisan.</div>
+        </div>
+      </div>
       <a class="pill" href="https://digiylyfe.com/" target="_blank" rel="noopener">← Retour DIGIYLYFE</a>
     </header>
 
     <section class="hero">
       <div class="card">
-        <div class="kicker">Outil maison · BY DIGIYLYFE</div>
+        <div class="kicker">Outil maison · BY DIGIYLYFE · V12</div>
         <h1>Préparer un projet sans se perdre.</h1>
-        <p class="lead">Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier : brief, prompt IA, mémo SQL léger, plan de réalisation, page HTML et JSON.</p>
-        <p class="lead">Version V11 : diapo plus ouvert, image plus haute, mode photo/affiche, swipe tactile, Google Drive ou WordPress média, zéro stockage image Supabase, zéro SQL lourd.</p>
+        <p class="lead">
+          Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier :
+          brief, prompt IA, mémo SQL léger, plan de réalisation, <strong>pré-devis artisan</strong>, page HTML et JSON.
+        </p>
+        <p class="lead">
+          Version V12 : la V11 premium reste debout. On ajoute la couche devis terrain :
+          <strong>DIGIY prépare. L’artisan valide. Le client comprend.</strong>
+        </p>
         <p class="lead"><strong>Chaque partenaire est une facette. DIGIY lui donne la lumière.</strong></p>
+
         <div class="actions">
           <button class="btn primary" type="button" onclick="generateAll()">Préparer le projet</button>
+          <button class="btn blue" type="button" onclick="setServiceQuoteExample()">Exemple devis artisan</button>
           <button class="btn" type="button" onclick="applyTypeDefaults(true)">Remplir exemple</button>
           <button class="btn danger" type="button" onclick="clearForm()">Nettoyer</button>
         </div>
+
         <div class="hint-grid">
           <div class="hint"><strong>1. Projet</strong><span>Nom, ville, type et public visé.</span></div>
           <div class="hint"><strong>2. Contact</strong><span>WhatsApp, horaires et repère terrain.</span></div>
-          <div class="hint"><strong>3. Sortie</strong><span>Une page mobile claire prête à tester.</span></div>
+          <div class="hint"><strong>3. Pré-devis</strong><span>Base claire à faire valider par l’artisan.</span></div>
         </div>
       </div>
 
       <div class="panel">
         <form class="form" onsubmit="event.preventDefault();generateAll();">
           <div class="row">
-            <div class="field"><label for="projectName">Nom du projet</label><input id="projectName" value="Restaurant Teranga Saly" placeholder="Ex : Restaurant Teranga Saly" /></div>
-            <div class="field"><label for="typeKey">Type</label><select id="typeKey" onchange="applyTypeDefaults(false)"><option value="restaurant" selected>Restaurant</option><option value="hotel">Logement / hôtel</option><option value="boutique">Boutique</option><option value="service">Service / artisan</option><option value="event">Événement</option><option value="generic">Projet simple</option></select></div>
+            <div class="field">
+              <label for="projectName">Nom du projet</label>
+              <input id="projectName" value="Restaurant Teranga Saly" placeholder="Ex : Restaurant Teranga Saly" />
+            </div>
+            <div class="field">
+              <label for="typeKey">Type</label>
+              <select id="typeKey" onchange="applyTypeDefaults(false)">
+                <option value="restaurant" selected>Restaurant</option>
+                <option value="hotel">Logement / hôtel</option>
+                <option value="boutique">Boutique</option>
+                <option value="service">Service / artisan</option>
+                <option value="event">Événement</option>
+                <option value="generic">Projet simple</option>
+              </select>
+            </div>
           </div>
+
           <div class="row">
-            <div class="field"><label for="city">Ville / zone</label><input id="city" value="Saly, Sénégal" placeholder="Ex : Saly, Sénégal" /></div>
-            <div class="field"><label for="style">Style souhaité</label><input id="style" value="Premium, mobile, chaleureux, africain, clair, rassurant" placeholder="Ex : sobre, moderne, local" /></div>
+            <div class="field">
+              <label for="city">Ville / zone</label>
+              <input id="city" value="Saly, Sénégal" placeholder="Ex : Saly, Sénégal" />
+            </div>
+            <div class="field">
+              <label for="style">Style souhaité</label>
+              <input id="style" value="Premium, mobile, chaleureux, africain, clair, rassurant" placeholder="Ex : sobre, moderne, local" />
+            </div>
           </div>
+
           <div class="row3">
-            <div class="field"><label for="contactPhone">WhatsApp officiel</label><input id="contactPhone" value="+221 77 000 00 00" placeholder="Ex : +221 77 000 00 00" /></div>
-            <div class="field"><label for="hours">Horaires</label><input id="hours" value="Tous les jours · 11h30 — 23h00" placeholder="Ex : Tous les jours 11h — 23h" /></div>
-            <div class="field"><label for="address">Repère / adresse</label><input id="address" value="Saly centre · proche route principale" placeholder="Ex : Saly centre, près de..." /></div>
+            <div class="field">
+              <label for="contactPhone">WhatsApp officiel</label>
+              <input id="contactPhone" value="+221 77 000 00 00" placeholder="Ex : +221 77 000 00 00" />
+            </div>
+            <div class="field">
+              <label for="hours">Horaires</label>
+              <input id="hours" value="Tous les jours · 11h30 — 23h00" placeholder="Ex : Tous les jours 11h — 23h" />
+            </div>
+            <div class="field">
+              <label for="address">Repère / adresse</label>
+              <input id="address" value="Saly centre · proche route principale" placeholder="Ex : Saly centre, près de..." />
+            </div>
           </div>
-          <div class="field"><label for="activity">Activité</label><textarea id="activity" placeholder="Décris l’activité">Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.</textarea></div>
-          <div class="field"><label for="goal">Objectif de la page</label><textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea><div class="small">Photos gardées sur ton Google Drive ou ton média WordPress : colle seulement les liens publics. Rien n’est envoyé dans Supabase Storage.</div></div>
-          <div class="field"><label for="audience">Public visé</label><input id="audience" value="Clients locaux, familles, touristes, groupes, visiteurs de Saly" placeholder="Ex : clients locaux, touristes, familles" /></div>
-          <div class="field"><label for="specialFeatures">Points importants</label><textarea id="specialFeatures" placeholder="Un point par ligne">Spécialités sénégalaises
+
+          <div class="field">
+            <label for="activity">Activité</label>
+            <textarea id="activity" placeholder="Décris l’activité">Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.</textarea>
+          </div>
+
+          <div class="field">
+            <label for="goal">Objectif de la page</label>
+            <textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea>
+            <div class="small">Photos gardées sur Google Drive ou média WordPress : colle seulement les liens publics. Rien n’est envoyé dans Supabase Storage.</div>
+          </div>
+
+          <div class="field">
+            <label for="audience">Public visé</label>
+            <input id="audience" value="Clients locaux, familles, touristes, groupes, visiteurs de Saly" placeholder="Ex : clients locaux, touristes, familles" />
+          </div>
+
+          <div class="field">
+            <label for="specialFeatures">Points importants</label>
+            <textarea id="specialFeatures" placeholder="Un point par ligne">Spécialités sénégalaises
 Réservation directe
 Contact WhatsApp
 Plats du jour
 Groupes et événements privés
 Photos et avis
-Horaires clairs</textarea></div>
-          <div class="field"><label for="extraSections">Sections à ajouter</label><textarea id="extraSections" placeholder="Un nom de section par ligne">Plat détail
+Horaires clairs</textarea>
+          </div>
+
+          <div class="field">
+            <label for="extraSections">Sections à ajouter</label>
+            <textarea id="extraSections" placeholder="Un nom de section par ligne">Plat détail
 Commande
 Témoignages
 Galerie
 Tarifs
 À propos
 Événements privés
-FAQ</textarea></div>
-          <div class="field"><label for="galleryPhotos">Galerie photos — titre | URL publique</label><textarea id="galleryPhotos" style="min-height:150px" placeholder="Une photo par ligne :
-Plat du jour | https://drive.google.com/file/d/ID_IMAGE/view?usp=sharing
-Salle | https://digiylyfe.net/wp-content/uploads/2026/04/photo.jpg
+FAQ</textarea>
+          </div>
 
-Tu peux aussi coller des URLs seules : elles rempliront les cadres dans l’ordre.">Photo du restaurant |
+          <div class="field">
+            <label for="galleryPhotos">Galerie photos — titre | URL publique</label>
+            <textarea id="galleryPhotos" style="min-height:150px" placeholder="Une photo par ligne :
+Plat du jour | https://drive.google.com/file/d/ID_IMAGE/view?usp=sharing
+Salle | https://digiylyfe.net/wp-content/uploads/2026/04/photo.jpg">Photo du restaurant |
 Plat du jour |
 Poisson grillé |
-Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> colle ici tes liens publics Google Drive ou WordPress média. Tu peux écrire <em>Titre | URL</em> ou coller les URLs seules sous les titres. Les photos restent dehors : Supabase ne reçoit rien, le SQL reste léger.</div></div>
+Salle ou terrasse |</textarea>
+            <div class="small"><strong>Important :</strong> Titre | URL, ou URLs seules. Les photos restent dehors : Supabase ne reçoit rien.</div>
+          </div>
+
+          <div class="quote-zone">
+            <div class="quote-title">
+              <strong>🧾 Pré-devis artisan</strong>
+              <span>Base claire à valider par l’artisan après vérification du terrain.</span>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="quoteClient">Client / demandeur</label>
+                <input id="quoteClient" placeholder="Ex : Mme Diop" />
+              </div>
+              <div class="field">
+                <label for="quoteWorkType">Type d’intervention</label>
+                <input id="quoteWorkType" placeholder="Ex : Pose carrelage terrasse" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="quoteMeasure">Surface / quantité / volume</label>
+                <input id="quoteMeasure" placeholder="Ex : 25 m², 3 chambres, 1 salle de bain" />
+              </div>
+              <div class="field">
+                <label for="quoteDelay">Délai estimé</label>
+                <input id="quoteDelay" placeholder="Ex : 2 à 3 jours après validation" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="quoteMaterials">Matériaux / fournitures prévues</label>
+              <textarea id="quoteMaterials" placeholder="Ex : colle, carreaux, ciment, sable, joints, transport matériel"></textarea>
+            </div>
+
+            <div class="row3">
+              <div class="field">
+                <label for="quoteLabor">Main-d’œuvre estimée (FCFA)</label>
+                <input id="quoteLabor" inputmode="numeric" placeholder="Ex : 75000" />
+              </div>
+              <div class="field">
+                <label for="quoteMaterialCost">Matériaux estimés (FCFA)</label>
+                <input id="quoteMaterialCost" inputmode="numeric" placeholder="Ex : 120000" />
+              </div>
+              <div class="field">
+                <label for="quoteTravel">Déplacement / transport (FCFA)</label>
+                <input id="quoteTravel" inputmode="numeric" placeholder="Ex : 10000" />
+              </div>
+            </div>
+
+            <div class="row3">
+              <div class="field">
+                <label for="quoteOther">Marge / imprévus (FCFA)</label>
+                <input id="quoteOther" inputmode="numeric" placeholder="Ex : 15000" />
+              </div>
+              <div class="field">
+                <label for="quoteDeposit">Acompte conseillé</label>
+                <input id="quoteDeposit" placeholder="Ex : 50% à la commande" />
+              </div>
+              <div class="field">
+                <label for="quoteValidity">Validité du devis</label>
+                <input id="quoteValidity" value="7 jours" placeholder="Ex : 7 jours" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="quoteNotes">Notes artisan / conditions</label>
+              <textarea id="quoteNotes" placeholder="Ex : prix à confirmer après visite, matériaux selon disponibilité, finition à préciser"></textarea>
+            </div>
+          </div>
+
           <button class="btn green" type="submit">Préparer le projet</button>
         </form>
       </div>
@@ -95,46 +629,157 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
     <section class="panel output-wrap">
       <div class="output-head">
         <div class="output-tabs" aria-label="Onglets de sortie">
-          <button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Brief</button><button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button><button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button><button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button><button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button><button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
+          <button type="button" class="active" data-tab="brief" onclick="setOutputTab('brief')">Brief</button>
+          <button type="button" data-tab="prompt" onclick="setOutputTab('prompt')">Prompt IA</button>
+          <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button>
+          <button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button>
+          <button type="button" class="devis-tab" data-tab="devis" onclick="setOutputTab('devis')">Pré-devis artisan</button>
+          <button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button>
+          <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
         </div>
-        <div class="output-actions"><button class="btn" type="button" onclick="copyCurrent()">Copier</button><button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button><button class="btn" type="button" onclick="previewPage()">Voir la page</button></div>
+        <div class="output-actions">
+          <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
+          <button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button>
+          <button class="btn" type="button" onclick="previewPage()">Voir la page</button>
+        </div>
       </div>
+
       <pre id="output" hidden></pre>
-      <div id="emptyState" class="empty"><div><h2>Rien préparé pour l’instant</h2><p>Clique sur <strong>Préparer le projet</strong>. La sortie apparaîtra ici.</p></div></div>
+      <div id="emptyState" class="empty">
+        <div>
+          <h2>Rien préparé pour l’instant</h2>
+          <p>Clique sur <strong>Préparer le projet</strong>. La sortie apparaîtra ici.</p>
+        </div>
+      </div>
     </section>
 
-    <div class="statusbar"><span id="status">Prêt.</span><span>BY DIGIYLYFE · terrain d’abord</span></div>
+    <div class="statusbar">
+      <span id="status">Prêt.</span>
+      <span>BY DIGIYLYFE · terrain d’abord</span>
+    </div>
   </main>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
     "use strict";
-    const outputs = { brief:"", prompt:"", sql:"", realisation:"", page:"", json:"" };
+
+    const outputs = {
+      brief:"",
+      prompt:"",
+      sql:"",
+      realisation:"",
+      devis:"",
+      page:"",
+      json:""
+    };
+
     let currentTab = "brief";
     let toastTimer = null;
     const $ = id => document.getElementById(id);
 
-    function esc(value){return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");}
-    function attr(value){return esc(value).replace(/`/g,"&#096;");}
-    function sqlEsc(value){return String(value ?? "").replace(/'/g,"''");}
-    function slug(value){return String(value || "projet").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,70) || "projet";}
-    function lines(value){const raw=String(value||"").split(/\n|,|;/g).map(x=>x.trim()).filter(Boolean);return [...new Set(raw)];}
-    function looksLikeUrl(value){return /^https?:\/\//i.test(String(value||"").trim());}
-    function galleryItems(value){
-      const fallbackTitles=["Photo du restaurant","Plat du jour","Poisson grillé","Salle ou terrasse","Ambiance","Équipe","Détail","Client heureux","Carte / menu","Extérieur","Intérieur","Moment partagé"];
-      const items=[];
-      const looseUrls=[];
+    function esc(value){
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+    }
 
-      String(value||"").split(/\n/g).forEach((line)=>{
-        const raw=line.trim();
+    function attr(value){
+      return esc(value).replace(/`/g,"&#096;");
+    }
+
+    function js(value){
+      return String(value ?? "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'")
+        .replace(/\n/g,"\\n")
+        .replace(/\r/g,"");
+    }
+
+    function sqlEsc(value){
+      return String(value ?? "").replace(/'/g,"''");
+    }
+
+    function slug(value){
+      return String(value || "projet")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"")
+        .slice(0,70) || "projet";
+    }
+
+    function lines(value){
+      const raw = String(value || "")
+        .split(/\n|,|;/g)
+        .map(x => x.trim())
+        .filter(Boolean);
+      return [...new Set(raw)];
+    }
+
+    function looksLikeUrl(value){
+      return /^https?:\/\//i.test(String(value || "").trim());
+    }
+
+    function numberXof(value){
+      const raw = String(value || "").replace(/[^\d]/g,"");
+      const n = Number(raw || 0);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function money(value){
+      const n = numberXof(value);
+      return n ? n.toLocaleString("fr-FR") + " FCFA" : "À compléter";
+    }
+
+    function waDigits(value){
+      return String(value || "").replace(/[^0-9]/g,"");
+    }
+
+    function imageUrl(value){
+      const url = String(value || "").trim();
+      if(!url) return "";
+
+      const fileMatch = url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
+      const idParam = url.match(/[?&]id=([^&]+)/);
+      const openMatch = url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+      const id = (fileMatch && fileMatch[1]) || (idParam && idParam[1]) || (openMatch && openMatch[1]) || "";
+
+      if(id) return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w1200";
+
+      try{
+        return encodeURI(url);
+      }catch(_){
+        return url;
+      }
+    }
+
+    function galleryItems(value){
+      const fallbackTitles = [
+        "Photo principale","Preuve terrain","Réalisation","Détail",
+        "Ambiance","Équipe","Avant / après","Contact"
+      ];
+
+      const items = [];
+      const looseUrls = [];
+
+      String(value || "").split(/\n/g).forEach(line => {
+        const raw = line.trim();
         if(!raw) return;
 
         if(raw.includes("|")){
-          const parts=raw.split("|");
-          const title=(parts.shift()||"").trim();
-          const rest=parts.join("|").trim();
-          const url=looksLikeUrl(rest)?rest:"";
-          items.push({title:title||fallbackTitles[items.length]||("Photo "+(items.length+1)),url});
+          const parts = raw.split("|");
+          const title = (parts.shift() || "").trim();
+          const rest = parts.join("|").trim();
+          const url = looksLikeUrl(rest) ? rest : "";
+          items.push({
+            title:title || fallbackTitles[items.length] || ("Photo " + (items.length + 1)),
+            url
+          });
           return;
         }
 
@@ -143,196 +788,604 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
           return;
         }
 
-        items.push({title:raw||fallbackTitles[items.length]||("Photo "+(items.length+1)),url:""});
+        items.push({
+          title:raw || fallbackTitles[items.length] || ("Photo " + (items.length + 1)),
+          url:""
+        });
       });
 
-      looseUrls.forEach((url)=>{
-        const empty=items.find(item=>!item.url);
+      looseUrls.forEach(url => {
+        const empty = items.find(item => !item.url);
         if(empty){
-          empty.url=url;
+          empty.url = url;
         }else{
-          items.push({title:fallbackTitles[items.length]||("Photo "+(items.length+1)),url});
+          items.push({
+            title:fallbackTitles[items.length] || ("Photo " + (items.length + 1)),
+            url
+          });
         }
       });
 
       return items.slice(0,12);
     }
-    function waDigits(value){return String(value||"").replace(/[^0-9]/g,"");}
-    function imageUrl(value){
-      const url=String(value||"").trim();
-      if(!url) return "";
-      const fileMatch=url.match(/drive\.google\.com\/file\/d\/([^/]+)/);
-      const idParam=url.match(/[?&]id=([^&]+)/);
-      const openMatch=url.match(/drive\.google\.com\/open\?id=([^&]+)/);
-      const id=(fileMatch&&fileMatch[1])||(idParam&&idParam[1])||(openMatch&&openMatch[1])||"";
-      if(id) return "https://drive.google.com/thumbnail?id="+encodeURIComponent(id)+"&sz=w1200";
-      try{return encodeURI(url);}catch{return url;}
+
+    function data(){
+      return {
+        projectName:$("projectName").value.trim() || "Projet DIGIY",
+        typeKey:$("typeKey").value || "generic",
+        city:$("city").value.trim() || "Saly, Sénégal",
+        style:$("style").value.trim() || "Mobile, clair, chaleureux, rassurant",
+        contactPhone:$("contactPhone").value.trim(),
+        hours:$("hours").value.trim(),
+        address:$("address").value.trim(),
+        activity:$("activity").value.trim() || "Activité locale à présenter simplement.",
+        goal:$("goal").value.trim() || "Présenter l’activité, rassurer le client et faciliter le contact.",
+        audience:$("audience").value.trim() || "Clients locaux et visiteurs",
+        specialFeatures:lines($("specialFeatures").value),
+        extraSections:lines($("extraSections").value),
+        galleryPhotos:galleryItems($("galleryPhotos").value),
+        galleryRaw:$("galleryPhotos").value.trim(),
+
+        quoteClient:$("quoteClient").value.trim(),
+        quoteWorkType:$("quoteWorkType").value.trim(),
+        quoteMeasure:$("quoteMeasure").value.trim(),
+        quoteMaterials:$("quoteMaterials").value.trim(),
+        quoteLabor:$("quoteLabor").value.trim(),
+        quoteMaterialCost:$("quoteMaterialCost").value.trim(),
+        quoteTravel:$("quoteTravel").value.trim(),
+        quoteOther:$("quoteOther").value.trim(),
+        quoteDelay:$("quoteDelay").value.trim(),
+        quoteDeposit:$("quoteDeposit").value.trim(),
+        quoteValidity:$("quoteValidity").value.trim() || "7 jours",
+        quoteNotes:$("quoteNotes").value.trim()
+      };
     }
 
-    function data(){return {
-      projectName:$("projectName").value.trim() || "Projet DIGIY",
-      typeKey:$("typeKey").value || "generic",
-      city:$("city").value.trim() || "Saly, Sénégal",
-      style:$("style").value.trim() || "Mobile, clair, chaleureux, rassurant",
-      contactPhone:$("contactPhone").value.trim(),
-      hours:$("hours").value.trim(),
-      address:$("address").value.trim(),
-      activity:$("activity").value.trim() || "Activité locale à présenter simplement.",
-      goal:$("goal").value.trim() || "Présenter l’activité, rassurer le client et faciliter le contact.",
-      audience:$("audience").value.trim() || "Clients locaux et visiteurs",
-      specialFeatures:lines($("specialFeatures").value),
-      extraSections:lines($("extraSections").value),
-      galleryPhotos:galleryItems($("galleryPhotos").value),
-      galleryRaw:$("galleryPhotos").value.trim()
-    };}
-
     const defaultsByType = {
-      restaurant:{projectName:"Restaurant Teranga Saly",city:"Saly, Sénégal",style:"Premium, mobile, chaleureux, africain, clair, rassurant",contactPhone:"+221 77 000 00 00",hours:"Tous les jours · 11h30 — 23h00",address:"Saly centre · proche route principale",activity:"Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.",goal:"Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.",audience:"Clients locaux, familles, touristes, groupes, visiteurs de Saly",specialFeatures:"Spécialités sénégalaises\nRéservation directe\nContact WhatsApp\nPlats du jour\nGroupes et événements privés\nPhotos et avis\nHoraires clairs",extraSections:"Plat détail\nCommande\nTémoignages\nGalerie\nTarifs\nÀ propos\nÉvénements privés\nFAQ",galleryPhotos:"Photo du restaurant |\nPlat du jour |\nPoisson grillé |\nSalle ou terrasse |"},
-      hotel:{projectName:"Maison d’hôtes Saly",city:"Saly, Sénégal",style:"Calme, premium, solaire, hospitalité locale, mobile",contactPhone:"+221 77 000 00 00",hours:"Arrivées sur rendez-vous",address:"Saly · repère à préciser",activity:"Logement ou maison d’hôtes avec chambres, disponibilité, repères du quartier et contact direct.",goal:"Présenter le lieu, rassurer le voyageur, montrer les tarifs et faciliter une demande de réservation directe.",audience:"Voyageurs, familles, couples, clients de passage, diaspora",specialFeatures:"Chambres disponibles\nContact direct\nPhotos du lieu\nTarifs nuit semaine mois\nQuartier et repères\nDisponibilités\nConseils locaux",extraSections:"Chambres\nDisponibilités\nGalerie\nTarifs\nQuartier\nRèglement\nFAQ",galleryPhotos:"Façade du lieu |\nChambre |\nTerrasse |\nQuartier |"},
-      boutique:{projectName:"Astou Market",city:"Saly, Sénégal",style:"Boutique claire, visuelle, directe, confiance, mobile",contactPhone:"+221 77 000 00 00",hours:"Lundi à samedi · 9h00 — 20h00",address:"Saly centre",activity:"Boutique locale avec produits, photos, prix indicatifs et contact WhatsApp direct.",goal:"Présenter la boutique, mettre en avant les produits, faciliter la demande client et préparer la vente directe.",audience:"Clients du quartier, visiteurs, habitués, acheteurs WhatsApp",specialFeatures:"Produits visibles\nPrix clairs\nCommande WhatsApp\nPhotos produits\nConseil direct\nRetrait ou livraison",extraSections:"Produits\nCommande\nGalerie\nTarifs\nAvis clients\nLivraison\nFAQ",galleryPhotos:"Produit phare |\nRayon boutique |\nNouveautés |\nCommande prête |"},
-      service:{projectName:"Mes services à Saly",city:"Saly, Sénégal",style:"Simple, sérieux, humain, local, mobile",contactPhone:"+221 77 000 00 00",hours:"Sur rendez-vous",address:"Saly et environs",activity:"Service terrain local : artisan, réparateur, aide maison, nettoyage, travaux ou prestation directe.",goal:"Présenter le savoir-faire, inspirer confiance, recevoir une demande claire et faciliter le contact direct.",audience:"Habitants, propriétaires, commerces, familles, professionnels locaux",specialFeatures:"Demande rapide\nContact WhatsApp\nPhotos avant après\nZone d’intervention\nTarifs indicatifs\nUrgence possible",extraSections:"Services\nDemande\nRéalisations\nTarifs\nAvis\nZone couverte\nFAQ",galleryPhotos:"Réalisation |\nAvant / après |\nÉquipe |\nMatériel |"},
-      event:{projectName:"Événement à Saly",city:"Saly, Sénégal",style:"Festif, clair, chaleureux, mobile, rassurant",contactPhone:"+221 77 000 00 00",hours:"Date et heure à préciser",address:"Lieu à préciser",activity:"Page de présentation pour un événement, une soirée, une rencontre, un atelier ou une activité locale.",goal:"Présenter le programme, donner les informations pratiques et faciliter l’inscription ou le contact.",audience:"Participants, familles, visiteurs, communauté locale",specialFeatures:"Programme\nInscription directe\nLieu et horaires\nContact WhatsApp\nPhotos\nInformations pratiques",extraSections:"Programme\nInscription\nGalerie\nTarifs\nLieu\nOrganisateur\nFAQ",galleryPhotos:"Affiche événement |\nLieu |\nAmbiance |\nOrganisateur |"},
-      generic:{projectName:"Projet DIGIY",city:"Saly, Sénégal",style:"Simple, clair, mobile, humain, rassurant",contactPhone:"+221 77 000 00 00",hours:"Horaires à préciser",address:"Repère à préciser",activity:"Projet local à présenter avec une page claire et directe.",goal:"Expliquer le projet, rassurer, montrer les informations utiles et guider vers l’action.",audience:"Public local, clients, partenaires, visiteurs",specialFeatures:"Présentation claire\nContact direct\nInformations pratiques\nConfiance\nAction simple",extraSections:"Présentation\nOffres\nContact\nGalerie\nTarifs\nFAQ",galleryPhotos:"Photo principale |\nPreuve terrain |\nOffre |\nContact |"}
+      restaurant:{
+        projectName:"Restaurant Teranga Saly",
+        city:"Saly, Sénégal",
+        style:"Premium, mobile, chaleureux, africain, clair, rassurant",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Tous les jours · 11h30 — 23h00",
+        address:"Saly centre · proche route principale",
+        activity:"Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.",
+        goal:"Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.",
+        audience:"Clients locaux, familles, touristes, groupes, visiteurs de Saly",
+        specialFeatures:"Spécialités sénégalaises\nRéservation directe\nContact WhatsApp\nPlats du jour\nGroupes et événements privés\nPhotos et avis\nHoraires clairs",
+        extraSections:"Plat détail\nCommande\nTémoignages\nGalerie\nTarifs\nÀ propos\nÉvénements privés\nFAQ",
+        galleryPhotos:"Photo du restaurant |\nPlat du jour |\nPoisson grillé |\nSalle ou terrasse |"
+      },
+      hotel:{
+        projectName:"Maison d’hôtes Saly",
+        city:"Saly, Sénégal",
+        style:"Calme, premium, solaire, hospitalité locale, mobile",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Arrivées sur rendez-vous",
+        address:"Saly · repère à préciser",
+        activity:"Logement ou maison d’hôtes avec chambres, disponibilité, repères du quartier et contact direct.",
+        goal:"Présenter le lieu, rassurer le voyageur, montrer les tarifs et faciliter une demande de réservation directe.",
+        audience:"Voyageurs, familles, couples, clients de passage, diaspora",
+        specialFeatures:"Chambres disponibles\nContact direct\nPhotos du lieu\nTarifs nuit semaine mois\nQuartier et repères\nDisponibilités\nConseils locaux",
+        extraSections:"Chambres\nDisponibilités\nGalerie\nTarifs\nQuartier\nRèglement\nFAQ",
+        galleryPhotos:"Façade du lieu |\nChambre |\nTerrasse |\nQuartier |"
+      },
+      boutique:{
+        projectName:"Astou Market",
+        city:"Saly, Sénégal",
+        style:"Boutique claire, visuelle, directe, confiance, mobile",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Lundi à samedi · 9h00 — 20h00",
+        address:"Saly centre",
+        activity:"Boutique locale avec produits, photos, prix indicatifs et contact WhatsApp direct.",
+        goal:"Présenter la boutique, mettre en avant les produits, faciliter la demande client et préparer la vente directe.",
+        audience:"Clients du quartier, visiteurs, habitués, acheteurs WhatsApp",
+        specialFeatures:"Produits visibles\nPrix clairs\nCommande WhatsApp\nPhotos produits\nConseil direct\nRetrait ou livraison",
+        extraSections:"Produits\nCommande\nGalerie\nTarifs\nAvis clients\nLivraison\nFAQ",
+        galleryPhotos:"Produit phare |\nRayon boutique |\nNouveautés |\nCommande prête |"
+      },
+      service:{
+        projectName:"Ndiaga Services Saly",
+        city:"Saly, Sénégal",
+        style:"Simple, sérieux, humain, local, mobile",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Sur rendez-vous",
+        address:"Saly et environs",
+        activity:"Service terrain local : artisan, réparateur, aide maison, nettoyage, travaux ou prestation directe.",
+        goal:"Présenter le savoir-faire, inspirer confiance, recevoir une demande claire et faciliter le contact direct.",
+        audience:"Habitants, propriétaires, commerces, familles, professionnels locaux",
+        specialFeatures:"Demande rapide\nContact WhatsApp\nPhotos avant après\nZone d’intervention\nTarifs indicatifs\nUrgence possible",
+        extraSections:"Services\nDemande de devis\nRéalisations\nTarifs\nAvis\nZone couverte\nFAQ",
+        galleryPhotos:"Réalisation |\nAvant / après |\nÉquipe |\nMatériel |"
+      },
+      event:{
+        projectName:"Événement à Saly",
+        city:"Saly, Sénégal",
+        style:"Festif, clair, chaleureux, mobile, rassurant",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Date et heure à préciser",
+        address:"Lieu à préciser",
+        activity:"Page de présentation pour un événement, une soirée, une rencontre, un atelier ou une activité locale.",
+        goal:"Présenter le programme, donner les informations pratiques et faciliter l’inscription ou le contact.",
+        audience:"Participants, familles, visiteurs, communauté locale",
+        specialFeatures:"Programme\nInscription directe\nLieu et horaires\nContact WhatsApp\nPhotos\nInformations pratiques",
+        extraSections:"Programme\nInscription\nGalerie\nTarifs\nLieu\nOrganisateur\nFAQ",
+        galleryPhotos:"Affiche événement |\nLieu |\nAmbiance |\nOrganisateur |"
+      },
+      generic:{
+        projectName:"Projet DIGIY",
+        city:"Saly, Sénégal",
+        style:"Simple, clair, mobile, humain, rassurant",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Horaires à préciser",
+        address:"Repère à préciser",
+        activity:"Projet local à présenter avec une page claire et directe.",
+        goal:"Expliquer le projet, rassurer, montrer les informations utiles et guider vers l’action.",
+        audience:"Public local, clients, partenaires, visiteurs",
+        specialFeatures:"Présentation claire\nContact direct\nInformations pratiques\nConfiance\nAction simple",
+        extraSections:"Présentation\nOffres\nContact\nGalerie\nTarifs\nFAQ",
+        galleryPhotos:"Photo principale |\nPreuve terrain |\nOffre |\nContact |"
+      }
     };
 
-    function applyTypeDefaults(force){const type=$("typeKey").value || "generic";const d=defaultsByType[type] || defaultsByType.generic;["projectName","city","style","contactPhone","hours","address","activity","goal","audience","specialFeatures","extraSections","galleryPhotos"].forEach(id=>{const el=$(id);if(force || !el.value.trim()) el.value=d[id]||"";});if(force){setStatus("Exemple chargé pour : "+type);toast("Exemple chargé");}}
-    function sectionTitleByType(d){if(d.typeKey==="restaurant")return "Menu et spécialités";if(d.typeKey==="hotel")return "Lieu et hospitalité";if(d.typeKey==="boutique")return "Produits et boutique";if(d.typeKey==="service")return "Services proposés";if(d.typeKey==="event")return "Programme et informations";return "Ce que nous proposons";}
-    function actionLabelByType(d){if(d.typeKey==="restaurant")return "Réserver / contacter";if(d.typeKey==="hotel")return "Demander une réservation";if(d.typeKey==="boutique")return "Commander / contacter";if(d.typeKey==="service")return "Demander le service";if(d.typeKey==="event")return "S’inscrire / contacter";return "Contacter";}
-    function buildNav(d){const base=[{id:"accueil",label:"Accueil"},{id:"menu",label:d.typeKey==="restaurant"?"Menu":"Offre"}];const extra=d.extraSections.slice(0,10).map(s=>({id:slug(s),label:s}));return [...base,...extra,{id:"reservation",label:d.typeKey==="restaurant"?"Réservation":"Demande"},{id:"contact",label:"Contact"}];}
+    function applyTypeDefaults(force){
+      const type = $("typeKey").value || "generic";
+      const d = defaultsByType[type] || defaultsByType.generic;
 
-    function brief(d){return ["# Brief — "+d.projectName,"","Chaque partenaire est une facette. DIGIY lui donne la lumière.","","- Type : "+d.typeKey,"- Zone : "+d.city,"- Style : "+d.style,"- WhatsApp : "+(d.contactPhone||"à préciser"),"- Horaires : "+(d.hours||"à préciser"),"- Repère : "+(d.address||"à préciser"),"","## Activité",d.activity,"","## Objectif",d.goal,"","## Public",d.audience,"","## Points importants",...(d.specialFeatures.length?d.specialFeatures.map(x=>"- "+x):["- Contact direct","- Confiance","- Informations pratiques"]),"","## Galerie photos",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" — "+x.url:" — URL à ajouter")):["- URL photos à ajouter"]),"","## Sections",...buildNav(d).map(x=>"- "+x.label+" (#"+x.id+")")].join(String.fromCharCode(10));}
-    function promptIA(d){return ["Tu es un assistant de création de page web locale.","Crée une page HTML mobile, claire, chaleureuse et rassurante.","","Projet : "+d.projectName,"Type : "+d.typeKey,"Zone : "+d.city,"Style : "+d.style,"WhatsApp : "+(d.contactPhone||"à préciser"),"Horaires : "+(d.hours||"à préciser"),"Repère : "+(d.address||"à préciser"),"Activité : "+d.activity,"Objectif : "+d.goal,"Public : "+d.audience,"","Sections attendues :",...buildNav(d).map(x=>"- "+x.label),"","Photos de galerie :",...(d.galleryPhotos.length?d.galleryPhotos.map(x=>"- "+x.title+(x.url?" : "+x.url:" : URL à ajouter")):["- À ajouter si disponible"]),"","Contraintes : phrases courtes, boutons visibles, contact direct, galerie diapo premium avec vraies images si les URLs sont fournies, pas de jargon technique, rendu agréable sur téléphone."].join(String.fromCharCode(10));}
-    function sql(d){return [
-      "-- DIGIY Projet Maison Builder — SQL léger",
-      "-- Aucun stockage image Supabase.",
-      "-- Les photos restent sur ton Google Drive, ton média WordPress ou toute URL publique directe.",
-      "-- Le générateur écrit les liens directement dans la page HTML produite.",
-      "-- Rien à créer en base pour la galerie.",
-      "",
-      "-- Option mémoire seulement, si un jour tu veux garder une trace texte :",
-      "-- project_id : "+sqlEsc(slug(d.projectName)),
-      "-- project_name : "+sqlEsc(d.projectName),
-      "-- city : "+sqlEsc(d.city),
-      "-- whatsapp : "+sqlEsc(d.contactPhone||"à préciser"),
-      "-- photos : liens externes uniquement, pas de fichier image en base"
-    ].join(String.fromCharCode(10));}
-    function realisation(d){return ["# Plan de réalisation — "+d.projectName,"","## 1. Page publique","- Poser une page HTML simple.","- Mettre le nom, la zone, l’activité et l’objectif dès le haut.","- Ajouter un bouton direct : "+actionLabelByType(d)+".","","## 2. Contact terrain","- Vérifier le WhatsApp : "+(d.contactPhone||"à préciser"),"- Vérifier les horaires : "+(d.hours||"à préciser"),"- Vérifier le repère : "+(d.address||"à préciser"),"","## 3. Sections",...buildNav(d).map((x,i)=>(i+1)+". "+x.label+" — ancre #"+x.id),"","## 4. Vérification","- Tester sur téléphone.","- Cliquer chaque bouton du menu.","- Cliquer Envoyer la demande et vérifier l’ouverture WhatsApp.","- Vérifier que le texte \\n<section n’apparaît pas dans la page générée."].join(String.fromCharCode(10));}
+      [
+        "projectName","city","style","contactPhone","hours","address",
+        "activity","goal","audience","specialFeatures","extraSections","galleryPhotos"
+      ].forEach(id => {
+        const el = $(id);
+        if(force || !el.value.trim()) el.value = d[id] || "";
+      });
 
-    function galleryModeFor(item){
-      const raw=String((item&&item.title)||"").toLowerCase();
-      const url=String((item&&item.url)||"").toLowerCase();
-      const isPoster=/affiche|flyer|texte|logo|diamant|vision|poster|menu|carte/.test(raw);
-      const isLikelyPoster=/chatgpt-image|poster|affiche|flyer/.test(url);
-      return (isPoster || isLikelyPoster) ? "contain" : "cover";
+      if(type === "service" && force){
+        setServiceQuoteExample(false);
+      }
+
+      if(force){
+        setStatus("Exemple chargé pour : " + type);
+        toast("Exemple chargé");
+      }
+    }
+
+    function setServiceQuoteExample(showToast = true){
+      $("typeKey").value = "service";
+      applyTypeDefaults(true);
+
+      $("quoteClient").value = "Client à préciser";
+      $("quoteWorkType").value = "Pose carrelage terrasse";
+      $("quoteMeasure").value = "25 m²";
+      $("quoteMaterials").value = "Carreaux, colle, ciment, sable, joints, croisillons, transport matériel";
+      $("quoteLabor").value = "75000";
+      $("quoteMaterialCost").value = "120000";
+      $("quoteTravel").value = "10000";
+      $("quoteOther").value = "15000";
+      $("quoteDelay").value = "2 à 3 jours après validation";
+      $("quoteDeposit").value = "50% au démarrage";
+      $("quoteValidity").value = "7 jours";
+      $("quoteNotes").value = "Prix à confirmer après visite du terrain. Matériaux selon disponibilité. Finition à préciser avec le client.";
+
+      setStatus("Exemple pré-devis artisan chargé.");
+      if(showToast) toast("Pré-devis chargé");
+    }
+
+    function sectionTitleByType(d){
+      if(d.typeKey === "restaurant") return "Menu et spécialités";
+      if(d.typeKey === "hotel") return "Lieu et hospitalité";
+      if(d.typeKey === "boutique") return "Produits et boutique";
+      if(d.typeKey === "service") return "Services proposés";
+      if(d.typeKey === "event") return "Programme et informations";
+      return "Ce que nous proposons";
+    }
+
+    function actionLabelByType(d){
+      if(d.typeKey === "restaurant") return "Réserver / contacter";
+      if(d.typeKey === "hotel") return "Demander une réservation";
+      if(d.typeKey === "boutique") return "Commander / contacter";
+      if(d.typeKey === "service") return "Demander un devis";
+      if(d.typeKey === "event") return "S’inscrire / contacter";
+      return "Contacter";
+    }
+
+    function buildNav(d){
+      const base = [
+        {id:"accueil", label:"Accueil"},
+        {id:"offre", label:d.typeKey === "restaurant" ? "Menu" : "Offre"}
+      ];
+
+      const extra = d.extraSections.slice(0,10).map(s => ({
+        id:slug(s),
+        label:s
+      }));
+
+      return [
+        ...base,
+        ...extra,
+        {id:"demande", label:d.typeKey === "service" ? "Devis" : "Demande"},
+        {id:"contact", label:"Contact"}
+      ];
+    }
+
+    function brief(d){
+      return [
+        "# Brief — " + d.projectName,
+        "",
+        "Chaque partenaire est une facette. DIGIY lui donne la lumière.",
+        "",
+        "- Type : " + d.typeKey,
+        "- Zone : " + d.city,
+        "- Style : " + d.style,
+        "- WhatsApp : " + (d.contactPhone || "à préciser"),
+        "- Horaires : " + (d.hours || "à préciser"),
+        "- Repère : " + (d.address || "à préciser"),
+        "",
+        "## Activité",
+        d.activity,
+        "",
+        "## Objectif",
+        d.goal,
+        "",
+        "## Public",
+        d.audience,
+        "",
+        "## Points importants",
+        ...(d.specialFeatures.length ? d.specialFeatures.map(x => "- " + x) : ["- Contact direct","- Confiance","- Informations pratiques"]),
+        "",
+        "## Pré-devis artisan",
+        "- Client : " + (d.quoteClient || "à préciser"),
+        "- Intervention : " + (d.quoteWorkType || "à préciser"),
+        "- Surface / quantité : " + (d.quoteMeasure || "à préciser"),
+        "- Délai : " + (d.quoteDelay || "à préciser"),
+        "- Total estimatif : " + quoteTotalLabel(d),
+        "- Validation : prix final à confirmer par l’artisan après vérification du terrain.",
+        "",
+        "## Galerie photos",
+        ...(d.galleryPhotos.length ? d.galleryPhotos.map(x => "- " + x.title + (x.url ? " — " + x.url : " — URL à ajouter")) : ["- URL photos à ajouter"]),
+        "",
+        "## Sections",
+        ...buildNav(d).map(x => "- " + x.label + " (#" + x.id + ")")
+      ].join("\n");
+    }
+
+    function promptIA(d){
+      return [
+        "Tu es un assistant de création de page web locale.",
+        "Crée une page HTML mobile, claire, chaleureuse et rassurante.",
+        "",
+        "Projet : " + d.projectName,
+        "Type : " + d.typeKey,
+        "Zone : " + d.city,
+        "Style : " + d.style,
+        "WhatsApp : " + (d.contactPhone || "à préciser"),
+        "Horaires : " + (d.hours || "à préciser"),
+        "Repère : " + (d.address || "à préciser"),
+        "Activité : " + d.activity,
+        "Objectif : " + d.goal,
+        "Public : " + d.audience,
+        "",
+        "Pré-devis artisan :",
+        "- Intervention : " + (d.quoteWorkType || "à préciser"),
+        "- Surface / quantité : " + (d.quoteMeasure || "à préciser"),
+        "- Matériaux : " + (d.quoteMaterials || "à préciser"),
+        "- Main-d’œuvre : " + money(d.quoteLabor),
+        "- Matériaux estimés : " + money(d.quoteMaterialCost),
+        "- Déplacement : " + money(d.quoteTravel),
+        "- Imprévus : " + money(d.quoteOther),
+        "- Total estimatif : " + quoteTotalLabel(d),
+        "",
+        "Règle importante : ne jamais présenter ce devis comme un prix définitif.",
+        "Formulation obligatoire : “Base de devis préparée par DIGIY. Prix final à confirmer par l’artisan après vérification du terrain.”",
+        "",
+        "Sections attendues :",
+        ...buildNav(d).map(x => "- " + x.label),
+        "",
+        "Contraintes : phrases courtes, boutons visibles, contact direct, galerie diapo premium si URLs fournies, pas de jargon technique, rendu agréable sur téléphone."
+      ].join("\n");
+    }
+
+    function sql(d){
+      return [
+        "-- DIGIY Projet Maison Builder — SQL léger",
+        "-- Aucun stockage image Supabase.",
+        "-- Les photos restent sur Google Drive, WordPress média ou toute URL publique directe.",
+        "-- Le pré-devis reste une sortie texte / JSON à valider par l’artisan.",
+        "-- Rien à créer en base pour la galerie.",
+        "",
+        "-- Option mémoire seulement, si un jour tu veux garder une trace texte :",
+        "-- project_id : " + sqlEsc(slug(d.projectName)),
+        "-- project_name : " + sqlEsc(d.projectName),
+        "-- city : " + sqlEsc(d.city),
+        "-- whatsapp : " + sqlEsc(d.contactPhone || "à préciser"),
+        "-- quote_work_type : " + sqlEsc(d.quoteWorkType || "à préciser"),
+        "-- quote_total_estimated_xof : " + sqlEsc(String(quoteTotal(d) || 0)),
+        "-- quote_warning : prix final à confirmer par l’artisan après vérification du terrain"
+      ].join("\n");
+    }
+
+    function realisation(d){
+      return [
+        "# Plan de réalisation — " + d.projectName,
+        "",
+        "## 1. Page publique",
+        "- Poser une page HTML simple.",
+        "- Mettre le nom, la zone, l’activité et l’objectif dès le haut.",
+        "- Ajouter un bouton direct : " + actionLabelByType(d) + ".",
+        "",
+        "## 2. Contact terrain",
+        "- Vérifier le WhatsApp : " + (d.contactPhone || "à préciser"),
+        "- Vérifier les horaires : " + (d.hours || "à préciser"),
+        "- Vérifier le repère : " + (d.address || "à préciser"),
+        "",
+        "## 3. Pré-devis artisan",
+        "- Vérifier les quantités.",
+        "- Vérifier la difficulté réelle du chantier.",
+        "- Corriger les matériaux selon le terrain.",
+        "- Faire valider le total par l’artisan.",
+        "- Ne jamais promettre un prix final sans visite ou confirmation.",
+        "",
+        "## 4. Sections",
+        ...buildNav(d).map((x,i) => (i + 1) + ". " + x.label + " — ancre #" + x.id),
+        "",
+        "## 5. Vérification",
+        "- Tester sur téléphone.",
+        "- Cliquer chaque bouton du menu.",
+        "- Cliquer Envoyer la demande et vérifier l’ouverture WhatsApp.",
+        "- Relire le pré-devis avant envoi client."
+      ].join("\n");
+    }
+
+    function quoteTotal(d){
+      return numberXof(d.quoteLabor) + numberXof(d.quoteMaterialCost) + numberXof(d.quoteTravel) + numberXof(d.quoteOther);
+    }
+
+    function quoteTotalLabel(d){
+      const total = quoteTotal(d);
+      return total ? total.toLocaleString("fr-FR") + " FCFA" : "À compléter";
+    }
+
+    function devisArtisan(d){
+      return [
+        "PRÉ-DEVIS ARTISAN — BASE À VALIDER",
+        "",
+        "Projet : " + d.projectName,
+        "Client : " + (d.quoteClient || "À préciser"),
+        "Zone : " + d.city,
+        "Contact : " + (d.contactPhone || "À préciser"),
+        "",
+        "IMPORTANT",
+        "Ce document est une base préparée par DIGIY. Le prix final doit être confirmé par l’artisan après vérification du terrain, des quantités, de l’accès, de l’urgence et des matériaux disponibles.",
+        "",
+        "1. DEMANDE",
+        "- Type d’intervention : " + (d.quoteWorkType || "À préciser"),
+        "- Surface / quantité : " + (d.quoteMeasure || "À préciser"),
+        "- Description activité : " + d.activity,
+        "- Objectif client : " + d.goal,
+        "",
+        "2. MATÉRIAUX / FOURNITURES",
+        d.quoteMaterials || "À préciser par l’artisan.",
+        "",
+        "3. ESTIMATION",
+        "- Main-d’œuvre : " + money(d.quoteLabor),
+        "- Matériaux : " + money(d.quoteMaterialCost),
+        "- Déplacement / transport : " + money(d.quoteTravel),
+        "- Marge / imprévus : " + money(d.quoteOther),
+        "",
+        "TOTAL ESTIMATIF : " + quoteTotalLabel(d),
+        "",
+        "4. CONDITIONS",
+        "- Délai estimé : " + (d.quoteDelay || "À préciser"),
+        "- Acompte conseillé : " + (d.quoteDeposit || "À préciser"),
+        "- Validité du devis : " + (d.quoteValidity || "7 jours"),
+        "",
+        "5. NOTES ARTISAN",
+        d.quoteNotes || "À compléter après échange ou visite terrain.",
+        "",
+        "Phrase client conseillée :",
+        "“Voici une base de devis préparée pour clarifier la demande. Je confirme le prix final après vérification du terrain et des matériaux.”",
+        "",
+        "BY DIGIYLYFE · L’outil prépare. L’artisan valide. Le client comprend."
+      ].join("\n");
     }
 
     function galleryHtml(d){
-      const items=(d.galleryPhotos&&d.galleryPhotos.length?d.galleryPhotos:[
-        {title:"Photo du restaurant",url:""},
-        {title:"Plat du jour",url:""},
-        {title:"Poisson grillé",url:""},
-        {title:"Salle ou terrasse",url:""}
+      const items = (d.galleryPhotos && d.galleryPhotos.length ? d.galleryPhotos : [
+        {title:"Photo principale",url:""},
+        {title:"Réalisation",url:""},
+        {title:"Preuve terrain",url:""},
+        {title:"Contact",url:""}
       ]).slice(0,8);
-      const hasAnyUrl=items.some(item=>String(item.url||"").trim());
-      const intro=hasAnyUrl?"":`<div class="box gallery-note"><h3>Galerie diapo premium prête à brancher</h3><p>Colle tes liens publics dans le générateur : titre | URL, ou colle seulement les URLs. Le diapo remplit les images dans l’ordre. Les photos restent sur Google Drive, WordPress média ou URL publique, sans Supabase Storage et sans SQL lourd.</p></div>`;
-      const slides=items.map((item,index)=>{
-        const title=esc(item.title||("Photo "+(index+1)));
-        const url=imageUrl(item.url);
-        const mode=galleryModeFor(item);
-        const modeLabel=mode==="contain"?"Image entière":"Photo immersive";
+
+      const slides = items.map((item,index) => {
+        const title = esc(item.title || ("Photo " + (index + 1)));
+        const url = imageUrl(item.url);
+
         if(url){
-          return `<figure class="gallery-slide ${mode}${index===0?' active':''}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.closest('figure').classList.add('is-missing');this.remove();"><figcaption><strong>${title}</strong><small>${modeLabel} · fais glisser ou utilise les flèches.</small></figcaption></figure>`;
+          return `<figure class="gallery-slide${index===0 ? " active" : ""}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer"><figcaption><strong>${title}</strong></figcaption></figure>`;
         }
-        return `<figure class="gallery-slide placeholder${index===0?' active':''}"><div class="gallery-placeholder"><span>${title}</span><small>Colle une URL photo dans le générateur</small></div><figcaption><strong>${title}</strong><small>URL photo à ajouter.</small></figcaption></figure>`;
+
+        return `<figure class="gallery-slide placeholder${index===0 ? " active" : ""}"><div class="gallery-placeholder"><span>${title}</span><small>URL photo à ajouter</small></div><figcaption><strong>${title}</strong></figcaption></figure>`;
       }).join("");
-      const thumbs=items.map((item,index)=>{
-        const title=esc(item.title||("Photo "+(index+1)));
-        const url=imageUrl(item.url);
+
+      const thumbs = items.map((item,index) => {
+        const title = esc(item.title || ("Photo " + (index + 1)));
+        const url = imageUrl(item.url);
+
         if(url){
-          return `<button class="gallery-thumb${index===0?' active':''}" type="button" data-index="${index}" aria-label="Voir ${title}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer"></button>`;
+          return `<button class="gallery-thumb${index===0 ? " active" : ""}" type="button" data-index="${index}"><img src="${attr(url)}" alt="" loading="lazy" referrerpolicy="no-referrer"></button>`;
         }
-        return `<button class="gallery-thumb text-thumb${index===0?' active':''}" type="button" data-index="${index}" aria-label="Voir ${title}"><span>${title}</span></button>`;
+
+        return `<button class="gallery-thumb text-thumb${index===0 ? " active" : ""}" type="button" data-index="${index}"><span>${title}</span></button>`;
       }).join("");
-      return `${intro}<div class="gallery-premium" data-gallery><div class="gallery-stage"><div class="gallery-slides">${slides}</div><button class="gallery-arrow prev" type="button" data-prev aria-label="Photo précédente">‹</button><button class="gallery-arrow next" type="button" data-next aria-label="Photo suivante">›</button><div class="gallery-counter" data-counter>1 / ${items.length}</div></div><div class="gallery-thumbs">${thumbs}</div></div>`;
+
+      return `<div class="gallery-premium" data-gallery><div class="gallery-stage"><div class="gallery-slides">${slides}</div><button class="gallery-arrow prev" type="button" data-prev>‹</button><button class="gallery-arrow next" type="button" data-next>›</button><div class="gallery-counter" data-counter>1 / ${items.length}</div></div><div class="gallery-thumbs">${thumbs}</div></div>`;
     }
 
     function extraSectionHtml(d, sectionName){
-      const id=slug(sectionName), title=esc(sectionName), key=slug(sectionName);let content="";
-      if(d.typeKey==="restaurant"){
-        const blocks={
-          "plat-detail":`<div class="grid"><div class="box"><h3>Plat signature</h3><p>Présente le plat phare : origine, goût, ingrédients principaux, niveau d’épices et accompagnement conseillé.</p></div><div class="box"><h3>Pour qui ?</h3><p>Familles, touristes, habitués du quartier ou clients qui veulent découvrir une vraie table locale.</p></div><div class="box"><h3>Conseil maison</h3><p>Ajoute une boisson, un dessert ou une suggestion du chef pour guider le client sans le fatiguer.</p></div></div>`,
-          "commande":`<div class="box"><h3>Commander simplement</h3><p>Le client choisit son plat, indique l’heure souhaitée, puis contacte le restaurant par WhatsApp ou téléphone.</p><ol class="steps"><li>Choisir le plat ou demander le plat du jour.</li><li>Indiquer le nombre de personnes ou de portions.</li><li>Confirmer l’heure, le lieu et le mode de retrait ou livraison.</li></ol></div>`,
-          "temoignages":`<div class="grid"><div class="box"><h3>Accueil chaleureux</h3><p>“On se sent bien reçu, comme à la maison.”</p></div><div class="box"><h3>Cuisine généreuse</h3><p>“Les plats sont simples, bons et bien servis.”</p></div><div class="box"><h3>Bon repère à Saly</h3><p>“Facile à contacter, pratique pour réserver avant d’arriver.”</p></div></div>`,
-          "galerie":galleryHtml(d),
-          "tarifs":`<div class="grid"><div class="box price"><span>Plat du jour</span><strong>À partir de 2 500 FCFA</strong><p>À adapter selon le vrai menu.</p></div><div class="box price"><span>Poisson / grillade</span><strong>Prix selon arrivage</strong><p>Clair, honnête, sans surprise.</p></div><div class="box price"><span>Groupe</span><strong>Sur demande</strong><p>Pour familles, anniversaires et événements privés.</p></div></div>`,
-          "a-propos":`<div class="box"><h3>Une table locale, simple et accueillante</h3><p>${esc(d.projectName)} présente une cuisine sénégalaise familiale, avec un accueil direct, une réservation simple et une présence claire pour les clients locaux comme pour les visiteurs.</p></div>`,
-          "evenements-prives":`<div class="grid"><div class="box"><h3>Repas de groupe</h3><p>Prévoir les tables, le nombre de personnes et l’heure d’arrivée.</p></div><div class="box"><h3>Anniversaire</h3><p>Ajouter une demande spéciale : gâteau, décoration, musique ou menu adapté.</p></div><div class="box"><h3>Sortie d’entreprise</h3><p>Organiser un repas simple, clair et confirmé à l’avance.</p></div></div>`,
-          "faq":`<div class="box faq-list"><details open><summary>Faut-il réserver ?</summary><p>Pour les groupes et les heures chargées, oui, c’est préférable.</p></details><details open><summary>Peut-on commander à emporter ?</summary><p>Oui, indique le plat, l’heure souhaitée et ton contact WhatsApp.</p></details><details open><summary>Acceptez-vous les groupes ?</summary><p>Oui, il faut préciser le nombre de personnes et l’heure prévue pour préparer l’accueil.</p></details></div>`
-        };
-        content=blocks[key] || `<div class="box"><h3>${title}</h3><p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p></div>`;
-      } else {
-        content=`<div class="box"><h3>${title}</h3><p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p></div>`;
+      const id = slug(sectionName);
+      const title = esc(sectionName);
+
+      if(slug(sectionName).includes("galerie")){
+        return `<section id="${esc(id)}" class="section"><h2>${title}</h2>${galleryHtml(d)}</section>`;
       }
-      return `<section id="${esc(id)}" class="section"><h2>${title}</h2>${content}</section>`;
+
+      if(slug(sectionName).includes("tarif") || slug(sectionName).includes("devis")){
+        return `<section id="${esc(id)}" class="section"><h2>${title}</h2><div class="box"><h3>Prix et devis</h3><p>Les prix peuvent dépendre du terrain, de la distance, des matériaux et de l’urgence. Un devis clair doit être confirmé par le professionnel.</p><p><strong>Total estimatif DIGIY :</strong> ${esc(quoteTotalLabel(d))}</p></div></section>`;
+      }
+
+      return `<section id="${esc(id)}" class="section"><h2>${title}</h2><div class="box"><h3>${title}</h3><p>Ajoute ici une information concrète : photo, horaire, prix, conseil, preuve de confiance ou appel à l’action.</p></div></section>`;
     }
 
     function firstPage(d){
-      const name=esc(d.projectName), city=esc(d.city), style=esc(d.style), activity=esc(d.activity), goal=esc(d.goal), audience=esc(d.audience), action=esc(actionLabelByType(d));
-      const phoneText=esc(d.contactPhone || "WhatsApp à préciser"), phoneDigits=waDigits(d.contactPhone), hours=esc(d.hours || "Horaires à préciser"), address=esc(d.address || "Repère à préciser");
-      const nav=buildNav(d).map(x=>`<a href="#${esc(x.id)}">${esc(x.label)}</a>`).join("");
-      const specials=(d.specialFeatures.length?d.specialFeatures:["Réservation directe","Contact WhatsApp","Photos et avis","Horaires clairs"]).slice(0,8).map(x=>`<li>${esc(x)}</li>`).join("");
-      const extraSections=d.extraSections.slice(0,10).map(sectionName=>extraSectionHtml(d,sectionName)).join(String.fromCharCode(10));
-      const restaurantMenu=d.typeKey==="restaurant"?`<div class="grid menu-grid"><div class="box dish"><span>Plat local</span><h3>Thiéboudienne maison</h3><p>Un plat signature pour montrer la cuisine sénégalaise et rassurer le client.</p></div><div class="box dish"><span>Grillade</span><h3>Poisson grillé</h3><p>Idéal pour les touristes, familles et clients qui veulent manger frais à Saly.</p></div><div class="box dish"><span>Réservation</span><h3>Table de groupe</h3><p>Prévoir une demande simple avec nombre de personnes, date et heure souhaitée.</p></div></div>`:`<div class="grid"><div class="box"><h3>Offre principale</h3><p>Présente ici le service ou produit le plus important.</p></div><div class="box"><h3>Contact direct</h3><p>Ajoute WhatsApp, téléphone ou formulaire client.</p></div><div class="box"><h3>Confiance</h3><p>Ajoute photos, avis, horaires et informations pratiques.</p></div></div>`;
-      const whatsMessage=`Bonjour, je souhaite faire une demande. Nom : `;
-      const buttonCode=phoneDigits?`const nom=document.getElementById('clientName').value||'';const tel=document.getElementById('clientPhone').value||'';const msg=document.getElementById('clientMessage').value||'';const text='${attr(whatsMessage)}'+nom+' / Téléphone : '+tel+' / Message : '+msg;window.open('https://wa.me/${phoneDigits}?text='+encodeURIComponent(text),'_blank');`:`alert('Ajoutez le WhatsApp officiel dans le générateur avant de publier cette page.');`;
+      const name = esc(d.projectName);
+      const city = esc(d.city);
+      const style = esc(d.style);
+      const activity = esc(d.activity);
+      const goal = esc(d.goal);
+      const audience = esc(d.audience);
+      const action = esc(actionLabelByType(d));
+      const phoneText = esc(d.contactPhone || "WhatsApp à préciser");
+      const phoneDigits = waDigits(d.contactPhone);
+      const hours = esc(d.hours || "Horaires à préciser");
+      const address = esc(d.address || "Repère à préciser");
+      const nav = buildNav(d).map(x => `<a href="#${esc(x.id)}">${esc(x.label)}</a>`).join("");
+      const specials = (d.specialFeatures.length ? d.specialFeatures : ["Contact direct","Confiance","Informations pratiques"])
+        .slice(0,8)
+        .map(x => `<li>${esc(x)}</li>`)
+        .join("");
+
+      const extraSections = d.extraSections.slice(0,10).map(sectionName => extraSectionHtml(d, sectionName)).join("\n");
+
+      const quoteBlock = d.typeKey === "service" || d.quoteWorkType || quoteTotal(d) ? `
+    <section id="predevis" class="section">
+      <h2>Pré-devis artisan</h2>
+      <div class="box quote">
+        <p><strong>Base estimative :</strong> ${esc(quoteTotalLabel(d))}</p>
+        <p><strong>Intervention :</strong> ${esc(d.quoteWorkType || "À préciser")}</p>
+        <p><strong>Surface / quantité :</strong> ${esc(d.quoteMeasure || "À préciser")}</p>
+        <p><strong>Délai :</strong> ${esc(d.quoteDelay || "À préciser")}</p>
+        <p class="warn">Ce montant est une base préparée par DIGIY. Le prix final doit être confirmé par l’artisan après vérification du terrain.</p>
+      </div>
+    </section>` : "";
+
       return `<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>${name}</title>
   <style>
-    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{min-height:86vh;display:grid;align-items:center}.card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.kicker{color:#ffe7a8;font-weight:900}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:var(--muted);font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}.section{padding:28px 0;scroll-margin-top:18px}.section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.box p,.box li{color:var(--muted);line-height:1.55}.dish span{display:inline-block;color:#ffe7a8;font-weight:900;font-size:13px}.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}.form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:9px 12px;margin:5px;background:rgba(255,255,255,.05);color:var(--muted)}.steps{margin:12px 0 0;padding-left:20px;color:var(--muted);line-height:1.7}.gallery-premium{display:grid;gap:14px;margin:18px 0 28px}.gallery-stage{position:relative;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(255,255,255,.045);box-shadow:0 28px 80px rgba(0,0,0,.30)}.gallery-slides{position:relative;min-height:420px;touch-action:pan-y}.gallery-slide{display:none;position:relative;margin:0;background:radial-gradient(circle at 50% 45%,rgba(245,199,107,.12),transparent 42%),rgba(6,20,16,.92)}.gallery-slide.active{display:block}.gallery-slide img{width:100%;height:clamp(420px,58vw,680px);display:block;background:#071512}.gallery-slide.cover img{object-fit:cover}.gallery-slide.contain img{object-fit:contain;padding:18px;background:radial-gradient(circle at 50% 45%,rgba(245,199,107,.10),transparent 42%),#071512}.gallery-slide figcaption{position:absolute;left:18px;right:18px;bottom:18px;padding:12px 14px;border-radius:18px;background:linear-gradient(180deg,rgba(5,17,14,.08),rgba(5,17,14,.68));backdrop-filter:blur(6px);max-width:620px}.gallery-slide figcaption strong{display:block;color:#fff4c8;font-size:clamp(17px,2.2vw,23px)}.gallery-slide figcaption small{display:block;color:#dcecdf;font-size:12px;margin-top:2px}.gallery-placeholder{display:grid;place-items:center;text-align:center;min-height:460px;padding:30px;color:#ffe7a8;background:radial-gradient(circle at 50% 50%,rgba(245,199,107,.18),transparent 45%),rgba(245,199,107,.08)}.gallery-placeholder span{font-size:clamp(20px,4vw,30px);font-weight:900}.gallery-placeholder small{display:block;color:var(--muted);margin-top:8px;font-size:13px}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(4,18,14,.52);color:#fff4c8;font-size:30px;line-height:1;display:grid;place-items:center;z-index:2}.gallery-arrow.prev{left:16px}.gallery-arrow.next{right:16px}.gallery-counter{position:absolute;top:16px;right:16px;padding:8px 12px;border-radius:999px;background:rgba(4,18,14,.55);border:1px solid rgba(255,255,255,.16);color:#fff4c8;font-weight:900;font-size:12px;z-index:2}.gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gallery-thumb{appearance:none;border:1px solid var(--line);padding:0;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.04);min-height:76px}.gallery-thumb img{width:100%;height:84px;object-fit:cover;display:block}.gallery-thumb.text-thumb{padding:12px;color:#ffe7a8;font-weight:900}.gallery-thumb.text-thumb span{display:block;font-size:13px;line-height:1.35}.gallery-thumb.active{outline:2px solid rgba(245,199,107,.78);outline-offset:2px}.price span{display:block;color:#ffe7a8;font-weight:900;margin-bottom:8px}.price strong{display:block;font-size:22px;margin-bottom:8px}.gallery-note{margin-bottom:14px}.faq-list details{border-top:1px solid var(--line);padding:14px 0}.faq-list details:first-child{border-top:0}.faq-list summary{cursor:pointer;font-weight:950;color:#ffe7a8}footer{padding:30px 0;color:var(--muted);font-size:13px}@media(max-width:760px){.grid,.info,.gallery-thumbs{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}.gallery-slides{min-height:320px}.gallery-slide img{height:clamp(320px,82vw,520px)}.gallery-slide.contain img{padding:10px}.gallery-slide figcaption{left:12px;right:12px;bottom:12px;padding:10px 12px}.gallery-arrow{width:42px;height:42px}.gallery-arrow.prev{left:10px}.gallery-arrow.next{right:10px}.gallery-counter{top:10px;right:10px}.gallery-thumbs{display:flex;overflow:auto;padding:4px 2px 6px;scroll-snap-type:x proximity}.gallery-thumb{min-width:92px;scroll-snap-align:start}.gallery-thumb img{height:72px}}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}.gallery-slide img{height:58vw;min-height:240px}.gallery-arrow{width:42px;height:42px}.gallery-thumbs{display:flex;overflow:auto;padding-bottom:4px;scroll-snap-type:x proximity}.gallery-thumb{min-width:88px;scroll-snap-align:start}.gallery-thumb img{height:70px}}
+    :root{--bg:#071512;--card:#102b24;--line:rgba(255,255,255,.13);--text:#f7fff9;--muted:#c7ddd3;--gold:#f5c76b;--green:#16c784;--blue:#5fd4ff}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 10% 0,rgba(245,199,107,.18),transparent 34%),linear-gradient(135deg,var(--bg),#03100d);color:var(--text)}
+    a{color:inherit}.wrap{max-width:1080px;margin:auto;padding:22px}.hero{min-height:86vh;display:grid;align-items:center}.card,.box{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.kicker{color:#ffe7a8;font-weight:900}.title{font-size:clamp(38px,8vw,78px);line-height:.92;margin:12px 0}.lead{color:var(--muted);font-size:18px;line-height:1.6}.nav{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.nav a,.btn{border:1px solid var(--line);border-radius:999px;padding:11px 14px;text-decoration:none;background:rgba(255,255,255,.06)}.btn{display:inline-block;background:var(--gold);color:#143226;font-weight:950;margin-top:12px}.section{padding:28px 0;scroll-margin-top:18px}.section h2{font-size:clamp(26px,4vw,42px);margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.box p,.box li{color:var(--muted);line-height:1.55}.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form input,.form textarea{width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:rgba(0,0,0,.22);color:#fff;margin:6px 0 12px}.form button{padding:13px 16px;border:0;border-radius:16px;background:var(--green);color:#06231a;font-weight:950}.warn{color:#fff1ba!important;border-top:1px solid var(--line);padding-top:12px}.gallery-premium{display:grid;gap:14px;margin:18px 0 28px}.gallery-stage{position:relative;border:1px solid var(--line);border-radius:30px;overflow:hidden;background:rgba(255,255,255,.045);box-shadow:0 28px 80px rgba(0,0,0,.30)}.gallery-slides{position:relative;min-height:420px;touch-action:pan-y}.gallery-slide{display:none;position:relative;margin:0;background:rgba(6,20,16,.92)}.gallery-slide.active{display:block}.gallery-slide img{width:100%;height:clamp(420px,58vw,680px);display:block;object-fit:cover;background:#071512}.gallery-slide figcaption{position:absolute;left:18px;right:18px;bottom:18px;padding:12px 14px;border-radius:18px;background:linear-gradient(180deg,rgba(5,17,14,.08),rgba(5,17,14,.68));backdrop-filter:blur(6px)}.gallery-placeholder{display:grid;place-items:center;text-align:center;min-height:460px;padding:30px;color:#ffe7a8;background:rgba(245,199,107,.08)}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(4,18,14,.52);color:#fff4c8;font-size:30px;z-index:2}.gallery-arrow.prev{left:16px}.gallery-arrow.next{right:16px}.gallery-counter{position:absolute;top:16px;right:16px;padding:8px 12px;border-radius:999px;background:rgba(4,18,14,.55);border:1px solid rgba(255,255,255,.16);color:#fff4c8;font-weight:900;font-size:12px;z-index:2}.gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.gallery-thumb{appearance:none;border:1px solid var(--line);padding:0;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.04);min-height:76px}.gallery-thumb img{width:100%;height:84px;object-fit:cover;display:block}.gallery-thumb.text-thumb{padding:12px;color:#ffe7a8;font-weight:900}.gallery-thumb.active{outline:2px solid rgba(245,199,107,.78);outline-offset:2px}footer{padding:30px 0;color:var(--muted);font-size:13px}
+    @media(max-width:760px){.grid,.info,.gallery-thumbs{grid-template-columns:1fr}.card,.box{padding:22px}.hero{min-height:auto;padding-top:35px}.gallery-slides{min-height:320px}.gallery-slide img{height:clamp(320px,82vw,520px)}.gallery-thumbs{display:flex;overflow:auto;padding:4px 2px 6px}.gallery-thumb{min-width:92px}}
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section id="accueil" class="hero"><div class="card"><div class="kicker">${city} · ${style}</div><h1 class="title">${name}</h1><p class="lead">${activity}</p><p class="lead">${goal}</p><p class="lead"><strong>Pour :</strong> ${audience}</p><div class="nav">${nav}</div><a class="btn" href="#reservation">${action}</a></div></section>
-    <section id="menu" class="section"><h2>${esc(sectionTitleByType(d))}</h2><p class="lead">Une première vitrine claire pour donner envie, rassurer et guider le client vers l’action.</p>${restaurantMenu}</section>
+    <section id="accueil" class="hero">
+      <div class="card">
+        <div class="kicker">${city} · ${style}</div>
+        <h1 class="title">${name}</h1>
+        <p class="lead">${activity}</p>
+        <p class="lead">${goal}</p>
+        <p class="lead"><strong>Pour :</strong> ${audience}</p>
+        <div class="nav">${nav}</div>
+        <a class="btn" href="#demande">${action}</a>
+      </div>
+    </section>
+
+    <section id="offre" class="section">
+      <h2>${esc(sectionTitleByType(d))}</h2>
+      <p class="lead">Une première vitrine claire pour donner envie, rassurer et guider le client vers l’action.</p>
+      <div class="grid">
+        <div class="box"><h3>Offre principale</h3><p>Présente ici le service, produit ou plat le plus important.</p></div>
+        <div class="box"><h3>Contact direct</h3><p>Le client comprend vite comment appeler, écrire ou demander.</p></div>
+        <div class="box"><h3>Confiance</h3><p>Photos, avis, horaires et repères utiles.</p></div>
+      </div>
+    </section>
+
+    ${quoteBlock}
     ${extraSections}
-    <section id="reservation" class="section"><h2>${action}</h2><div class="info"><div class="box form"><label>Nom</label><input id="clientName" placeholder="Votre nom"><label>Téléphone</label><input id="clientPhone" placeholder="Votre WhatsApp"><label>Message</label><textarea id="clientMessage" placeholder="Date, heure, nombre de personnes ou demande particulière"></textarea><button type="button" onclick="${buttonCode}">Envoyer la demande sur WhatsApp</button></div><div class="box"><h3>Informations pratiques</h3><p><strong>WhatsApp :</strong> ${phoneText}</p><p><strong>Horaires :</strong> ${hours}</p><p><strong>Repère :</strong> ${address}</p><p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p></div></div></section>
-    <section id="contact" class="section"><h2>Contact et besoins particuliers</h2><div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div></section>
+
+    <section id="demande" class="section">
+      <h2>${action}</h2>
+      <div class="info">
+        <div class="box form">
+          <label>Nom</label>
+          <input id="clientName" placeholder="Votre nom">
+          <label>Téléphone</label>
+          <input id="clientPhone" placeholder="Votre WhatsApp">
+          <label>Message</label>
+          <textarea id="clientMessage" placeholder="Votre demande"></textarea>
+          <button id="sendRequest" type="button">Envoyer la demande sur WhatsApp</button>
+        </div>
+        <div class="box">
+          <h3>Informations pratiques</h3>
+          <p><strong>WhatsApp :</strong> ${phoneText}</p>
+          <p><strong>Horaires :</strong> ${hours}</p>
+          <p><strong>Repère :</strong> ${address}</p>
+          <p>Le client doit comprendre vite quoi faire : appeler, écrire ou réserver.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact et besoins particuliers</h2>
+      <div class="box"><h3>Besoins particuliers</h3><ul>${specials}</ul></div>
+    </section>
+
     <footer>Chaque partenaire est une facette. DIGIY lui donne la lumière.<br>Page générée par DIGIY Projet Maison · BY DIGIYLYFE</footer>
   </main>
+
   ${'<scr'+'ipt>'}
     (function(){
+      var phone='${js(phoneDigits)}';
+      var project='${js(d.projectName)}';
+
+      var send=document.getElementById('sendRequest');
+      if(send){
+        send.addEventListener('click',function(){
+          if(!phone){
+            alert('Ajoutez le WhatsApp officiel dans le générateur avant de publier cette page.');
+            return;
+          }
+          var nom=document.getElementById('clientName').value || '';
+          var tel=document.getElementById('clientPhone').value || '';
+          var msg=document.getElementById('clientMessage').value || '';
+          var text='Bonjour, je souhaite faire une demande pour '+project+'. Nom : '+nom+' / Téléphone : '+tel+' / Message : '+msg;
+          window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(text),'_blank');
+        });
+      }
+
       function initGallery(gallery){
-        const slides=[...gallery.querySelectorAll('.gallery-slide')];
-        const thumbs=[...gallery.querySelectorAll('.gallery-thumb')];
-        const prev=gallery.querySelector('[data-prev]');
-        const next=gallery.querySelector('[data-next]');
-        const counter=gallery.querySelector('[data-counter]');
+        var slides=[].slice.call(gallery.querySelectorAll('.gallery-slide'));
+        var thumbs=[].slice.call(gallery.querySelectorAll('.gallery-thumb'));
+        var prev=gallery.querySelector('[data-prev]');
+        var next=gallery.querySelector('[data-next]');
+        var counter=gallery.querySelector('[data-counter]');
         if(!slides.length) return;
-        let index=slides.findIndex(s=>s.classList.contains('active'));
+
+        var index=slides.findIndex(function(s){return s.classList.contains('active');});
         if(index<0) index=0;
+
         function show(i){
           index=(i+slides.length)%slides.length;
-          slides.forEach((slide,idx)=>slide.classList.toggle('active',idx===index));
-          thumbs.forEach((thumb,idx)=>thumb.classList.toggle('active',idx===index));
+          slides.forEach(function(slide,idx){slide.classList.toggle('active',idx===index);});
+          thumbs.forEach(function(thumb,idx){thumb.classList.toggle('active',idx===index);});
           if(counter) counter.textContent=(index+1)+' / '+slides.length;
         }
-        prev && prev.addEventListener('click',()=>show(index-1));
-        next && next.addEventListener('click',()=>show(index+1));
-        thumbs.forEach((thumb,idx)=>thumb.addEventListener('click',()=>show(idx)));
-        let startX=0,deltaX=0;
-        const zone=gallery.querySelector('.gallery-slides');
-        if(zone){
-          zone.addEventListener('touchstart',(e)=>{startX=e.changedTouches[0].clientX;deltaX=0;},{passive:true});
-          zone.addEventListener('touchmove',(e)=>{deltaX=e.changedTouches[0].clientX-startX;},{passive:true});
-          zone.addEventListener('touchend',()=>{if(Math.abs(deltaX)>45){show(index+(deltaX<0?1:-1));}});
-        }
+
+        if(prev) prev.addEventListener('click',function(){show(index-1);});
+        if(next) next.addEventListener('click',function(){show(index+1);});
+        thumbs.forEach(function(thumb,idx){thumb.addEventListener('click',function(){show(idx);});});
+
         show(index);
       }
+
       document.querySelectorAll('[data-gallery]').forEach(initGallery);
     })();
   ${'</scr'+'ipt>'}
@@ -340,17 +1393,145 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
 </html>`;
     }
 
-    function generateAll(){const d=data();outputs.brief=brief(d);outputs.prompt=promptIA(d);outputs.sql=sql(d);outputs.realisation=realisation(d);outputs.page=firstPage(d);outputs.json=JSON.stringify(d,null,2);currentTab="page";document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===currentTab));renderOutput();setStatus("Dossier préparé pour : "+d.projectName);toast("Projet préparé");}
-    function setOutputTab(t){currentTab=t;document.querySelectorAll(".output-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));renderOutput();}
-    function renderOutput(){const text=outputs[currentTab]||"",out=$("output"),empty=$("emptyState");if(!text){out.hidden=true;out.style.display="none";empty.hidden=false;empty.style.display="grid";return}empty.hidden=true;empty.style.display="none";out.hidden=false;out.style.display="block";out.textContent=text;}
-    async function copyCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à copier");return}try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}toast("Sortie copiée");}
-    function downloadCurrent(){const text=outputs[currentTab]||"";if(!text.trim()){toast("Rien à télécharger");return}const d=data();const ext=currentTab==="json"?"json":currentTab==="sql"?"sql":currentTab==="page"?"html":"md";const blob=new Blob([text],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=slug(d.projectName)+"_"+currentTab+"."+ext;document.body.appendChild(a);a.click();URL.revokeObjectURL(a.href);a.remove();toast("Téléchargement lancé");}
-    function previewPage(){if(!outputs.page.trim()){toast("Prépare d’abord la page");return}const blob=new Blob([outputs.page],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob);window.open(url,"_blank");setTimeout(()=>URL.revokeObjectURL(url),60000);}
-    function clearForm(){["projectName","city","style","contactPhone","hours","address","activity","goal","audience","specialFeatures","extraSections","galleryPhotos"].forEach(id=>$(id).value="");outputs.brief=outputs.prompt=outputs.sql=outputs.realisation=outputs.page=outputs.json="";renderOutput();setStatus("Formulaire nettoyé.");toast("Nettoyé");}
-    function setStatus(text){$("status").textContent=text;}
-    function toast(text){const el=$("toast");el.textContent=text;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),1800);}
+    function generateAll(){
+      const d = data();
 
-    // Sécurité V10 : les boutons inline appellent explicitement window.*.
+      outputs.brief = brief(d);
+      outputs.prompt = promptIA(d);
+      outputs.sql = sql(d);
+      outputs.realisation = realisation(d);
+      outputs.devis = devisArtisan(d);
+      outputs.page = firstPage(d);
+      outputs.json = JSON.stringify(d,null,2);
+
+      currentTab = d.typeKey === "service" || d.quoteWorkType || quoteTotal(d) ? "devis" : "page";
+
+      document.querySelectorAll(".output-tabs button").forEach(b => {
+        b.classList.toggle("active", b.dataset.tab === currentTab);
+      });
+
+      renderOutput();
+      setStatus("Dossier préparé pour : " + d.projectName);
+      toast("Projet préparé");
+    }
+
+    function setOutputTab(t){
+      currentTab = t;
+      document.querySelectorAll(".output-tabs button").forEach(b => {
+        b.classList.toggle("active", b.dataset.tab === t);
+      });
+      renderOutput();
+    }
+
+    function renderOutput(){
+      const text = outputs[currentTab] || "";
+      const out = $("output");
+      const empty = $("emptyState");
+
+      if(!text){
+        out.hidden = true;
+        out.style.display = "none";
+        empty.hidden = false;
+        empty.style.display = "grid";
+        return;
+      }
+
+      empty.hidden = true;
+      empty.style.display = "none";
+      out.hidden = false;
+      out.style.display = "block";
+      out.textContent = text;
+    }
+
+    async function copyCurrent(){
+      const text = outputs[currentTab] || "";
+      if(!text.trim()){
+        toast("Rien à copier");
+        return;
+      }
+
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(_){
+        const t = document.createElement("textarea");
+        t.value = text;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand("copy");
+        t.remove();
+      }
+
+      toast("Sortie copiée");
+    }
+
+    function downloadCurrent(){
+      const text = outputs[currentTab] || "";
+      if(!text.trim()){
+        toast("Rien à télécharger");
+        return;
+      }
+
+      const d = data();
+      const ext =
+        currentTab === "json" ? "json" :
+        currentTab === "sql" ? "sql" :
+        currentTab === "page" ? "html" :
+        "md";
+
+      const blob = new Blob([text],{type:"text/plain;charset=utf-8"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = slug(d.projectName) + "_" + currentTab + "." + ext;
+      document.body.appendChild(a);
+      a.click();
+      URL.revokeObjectURL(a.href);
+      a.remove();
+
+      toast("Téléchargement lancé");
+    }
+
+    function previewPage(){
+      if(!outputs.page.trim()){
+        toast("Prépare d’abord la page");
+        return;
+      }
+
+      const blob = new Blob([outputs.page],{type:"text/html;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      window.open(url,"_blank");
+      setTimeout(() => URL.revokeObjectURL(url),60000);
+    }
+
+    function clearForm(){
+      [
+        "projectName","city","style","contactPhone","hours","address",
+        "activity","goal","audience","specialFeatures","extraSections","galleryPhotos",
+        "quoteClient","quoteWorkType","quoteMeasure","quoteMaterials","quoteLabor",
+        "quoteMaterialCost","quoteTravel","quoteOther","quoteDelay","quoteDeposit",
+        "quoteValidity","quoteNotes"
+      ].forEach(id => {
+        const el = $(id);
+        if(el) el.value = "";
+      });
+
+      outputs.brief = outputs.prompt = outputs.sql = outputs.realisation = outputs.devis = outputs.page = outputs.json = "";
+      renderOutput();
+      setStatus("Formulaire nettoyé.");
+      toast("Nettoyé");
+    }
+
+    function setStatus(text){
+      $("status").textContent = text;
+    }
+
+    function toast(text){
+      const el = $("toast");
+      el.textContent = text;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove("show"),1800);
+    }
+
     window.generateAll = generateAll;
     window.setOutputTab = setOutputTab;
     window.copyCurrent = copyCurrent;
@@ -358,14 +1539,8 @@ Salle ou terrasse |</textarea><div class="small"><strong>Important :</strong> co
     window.previewPage = previewPage;
     window.clearForm = clearForm;
     window.applyTypeDefaults = applyTypeDefaults;
+    window.setServiceQuoteExample = setServiceQuoteExample;
 
-    window.generateAll=generateAll;
-    window.setOutputTab=setOutputTab;
-    window.copyCurrent=copyCurrent;
-    window.downloadCurrent=downloadCurrent;
-    window.previewPage=previewPage;
-    window.clearForm=clearForm;
-    window.applyTypeDefaults=applyTypeDefaults;
     applyTypeDefaults(false);
   </script>
 </body>
