@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIGIY Projet Maison Builder — V13 POS écoute métier</title>
+  <title>DIGIY Projet Maison Builder — V14 Cahier logiciel POS</title>
 
   <style>
     :root{
@@ -430,14 +430,14 @@
 
     <section class="hero">
       <div class="card">
-        <div class="kicker">Outil maison · BY DIGIYLYFE · V13</div>
+        <div class="kicker">Outil maison · BY DIGIYLYFE · V14</div>
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">
           Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier :
-          brief, prompt IA, mémo SQL léger, plan de réalisation, <strong>pré-devis artisan</strong>, page HTML et JSON.
+          brief, prompt IA, mémo SQL léger, plan de réalisation, <strong>pré-devis artisan</strong>, cahier logiciel POS, prompt de recouture, page HTML et JSON.
         </p>
         <p class="lead">
-          Version V13 : la V12 devis reste debout. On ajoute la couche POS écoute métier :
+          Version V14 : la V12 devis reste debout. En mode POS, on ne sort pas une vitrine : on sort un cahier logiciel métier :
           <strong>Le pro parle métier. DIGIY prépare. Le pro valide. La caisse exécute.</strong>
         </p>
         <p class="lead"><strong>Chaque partenaire est une facette. DIGIY lui donne la lumière.</strong></p>
@@ -692,7 +692,8 @@ Salle ou terrasse |</textarea>
           <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button>
           <button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button>
           <button type="button" class="devis-tab" data-tab="devis" onclick="setOutputTab('devis')">Pré-devis artisan</button>
-          <button type="button" data-tab="pos" onclick="setOutputTab('pos')">POS écoute métier</button>
+          <button type="button" data-tab="pos" onclick="setOutputTab('pos')">Cahier logiciel POS</button>
+          <button type="button" data-tab="codepos" onclick="setOutputTab('codepos')">Prompt recouture POS</button>
           <button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button>
           <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
         </div>
@@ -730,6 +731,7 @@ Salle ou terrasse |</textarea>
       realisation:"",
       devis:"",
       pos:"",
+      codepos:"",
       page:"",
       json:""
     };
@@ -1538,10 +1540,84 @@ Salle ou terrasse |</textarea>
         "6. Encaisser → stats mises à jour.",
         "7. Vérifier que le ticket reste au choix.",
         "",
-        "## Prompt de recouture caisse.html",
-        "Recoudre le fichier caisse.html sans refaire toute l’interface. Ajouter une oreille métier POS discrète. Elle doit comprendre les phrases officielles, appliquer les corrections micro, préparer un brouillon, demander validation, puis exécuter. La caisse doit rester utilisable au clic sans voix. Garder panier, addition, encaissement, stats, ticket au choix, localStorage et gros boutons mobile."
+        "## Ce n’est pas une page web",
+        "Cette sortie sert à dégrossir le logiciel POS. Pour coder, utiliser l’onglet Prompt recouture POS. La Page HTML reste disponible seulement comme document de présentation, pas comme logiciel de caisse."
       ].join("\n");
     }
+
+
+    function promptRecouturePOS(d){
+      const products = d.posProducts.length ? d.posProducts : ["Pain | 250","Café | 1000","Dentifrice | 1200","Savon | 500"];
+      const phrases = d.posPhrases.length ? d.posPhrases : ["dentifrice 2 à 1200","2 pains à 250","café","ajoute 12 savons à 500","va aux stats"];
+      const aliases = d.posAliases.length ? d.posAliases : ["pin = pain","pins = pains","deux = 2","dentifrices = dentifrice","cafe = café"];
+      const workflow = d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute.";
+
+      return [
+        "MISSION DE RECOUTURE — LOGICIEL POS DIGIY",
+        "",
+        "Important : ne pas créer une page web vitrine. Recoudre le logiciel de caisse existant.",
+        "Fichier cible conseillé : caisse.html",
+        "",
+        "Objectif :",
+        "Créer / améliorer une caisse POS mobile pour commerçant terrain.",
+        "La caisse doit fonctionner au clic, et l’oreille métier doit seulement aider à préparer les actions.",
+        "",
+        "Doctrine :",
+        "Le pro parle métier. DIGIY prépare un brouillon. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+        "",
+        "Marchandises de départ :",
+        ...products.map(x => "- " + x),
+        "",
+        "Phrases d'entraînement :",
+        ...phrases.map(x => "- " + x),
+        "",
+        "Corrections micro :",
+        ...aliases.map(x => "- " + x),
+        "",
+        "Parcours attendu :",
+        workflow,
+        "",
+        "Écrans / fonctions à garder :",
+        "- Caisse",
+        "- Marchandises / produits",
+        "- Recherche",
+        "- Panier",
+        "- Addition",
+        "- Paiement",
+        "- Encaisser",
+        "- Stats locales",
+        "- Notes clientes",
+        "- Ticket au choix",
+        "- Oreille métier discrète",
+        "",
+        "Règles non négociables :",
+        "- La voix ne doit jamais encaisser seule.",
+        "- La voix ne doit jamais supprimer une donnée seule.",
+        "- Toute action préparée par la voix doit être validée par le pro.",
+        "- La caisse doit rester utilisable sans micro.",
+        "- Les stats s’enregistrent seulement après Encaisser.",
+        "- Le ticket ne sort pas automatiquement.",
+        "- Priorité mobile : gros boutons, peu d’écriture, lecture simple.",
+        "",
+        "Sortie attendue du développeur / IA :",
+        "1. Modifier le fichier caisse.html existant.",
+        "2. Ne pas refaire toute l’interface si elle marche.",
+        "3. Ajouter ou améliorer l’oreille métier avec les règles ci-dessus.",
+        "4. Préserver localStorage pour l’autonomie téléphone.",
+        "5. Donner un fichier complet prêt à poser.",
+        "",
+        "Test final obligatoire :",
+        "- Dire ou écrire : café",
+        "- Dire ou écrire : dentifrice 2 à 1200",
+        "- Dire ou écrire : 2 pains à 250",
+        "- Dire ou écrire : ajoute 12 savons à 500",
+        "- Dire ou écrire : Awa doit 2500 fin du mois",
+        "- Encaisser une vente",
+        "- Vérifier stats",
+        "- Vérifier ticket au choix"
+      ].join("\n");
+    }
+
 
     function generateAll(){
       const d = data();
@@ -1552,6 +1628,7 @@ Salle ou terrasse |</textarea>
       outputs.realisation = realisation(d);
       outputs.devis = devisArtisan(d);
       outputs.pos = posEcouteMetier(d);
+      outputs.codepos = promptRecouturePOS(d);
       outputs.page = firstPage(d);
       outputs.json = JSON.stringify(d,null,2);
 
@@ -1666,7 +1743,7 @@ Salle ou terrasse |</textarea>
         if(el) el.value = "";
       });
 
-      outputs.brief = outputs.prompt = outputs.sql = outputs.realisation = outputs.devis = outputs.pos = outputs.page = outputs.json = "";
+      outputs.brief = outputs.prompt = outputs.sql = outputs.realisation = outputs.devis = outputs.pos = outputs.codepos = outputs.page = outputs.json = "";
       renderOutput();
       setStatus("Formulaire nettoyé.");
       toast("Nettoyé");
@@ -1697,6 +1774,11 @@ Salle ou terrasse |</textarea>
   </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
