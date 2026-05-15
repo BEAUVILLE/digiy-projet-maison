@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIGIY Projet Maison Builder — V12 Pré-devis artisan</title>
+  <title>DIGIY Projet Maison Builder — V13 POS écoute métier</title>
 
   <style>
     :root{
@@ -430,15 +430,15 @@
 
     <section class="hero">
       <div class="card">
-        <div class="kicker">Outil maison · BY DIGIYLYFE · V12</div>
+        <div class="kicker">Outil maison · BY DIGIYLYFE · V13</div>
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">
           Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier :
           brief, prompt IA, mémo SQL léger, plan de réalisation, <strong>pré-devis artisan</strong>, page HTML et JSON.
         </p>
         <p class="lead">
-          Version V12 : la V11 premium reste debout. On ajoute la couche devis terrain :
-          <strong>DIGIY prépare. L’artisan valide. Le client comprend.</strong>
+          Version V13 : la V12 devis reste debout. On ajoute la couche POS écoute métier :
+          <strong>Le pro parle métier. DIGIY prépare. Le pro valide. La caisse exécute.</strong>
         </p>
         <p class="lead"><strong>Chaque partenaire est une facette. DIGIY lui donne la lumière.</strong></p>
 
@@ -469,6 +469,7 @@
                 <option value="restaurant" selected>Restaurant</option>
                 <option value="hotel">Logement / hôtel</option>
                 <option value="boutique">Boutique</option>
+                <option value="pos">Commerce / POS écoute métier</option>
                 <option value="service">Service / artisan</option>
                 <option value="event">Événement</option>
                 <option value="generic">Projet simple</option>
@@ -539,6 +540,63 @@ Tarifs
 À propos
 Événements privés
 FAQ</textarea>
+          </div>
+
+
+          <div class="quote-zone">
+            <div class="quote-title">
+              <strong>🎙️ POS écoute métier</strong>
+              <span>On forme deux choses : le langage du pro et le langage de la caisse.</span>
+            </div>
+
+            <div class="field">
+              <label for="posProducts">Articles prioritaires — un par ligne</label>
+              <textarea id="posProducts" placeholder="Ex :
+Pain | 250
+Café | 1000
+Dentifrice | 1200
+Savon | 500"></textarea>
+              <div class="small">Conseil : commence par 10 articles forts. La caisse reconnaît d’abord le comptoir réel.</div>
+            </div>
+
+            <div class="field">
+              <label for="posActions">Actions métier POS — une par ligne</label>
+              <textarea id="posActions" placeholder="Ex :
+Vendre
+Ajouter du stock
+Corriger quantité
+Faire remise
+Noter dette client
+Encaisser
+Voir stats
+Ticket au choix"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="posPhrases">Phrases officielles d’entraînement — une par ligne</label>
+              <textarea id="posPhrases" placeholder="Ex :
+dentifrice 2 à 1200
+2 pains à 250
+café
+ajoute 12 savons à 500
+Awa doit 2500 fin du mois
+va aux stats"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="posAliases">Corrections micro / synonymes — une par ligne</label>
+              <textarea id="posAliases" placeholder="Ex :
+pin = pain
+pins = pains
+deux = 2
+dentifrices = dentifrice
+cafe = café"></textarea>
+            </div>
+
+            <div class="field">
+              <label for="posWorkflow">Parcours action POS</label>
+              <textarea id="posWorkflow" placeholder="Ex : le pro parle ou clique, DIGIY prépare un brouillon, le pro valide, la caisse ajoute au panier, l’addition s’ouvre, puis Encaisser enregistre les stats.">Le pro parle ou clique. DIGIY prépare un brouillon. Le pro valide. La caisse ajoute au panier. L’addition s’ouvre. Encaisser enregistre les stats. Le ticket reste au choix.</textarea>
+            </div>
           </div>
 
           <div class="field">
@@ -634,6 +692,7 @@ Salle ou terrasse |</textarea>
           <button type="button" data-tab="sql" onclick="setOutputTab('sql')">SQL</button>
           <button type="button" data-tab="realisation" onclick="setOutputTab('realisation')">Réalisation</button>
           <button type="button" class="devis-tab" data-tab="devis" onclick="setOutputTab('devis')">Pré-devis artisan</button>
+          <button type="button" data-tab="pos" onclick="setOutputTab('pos')">POS écoute métier</button>
           <button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button>
           <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
         </div>
@@ -670,6 +729,7 @@ Salle ou terrasse |</textarea>
       sql:"",
       realisation:"",
       devis:"",
+      pos:"",
       page:"",
       json:""
     };
@@ -826,6 +886,12 @@ Salle ou terrasse |</textarea>
         galleryPhotos:galleryItems($("galleryPhotos").value),
         galleryRaw:$("galleryPhotos").value.trim(),
 
+        posProducts:lines($("posProducts").value),
+        posActions:lines($("posActions").value),
+        posPhrases:lines($("posPhrases").value),
+        posAliases:lines($("posAliases").value),
+        posWorkflow:$("posWorkflow").value.trim(),
+
         quoteClient:$("quoteClient").value.trim(),
         quoteWorkType:$("quoteWorkType").value.trim(),
         quoteMeasure:$("quoteMeasure").value.trim(),
@@ -884,6 +950,25 @@ Salle ou terrasse |</textarea>
         extraSections:"Produits\nCommande\nGalerie\nTarifs\nAvis clients\nLivraison\nFAQ",
         galleryPhotos:"Produit phare |\nRayon boutique |\nNouveautés |\nCommande prête |"
       },
+      pos:{
+        projectName:"POS Boutique Teranga",
+        city:"Saly, Sénégal",
+        style:"Caisse simple, mobile, gros boutons, écoute métier, terrain",
+        contactPhone:"+221 77 000 00 00",
+        hours:"Tous les jours · horaires boutique",
+        address:"Comptoir boutique · zone à préciser",
+        activity:"Logiciel de caisse POS pour petite boutique : articles, prix, panier, addition, encaissement, stats, ticket au choix et oreille métier.",
+        goal:"Dégrossir le logiciel POS : former le pro avec des phrases simples, former la caisse avec des règles métier, préparer les actions puis laisser le pro valider.",
+        audience:"Commerçants, boutiques, épiceries, kiosques, vendeurs terrain, gérants de petit commerce",
+        specialFeatures:"Articles propres\nPrix et stock\nPanier rapide\nAddition claire\nEncaisser\nStats locales\nTicket au choix\nOreille métier\nValidation avant action",
+        extraSections:"Caisse\nArticles\nOreille métier\nPanier\nAddition\nPaiement\nStats\nTicket\nEntraînement",
+        galleryPhotos:"Comptoir |\nArticles |\nCaisse téléphone |\nTicket |",
+        posProducts:"Pain | 250\nCafé | 1000\nDentifrice | 1200\nSavon | 500\nEau | 500\nRiz | 3500\nHuile | 1500\nSucre | 800",
+        posActions:"Vendre\nAjouter au panier\nAjouter du stock\nCorriger quantité\nFaire remise\nNoter dette client\nEncaisser\nVoir stats\nTicket au choix",
+        posPhrases:"dentifrice 2 à 1200\n2 pains à 250\ncafé\najoute 12 savons à 500\nAwa doit 2500 fin du mois\nva aux stats\nouvre l’addition",
+        posAliases:"pin = pain\npins = pains\ndeux = 2\ntrois = 3\ndentifrices = dentifrice\ncafe = café",
+        posWorkflow:"Le pro parle ou clique. DIGIY prépare un brouillon. Le pro valide. La caisse ajoute au panier. L’addition s’ouvre. Encaisser enregistre les stats. Le ticket reste au choix."
+      },
       service:{
         projectName:"Ndiaga Services Saly",
         city:"Saly, Sénégal",
@@ -934,7 +1019,8 @@ Salle ou terrasse |</textarea>
 
       [
         "projectName","city","style","contactPhone","hours","address",
-        "activity","goal","audience","specialFeatures","extraSections","galleryPhotos"
+        "activity","goal","audience","specialFeatures","extraSections","galleryPhotos",
+        "posProducts","posActions","posPhrases","posAliases","posWorkflow"
       ].forEach(id => {
         const el = $(id);
         if(force || !el.value.trim()) el.value = d[id] || "";
@@ -975,6 +1061,7 @@ Salle ou terrasse |</textarea>
       if(d.typeKey === "restaurant") return "Menu et spécialités";
       if(d.typeKey === "hotel") return "Lieu et hospitalité";
       if(d.typeKey === "boutique") return "Produits et boutique";
+      if(d.typeKey === "pos") return "Caisse, articles et actions métier";
       if(d.typeKey === "service") return "Services proposés";
       if(d.typeKey === "event") return "Programme et informations";
       return "Ce que nous proposons";
@@ -984,6 +1071,7 @@ Salle ou terrasse |</textarea>
       if(d.typeKey === "restaurant") return "Réserver / contacter";
       if(d.typeKey === "hotel") return "Demander une réservation";
       if(d.typeKey === "boutique") return "Commander / contacter";
+      if(d.typeKey === "pos") return "Préparer la caisse";
       if(d.typeKey === "service") return "Demander un devis";
       if(d.typeKey === "event") return "S’inscrire / contacter";
       return "Contacter";
@@ -1257,7 +1345,7 @@ Salle ou terrasse |</textarea>
 
       const extraSections = d.extraSections.slice(0,10).map(sectionName => extraSectionHtml(d, sectionName)).join("\n");
 
-      const quoteBlock = d.typeKey === "service" || d.quoteWorkType || quoteTotal(d) ? `
+      const quoteBlock = (d.typeKey === "service" || d.quoteWorkType || quoteTotal(d)) && d.typeKey !== "pos" ? `
     <section id="predevis" class="section">
       <h2>Pré-devis artisan</h2>
       <div class="box quote">
@@ -1393,6 +1481,68 @@ Salle ou terrasse |</textarea>
 </html>`;
     }
 
+
+    function posEcouteMetier(d){
+      const products = d.posProducts.length ? d.posProducts : ["Pain | 250","Café | 1000","Dentifrice | 1200","Savon | 500"];
+      const actions = d.posActions.length ? d.posActions : ["Vendre","Ajouter au panier","Ajouter du stock","Corriger quantité","Encaisser","Stats","Ticket au choix"];
+      const phrases = d.posPhrases.length ? d.posPhrases : ["dentifrice 2 à 1200","2 pains à 250","café","ajoute 12 savons à 500","va aux stats"];
+      const aliases = d.posAliases.length ? d.posAliases : ["pin = pain","pins = pains","deux = 2","dentifrices = dentifrice","cafe = café"];
+      const workflow = d.posWorkflow || "Le pro parle ou clique. DIGIY prépare. Le pro valide. La caisse exécute. Les stats se gardent après Encaisser. Le ticket reste au choix.";
+
+      return [
+        "# POS écoute métier — " + d.projectName,
+        "",
+        "## Doctrine",
+        "Le pro parle métier. DIGIY prépare l’action. Le pro valide. La caisse exécute. Le suivi garde la trace.",
+        "",
+        "## Ce qu’on forme",
+        "1. Le langage du pro : phrases courtes, répétables, faciles à dire au comptoir.",
+        "2. Le langage de la caisse : règles, synonymes, corrections micro et actions à valider.",
+        "",
+        "## Articles prioritaires",
+        ...products.map(x => "- " + x),
+        "",
+        "## Actions métier POS",
+        ...actions.map(x => "- " + x),
+        "",
+        "## Phrases officielles d’entraînement",
+        ...phrases.map(x => "- “" + x + "”"),
+        "",
+        "## Corrections micro / synonymes",
+        ...aliases.map(x => "- " + x),
+        "",
+        "## Parcours action",
+        workflow,
+        "",
+        "## Grammaire caisse conseillée",
+        "- Article seul : si l’article existe déjà, quantité 1 avec le prix enregistré. Exemple : “café”.",
+        "- Article + quantité + prix : vente rapide. Exemple : “dentifrice 2 à 1200”.",
+        "- Quantité + article + prix : vente rapide. Exemple : “2 pains à 250”.",
+        "- Ajoute + quantité + article + prix : ajout / mise à jour stock. Exemple : “ajoute 12 savons à 500”.",
+        "- Client + doit + montant + date : dette client. Exemple : “Awa doit 2500 fin du mois”.",
+        "- Chemin vocal : “va aux stats”, “ouvre les notes”, “ouvre l’addition”.",
+        "",
+        "## Sécurité d’usage",
+        "- La voix ne doit jamais encaisser seule.",
+        "- La voix prépare un brouillon.",
+        "- Le pro valide avant action.",
+        "- Encaisser seulement après paiement réel.",
+        "- Ticket seulement si le client le demande.",
+        "",
+        "## Tests terrain minimum",
+        "1. Dire : café → si l’article existe, panier quantité 1.",
+        "2. Dire : dentifrice 2 à 1200 → brouillon vente, puis validation.",
+        "3. Dire : 2 pains à 250 → brouillon vente, puis validation.",
+        "4. Dire : ajoute 12 savons à 500 → article / stock préparé.",
+        "5. Dire : Awa doit 2500 fin du mois → note dette client.",
+        "6. Encaisser → stats mises à jour.",
+        "7. Vérifier que le ticket reste au choix.",
+        "",
+        "## Prompt de recouture caisse.html",
+        "Recoudre le fichier caisse.html sans refaire toute l’interface. Ajouter une oreille métier POS discrète. Elle doit comprendre les phrases officielles, appliquer les corrections micro, préparer un brouillon, demander validation, puis exécuter. La caisse doit rester utilisable au clic sans voix. Garder panier, addition, encaissement, stats, ticket au choix, localStorage et gros boutons mobile."
+      ].join("\n");
+    }
+
     function generateAll(){
       const d = data();
 
@@ -1401,10 +1551,11 @@ Salle ou terrasse |</textarea>
       outputs.sql = sql(d);
       outputs.realisation = realisation(d);
       outputs.devis = devisArtisan(d);
+      outputs.pos = posEcouteMetier(d);
       outputs.page = firstPage(d);
       outputs.json = JSON.stringify(d,null,2);
 
-      currentTab = d.typeKey === "service" || d.quoteWorkType || quoteTotal(d) ? "devis" : "page";
+      currentTab = d.typeKey === "pos" ? "pos" : (d.typeKey === "service" || d.quoteWorkType || quoteTotal(d) ? "devis" : "page");
 
       document.querySelectorAll(".output-tabs button").forEach(b => {
         b.classList.toggle("active", b.dataset.tab === currentTab);
@@ -1506,6 +1657,7 @@ Salle ou terrasse |</textarea>
       [
         "projectName","city","style","contactPhone","hours","address",
         "activity","goal","audience","specialFeatures","extraSections","galleryPhotos",
+        "posProducts","posActions","posPhrases","posAliases","posWorkflow",
         "quoteClient","quoteWorkType","quoteMeasure","quoteMaterials","quoteLabor",
         "quoteMaterialCost","quoteTravel","quoteOther","quoteDelay","quoteDeposit",
         "quoteValidity","quoteNotes"
@@ -1514,7 +1666,7 @@ Salle ou terrasse |</textarea>
         if(el) el.value = "";
       });
 
-      outputs.brief = outputs.prompt = outputs.sql = outputs.realisation = outputs.devis = outputs.page = outputs.json = "";
+      outputs.brief = outputs.prompt = outputs.sql = outputs.realisation = outputs.devis = outputs.pos = outputs.page = outputs.json = "";
       renderOutput();
       setStatus("Formulaire nettoyé.");
       toast("Nettoyé");
@@ -1545,6 +1697,11 @@ Salle ou terrasse |</textarea>
   </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
