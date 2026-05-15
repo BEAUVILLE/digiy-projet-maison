@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIGIY Projet Maison Builder — V15 Prompt logiciel POS</title>
+  <title>DIGIY Projet Maison Builder — V17 POS textile propre</title>
 
   <style>
     :root{
@@ -430,14 +430,14 @@
 
     <section class="hero">
       <div class="card">
-        <div class="kicker">Outil maison · BY DIGIYLYFE · V15</div>
+        <div class="kicker">Outil maison · BY DIGIYLYFE · V17</div>
         <h1>Préparer un projet sans se perdre.</h1>
         <p class="lead">
           Tu remplis les champs, tu appuies sur <strong>Préparer le projet</strong>, et DIGIY sort le dossier :
           brief, prompt IA, mémo SQL léger, plan de réalisation, <strong>pré-devis artisan</strong>, cahier logiciel POS, prompt de recouture, page HTML et JSON.
         </p>
         <p class="lead">
-          Version V15 : en mode POS, le Prompt IA devient un prompt logiciel de caisse. Pas une vitrine, pas un pré-devis :
+          Version V17 : POS textile propre. Cahier logiciel, prompt recouture et JSON parlent enfin le même métier :
           <strong>Le pro parle métier. DIGIY prépare. Le pro valide. La caisse exécute.</strong>
         </p>
         <p class="lead"><strong>Chaque partenaire est une facette. DIGIY lui donne la lumière.</strong></p>
@@ -461,15 +461,15 @@
           <div class="row">
             <div class="field">
               <label for="projectName">Nom du projet</label>
-              <input id="projectName" value="Restaurant Teranga Saly" placeholder="Ex : Restaurant Teranga Saly" />
+              <input id="projectName" value="POS Boutique Linge & Style" placeholder="Ex : POS Boutique Linge & Style" />
             </div>
             <div class="field">
               <label for="typeKey">Type</label>
               <select id="typeKey" onchange="applyTypeDefaults(false)">
-                <option value="restaurant" selected>Restaurant</option>
+                <option value="restaurant">Restaurant</option>
                 <option value="hotel">Logement / hôtel</option>
                 <option value="boutique">Boutique</option>
-                <option value="pos">Commerce / POS écoute métier</option>
+                <option value="pos" selected>Commerce / POS écoute métier</option>
                 <option value="service">Service / artisan</option>
                 <option value="event">Événement</option>
                 <option value="generic">Projet simple</option>
@@ -484,7 +484,7 @@
             </div>
             <div class="field">
               <label for="style">Style souhaité</label>
-              <input id="style" value="Premium, mobile, chaleureux, africain, clair, rassurant" placeholder="Ex : sobre, moderne, local" />
+              <input id="style" value="Caisse textile simple, mobile, gros boutons, marchandises, tailles, couleurs, écoute métier" placeholder="Ex : sobre, moderne, local" />
             </div>
           </div>
 
@@ -495,51 +495,63 @@
             </div>
             <div class="field">
               <label for="hours">Horaires</label>
-              <input id="hours" value="Tous les jours · 11h30 — 23h00" placeholder="Ex : Tous les jours 11h — 23h" />
+              <input id="hours" value="Tous les jours · horaires boutique" placeholder="Ex : Tous les jours 11h — 23h" />
             </div>
             <div class="field">
               <label for="address">Repère / adresse</label>
-              <input id="address" value="Saly centre · proche route principale" placeholder="Ex : Saly centre, près de..." />
+              <input id="address" value="Comptoir boutique textile · zone à préciser" placeholder="Ex : Saly centre, près de..." />
             </div>
           </div>
 
           <div class="field">
             <label for="activity">Activité</label>
-            <textarea id="activity" placeholder="Décris l’activité">Restaurant familial sénégalais avec spécialités locales, poissons grillés, plats du jour et service de réservation.</textarea>
+            <textarea id="activity" placeholder="Décris l’activité">Logiciel de caisse POS pour boutique de linge de maison, robes stylées, tenues, foutas, draps, serviettes, parures de lit et marchandises textiles. La caisse aide à vendre vite, suivre les prix, gérer les stocks, noter les tailles, couleurs, commandes clientes, dettes, remises et garder les ventes propres.</textarea>
           </div>
 
           <div class="field">
             <label for="goal">Objectif de la page</label>
-            <textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Présenter le restaurant, afficher le menu, mettre en avant les spécialités, permettre aux clients de réserver une table et contacter facilement l’établissement par WhatsApp.</textarea>
+            <textarea id="goal" placeholder="Ex : présenter, rassurer, recevoir des demandes">Dégrossir un logiciel POS adapté au commerce textile : former le pro avec des phrases simples, former la caisse avec des règles métier, préparer les actions puis laisser le pro valider avant exécution.</textarea>
             <div class="small">Photos gardées sur Google Drive ou média WordPress : colle seulement les liens publics. Rien n’est envoyé dans Supabase Storage.</div>
           </div>
 
           <div class="field">
             <label for="audience">Public visé</label>
-            <input id="audience" value="Clients locaux, familles, touristes, groupes, visiteurs de Saly" placeholder="Ex : clients locaux, touristes, familles" />
+            <input id="audience" value="Boutiques de linge de maison, vendeuses de robes, commerces textile, boutiques de plage, hôtels, villas, familles, clientes locales et visiteurs" placeholder="Ex : clients locaux, touristes, familles" />
           </div>
 
           <div class="field">
             <label for="specialFeatures">Points importants</label>
-            <textarea id="specialFeatures" placeholder="Un point par ligne">Spécialités sénégalaises
-Réservation directe
-Contact WhatsApp
-Plats du jour
-Groupes et événements privés
-Photos et avis
-Horaires clairs</textarea>
+            <textarea id="specialFeatures" placeholder="Un point par ligne">Marchandises propres
+Prix visibles
+Stock par modèle
+Couleurs et tailles
+Panier rapide
+Addition claire
+Remise possible
+Commande cliente
+Dette client
+Encaisser
+Stats locales
+Ticket au choix
+Oreille métier
+Validation avant action</textarea>
           </div>
 
           <div class="field">
             <label for="extraSections">Sections à ajouter</label>
-            <textarea id="extraSections" placeholder="Un nom de section par ligne">Plat détail
-Commande
-Témoignages
-Galerie
-Tarifs
-À propos
-Événements privés
-FAQ</textarea>
+            <textarea id="extraSections" placeholder="Un nom de section par ligne">Caisse
+Marchandises
+Stock
+Couleurs
+Tailles
+Oreille métier
+Panier
+Addition
+Paiement
+Notes clientes
+Stats
+Ticket
+Entraînement</textarea>
           </div>
 
 
@@ -555,7 +567,18 @@ FAQ</textarea>
 Pain | 250
 Café | 1000
 Dentifrice | 1200
-Savon | 500"></textarea>
+Savon | 500">Drap 2 places | 15000
+Drap 1 place | 9000
+Serviette bain | 5000
+Serviette plage | 7000
+Fouta | 8000
+Robe stylée | 18000
+Robe plage | 12000
+Tenue femme | 25000
+Parure lit | 22000
+Coussin déco | 6000
+Nappe maison | 10000
+Crème beauté | 3500</textarea>
               <div class="small">Conseil : commence par 10 articles forts. La caisse reconnaît d’abord le comptoir réel.</div>
             </div>
 
@@ -569,7 +592,20 @@ Faire remise
 Noter dette client
 Encaisser
 Voir stats
-Ticket au choix"></textarea>
+Ticket au choix">Vendre
+Ajouter au panier
+Ajouter du stock
+Changer quantité
+Changer prix
+Faire remise
+Noter taille
+Noter couleur
+Noter commande cliente
+Noter dette client
+Encaisser
+Voir stats
+Ticket au choix
+Nouvelle vente</textarea>
             </div>
 
             <div class="field">
@@ -580,7 +616,17 @@ dentifrice 2 à 1200
 café
 ajoute 12 savons à 500
 Awa doit 2500 fin du mois
-va aux stats"></textarea>
+va aux stats">robe stylée 1 à 18000
+2 serviettes bain à 5000
+drap 2 places 1 à 15000
+fouta 3 à 8000
+parure lit 1 à 22000
+ajoute 12 serviettes bain à 5000
+Awa doit 10000 pour robe stylée
+note couleur bleue taille M
+va aux stats
+ouvre les marchandises
+nouvelle vente</textarea>
             </div>
 
             <div class="field">
@@ -590,12 +636,25 @@ pin = pain
 pins = pains
 deux = 2
 dentifrices = dentifrice
-cafe = café"></textarea>
+cafe = café">article = marchandise
+articles = marchandises
+serviettes = serviette
+robes = robe
+draps = drap
+foutas = fouta
+parures = parure
+deux = 2
+trois = 3
+quatre = 4
+bleu = bleue
+taille moyenne = taille M
+stat = stats
+statistique = stats</textarea>
             </div>
 
             <div class="field">
               <label for="posWorkflow">Parcours action POS</label>
-              <textarea id="posWorkflow" placeholder="Ex : le pro parle ou clique, DIGIY prépare un brouillon, le pro valide, la caisse ajoute au panier, l’addition s’ouvre, puis Encaisser enregistre les stats.">Le pro parle ou clique. DIGIY prépare un brouillon. Le pro valide. La caisse ajoute au panier. L’addition s’ouvre. Encaisser enregistre les stats. Le ticket reste au choix.</textarea>
+              <textarea id="posWorkflow" placeholder="Ex : le pro parle ou clique, DIGIY prépare un brouillon, le pro valide, la caisse ajoute au panier, l’addition s’ouvre, puis Encaisser enregistre les stats.">Le pro parle ou clique. DIGIY prépare un brouillon. Le pro valide. La caisse ajoute la marchandise au panier. L’addition s’ouvre. Le pro confirme. Le paiement est choisi. Encaisser enregistre les stats. Le ticket reste au choix si la cliente le demande.</textarea>
             </div>
           </div>
 
@@ -603,10 +662,10 @@ cafe = café"></textarea>
             <label for="galleryPhotos">Galerie photos — titre | URL publique</label>
             <textarea id="galleryPhotos" style="min-height:150px" placeholder="Une photo par ligne :
 Plat du jour | https://drive.google.com/file/d/ID_IMAGE/view?usp=sharing
-Salle | https://digiylyfe.net/wp-content/uploads/2026/04/photo.jpg">Photo du restaurant |
-Plat du jour |
-Poisson grillé |
-Salle ou terrasse |</textarea>
+Salle | https://digiylyfe.net/wp-content/uploads/2026/04/photo.jpg">Comptoir textile |
+Marchandises |
+Robes stylées |
+Linge de maison |</textarea>
             <div class="small"><strong>Important :</strong> Titre | URL, ou URLs seules. Les photos restent dehors : Supabase ne reçoit rien.</div>
           </div>
 
@@ -694,13 +753,13 @@ Salle ou terrasse |</textarea>
           <button type="button" class="devis-tab" data-tab="devis" onclick="setOutputTab('devis')">Pré-devis artisan</button>
           <button type="button" data-tab="pos" onclick="setOutputTab('pos')">Cahier logiciel POS</button>
           <button type="button" data-tab="codepos" onclick="setOutputTab('codepos')">Prompt recouture POS</button>
-          <button type="button" data-tab="page" onclick="setOutputTab('page')">Page HTML</button>
+          <button type="button" data-tab="page" onclick="setOutputTab('page')">Page document</button>
           <button type="button" data-tab="json" onclick="setOutputTab('json')">JSON</button>
         </div>
         <div class="output-actions">
           <button class="btn" type="button" onclick="copyCurrent()">Copier</button>
           <button class="btn" type="button" onclick="downloadCurrent()">Télécharger</button>
-          <button class="btn" type="button" onclick="previewPage()">Voir la page</button>
+          <button class="btn" type="button" onclick="previewPage()">Voir le document</button>
         </div>
       </div>
 
@@ -1213,7 +1272,7 @@ Salle ou terrasse |</textarea>
           "",
           "Sortie attendue :",
           "Recoudre le fichier caisse.html complet, prêt à poser, sans refaire toute l’interface si elle marche déjà."
-        ].join("\\n");
+        ].join("\n");
       }
 
       return [
@@ -1248,7 +1307,7 @@ Salle ou terrasse |</textarea>
         ...buildNav(d).map(x => "- " + x.label),
         "",
         "Contraintes : phrases courtes, boutons visibles, contact direct, galerie diapo premium si URLs fournies, pas de jargon technique, rendu agréable sur téléphone."
-      ].join("\\n");
+      ].join("\n");
     }
 
     function sql(d){
@@ -1270,7 +1329,7 @@ Salle ou terrasse |</textarea>
           "-- Projet : " + sqlEsc(d.projectName),
           "-- Type : POS écoute métier",
           "-- Zone : " + sqlEsc(d.city)
-        ].join("\\n");
+        ].join("\n");
       }
 
       return [
@@ -1288,7 +1347,7 @@ Salle ou terrasse |</textarea>
         "-- quote_work_type : " + sqlEsc(d.quoteWorkType || "à préciser"),
         "-- quote_total_estimated_xof : " + sqlEsc(String(quoteTotal(d) || 0)),
         "-- quote_warning : prix final à confirmer par l’artisan après vérification du terrain"
-      ].join("\\n");
+      ].join("\n");
     }
 
     function realisation(d){
@@ -1329,7 +1388,7 @@ Salle ou terrasse |</textarea>
           "- Utiliser l’onglet Prompt recouture POS.",
           "- Recoudre caisse.html complet.",
           "- Garder mobile-first, gros boutons, peu d’écriture."
-        ].join("\\n");
+        ].join("\n");
       }
 
       return [
@@ -1360,7 +1419,7 @@ Salle ou terrasse |</textarea>
         "- Cliquer chaque bouton du menu.",
         "- Cliquer Envoyer la demande et vérifier l’ouverture WhatsApp.",
         "- Relire le pré-devis avant envoi client."
-      ].join("\\n");
+      ].join("\n");
     }
 
     function quoteTotal(d){
@@ -1654,28 +1713,30 @@ Salle ou terrasse |</textarea>
         workflow,
         "",
         "## Grammaire caisse conseillée",
-        "- Marchandise seule : si elle existe déjà, quantité 1 avec le prix enregistré. Exemple : “café”.",
-        "- Marchandise + quantité + prix : vente rapide. Exemple : “dentifrice 2 à 1200”.",
-        "- Quantité + marchandise + prix : vente rapide. Exemple : “2 pains à 250”.",
-        "- Ajoute + quantité + marchandise + prix : ajout / mise à jour stock. Exemple : “ajoute 12 savons à 500”.",
-        "- Client + doit + montant + date : dette client. Exemple : “Awa doit 2500 fin du mois”.",
-        "- Chemin vocal : “va aux stats”, “ouvre les notes”, “ouvre l’addition”.",
+        "- Marchandise seule : si elle existe déjà, quantité 1 avec le prix enregistré. Exemple : “fouta”.",
+        "- Marchandise + quantité + prix : vente rapide. Exemple : “robe stylée 1 à 18000”.",
+        "- Quantité + marchandise + prix : vente rapide. Exemple : “2 serviettes bain à 5000”.",
+        "- Ajoute + quantité + marchandise + prix : ajout / mise à jour stock. Exemple : “ajoute 12 serviettes bain à 5000”.",
+        "- Client + doit + montant + marchandise : dette cliente. Exemple : “Awa doit 10000 pour robe stylée”.",
+        "- Note + couleur + taille : note cliente. Exemple : “note couleur bleue taille M”.",
+        "- Chemin vocal : “va aux stats”, “ouvre les notes clientes”, “ouvre les marchandises”, “ouvre l’addition”.",
         "",
         "## Sécurité d’usage",
         "- La voix ne doit jamais encaisser seule.",
         "- La voix prépare un brouillon.",
         "- Le pro valide avant action.",
         "- Encaisser seulement après paiement réel.",
-        "- Ticket seulement si le client le demande.",
+        "- Ticket seulement si la cliente le demande.",
         "",
         "## Tests terrain minimum",
-        "1. Dire : café → si l’article existe, panier quantité 1.",
-        "2. Dire : dentifrice 2 à 1200 → brouillon vente, puis validation.",
-        "3. Dire : 2 pains à 250 → brouillon vente, puis validation.",
-        "4. Dire : ajoute 12 savons à 500 → article / stock préparé.",
-        "5. Dire : Awa doit 2500 fin du mois → note dette client.",
-        "6. Encaisser → stats mises à jour.",
-        "7. Vérifier que le ticket reste au choix.",
+        "1. Dire : fouta → si la marchandise existe déjà, panier quantité 1.",
+        "2. Dire : robe stylée 1 à 18000 → brouillon vente, puis validation.",
+        "3. Dire : 2 serviettes bain à 5000 → brouillon vente, puis validation.",
+        "4. Dire : ajoute 12 serviettes bain à 5000 → stock préparé.",
+        "5. Dire : Awa doit 10000 pour robe stylée → note dette cliente.",
+        "6. Dire : note couleur bleue taille M → note cliente.",
+        "7. Encaisser → stats mises à jour.",
+        "8. Vérifier que le ticket reste au choix.",
         "",
         "## Ce n’est pas une page web",
         "Cette sortie sert à dégrossir le logiciel POS. Pour coder, utiliser l’onglet Prompt recouture POS. La Page HTML reste disponible seulement comme document de présentation, pas comme logiciel de caisse."
@@ -1744,11 +1805,11 @@ Salle ou terrasse |</textarea>
         "5. Donner un fichier complet prêt à poser.",
         "",
         "Test final obligatoire :",
-        "- Dire ou écrire : café",
-        "- Dire ou écrire : dentifrice 2 à 1200",
-        "- Dire ou écrire : 2 pains à 250",
-        "- Dire ou écrire : ajoute 12 savons à 500",
-        "- Dire ou écrire : Awa doit 2500 fin du mois",
+        "- Dire ou écrire : fouta",
+        "- Dire ou écrire : robe stylée 1 à 18000",
+        "- Dire ou écrire : 2 serviettes bain à 5000",
+        "- Dire ou écrire : ajoute 12 serviettes bain à 5000",
+        "- Dire ou écrire : Awa doit 10000 pour robe stylée",
         "- Encaisser une vente",
         "- Vérifier stats",
         "- Vérifier ticket au choix"
@@ -1908,9 +1969,15 @@ Salle ou terrasse |</textarea>
     window.setServiceQuoteExample = setServiceQuoteExample;
 
     applyTypeDefaults(false);
+    setStatus('V17 POS textile propre · prêt à préparer le cahier logiciel.');
   </script>
 </body>
 </html>
+
+
+
+
+
 
 
 
